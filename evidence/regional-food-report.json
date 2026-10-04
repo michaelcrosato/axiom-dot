@@ -1,0 +1,4066 @@
+{
+  "version": 1,
+  "status": "verified",
+  "measuredAt": "2026-10-02T23:15:52.444Z",
+  "source": {
+    "head": "187a580a0ef194e5d0a6fdfe20dc766e1ff7de19",
+    "workingTreeDirty": true,
+    "sha256": {
+      "src/regional-food.ts": "0d747917822e1f1806e43ec16f8b4edc855bd2cc45606ff0b9f4643c2ed97f9b",
+      "src/regional-clock.ts": "56b6f327247780c050cd9361273fc43b12a35c8edbd29dc189d6924533af24bf",
+      "src/regional-food-lab.ts": "d64d574cf6bc1a5b69844f8a46f0db2df608b0c9637ab88e5fb48d15be18874d",
+      "src/world.ts": "7cfac12c985edcdf8c30cb8484923808261571c613ffd998431a6fc44cd0e17f",
+      "src/regional-trade.ts": "920a28476e2630d23457bc7124a789e71616222ee091071b32db1dc7d69d0ec9",
+      "src/regional-supply.ts": "e289a11b45c0372c92a66fa81b2e7a89e68e66bc4893080ec8fa7ffb6768a5ca",
+      "src/regional-supply-lab.ts": "dfebb67202171a04b39a286a8b015b3422b0b8d71e03d0df779bd7a319f11a48",
+      "src/regional-world.ts": "cb7903f27255c1f59f4abaa61af76a60701e71a90c70d4ca8097c9fba446b174",
+      "src/regional-routes.ts": "f2498848f3f9079f3189d1a9ad437c005d9ac9514746792c6501b0df4bd9c67e",
+      "src/wilderness-state.ts": "1ed057c900ee76646e65d9ae6f195effccf38523306cdfcc7897959f062028d0",
+      "src/wilderness.ts": "7028595f5fd1b368e8c425723baa6e6e73834005ac829335d19e761f64f959e1",
+      "src/wilderness-geometry.ts": "68ade05e6fa8d2e76db846b17438bfc80ae091abb514ac1bf5dbb17d5b57438f",
+      "src/physics.worker.ts": "05a79fa9411f4285ce6a7dcd12e3a3e6626802f6162a924f4c09dde41aaa657f",
+      "src/tuning.ts": "7e7c9fae5b6546e9e7efd107c836b543bba02b7e31049b1b2601e8a61b534053",
+      "src/contact-physics.ts": "785cc37cf93e11cb748e18b495b14261c5ab9bcf2b7e3ab0302bd7bbf979e414",
+      "src/player-contact.ts": "7deb547429e2d6ad1dfc84cc8061a110bdc441454de23e9fdfc884a7fb4842af",
+      "src/locomotion.ts": "b138b894d61d68c6765a5260490252bbff638536cd374319582c3707d6c0efc5",
+      "src/ledge-mantle.ts": "64d68205951405f0597d5b877b5c295867c8ccd3194a3ba38cb57b1195688f39",
+      "tests/helpers/regional-physics.ts": "5fa8ccb279788fdfef0f27a16ecc86a90ea9d4e472764936b2e75b8b1f4b12b6",
+      "tests/regional-food-integration.test.ts": "015f385382c3f96763f49dd9bbf5bb819737e6d061a38f61d4b75ea5b5118b76",
+      "tests/regional-food-terrain-physics.test.ts": "a7e91466796e3cbfcdd922aac75f6f61724d61272f66d9b4ca0b84428f986ade",
+      "scripts/measure-regional-food.mts": "7c6068e31a54438fb224cd5f1beb508ce956d366014cf3d985301bdda336b668",
+      "vite.client.config.ts": "c983c91e4e578e5674f30c39ffb3d76a21f090c339d775baa840e31736e2ae42",
+      "package.json": "d5d0ee7cb3bfa753c33408135d772f983d7371f1ad371ac6d3dd39d980d5e9ef",
+      "package-lock.json": "10ffd31c5f9406511b2fd7bdd1f2ca5f019d245e3f71fedc9dc9cd4763280a32",
+      "src/main.ts": "f231017207af30a32878e2102910b38eb4e5a8683b547f2bcdd1dfff5157ab6a",
+      "src/regional-food-view.ts": "551085dfe988a54aae394b7f8aaa0a003befb59afc210c501c269b256fddb123",
+      "src/regional-food-ui.ts": "3c9ab63f060c3e89a5513f5bba23dafc28e4ca1c533a43dc767162f7f8d325c4",
+      "src/world-map-view.ts": "5825f3078d280078b633345a6aa93e86573e6e567507abb5283278ed9577b560",
+      "src/session.ts": "f431c04883a5b0ec3543ca56870f8da9cfd9d90f8d0fdd92c185039d9d48a9ef",
+      "src/coop-protocol.ts": "c156eeb69544b3f7cf027c56af119555f10fc27ff3d1dba1092abfb68a28df7b",
+      "server/coop-api.ts": "7ab83d1795c287e0ee3b1fa84d7d1a2a313f467eff85e2fbbcb98b33e85e3ba0",
+      "server/coop-authority.ts": "f54eebcccf673688df662aad5dbec1310e048ce5b26253d5128933a6c9b9c381",
+      "server/coop-validation.ts": "61fe5d77b0032c38bffb4e434d1c16b95e009f1c122e90ded3d0df10811c6f5a",
+      "tests/regional-food-main.test.ts": "03494478094e35a152e9fbb0a3590d698b1e1b13cfe6f89816160e7ea693507f",
+      "tests/regional-food.test.ts": "bbde697c8e9ac962329f8e2d34ce845be792e45fc36fd70dd1949972b03595c0",
+      "tests/regional-food-view.test.ts": "0d768532895061988c0fd4984737c7493c4092e6cc94081227c3c64d167909fe",
+      "tests/regional-food-ui.test.ts": "02056d2f0506e1eab027002f5408ace1ab171381519f4dd2b40df71d3d12b698",
+      "tests/regional-food-coop.test.ts": "4b7217386324887ce2beaccd36e92294160f9dcf47b255af94baefd689873555",
+      "tests/regional-food-recovery.test.ts": "b92ab50939345f90a9d1fe1ed12439e0758ad720d446bb2fa44697107c24cd35",
+      "src/coop.ts": "a4905570288de8bffdbc1178d40c453d8ce5e3a8215ae10c278341810bd458cd",
+      "src/regional-view.ts": "6f067237e80f4320a6b21ff83e0ee1a8a6845d29a5a98c904c8a51ebcafae47c",
+      "src/regional-supply-ui.ts": "6bbb1b821303d2015204966bf76a8b7a81bd252e9f1a577ed689729e24094a8f",
+      "src/regional-trade-ui.ts": "19500bf26c630e84b1aef02846d3adc4fb8bca7534a09f572084be9e337cfbee",
+      "tests/regional-clock-precision.test.ts": "dab4d56ada5eea5cf93d0e77cd4d7ea8f2e7313646508299343cc2c2463e47ab",
+      "tests/regional-food-trade-witness.test.ts": "2786cbc587736eea6f9f8a00348ed82401fff214d427337f28b994377bed240d",
+      "tests/regional-trade-timeline.test.ts": "b33ea23ead2a4bab6965f1b313226a9a067eb91c3d1aece64f0206e0957b57b7",
+      "tests/regional-food-world-authority.test.ts": "d93b967fb0b8f923dc96ae7f45c6ae29c39c01a4bd70933ae1aee7ef8f94f18c",
+      "tests/regional-food-supply-history.test.ts": "b6cb2dbef75f2ffbce1f951d54a8bd96243bb2d6d271073b651f455dcc9869bd",
+      "tests/regional-food-map.test.ts": "15fdba2000b1f2c5ad6897dc6b8894931648005da140667076e739a2c1cdb46f",
+      "tests/helpers/regional-food-campaign.ts": "41050136e1a6258102a3d0b4a4d823861a1f1d37d8c01912f47e1583033019bb",
+      "tests/helpers/regional-food-http.ts": "05a28b5226d76f30e74f4dac542b96a47858f1060758ccc8b31b15df442bdf09",
+      "scripts/verify-regional-food-build.mts": "b0a5c8a3410598ccd0821b085bb2ec94eae6c17a8386b11ef38b7baf5c5db03e"
+    },
+    "runtime": "v22.23.0",
+    "runtimeSha256": "b587d8a062552ab52ecae2a7b0bcd079351d1dc61cf2555fd5994f558274ae58"
+  },
+  "scope": "Disposable three-farm production cycles using actual inputs, conservative overflow/seed/food accounting, bounded save stages and old-ledger invariants; six-seed supported-clearance sweep and actual Vite-emitted production physics worker on all three local paths, approaches, streaming boundary and unload/revisit. No browser/device visual review, live-campaign operation or device frame-rate benchmark.",
+  "command": "node --experimental-strip-types --test --test-concurrency=1 --test-reporter=spec tests/regional-food-integration.test.ts tests/regional-food-terrain-physics.test.ts",
+  "testFiles": [
+    "tests/regional-food-integration.test.ts",
+    "tests/regional-food-terrain-physics.test.ts"
+  ],
+  "lab": {
+    "version": 1,
+    "seed": 73129,
+    "iterations": 3,
+    "sourceRevision": "187a580a0ef194e5d0a6fdfe20dc766e1ff7de19",
+    "scope": "Fresh disposable campaigns earn the old finite freight stores and three collector builds. Food recovers only new overflow, reuses two conserved seed portions, harvests crops and physically times local shipments and meals. Four declared starter meals per community are counted separately. Finite stewardship claims end while resident crop work continues. Model command poses are assigned; actual controller traversal is a separate test. No live campaign/storage, browser rendering, device-performance or network-transport access.",
+    "status": "complete",
+    "runs": [
+      {
+        "iteration": 1,
+        "checks": [
+          {
+            "name": "Mature-save opt-in preserves old progress",
+            "expected": "New food starts at zero local time and zero water; existing spill is only a discarded watermark",
+            "pass": true,
+            "actual": "1728.580, 1274.090, 1047.463 historic spilled litres excluded from new inventory"
+          },
+          {
+            "name": "Harvest, shipment and meal conservation (Pinewatch Garden)",
+            "expected": "New overflow, reusable seeds, crop food and finite starter portions balance through every reservation, carried meal and consumption bucket",
+            "pass": true,
+            "actual": "28 grown + 4 starter portions; 16 eaten; maximum balance error 1.8474111129762605e-13"
+          },
+          {
+            "name": "Reload all active stages (Pinewatch Garden)",
+            "expected": "Exact strict saves preserve growing, harvesting, loading, loaded transit, unloading and eating",
+            "pass": true,
+            "actual": "growth, eat, harvest, load, transit, unload"
+          },
+          {
+            "name": "Meals improve real work (Pinewatch Garden)",
+            "expected": "Both stable new residents eat real food, lower hunger and cross a productive work-rate threshold",
+            "pass": true,
+            "actual": "8 gardener and 1 pantry-worker rate improvements"
+          },
+          {
+            "name": "Finite requests and renewable work (Pinewatch Garden)",
+            "expected": "Four distinct crop jobs pay at most four marks; resident harvest and consumption continue after the pool is exhausted",
+            "pass": true,
+            "actual": "4 distinct requests, 4 marks, 4 further harvests"
+          },
+          {
+            "name": "Real local delivery time (Pinewatch Garden)",
+            "expected": "Loaded food spends at least its surface distance / speed between reservation and completed delivery",
+            "pass": true,
+            "actual": "28.800 m at 1.4 m/s; first reservation→delivery 25 s; peak 1.400000 m/s"
+          },
+          {
+            "name": "Harvest, shipment and meal conservation (Alder Garden)",
+            "expected": "New overflow, reusable seeds, crop food and finite starter portions balance through every reservation, carried meal and consumption bucket",
+            "pass": true,
+            "actual": "28 grown + 4 starter portions; 16 eaten; maximum balance error 1.9895196601282805e-13"
+          },
+          {
+            "name": "Reload all active stages (Alder Garden)",
+            "expected": "Exact strict saves preserve growing, harvesting, loading, loaded transit, unloading and eating",
+            "pass": true,
+            "actual": "growth, eat, harvest, load, transit, unload"
+          },
+          {
+            "name": "Meals improve real work (Alder Garden)",
+            "expected": "Both stable new residents eat real food, lower hunger and cross a productive work-rate threshold",
+            "pass": true,
+            "actual": "8 gardener and 1 pantry-worker rate improvements"
+          },
+          {
+            "name": "Finite requests and renewable work (Alder Garden)",
+            "expected": "Four distinct crop jobs pay at most four marks; resident harvest and consumption continue after the pool is exhausted",
+            "pass": true,
+            "actual": "4 distinct requests, 4 marks, 4 further harvests"
+          },
+          {
+            "name": "Real local delivery time (Alder Garden)",
+            "expected": "Loaded food spends at least its surface distance / speed between reservation and completed delivery",
+            "pass": true,
+            "actual": "28.800 m at 1.4 m/s; first reservation→delivery 25 s; peak 1.400000 m/s"
+          },
+          {
+            "name": "Harvest, shipment and meal conservation (Northreach Garden)",
+            "expected": "New overflow, reusable seeds, crop food and finite starter portions balance through every reservation, carried meal and consumption bucket",
+            "pass": true,
+            "actual": "28 grown + 4 starter portions; 16 eaten; maximum balance error 1.8474111129762605e-13"
+          },
+          {
+            "name": "Reload all active stages (Northreach Garden)",
+            "expected": "Exact strict saves preserve growing, harvesting, loading, loaded transit, unloading and eating",
+            "pass": true,
+            "actual": "growth, eat, harvest, load, transit, unload"
+          },
+          {
+            "name": "Meals improve real work (Northreach Garden)",
+            "expected": "Both stable new residents eat real food, lower hunger and cross a productive work-rate threshold",
+            "pass": true,
+            "actual": "8 gardener and 1 pantry-worker rate improvements"
+          },
+          {
+            "name": "Finite requests and renewable work (Northreach Garden)",
+            "expected": "Four distinct crop jobs pay at most four marks; resident harvest and consumption continue after the pool is exhausted",
+            "pass": true,
+            "actual": "4 distinct requests, 4 marks, 4 further harvests"
+          },
+          {
+            "name": "Real local delivery time (Northreach Garden)",
+            "expected": "Loaded food spends at least its surface distance / speed between reservation and completed delivery",
+            "pass": true,
+            "actual": "28.800 m at 1.4 m/s; first reservation→delivery 25 s; peak 1.400000 m/s"
+          },
+          {
+            "name": "Finite shelves pause and resume production",
+            "expected": "A full source and occupied store stop planting until real eating frees capacity",
+            "pass": true,
+            "actual": "Full capacity observed true; later harvest true"
+          },
+          {
+            "name": "Old ledgers and terrain resources remain separate",
+            "expected": "Every V31/V32 active tick matches the no-food control; no old resident, collector, store, harvest or inventory state is changed by food",
+            "pass": true,
+            "actual": "Exact old supply/trade control payloads and old ownership records"
+          },
+          {
+            "name": "Bounded payload and identities",
+            "expected": "Three farms, six new stable actors, at most fifteen receipts and less than 45 KB of food state",
+            "pass": true,
+            "actual": "7751 peak bytes; 15 receipts"
+          },
+          {
+            "name": "Disposable campaign isolation",
+            "expected": "All setup and observation used fresh states without mutating the starting earned campaign",
+            "pass": true,
+            "actual": "Starting campaign remains byte-exact; no live storage accepted"
+          }
+        ],
+        "farms": [
+          {
+            "id": "region:1:73129/food/0",
+            "name": "Pinewatch Garden",
+            "surfaceMetres": 28.8,
+            "observedActivities": [
+              "empty/outbound",
+              "growing/outbound",
+              "growing/unloading",
+              "growing/eating",
+              "growing/returning",
+              "ripe/returning",
+              "ripe/outbound",
+              "empty/returning",
+              "empty/loading",
+              "empty/idle",
+              "growing/loading",
+              "empty/unloading",
+              "empty/eating"
+            ],
+            "checkpoints": [
+              "growth",
+              "eat",
+              "harvest",
+              "load",
+              "transit",
+              "unload"
+            ],
+            "maxBalanceError": 1.8474111129762605e-13,
+            "firstMealSeconds": 26,
+            "cycles": 7,
+            "consumed": 16,
+            "final": {
+              "harvested": 28,
+              "starterGranted": 4,
+              "stock": 8,
+              "reserved": 0,
+              "cargo": 0,
+              "store": 8,
+              "meals": 16,
+              "returnMeal": 0,
+              "farmerMeal": 0,
+              "carrierMeal": 0,
+              "seeds": 2,
+              "seedsSown": 7,
+              "seedsReturned": 7,
+              "water": 6,
+              "waterCaptured": 20,
+              "waterUsed": 14,
+              "waterLost": 128.48,
+              "stewardship": 4,
+              "farmerHunger": 32,
+              "carrierHunger": 32
+            }
+          },
+          {
+            "id": "region:1:73129/food/1",
+            "name": "Alder Garden",
+            "surfaceMetres": 28.8,
+            "observedActivities": [
+              "empty/outbound",
+              "growing/outbound",
+              "growing/unloading",
+              "growing/eating",
+              "growing/returning",
+              "ripe/returning",
+              "ripe/outbound",
+              "empty/returning",
+              "empty/loading",
+              "empty/idle",
+              "growing/loading",
+              "empty/unloading",
+              "empty/eating"
+            ],
+            "checkpoints": [
+              "growth",
+              "eat",
+              "harvest",
+              "load",
+              "transit",
+              "unload"
+            ],
+            "maxBalanceError": 1.9895196601282805e-13,
+            "firstMealSeconds": 26,
+            "cycles": 7,
+            "consumed": 16,
+            "final": {
+              "harvested": 28,
+              "starterGranted": 4,
+              "stock": 8,
+              "reserved": 0,
+              "cargo": 0,
+              "store": 8,
+              "meals": 16,
+              "returnMeal": 0,
+              "farmerMeal": 0,
+              "carrierMeal": 0,
+              "seeds": 2,
+              "seedsSown": 7,
+              "seedsReturned": 7,
+              "water": 6,
+              "waterCaptured": 20,
+              "waterUsed": 14,
+              "waterLost": 92.54,
+              "stewardship": 4,
+              "farmerHunger": 32,
+              "carrierHunger": 32
+            }
+          },
+          {
+            "id": "region:1:73129/food/2",
+            "name": "Northreach Garden",
+            "surfaceMetres": 28.799999,
+            "observedActivities": [
+              "empty/outbound",
+              "growing/outbound",
+              "growing/unloading",
+              "growing/eating",
+              "growing/returning",
+              "ripe/outbound",
+              "ripe/returning",
+              "ripe/loading",
+              "empty/returning",
+              "empty/idle",
+              "growing/loading",
+              "empty/unloading",
+              "empty/eating",
+              "empty/loading"
+            ],
+            "checkpoints": [
+              "growth",
+              "eat",
+              "harvest",
+              "load",
+              "transit",
+              "unload"
+            ],
+            "maxBalanceError": 1.8474111129762605e-13,
+            "firstMealSeconds": 26,
+            "cycles": 7,
+            "consumed": 16,
+            "final": {
+              "harvested": 28,
+              "starterGranted": 4,
+              "stock": 8,
+              "reserved": 0,
+              "cargo": 0,
+              "store": 8,
+              "meals": 16,
+              "returnMeal": 0,
+              "farmerMeal": 0,
+              "carrierMeal": 0,
+              "seeds": 2,
+              "seedsSown": 7,
+              "seedsReturned": 7,
+              "water": 6,
+              "waterCaptured": 20,
+              "waterUsed": 14,
+              "waterLost": 65.55,
+              "stewardship": 4,
+              "farmerHunger": 32,
+              "carrierHunger": 32
+            }
+          }
+        ],
+        "metrics": {
+          "simulationSeconds": 757,
+          "oldPrerequisiteSeconds": 9018,
+          "finiteStarterMeals": 12,
+          "grownFood": 84,
+          "consumedFood": 48,
+          "activeTickCalls": 757,
+          "activeTickMeanMilliseconds": 2.3395180250989376,
+          "activeTickMaximumMilliseconds": 17.02530600001046,
+          "elapsedMilliseconds": 9703.280566000001,
+          "peakStateBytes": 7751,
+          "finalStateBytes": 7738,
+          "serializedCheckpoints": 13,
+          "checkpointParseMeanMilliseconds": 3.7611347692313406,
+          "checkpointParseMaximumMilliseconds": 5.640679999996792,
+          "stewardshipPoolExhaustedAtSeconds": 140,
+          "maximumCarrierMetresPerSecond": 1.4000000000000021,
+          "liveCampaignAccess": false
+        }
+      },
+      {
+        "iteration": 2,
+        "checks": [
+          {
+            "name": "Mature-save opt-in preserves old progress",
+            "expected": "New food starts at zero local time and zero water; existing spill is only a discarded watermark",
+            "pass": true,
+            "actual": "1728.580, 1274.090, 1047.463 historic spilled litres excluded from new inventory"
+          },
+          {
+            "name": "Harvest, shipment and meal conservation (Pinewatch Garden)",
+            "expected": "New overflow, reusable seeds, crop food and finite starter portions balance through every reservation, carried meal and consumption bucket",
+            "pass": true,
+            "actual": "28 grown + 4 starter portions; 16 eaten; maximum balance error 1.8474111129762605e-13"
+          },
+          {
+            "name": "Reload all active stages (Pinewatch Garden)",
+            "expected": "Exact strict saves preserve growing, harvesting, loading, loaded transit, unloading and eating",
+            "pass": true,
+            "actual": "growth, eat, harvest, load, transit, unload"
+          },
+          {
+            "name": "Meals improve real work (Pinewatch Garden)",
+            "expected": "Both stable new residents eat real food, lower hunger and cross a productive work-rate threshold",
+            "pass": true,
+            "actual": "8 gardener and 1 pantry-worker rate improvements"
+          },
+          {
+            "name": "Finite requests and renewable work (Pinewatch Garden)",
+            "expected": "Four distinct crop jobs pay at most four marks; resident harvest and consumption continue after the pool is exhausted",
+            "pass": true,
+            "actual": "4 distinct requests, 4 marks, 4 further harvests"
+          },
+          {
+            "name": "Real local delivery time (Pinewatch Garden)",
+            "expected": "Loaded food spends at least its surface distance / speed between reservation and completed delivery",
+            "pass": true,
+            "actual": "28.800 m at 1.4 m/s; first reservation→delivery 25 s; peak 1.400000 m/s"
+          },
+          {
+            "name": "Harvest, shipment and meal conservation (Alder Garden)",
+            "expected": "New overflow, reusable seeds, crop food and finite starter portions balance through every reservation, carried meal and consumption bucket",
+            "pass": true,
+            "actual": "28 grown + 4 starter portions; 16 eaten; maximum balance error 1.9895196601282805e-13"
+          },
+          {
+            "name": "Reload all active stages (Alder Garden)",
+            "expected": "Exact strict saves preserve growing, harvesting, loading, loaded transit, unloading and eating",
+            "pass": true,
+            "actual": "growth, eat, harvest, load, transit, unload"
+          },
+          {
+            "name": "Meals improve real work (Alder Garden)",
+            "expected": "Both stable new residents eat real food, lower hunger and cross a productive work-rate threshold",
+            "pass": true,
+            "actual": "8 gardener and 1 pantry-worker rate improvements"
+          },
+          {
+            "name": "Finite requests and renewable work (Alder Garden)",
+            "expected": "Four distinct crop jobs pay at most four marks; resident harvest and consumption continue after the pool is exhausted",
+            "pass": true,
+            "actual": "4 distinct requests, 4 marks, 4 further harvests"
+          },
+          {
+            "name": "Real local delivery time (Alder Garden)",
+            "expected": "Loaded food spends at least its surface distance / speed between reservation and completed delivery",
+            "pass": true,
+            "actual": "28.800 m at 1.4 m/s; first reservation→delivery 25 s; peak 1.400000 m/s"
+          },
+          {
+            "name": "Harvest, shipment and meal conservation (Northreach Garden)",
+            "expected": "New overflow, reusable seeds, crop food and finite starter portions balance through every reservation, carried meal and consumption bucket",
+            "pass": true,
+            "actual": "28 grown + 4 starter portions; 16 eaten; maximum balance error 1.8474111129762605e-13"
+          },
+          {
+            "name": "Reload all active stages (Northreach Garden)",
+            "expected": "Exact strict saves preserve growing, harvesting, loading, loaded transit, unloading and eating",
+            "pass": true,
+            "actual": "growth, eat, harvest, load, transit, unload"
+          },
+          {
+            "name": "Meals improve real work (Northreach Garden)",
+            "expected": "Both stable new residents eat real food, lower hunger and cross a productive work-rate threshold",
+            "pass": true,
+            "actual": "8 gardener and 1 pantry-worker rate improvements"
+          },
+          {
+            "name": "Finite requests and renewable work (Northreach Garden)",
+            "expected": "Four distinct crop jobs pay at most four marks; resident harvest and consumption continue after the pool is exhausted",
+            "pass": true,
+            "actual": "4 distinct requests, 4 marks, 4 further harvests"
+          },
+          {
+            "name": "Real local delivery time (Northreach Garden)",
+            "expected": "Loaded food spends at least its surface distance / speed between reservation and completed delivery",
+            "pass": true,
+            "actual": "28.800 m at 1.4 m/s; first reservation→delivery 25 s; peak 1.400000 m/s"
+          },
+          {
+            "name": "Finite shelves pause and resume production",
+            "expected": "A full source and occupied store stop planting until real eating frees capacity",
+            "pass": true,
+            "actual": "Full capacity observed true; later harvest true"
+          },
+          {
+            "name": "Old ledgers and terrain resources remain separate",
+            "expected": "Every V31/V32 active tick matches the no-food control; no old resident, collector, store, harvest or inventory state is changed by food",
+            "pass": true,
+            "actual": "Exact old supply/trade control payloads and old ownership records"
+          },
+          {
+            "name": "Bounded payload and identities",
+            "expected": "Three farms, six new stable actors, at most fifteen receipts and less than 45 KB of food state",
+            "pass": true,
+            "actual": "7751 peak bytes; 15 receipts"
+          },
+          {
+            "name": "Disposable campaign isolation",
+            "expected": "All setup and observation used fresh states without mutating the starting earned campaign",
+            "pass": true,
+            "actual": "Starting campaign remains byte-exact; no live storage accepted"
+          }
+        ],
+        "farms": [
+          {
+            "id": "region:1:73129/food/0",
+            "name": "Pinewatch Garden",
+            "surfaceMetres": 28.8,
+            "observedActivities": [
+              "empty/outbound",
+              "growing/outbound",
+              "growing/unloading",
+              "growing/eating",
+              "growing/returning",
+              "ripe/returning",
+              "ripe/outbound",
+              "empty/returning",
+              "empty/loading",
+              "empty/idle",
+              "growing/loading",
+              "empty/unloading",
+              "empty/eating"
+            ],
+            "checkpoints": [
+              "growth",
+              "eat",
+              "harvest",
+              "load",
+              "transit",
+              "unload"
+            ],
+            "maxBalanceError": 1.8474111129762605e-13,
+            "firstMealSeconds": 26,
+            "cycles": 7,
+            "consumed": 16,
+            "final": {
+              "harvested": 28,
+              "starterGranted": 4,
+              "stock": 8,
+              "reserved": 0,
+              "cargo": 0,
+              "store": 8,
+              "meals": 16,
+              "returnMeal": 0,
+              "farmerMeal": 0,
+              "carrierMeal": 0,
+              "seeds": 2,
+              "seedsSown": 7,
+              "seedsReturned": 7,
+              "water": 6,
+              "waterCaptured": 20,
+              "waterUsed": 14,
+              "waterLost": 128.48,
+              "stewardship": 4,
+              "farmerHunger": 32,
+              "carrierHunger": 32
+            }
+          },
+          {
+            "id": "region:1:73129/food/1",
+            "name": "Alder Garden",
+            "surfaceMetres": 28.8,
+            "observedActivities": [
+              "empty/outbound",
+              "growing/outbound",
+              "growing/unloading",
+              "growing/eating",
+              "growing/returning",
+              "ripe/returning",
+              "ripe/outbound",
+              "empty/returning",
+              "empty/loading",
+              "empty/idle",
+              "growing/loading",
+              "empty/unloading",
+              "empty/eating"
+            ],
+            "checkpoints": [
+              "growth",
+              "eat",
+              "harvest",
+              "load",
+              "transit",
+              "unload"
+            ],
+            "maxBalanceError": 1.9895196601282805e-13,
+            "firstMealSeconds": 26,
+            "cycles": 7,
+            "consumed": 16,
+            "final": {
+              "harvested": 28,
+              "starterGranted": 4,
+              "stock": 8,
+              "reserved": 0,
+              "cargo": 0,
+              "store": 8,
+              "meals": 16,
+              "returnMeal": 0,
+              "farmerMeal": 0,
+              "carrierMeal": 0,
+              "seeds": 2,
+              "seedsSown": 7,
+              "seedsReturned": 7,
+              "water": 6,
+              "waterCaptured": 20,
+              "waterUsed": 14,
+              "waterLost": 92.54,
+              "stewardship": 4,
+              "farmerHunger": 32,
+              "carrierHunger": 32
+            }
+          },
+          {
+            "id": "region:1:73129/food/2",
+            "name": "Northreach Garden",
+            "surfaceMetres": 28.799999,
+            "observedActivities": [
+              "empty/outbound",
+              "growing/outbound",
+              "growing/unloading",
+              "growing/eating",
+              "growing/returning",
+              "ripe/outbound",
+              "ripe/returning",
+              "ripe/loading",
+              "empty/returning",
+              "empty/idle",
+              "growing/loading",
+              "empty/unloading",
+              "empty/eating",
+              "empty/loading"
+            ],
+            "checkpoints": [
+              "growth",
+              "eat",
+              "harvest",
+              "load",
+              "transit",
+              "unload"
+            ],
+            "maxBalanceError": 1.8474111129762605e-13,
+            "firstMealSeconds": 26,
+            "cycles": 7,
+            "consumed": 16,
+            "final": {
+              "harvested": 28,
+              "starterGranted": 4,
+              "stock": 8,
+              "reserved": 0,
+              "cargo": 0,
+              "store": 8,
+              "meals": 16,
+              "returnMeal": 0,
+              "farmerMeal": 0,
+              "carrierMeal": 0,
+              "seeds": 2,
+              "seedsSown": 7,
+              "seedsReturned": 7,
+              "water": 6,
+              "waterCaptured": 20,
+              "waterUsed": 14,
+              "waterLost": 65.55,
+              "stewardship": 4,
+              "farmerHunger": 32,
+              "carrierHunger": 32
+            }
+          }
+        ],
+        "metrics": {
+          "simulationSeconds": 757,
+          "oldPrerequisiteSeconds": 9018,
+          "finiteStarterMeals": 12,
+          "grownFood": 84,
+          "consumedFood": 48,
+          "activeTickCalls": 757,
+          "activeTickMeanMilliseconds": 2.2420818414791692,
+          "activeTickMaximumMilliseconds": 5.082148999994388,
+          "elapsedMilliseconds": 9190.451727000007,
+          "peakStateBytes": 7751,
+          "finalStateBytes": 7738,
+          "serializedCheckpoints": 13,
+          "checkpointParseMeanMilliseconds": 3.179549692308333,
+          "checkpointParseMaximumMilliseconds": 3.903493999998318,
+          "stewardshipPoolExhaustedAtSeconds": 140,
+          "maximumCarrierMetresPerSecond": 1.4000000000000021,
+          "liveCampaignAccess": false
+        }
+      },
+      {
+        "iteration": 3,
+        "checks": [
+          {
+            "name": "Mature-save opt-in preserves old progress",
+            "expected": "New food starts at zero local time and zero water; existing spill is only a discarded watermark",
+            "pass": true,
+            "actual": "1728.580, 1274.090, 1047.463 historic spilled litres excluded from new inventory"
+          },
+          {
+            "name": "Harvest, shipment and meal conservation (Pinewatch Garden)",
+            "expected": "New overflow, reusable seeds, crop food and finite starter portions balance through every reservation, carried meal and consumption bucket",
+            "pass": true,
+            "actual": "28 grown + 4 starter portions; 16 eaten; maximum balance error 1.8474111129762605e-13"
+          },
+          {
+            "name": "Reload all active stages (Pinewatch Garden)",
+            "expected": "Exact strict saves preserve growing, harvesting, loading, loaded transit, unloading and eating",
+            "pass": true,
+            "actual": "growth, eat, harvest, load, transit, unload"
+          },
+          {
+            "name": "Meals improve real work (Pinewatch Garden)",
+            "expected": "Both stable new residents eat real food, lower hunger and cross a productive work-rate threshold",
+            "pass": true,
+            "actual": "8 gardener and 1 pantry-worker rate improvements"
+          },
+          {
+            "name": "Finite requests and renewable work (Pinewatch Garden)",
+            "expected": "Four distinct crop jobs pay at most four marks; resident harvest and consumption continue after the pool is exhausted",
+            "pass": true,
+            "actual": "4 distinct requests, 4 marks, 4 further harvests"
+          },
+          {
+            "name": "Real local delivery time (Pinewatch Garden)",
+            "expected": "Loaded food spends at least its surface distance / speed between reservation and completed delivery",
+            "pass": true,
+            "actual": "28.800 m at 1.4 m/s; first reservation→delivery 25 s; peak 1.400000 m/s"
+          },
+          {
+            "name": "Harvest, shipment and meal conservation (Alder Garden)",
+            "expected": "New overflow, reusable seeds, crop food and finite starter portions balance through every reservation, carried meal and consumption bucket",
+            "pass": true,
+            "actual": "28 grown + 4 starter portions; 16 eaten; maximum balance error 1.9895196601282805e-13"
+          },
+          {
+            "name": "Reload all active stages (Alder Garden)",
+            "expected": "Exact strict saves preserve growing, harvesting, loading, loaded transit, unloading and eating",
+            "pass": true,
+            "actual": "growth, eat, harvest, load, transit, unload"
+          },
+          {
+            "name": "Meals improve real work (Alder Garden)",
+            "expected": "Both stable new residents eat real food, lower hunger and cross a productive work-rate threshold",
+            "pass": true,
+            "actual": "8 gardener and 1 pantry-worker rate improvements"
+          },
+          {
+            "name": "Finite requests and renewable work (Alder Garden)",
+            "expected": "Four distinct crop jobs pay at most four marks; resident harvest and consumption continue after the pool is exhausted",
+            "pass": true,
+            "actual": "4 distinct requests, 4 marks, 4 further harvests"
+          },
+          {
+            "name": "Real local delivery time (Alder Garden)",
+            "expected": "Loaded food spends at least its surface distance / speed between reservation and completed delivery",
+            "pass": true,
+            "actual": "28.800 m at 1.4 m/s; first reservation→delivery 25 s; peak 1.400000 m/s"
+          },
+          {
+            "name": "Harvest, shipment and meal conservation (Northreach Garden)",
+            "expected": "New overflow, reusable seeds, crop food and finite starter portions balance through every reservation, carried meal and consumption bucket",
+            "pass": true,
+            "actual": "28 grown + 4 starter portions; 16 eaten; maximum balance error 1.8474111129762605e-13"
+          },
+          {
+            "name": "Reload all active stages (Northreach Garden)",
+            "expected": "Exact strict saves preserve growing, harvesting, loading, loaded transit, unloading and eating",
+            "pass": true,
+            "actual": "growth, eat, harvest, load, transit, unload"
+          },
+          {
+            "name": "Meals improve real work (Northreach Garden)",
+            "expected": "Both stable new residents eat real food, lower hunger and cross a productive work-rate threshold",
+            "pass": true,
+            "actual": "8 gardener and 1 pantry-worker rate improvements"
+          },
+          {
+            "name": "Finite requests and renewable work (Northreach Garden)",
+            "expected": "Four distinct crop jobs pay at most four marks; resident harvest and consumption continue after the pool is exhausted",
+            "pass": true,
+            "actual": "4 distinct requests, 4 marks, 4 further harvests"
+          },
+          {
+            "name": "Real local delivery time (Northreach Garden)",
+            "expected": "Loaded food spends at least its surface distance / speed between reservation and completed delivery",
+            "pass": true,
+            "actual": "28.800 m at 1.4 m/s; first reservation→delivery 25 s; peak 1.400000 m/s"
+          },
+          {
+            "name": "Finite shelves pause and resume production",
+            "expected": "A full source and occupied store stop planting until real eating frees capacity",
+            "pass": true,
+            "actual": "Full capacity observed true; later harvest true"
+          },
+          {
+            "name": "Old ledgers and terrain resources remain separate",
+            "expected": "Every V31/V32 active tick matches the no-food control; no old resident, collector, store, harvest or inventory state is changed by food",
+            "pass": true,
+            "actual": "Exact old supply/trade control payloads and old ownership records"
+          },
+          {
+            "name": "Bounded payload and identities",
+            "expected": "Three farms, six new stable actors, at most fifteen receipts and less than 45 KB of food state",
+            "pass": true,
+            "actual": "7751 peak bytes; 15 receipts"
+          },
+          {
+            "name": "Disposable campaign isolation",
+            "expected": "All setup and observation used fresh states without mutating the starting earned campaign",
+            "pass": true,
+            "actual": "Starting campaign remains byte-exact; no live storage accepted"
+          }
+        ],
+        "farms": [
+          {
+            "id": "region:1:73129/food/0",
+            "name": "Pinewatch Garden",
+            "surfaceMetres": 28.8,
+            "observedActivities": [
+              "empty/outbound",
+              "growing/outbound",
+              "growing/unloading",
+              "growing/eating",
+              "growing/returning",
+              "ripe/returning",
+              "ripe/outbound",
+              "empty/returning",
+              "empty/loading",
+              "empty/idle",
+              "growing/loading",
+              "empty/unloading",
+              "empty/eating"
+            ],
+            "checkpoints": [
+              "growth",
+              "eat",
+              "harvest",
+              "load",
+              "transit",
+              "unload"
+            ],
+            "maxBalanceError": 1.8474111129762605e-13,
+            "firstMealSeconds": 26,
+            "cycles": 7,
+            "consumed": 16,
+            "final": {
+              "harvested": 28,
+              "starterGranted": 4,
+              "stock": 8,
+              "reserved": 0,
+              "cargo": 0,
+              "store": 8,
+              "meals": 16,
+              "returnMeal": 0,
+              "farmerMeal": 0,
+              "carrierMeal": 0,
+              "seeds": 2,
+              "seedsSown": 7,
+              "seedsReturned": 7,
+              "water": 6,
+              "waterCaptured": 20,
+              "waterUsed": 14,
+              "waterLost": 128.48,
+              "stewardship": 4,
+              "farmerHunger": 32,
+              "carrierHunger": 32
+            }
+          },
+          {
+            "id": "region:1:73129/food/1",
+            "name": "Alder Garden",
+            "surfaceMetres": 28.8,
+            "observedActivities": [
+              "empty/outbound",
+              "growing/outbound",
+              "growing/unloading",
+              "growing/eating",
+              "growing/returning",
+              "ripe/returning",
+              "ripe/outbound",
+              "empty/returning",
+              "empty/loading",
+              "empty/idle",
+              "growing/loading",
+              "empty/unloading",
+              "empty/eating"
+            ],
+            "checkpoints": [
+              "growth",
+              "eat",
+              "harvest",
+              "load",
+              "transit",
+              "unload"
+            ],
+            "maxBalanceError": 1.9895196601282805e-13,
+            "firstMealSeconds": 26,
+            "cycles": 7,
+            "consumed": 16,
+            "final": {
+              "harvested": 28,
+              "starterGranted": 4,
+              "stock": 8,
+              "reserved": 0,
+              "cargo": 0,
+              "store": 8,
+              "meals": 16,
+              "returnMeal": 0,
+              "farmerMeal": 0,
+              "carrierMeal": 0,
+              "seeds": 2,
+              "seedsSown": 7,
+              "seedsReturned": 7,
+              "water": 6,
+              "waterCaptured": 20,
+              "waterUsed": 14,
+              "waterLost": 92.54,
+              "stewardship": 4,
+              "farmerHunger": 32,
+              "carrierHunger": 32
+            }
+          },
+          {
+            "id": "region:1:73129/food/2",
+            "name": "Northreach Garden",
+            "surfaceMetres": 28.799999,
+            "observedActivities": [
+              "empty/outbound",
+              "growing/outbound",
+              "growing/unloading",
+              "growing/eating",
+              "growing/returning",
+              "ripe/outbound",
+              "ripe/returning",
+              "ripe/loading",
+              "empty/returning",
+              "empty/idle",
+              "growing/loading",
+              "empty/unloading",
+              "empty/eating",
+              "empty/loading"
+            ],
+            "checkpoints": [
+              "growth",
+              "eat",
+              "harvest",
+              "load",
+              "transit",
+              "unload"
+            ],
+            "maxBalanceError": 1.8474111129762605e-13,
+            "firstMealSeconds": 26,
+            "cycles": 7,
+            "consumed": 16,
+            "final": {
+              "harvested": 28,
+              "starterGranted": 4,
+              "stock": 8,
+              "reserved": 0,
+              "cargo": 0,
+              "store": 8,
+              "meals": 16,
+              "returnMeal": 0,
+              "farmerMeal": 0,
+              "carrierMeal": 0,
+              "seeds": 2,
+              "seedsSown": 7,
+              "seedsReturned": 7,
+              "water": 6,
+              "waterCaptured": 20,
+              "waterUsed": 14,
+              "waterLost": 65.55,
+              "stewardship": 4,
+              "farmerHunger": 32,
+              "carrierHunger": 32
+            }
+          }
+        ],
+        "metrics": {
+          "simulationSeconds": 757,
+          "oldPrerequisiteSeconds": 9018,
+          "finiteStarterMeals": 12,
+          "grownFood": 84,
+          "consumedFood": 48,
+          "activeTickCalls": 757,
+          "activeTickMeanMilliseconds": 2.130725585204802,
+          "activeTickMaximumMilliseconds": 3.832083999994211,
+          "elapsedMilliseconds": 8839.787396,
+          "peakStateBytes": 7751,
+          "finalStateBytes": 7738,
+          "serializedCheckpoints": 13,
+          "checkpointParseMeanMilliseconds": 2.9705180769233266,
+          "checkpointParseMaximumMilliseconds": 4.914950999998837,
+          "stewardshipPoolExhaustedAtSeconds": 140,
+          "maximumCarrierMetresPerSecond": 1.4000000000000021,
+          "liveCampaignAccess": false
+        }
+      }
+    ]
+  },
+  "seedSweep": [
+    {
+      "seed": 0,
+      "status": "complete",
+      "error": null,
+      "passed": true,
+      "failedChecks": [],
+      "farms": [
+        {
+          "id": "region:1:0/food/0",
+          "name": "Pinewatch Garden",
+          "surfaceMetres": 28.8,
+          "observedActivities": [
+            "empty/outbound",
+            "growing/outbound",
+            "growing/unloading",
+            "growing/eating",
+            "growing/returning",
+            "ripe/outbound",
+            "ripe/returning",
+            "empty/returning",
+            "empty/loading",
+            "empty/idle",
+            "growing/loading",
+            "empty/unloading",
+            "empty/eating"
+          ],
+          "checkpoints": [
+            "growth",
+            "eat",
+            "harvest",
+            "load",
+            "transit",
+            "unload"
+          ],
+          "maxBalanceError": 1.9895196601282805e-13,
+          "firstMealSeconds": 26,
+          "cycles": 7,
+          "consumed": 16,
+          "final": {
+            "harvested": 28,
+            "starterGranted": 4,
+            "stock": 8,
+            "reserved": 0,
+            "cargo": 0,
+            "store": 8,
+            "meals": 16,
+            "returnMeal": 0,
+            "farmerMeal": 0,
+            "carrierMeal": 0,
+            "seeds": 2,
+            "seedsSown": 7,
+            "seedsReturned": 7,
+            "water": 6,
+            "waterCaptured": 20,
+            "waterUsed": 14,
+            "waterLost": 121.52,
+            "stewardship": 4,
+            "farmerHunger": 32,
+            "carrierHunger": 32
+          }
+        },
+        {
+          "id": "region:1:0/food/1",
+          "name": "Alder Garden",
+          "surfaceMetres": 28.799999,
+          "observedActivities": [
+            "empty/outbound",
+            "growing/outbound",
+            "growing/unloading",
+            "growing/eating",
+            "growing/returning",
+            "ripe/outbound",
+            "ripe/returning",
+            "ripe/loading",
+            "empty/returning",
+            "empty/idle",
+            "growing/loading",
+            "empty/unloading",
+            "empty/eating",
+            "empty/loading"
+          ],
+          "checkpoints": [
+            "growth",
+            "eat",
+            "harvest",
+            "load",
+            "transit",
+            "unload"
+          ],
+          "maxBalanceError": 1.2789769243681803e-13,
+          "firstMealSeconds": 26,
+          "cycles": 7,
+          "consumed": 16,
+          "final": {
+            "harvested": 28,
+            "starterGranted": 4,
+            "stock": 8,
+            "reserved": 0,
+            "cargo": 0,
+            "store": 8,
+            "meals": 16,
+            "returnMeal": 0,
+            "farmerMeal": 0,
+            "carrierMeal": 0,
+            "seeds": 2,
+            "seedsSown": 7,
+            "seedsReturned": 7,
+            "water": 6,
+            "waterCaptured": 20,
+            "waterUsed": 14,
+            "waterLost": 84.8,
+            "stewardship": 4,
+            "farmerHunger": 32,
+            "carrierHunger": 32
+          }
+        },
+        {
+          "id": "region:1:0/food/2",
+          "name": "Northreach Garden",
+          "surfaceMetres": 28.8,
+          "observedActivities": [
+            "empty/outbound",
+            "growing/outbound",
+            "growing/unloading",
+            "growing/eating",
+            "growing/returning",
+            "ripe/returning",
+            "ripe/outbound",
+            "empty/returning",
+            "empty/loading",
+            "empty/idle",
+            "growing/loading",
+            "empty/unloading",
+            "empty/eating"
+          ],
+          "checkpoints": [
+            "growth",
+            "eat",
+            "harvest",
+            "load",
+            "transit",
+            "unload"
+          ],
+          "maxBalanceError": 1.8474111129762605e-13,
+          "firstMealSeconds": 26,
+          "cycles": 7,
+          "consumed": 16,
+          "final": {
+            "harvested": 28,
+            "starterGranted": 4,
+            "stock": 8,
+            "reserved": 0,
+            "cargo": 0,
+            "store": 8,
+            "meals": 16,
+            "returnMeal": 0,
+            "farmerMeal": 0,
+            "carrierMeal": 0,
+            "seeds": 2,
+            "seedsSown": 7,
+            "seedsReturned": 7,
+            "water": 6,
+            "waterCaptured": 20,
+            "waterUsed": 14,
+            "waterLost": 71.9,
+            "stewardship": 4,
+            "farmerHunger": 32,
+            "carrierHunger": 32
+          }
+        }
+      ],
+      "metrics": [
+        {
+          "simulationSeconds": 757,
+          "oldPrerequisiteSeconds": 9435,
+          "finiteStarterMeals": 12,
+          "grownFood": 84,
+          "consumedFood": 48,
+          "activeTickCalls": 757,
+          "activeTickMeanMilliseconds": 2.0782144504621263,
+          "activeTickMaximumMilliseconds": 3.445856000005733,
+          "elapsedMilliseconds": 8707.440312000006,
+          "peakStateBytes": 7579,
+          "finalStateBytes": 7555,
+          "serializedCheckpoints": 13,
+          "checkpointParseMeanMilliseconds": 3.0691555384568905,
+          "checkpointParseMaximumMilliseconds": 3.520109999983106,
+          "stewardshipPoolExhaustedAtSeconds": 140,
+          "maximumCarrierMetresPerSecond": 1.4000000000000021,
+          "liveCampaignAccess": false
+        }
+      ]
+    },
+    {
+      "seed": 1,
+      "status": "complete",
+      "error": null,
+      "passed": true,
+      "failedChecks": [],
+      "farms": [
+        {
+          "id": "region:1:1/food/0",
+          "name": "Pinewatch Garden",
+          "surfaceMetres": 28.8,
+          "observedActivities": [
+            "empty/outbound",
+            "growing/outbound",
+            "growing/unloading",
+            "growing/eating",
+            "growing/returning",
+            "ripe/returning",
+            "ripe/outbound",
+            "empty/returning",
+            "empty/loading",
+            "empty/idle",
+            "growing/loading",
+            "empty/unloading",
+            "empty/eating"
+          ],
+          "checkpoints": [
+            "growth",
+            "eat",
+            "harvest",
+            "load",
+            "transit",
+            "unload"
+          ],
+          "maxBalanceError": 1.7053025658242404e-13,
+          "firstMealSeconds": 26,
+          "cycles": 7,
+          "consumed": 16,
+          "final": {
+            "harvested": 28,
+            "starterGranted": 4,
+            "stock": 8,
+            "reserved": 0,
+            "cargo": 0,
+            "store": 8,
+            "meals": 16,
+            "returnMeal": 0,
+            "farmerMeal": 0,
+            "carrierMeal": 0,
+            "seeds": 2,
+            "seedsSown": 7,
+            "seedsReturned": 7,
+            "water": 6,
+            "waterCaptured": 20,
+            "waterUsed": 14,
+            "waterLost": 126.44,
+            "stewardship": 4,
+            "farmerHunger": 32,
+            "carrierHunger": 32
+          }
+        },
+        {
+          "id": "region:1:1/food/1",
+          "name": "Alder Garden",
+          "surfaceMetres": 28.799999,
+          "observedActivities": [
+            "empty/outbound",
+            "growing/outbound",
+            "growing/unloading",
+            "growing/eating",
+            "growing/returning",
+            "ripe/outbound",
+            "ripe/returning",
+            "empty/returning",
+            "empty/loading",
+            "empty/idle",
+            "growing/loading",
+            "empty/unloading",
+            "empty/eating"
+          ],
+          "checkpoints": [
+            "growth",
+            "eat",
+            "harvest",
+            "load",
+            "transit",
+            "unload"
+          ],
+          "maxBalanceError": 2.2737367544323206e-13,
+          "firstMealSeconds": 26,
+          "cycles": 7,
+          "consumed": 16,
+          "final": {
+            "harvested": 28,
+            "starterGranted": 4,
+            "stock": 8,
+            "reserved": 0,
+            "cargo": 0,
+            "store": 8,
+            "meals": 16,
+            "returnMeal": 0,
+            "farmerMeal": 0,
+            "carrierMeal": 0,
+            "seeds": 2,
+            "seedsSown": 7,
+            "seedsReturned": 7,
+            "water": 6,
+            "waterCaptured": 20,
+            "waterUsed": 14,
+            "waterLost": 87.7,
+            "stewardship": 4,
+            "farmerHunger": 32,
+            "carrierHunger": 32
+          }
+        },
+        {
+          "id": "region:1:1/food/2",
+          "name": "Northreach Garden",
+          "surfaceMetres": 28.799999,
+          "observedActivities": [
+            "empty/outbound",
+            "growing/outbound",
+            "growing/unloading",
+            "growing/eating",
+            "growing/returning",
+            "ripe/returning",
+            "ripe/outbound",
+            "empty/returning",
+            "empty/loading",
+            "empty/idle",
+            "growing/loading",
+            "empty/unloading",
+            "empty/eating"
+          ],
+          "checkpoints": [
+            "growth",
+            "eat",
+            "harvest",
+            "load",
+            "transit",
+            "unload"
+          ],
+          "maxBalanceError": 1.8474111129762605e-13,
+          "firstMealSeconds": 26,
+          "cycles": 7,
+          "consumed": 16,
+          "final": {
+            "harvested": 28,
+            "starterGranted": 4,
+            "stock": 8,
+            "reserved": 0,
+            "cargo": 0,
+            "store": 8,
+            "meals": 16,
+            "returnMeal": 0,
+            "farmerMeal": 0,
+            "carrierMeal": 0,
+            "seeds": 2,
+            "seedsSown": 7,
+            "seedsReturned": 7,
+            "water": 6,
+            "waterCaptured": 20,
+            "waterUsed": 14,
+            "waterLost": 74.65,
+            "stewardship": 4,
+            "farmerHunger": 32,
+            "carrierHunger": 32
+          }
+        }
+      ],
+      "metrics": [
+        {
+          "simulationSeconds": 757,
+          "oldPrerequisiteSeconds": 9501,
+          "finiteStarterMeals": 12,
+          "grownFood": 84,
+          "consumedFood": 48,
+          "activeTickCalls": 757,
+          "activeTickMeanMilliseconds": 1.996443442536424,
+          "activeTickMaximumMilliseconds": 6.583062999998219,
+          "elapsedMilliseconds": 7702.243480000005,
+          "peakStateBytes": 7576,
+          "finalStateBytes": 7561,
+          "serializedCheckpoints": 12,
+          "checkpointParseMeanMilliseconds": 3.141312749995753,
+          "checkpointParseMaximumMilliseconds": 3.9727319999947213,
+          "stewardshipPoolExhaustedAtSeconds": 140,
+          "maximumCarrierMetresPerSecond": 1.4000000000000021,
+          "liveCampaignAccess": false
+        }
+      ]
+    },
+    {
+      "seed": 42,
+      "status": "complete",
+      "error": null,
+      "passed": true,
+      "failedChecks": [],
+      "farms": [
+        {
+          "id": "region:1:42/food/0",
+          "name": "Pinewatch Garden",
+          "surfaceMetres": 28.8,
+          "observedActivities": [
+            "empty/outbound",
+            "empty/unloading",
+            "growing/eating",
+            "growing/returning",
+            "growing/outbound",
+            "ripe/outbound",
+            "growing/unloading",
+            "growing/loading",
+            "ripe/returning",
+            "empty/returning",
+            "empty/idle",
+            "empty/eating",
+            "empty/loading"
+          ],
+          "checkpoints": [
+            "growth",
+            "eat",
+            "harvest",
+            "load",
+            "transit",
+            "unload"
+          ],
+          "maxBalanceError": 2.2737367544323206e-13,
+          "firstMealSeconds": 26,
+          "cycles": 7,
+          "consumed": 16,
+          "final": {
+            "harvested": 28,
+            "starterGranted": 4,
+            "stock": 8,
+            "reserved": 0,
+            "cargo": 0,
+            "store": 8,
+            "meals": 16,
+            "returnMeal": 0,
+            "farmerMeal": 0,
+            "carrierMeal": 0,
+            "seeds": 2,
+            "seedsSown": 7,
+            "seedsReturned": 7,
+            "water": 6,
+            "waterCaptured": 20,
+            "waterUsed": 14,
+            "waterLost": 127.2,
+            "stewardship": 4,
+            "farmerHunger": 32,
+            "carrierHunger": 32
+          }
+        },
+        {
+          "id": "region:1:42/food/1",
+          "name": "Alder Garden",
+          "surfaceMetres": 28.8,
+          "observedActivities": [
+            "empty/outbound",
+            "empty/unloading",
+            "empty/eating",
+            "empty/returning",
+            "growing/returning",
+            "growing/outbound",
+            "ripe/outbound",
+            "growing/unloading",
+            "growing/eating",
+            "growing/loading",
+            "ripe/returning",
+            "empty/idle",
+            "empty/loading"
+          ],
+          "checkpoints": [
+            "eat",
+            "growth",
+            "harvest",
+            "load",
+            "transit",
+            "unload"
+          ],
+          "maxBalanceError": 2.1316282072803006e-13,
+          "firstMealSeconds": 26,
+          "cycles": 7,
+          "consumed": 16,
+          "final": {
+            "harvested": 28,
+            "starterGranted": 4,
+            "stock": 8,
+            "reserved": 0,
+            "cargo": 0,
+            "store": 8,
+            "meals": 16,
+            "returnMeal": 0,
+            "farmerMeal": 0,
+            "carrierMeal": 0,
+            "seeds": 2,
+            "seedsSown": 7,
+            "seedsReturned": 7,
+            "water": 6,
+            "waterCaptured": 20,
+            "waterUsed": 14,
+            "waterLost": 90.86,
+            "stewardship": 4,
+            "farmerHunger": 32,
+            "carrierHunger": 32
+          }
+        },
+        {
+          "id": "region:1:42/food/2",
+          "name": "Northreach Garden",
+          "surfaceMetres": 28.799999,
+          "observedActivities": [
+            "empty/outbound",
+            "empty/unloading",
+            "empty/eating",
+            "empty/returning",
+            "growing/returning",
+            "growing/outbound",
+            "growing/unloading",
+            "ripe/eating",
+            "ripe/returning",
+            "growing/loading",
+            "ripe/outbound",
+            "ripe/idle",
+            "ripe/loading",
+            "growing/eating",
+            "empty/idle",
+            "empty/loading"
+          ],
+          "checkpoints": [
+            "eat",
+            "growth",
+            "harvest",
+            "load",
+            "transit",
+            "unload"
+          ],
+          "maxBalanceError": 1.8474111129762605e-13,
+          "firstMealSeconds": 26,
+          "cycles": 7,
+          "consumed": 16,
+          "final": {
+            "harvested": 28,
+            "starterGranted": 4,
+            "stock": 8,
+            "reserved": 0,
+            "cargo": 0,
+            "store": 8,
+            "meals": 16,
+            "returnMeal": 0,
+            "farmerMeal": 0,
+            "carrierMeal": 0,
+            "seeds": 2,
+            "seedsSown": 7,
+            "seedsReturned": 7,
+            "water": 6,
+            "waterCaptured": 20,
+            "waterUsed": 14,
+            "waterLost": 66.4,
+            "stewardship": 4,
+            "farmerHunger": 32,
+            "carrierHunger": 32
+          }
+        }
+      ],
+      "metrics": [
+        {
+          "simulationSeconds": 757,
+          "oldPrerequisiteSeconds": 8831,
+          "finiteStarterMeals": 12,
+          "grownFood": 84,
+          "consumedFood": 48,
+          "activeTickCalls": 757,
+          "activeTickMeanMilliseconds": 1.9859794227212537,
+          "activeTickMaximumMilliseconds": 7.8543789999966975,
+          "elapsedMilliseconds": 7407.299131000007,
+          "peakStateBytes": 7627,
+          "finalStateBytes": 7603,
+          "serializedCheckpoints": 12,
+          "checkpointParseMeanMilliseconds": 2.9372271666676775,
+          "checkpointParseMaximumMilliseconds": 3.7412790000089444,
+          "stewardshipPoolExhaustedAtSeconds": 142,
+          "maximumCarrierMetresPerSecond": 1.4000000000000021,
+          "liveCampaignAccess": false
+        }
+      ]
+    },
+    {
+      "seed": 12345,
+      "status": "complete",
+      "error": null,
+      "passed": true,
+      "failedChecks": [],
+      "farms": [
+        {
+          "id": "region:1:12345/food/0",
+          "name": "Pinewatch Garden",
+          "surfaceMetres": 28.800001,
+          "observedActivities": [
+            "empty/outbound",
+            "growing/outbound",
+            "growing/unloading",
+            "growing/eating",
+            "growing/returning",
+            "ripe/returning",
+            "ripe/outbound",
+            "empty/returning",
+            "empty/loading",
+            "empty/idle",
+            "growing/loading",
+            "empty/unloading",
+            "empty/eating"
+          ],
+          "checkpoints": [
+            "growth",
+            "eat",
+            "harvest",
+            "load",
+            "transit",
+            "unload"
+          ],
+          "maxBalanceError": 1.7053025658242404e-13,
+          "firstMealSeconds": 26,
+          "cycles": 7,
+          "consumed": 16,
+          "final": {
+            "harvested": 28,
+            "starterGranted": 4,
+            "stock": 8,
+            "reserved": 0,
+            "cargo": 0,
+            "store": 8,
+            "meals": 16,
+            "returnMeal": 0,
+            "farmerMeal": 0,
+            "carrierMeal": 0,
+            "seeds": 2,
+            "seedsSown": 7,
+            "seedsReturned": 7,
+            "water": 6,
+            "waterCaptured": 20,
+            "waterUsed": 14,
+            "waterLost": 125.52,
+            "stewardship": 4,
+            "farmerHunger": 32,
+            "carrierHunger": 32
+          }
+        },
+        {
+          "id": "region:1:12345/food/1",
+          "name": "Alder Garden",
+          "surfaceMetres": 28.799999,
+          "observedActivities": [
+            "empty/outbound",
+            "growing/outbound",
+            "growing/unloading",
+            "growing/eating",
+            "growing/returning",
+            "ripe/returning",
+            "ripe/outbound",
+            "empty/returning",
+            "empty/loading",
+            "empty/idle",
+            "growing/loading",
+            "empty/unloading",
+            "empty/eating"
+          ],
+          "checkpoints": [
+            "growth",
+            "eat",
+            "harvest",
+            "load",
+            "transit",
+            "unload"
+          ],
+          "maxBalanceError": 1.2789769243681803e-13,
+          "firstMealSeconds": 26,
+          "cycles": 7,
+          "consumed": 16,
+          "final": {
+            "harvested": 28,
+            "starterGranted": 4,
+            "stock": 8,
+            "reserved": 0,
+            "cargo": 0,
+            "store": 8,
+            "meals": 16,
+            "returnMeal": 0,
+            "farmerMeal": 0,
+            "carrierMeal": 0,
+            "seeds": 2,
+            "seedsSown": 7,
+            "seedsReturned": 7,
+            "water": 6,
+            "waterCaptured": 20,
+            "waterUsed": 14,
+            "waterLost": 87.4,
+            "stewardship": 4,
+            "farmerHunger": 32,
+            "carrierHunger": 32
+          }
+        },
+        {
+          "id": "region:1:12345/food/2",
+          "name": "Northreach Garden",
+          "surfaceMetres": 28.799999,
+          "observedActivities": [
+            "empty/outbound",
+            "growing/outbound",
+            "growing/unloading",
+            "growing/eating",
+            "growing/returning",
+            "ripe/outbound",
+            "ripe/returning",
+            "ripe/loading",
+            "empty/returning",
+            "empty/idle",
+            "growing/loading",
+            "empty/unloading",
+            "empty/eating",
+            "empty/loading"
+          ],
+          "checkpoints": [
+            "growth",
+            "eat",
+            "harvest",
+            "load",
+            "transit",
+            "unload"
+          ],
+          "maxBalanceError": 9.237055564881302e-14,
+          "firstMealSeconds": 26,
+          "cycles": 7,
+          "consumed": 16,
+          "final": {
+            "harvested": 28,
+            "starterGranted": 4,
+            "stock": 8,
+            "reserved": 0,
+            "cargo": 0,
+            "store": 8,
+            "meals": 16,
+            "returnMeal": 0,
+            "farmerMeal": 0,
+            "carrierMeal": 0,
+            "seeds": 2,
+            "seedsSown": 7,
+            "seedsReturned": 7,
+            "water": 6,
+            "waterCaptured": 20,
+            "waterUsed": 14,
+            "waterLost": 72.75,
+            "stewardship": 4,
+            "farmerHunger": 32,
+            "carrierHunger": 32
+          }
+        }
+      ],
+      "metrics": [
+        {
+          "simulationSeconds": 757,
+          "oldPrerequisiteSeconds": 8918,
+          "finiteStarterMeals": 12,
+          "grownFood": 84,
+          "consumedFood": 48,
+          "activeTickCalls": 757,
+          "activeTickMeanMilliseconds": 1.981739080581121,
+          "activeTickMaximumMilliseconds": 11.646788999991259,
+          "elapsedMilliseconds": 7267.106914000004,
+          "peakStateBytes": 7759,
+          "finalStateBytes": 7747,
+          "serializedCheckpoints": 13,
+          "checkpointParseMeanMilliseconds": 3.1179287692312547,
+          "checkpointParseMaximumMilliseconds": 4.439436000015121,
+          "stewardshipPoolExhaustedAtSeconds": 140,
+          "maximumCarrierMetresPerSecond": 1.4000000000000021,
+          "liveCampaignAccess": false
+        }
+      ]
+    },
+    {
+      "seed": 73129,
+      "status": "complete",
+      "error": null,
+      "passed": true,
+      "failedChecks": [],
+      "farms": [
+        {
+          "id": "region:1:73129/food/0",
+          "name": "Pinewatch Garden",
+          "surfaceMetres": 28.8,
+          "observedActivities": [
+            "empty/outbound",
+            "growing/outbound",
+            "growing/unloading",
+            "growing/eating",
+            "growing/returning",
+            "ripe/returning",
+            "ripe/outbound",
+            "empty/returning",
+            "empty/loading",
+            "empty/idle",
+            "growing/loading",
+            "empty/unloading",
+            "empty/eating"
+          ],
+          "checkpoints": [
+            "growth",
+            "eat",
+            "harvest",
+            "load",
+            "transit",
+            "unload"
+          ],
+          "maxBalanceError": 1.8474111129762605e-13,
+          "firstMealSeconds": 26,
+          "cycles": 7,
+          "consumed": 16,
+          "final": {
+            "harvested": 28,
+            "starterGranted": 4,
+            "stock": 8,
+            "reserved": 0,
+            "cargo": 0,
+            "store": 8,
+            "meals": 16,
+            "returnMeal": 0,
+            "farmerMeal": 0,
+            "carrierMeal": 0,
+            "seeds": 2,
+            "seedsSown": 7,
+            "seedsReturned": 7,
+            "water": 6,
+            "waterCaptured": 20,
+            "waterUsed": 14,
+            "waterLost": 128.48,
+            "stewardship": 4,
+            "farmerHunger": 32,
+            "carrierHunger": 32
+          }
+        },
+        {
+          "id": "region:1:73129/food/1",
+          "name": "Alder Garden",
+          "surfaceMetres": 28.8,
+          "observedActivities": [
+            "empty/outbound",
+            "growing/outbound",
+            "growing/unloading",
+            "growing/eating",
+            "growing/returning",
+            "ripe/returning",
+            "ripe/outbound",
+            "empty/returning",
+            "empty/loading",
+            "empty/idle",
+            "growing/loading",
+            "empty/unloading",
+            "empty/eating"
+          ],
+          "checkpoints": [
+            "growth",
+            "eat",
+            "harvest",
+            "load",
+            "transit",
+            "unload"
+          ],
+          "maxBalanceError": 1.9895196601282805e-13,
+          "firstMealSeconds": 26,
+          "cycles": 7,
+          "consumed": 16,
+          "final": {
+            "harvested": 28,
+            "starterGranted": 4,
+            "stock": 8,
+            "reserved": 0,
+            "cargo": 0,
+            "store": 8,
+            "meals": 16,
+            "returnMeal": 0,
+            "farmerMeal": 0,
+            "carrierMeal": 0,
+            "seeds": 2,
+            "seedsSown": 7,
+            "seedsReturned": 7,
+            "water": 6,
+            "waterCaptured": 20,
+            "waterUsed": 14,
+            "waterLost": 92.54,
+            "stewardship": 4,
+            "farmerHunger": 32,
+            "carrierHunger": 32
+          }
+        },
+        {
+          "id": "region:1:73129/food/2",
+          "name": "Northreach Garden",
+          "surfaceMetres": 28.799999,
+          "observedActivities": [
+            "empty/outbound",
+            "growing/outbound",
+            "growing/unloading",
+            "growing/eating",
+            "growing/returning",
+            "ripe/outbound",
+            "ripe/returning",
+            "ripe/loading",
+            "empty/returning",
+            "empty/idle",
+            "growing/loading",
+            "empty/unloading",
+            "empty/eating",
+            "empty/loading"
+          ],
+          "checkpoints": [
+            "growth",
+            "eat",
+            "harvest",
+            "load",
+            "transit",
+            "unload"
+          ],
+          "maxBalanceError": 1.8474111129762605e-13,
+          "firstMealSeconds": 26,
+          "cycles": 7,
+          "consumed": 16,
+          "final": {
+            "harvested": 28,
+            "starterGranted": 4,
+            "stock": 8,
+            "reserved": 0,
+            "cargo": 0,
+            "store": 8,
+            "meals": 16,
+            "returnMeal": 0,
+            "farmerMeal": 0,
+            "carrierMeal": 0,
+            "seeds": 2,
+            "seedsSown": 7,
+            "seedsReturned": 7,
+            "water": 6,
+            "waterCaptured": 20,
+            "waterUsed": 14,
+            "waterLost": 65.55,
+            "stewardship": 4,
+            "farmerHunger": 32,
+            "carrierHunger": 32
+          }
+        }
+      ],
+      "metrics": [
+        {
+          "simulationSeconds": 757,
+          "oldPrerequisiteSeconds": 9018,
+          "finiteStarterMeals": 12,
+          "grownFood": 84,
+          "consumedFood": 48,
+          "activeTickCalls": 757,
+          "activeTickMeanMilliseconds": 2.146674229854412,
+          "activeTickMaximumMilliseconds": 5.532086999999592,
+          "elapsedMilliseconds": 9198.769111000001,
+          "peakStateBytes": 7751,
+          "finalStateBytes": 7738,
+          "serializedCheckpoints": 13,
+          "checkpointParseMeanMilliseconds": 2.8314321538469254,
+          "checkpointParseMaximumMilliseconds": 3.6140829999931157,
+          "stewardshipPoolExhaustedAtSeconds": 140,
+          "maximumCarrierMetresPerSecond": 1.4000000000000021,
+          "liveCampaignAccess": false
+        }
+      ]
+    },
+    {
+      "seed": 4294967295,
+      "status": "complete",
+      "error": null,
+      "passed": true,
+      "failedChecks": [],
+      "farms": [
+        {
+          "id": "region:1:4294967295/food/0",
+          "name": "Pinewatch Garden",
+          "surfaceMetres": 28.8,
+          "observedActivities": [
+            "empty/outbound",
+            "growing/outbound",
+            "growing/unloading",
+            "growing/eating",
+            "growing/returning",
+            "ripe/outbound",
+            "ripe/returning",
+            "empty/returning",
+            "empty/loading",
+            "empty/idle",
+            "growing/loading",
+            "empty/unloading",
+            "empty/eating"
+          ],
+          "checkpoints": [
+            "growth",
+            "eat",
+            "harvest",
+            "load",
+            "transit",
+            "unload"
+          ],
+          "maxBalanceError": 1.9895196601282805e-13,
+          "firstMealSeconds": 26,
+          "cycles": 7,
+          "consumed": 16,
+          "final": {
+            "harvested": 28,
+            "starterGranted": 4,
+            "stock": 8,
+            "reserved": 0,
+            "cargo": 0,
+            "store": 8,
+            "meals": 16,
+            "returnMeal": 0,
+            "farmerMeal": 0,
+            "carrierMeal": 0,
+            "seeds": 2,
+            "seedsSown": 7,
+            "seedsReturned": 7,
+            "water": 6,
+            "waterCaptured": 20,
+            "waterUsed": 14,
+            "waterLost": 124.24,
+            "stewardship": 4,
+            "farmerHunger": 32,
+            "carrierHunger": 32
+          }
+        },
+        {
+          "id": "region:1:4294967295/food/1",
+          "name": "Alder Garden",
+          "surfaceMetres": 28.799999,
+          "observedActivities": [
+            "empty/outbound",
+            "growing/outbound",
+            "growing/unloading",
+            "growing/eating",
+            "growing/returning",
+            "ripe/outbound",
+            "ripe/returning",
+            "ripe/loading",
+            "empty/returning",
+            "empty/idle",
+            "growing/loading",
+            "empty/unloading",
+            "empty/eating",
+            "empty/loading"
+          ],
+          "checkpoints": [
+            "growth",
+            "eat",
+            "harvest",
+            "load",
+            "transit",
+            "unload"
+          ],
+          "maxBalanceError": 1.2789769243681803e-13,
+          "firstMealSeconds": 26,
+          "cycles": 7,
+          "consumed": 16,
+          "final": {
+            "harvested": 28,
+            "starterGranted": 4,
+            "stock": 8,
+            "reserved": 0,
+            "cargo": 0,
+            "store": 8,
+            "meals": 16,
+            "returnMeal": 0,
+            "farmerMeal": 0,
+            "carrierMeal": 0,
+            "seeds": 2,
+            "seedsSown": 7,
+            "seedsReturned": 7,
+            "water": 6,
+            "waterCaptured": 20,
+            "waterUsed": 14,
+            "waterLost": 84.38,
+            "stewardship": 4,
+            "farmerHunger": 32,
+            "carrierHunger": 32
+          }
+        },
+        {
+          "id": "region:1:4294967295/food/2",
+          "name": "Northreach Garden",
+          "surfaceMetres": 28.799999,
+          "observedActivities": [
+            "empty/outbound",
+            "growing/outbound",
+            "growing/unloading",
+            "growing/eating",
+            "growing/returning",
+            "ripe/returning",
+            "ripe/outbound",
+            "empty/returning",
+            "empty/loading",
+            "empty/idle",
+            "growing/loading",
+            "empty/unloading",
+            "empty/eating"
+          ],
+          "checkpoints": [
+            "growth",
+            "eat",
+            "harvest",
+            "load",
+            "transit",
+            "unload"
+          ],
+          "maxBalanceError": 1.8474111129762605e-13,
+          "firstMealSeconds": 26,
+          "cycles": 7,
+          "consumed": 16,
+          "final": {
+            "harvested": 28,
+            "starterGranted": 4,
+            "stock": 8,
+            "reserved": 0,
+            "cargo": 0,
+            "store": 8,
+            "meals": 16,
+            "returnMeal": 0,
+            "farmerMeal": 0,
+            "carrierMeal": 0,
+            "seeds": 2,
+            "seedsSown": 7,
+            "seedsReturned": 7,
+            "water": 6,
+            "waterCaptured": 20,
+            "waterUsed": 14,
+            "waterLost": 69.05,
+            "stewardship": 4,
+            "farmerHunger": 32,
+            "carrierHunger": 32
+          }
+        }
+      ],
+      "metrics": [
+        {
+          "simulationSeconds": 757,
+          "oldPrerequisiteSeconds": 9404,
+          "finiteStarterMeals": 12,
+          "grownFood": 84,
+          "consumedFood": 48,
+          "activeTickCalls": 757,
+          "activeTickMeanMilliseconds": 2.2060355587850204,
+          "activeTickMaximumMilliseconds": 12.023532999999588,
+          "elapsedMilliseconds": 9501.213921000017,
+          "peakStateBytes": 7979,
+          "finalStateBytes": 7967,
+          "serializedCheckpoints": 13,
+          "checkpointParseMeanMilliseconds": 3.1968190769235103,
+          "checkpointParseMaximumMilliseconds": 3.669101999985287,
+          "stewardshipPoolExhaustedAtSeconds": 140,
+          "maximumCarrierMetresPerSecond": 1.4000000000000021,
+          "liveCampaignAccess": false
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scenario": {
+      "regionalFoodScenario": 1,
+      "scope": "Fresh disposable campaigns earn the old finite freight stores and three collector builds. Food recovers only new overflow, reuses two conserved seed portions, harvests crops and physically times local shipments and meals. Four declared starter meals per community are counted separately. Finite stewardship claims end while resident crop work continues. Model command poses are assigned; actual controller traversal is a separate test. No live campaign/storage, browser rendering, device-performance or network-transport access.",
+      "runs": [
+        {
+          "iteration": 1,
+          "checks": [
+            {
+              "name": "Mature-save opt-in preserves old progress",
+              "expected": "New food starts at zero local time and zero water; existing spill is only a discarded watermark",
+              "pass": true,
+              "actual": "1728.580, 1274.090, 1047.463 historic spilled litres excluded from new inventory"
+            },
+            {
+              "name": "Harvest, shipment and meal conservation (Pinewatch Garden)",
+              "expected": "New overflow, reusable seeds, crop food and finite starter portions balance through every reservation, carried meal and consumption bucket",
+              "pass": true,
+              "actual": "28 grown + 4 starter portions; 16 eaten; maximum balance error 1.8474111129762605e-13"
+            },
+            {
+              "name": "Reload all active stages (Pinewatch Garden)",
+              "expected": "Exact strict saves preserve growing, harvesting, loading, loaded transit, unloading and eating",
+              "pass": true,
+              "actual": "growth, eat, harvest, load, transit, unload"
+            },
+            {
+              "name": "Meals improve real work (Pinewatch Garden)",
+              "expected": "Both stable new residents eat real food, lower hunger and cross a productive work-rate threshold",
+              "pass": true,
+              "actual": "8 gardener and 1 pantry-worker rate improvements"
+            },
+            {
+              "name": "Finite requests and renewable work (Pinewatch Garden)",
+              "expected": "Four distinct crop jobs pay at most four marks; resident harvest and consumption continue after the pool is exhausted",
+              "pass": true,
+              "actual": "4 distinct requests, 4 marks, 4 further harvests"
+            },
+            {
+              "name": "Real local delivery time (Pinewatch Garden)",
+              "expected": "Loaded food spends at least its surface distance / speed between reservation and completed delivery",
+              "pass": true,
+              "actual": "28.800 m at 1.4 m/s; first reservation→delivery 25 s; peak 1.400000 m/s"
+            },
+            {
+              "name": "Harvest, shipment and meal conservation (Alder Garden)",
+              "expected": "New overflow, reusable seeds, crop food and finite starter portions balance through every reservation, carried meal and consumption bucket",
+              "pass": true,
+              "actual": "28 grown + 4 starter portions; 16 eaten; maximum balance error 1.9895196601282805e-13"
+            },
+            {
+              "name": "Reload all active stages (Alder Garden)",
+              "expected": "Exact strict saves preserve growing, harvesting, loading, loaded transit, unloading and eating",
+              "pass": true,
+              "actual": "growth, eat, harvest, load, transit, unload"
+            },
+            {
+              "name": "Meals improve real work (Alder Garden)",
+              "expected": "Both stable new residents eat real food, lower hunger and cross a productive work-rate threshold",
+              "pass": true,
+              "actual": "8 gardener and 1 pantry-worker rate improvements"
+            },
+            {
+              "name": "Finite requests and renewable work (Alder Garden)",
+              "expected": "Four distinct crop jobs pay at most four marks; resident harvest and consumption continue after the pool is exhausted",
+              "pass": true,
+              "actual": "4 distinct requests, 4 marks, 4 further harvests"
+            },
+            {
+              "name": "Real local delivery time (Alder Garden)",
+              "expected": "Loaded food spends at least its surface distance / speed between reservation and completed delivery",
+              "pass": true,
+              "actual": "28.800 m at 1.4 m/s; first reservation→delivery 25 s; peak 1.400000 m/s"
+            },
+            {
+              "name": "Harvest, shipment and meal conservation (Northreach Garden)",
+              "expected": "New overflow, reusable seeds, crop food and finite starter portions balance through every reservation, carried meal and consumption bucket",
+              "pass": true,
+              "actual": "28 grown + 4 starter portions; 16 eaten; maximum balance error 1.8474111129762605e-13"
+            },
+            {
+              "name": "Reload all active stages (Northreach Garden)",
+              "expected": "Exact strict saves preserve growing, harvesting, loading, loaded transit, unloading and eating",
+              "pass": true,
+              "actual": "growth, eat, harvest, load, transit, unload"
+            },
+            {
+              "name": "Meals improve real work (Northreach Garden)",
+              "expected": "Both stable new residents eat real food, lower hunger and cross a productive work-rate threshold",
+              "pass": true,
+              "actual": "8 gardener and 1 pantry-worker rate improvements"
+            },
+            {
+              "name": "Finite requests and renewable work (Northreach Garden)",
+              "expected": "Four distinct crop jobs pay at most four marks; resident harvest and consumption continue after the pool is exhausted",
+              "pass": true,
+              "actual": "4 distinct requests, 4 marks, 4 further harvests"
+            },
+            {
+              "name": "Real local delivery time (Northreach Garden)",
+              "expected": "Loaded food spends at least its surface distance / speed between reservation and completed delivery",
+              "pass": true,
+              "actual": "28.800 m at 1.4 m/s; first reservation→delivery 25 s; peak 1.400000 m/s"
+            },
+            {
+              "name": "Finite shelves pause and resume production",
+              "expected": "A full source and occupied store stop planting until real eating frees capacity",
+              "pass": true,
+              "actual": "Full capacity observed true; later harvest true"
+            },
+            {
+              "name": "Old ledgers and terrain resources remain separate",
+              "expected": "Every V31/V32 active tick matches the no-food control; no old resident, collector, store, harvest or inventory state is changed by food",
+              "pass": true,
+              "actual": "Exact old supply/trade control payloads and old ownership records"
+            },
+            {
+              "name": "Bounded payload and identities",
+              "expected": "Three farms, six new stable actors, at most fifteen receipts and less than 45 KB of food state",
+              "pass": true,
+              "actual": "7751 peak bytes; 15 receipts"
+            },
+            {
+              "name": "Disposable campaign isolation",
+              "expected": "All setup and observation used fresh states without mutating the starting earned campaign",
+              "pass": true,
+              "actual": "Starting campaign remains byte-exact; no live storage accepted"
+            }
+          ],
+          "farms": [
+            {
+              "id": "region:1:73129/food/0",
+              "name": "Pinewatch Garden",
+              "surfaceMetres": 28.8,
+              "observedActivities": [
+                "empty/outbound",
+                "growing/outbound",
+                "growing/unloading",
+                "growing/eating",
+                "growing/returning",
+                "ripe/returning",
+                "ripe/outbound",
+                "empty/returning",
+                "empty/loading",
+                "empty/idle",
+                "growing/loading",
+                "empty/unloading",
+                "empty/eating"
+              ],
+              "checkpoints": [
+                "growth",
+                "eat",
+                "harvest",
+                "load",
+                "transit",
+                "unload"
+              ],
+              "maxBalanceError": 1.8474111129762605e-13,
+              "firstMealSeconds": 26,
+              "cycles": 7,
+              "consumed": 16,
+              "final": {
+                "harvested": 28,
+                "starterGranted": 4,
+                "stock": 8,
+                "reserved": 0,
+                "cargo": 0,
+                "store": 8,
+                "meals": 16,
+                "returnMeal": 0,
+                "farmerMeal": 0,
+                "carrierMeal": 0,
+                "seeds": 2,
+                "seedsSown": 7,
+                "seedsReturned": 7,
+                "water": 6,
+                "waterCaptured": 20,
+                "waterUsed": 14,
+                "waterLost": 128.48,
+                "stewardship": 4,
+                "farmerHunger": 32,
+                "carrierHunger": 32
+              }
+            },
+            {
+              "id": "region:1:73129/food/1",
+              "name": "Alder Garden",
+              "surfaceMetres": 28.8,
+              "observedActivities": [
+                "empty/outbound",
+                "growing/outbound",
+                "growing/unloading",
+                "growing/eating",
+                "growing/returning",
+                "ripe/returning",
+                "ripe/outbound",
+                "empty/returning",
+                "empty/loading",
+                "empty/idle",
+                "growing/loading",
+                "empty/unloading",
+                "empty/eating"
+              ],
+              "checkpoints": [
+                "growth",
+                "eat",
+                "harvest",
+                "load",
+                "transit",
+                "unload"
+              ],
+              "maxBalanceError": 1.9895196601282805e-13,
+              "firstMealSeconds": 26,
+              "cycles": 7,
+              "consumed": 16,
+              "final": {
+                "harvested": 28,
+                "starterGranted": 4,
+                "stock": 8,
+                "reserved": 0,
+                "cargo": 0,
+                "store": 8,
+                "meals": 16,
+                "returnMeal": 0,
+                "farmerMeal": 0,
+                "carrierMeal": 0,
+                "seeds": 2,
+                "seedsSown": 7,
+                "seedsReturned": 7,
+                "water": 6,
+                "waterCaptured": 20,
+                "waterUsed": 14,
+                "waterLost": 92.54,
+                "stewardship": 4,
+                "farmerHunger": 32,
+                "carrierHunger": 32
+              }
+            },
+            {
+              "id": "region:1:73129/food/2",
+              "name": "Northreach Garden",
+              "surfaceMetres": 28.799999,
+              "observedActivities": [
+                "empty/outbound",
+                "growing/outbound",
+                "growing/unloading",
+                "growing/eating",
+                "growing/returning",
+                "ripe/outbound",
+                "ripe/returning",
+                "ripe/loading",
+                "empty/returning",
+                "empty/idle",
+                "growing/loading",
+                "empty/unloading",
+                "empty/eating",
+                "empty/loading"
+              ],
+              "checkpoints": [
+                "growth",
+                "eat",
+                "harvest",
+                "load",
+                "transit",
+                "unload"
+              ],
+              "maxBalanceError": 1.8474111129762605e-13,
+              "firstMealSeconds": 26,
+              "cycles": 7,
+              "consumed": 16,
+              "final": {
+                "harvested": 28,
+                "starterGranted": 4,
+                "stock": 8,
+                "reserved": 0,
+                "cargo": 0,
+                "store": 8,
+                "meals": 16,
+                "returnMeal": 0,
+                "farmerMeal": 0,
+                "carrierMeal": 0,
+                "seeds": 2,
+                "seedsSown": 7,
+                "seedsReturned": 7,
+                "water": 6,
+                "waterCaptured": 20,
+                "waterUsed": 14,
+                "waterLost": 65.55,
+                "stewardship": 4,
+                "farmerHunger": 32,
+                "carrierHunger": 32
+              }
+            }
+          ],
+          "metrics": {
+            "simulationSeconds": 757,
+            "oldPrerequisiteSeconds": 9018,
+            "finiteStarterMeals": 12,
+            "grownFood": 84,
+            "consumedFood": 48,
+            "activeTickCalls": 757,
+            "activeTickMeanMilliseconds": 2.3706376261558333,
+            "activeTickMaximumMilliseconds": 7.628149000000121,
+            "elapsedMilliseconds": 10261.539845,
+            "peakStateBytes": 7751,
+            "finalStateBytes": 7738,
+            "serializedCheckpoints": 13,
+            "checkpointParseMeanMilliseconds": 3.8245786153845702,
+            "checkpointParseMaximumMilliseconds": 5.742243999999118,
+            "stewardshipPoolExhaustedAtSeconds": 140,
+            "maximumCarrierMetresPerSecond": 1.4000000000000021,
+            "liveCampaignAccess": false
+          }
+        },
+        {
+          "iteration": 2,
+          "checks": [
+            {
+              "name": "Mature-save opt-in preserves old progress",
+              "expected": "New food starts at zero local time and zero water; existing spill is only a discarded watermark",
+              "pass": true,
+              "actual": "1728.580, 1274.090, 1047.463 historic spilled litres excluded from new inventory"
+            },
+            {
+              "name": "Harvest, shipment and meal conservation (Pinewatch Garden)",
+              "expected": "New overflow, reusable seeds, crop food and finite starter portions balance through every reservation, carried meal and consumption bucket",
+              "pass": true,
+              "actual": "28 grown + 4 starter portions; 16 eaten; maximum balance error 1.8474111129762605e-13"
+            },
+            {
+              "name": "Reload all active stages (Pinewatch Garden)",
+              "expected": "Exact strict saves preserve growing, harvesting, loading, loaded transit, unloading and eating",
+              "pass": true,
+              "actual": "growth, eat, harvest, load, transit, unload"
+            },
+            {
+              "name": "Meals improve real work (Pinewatch Garden)",
+              "expected": "Both stable new residents eat real food, lower hunger and cross a productive work-rate threshold",
+              "pass": true,
+              "actual": "8 gardener and 1 pantry-worker rate improvements"
+            },
+            {
+              "name": "Finite requests and renewable work (Pinewatch Garden)",
+              "expected": "Four distinct crop jobs pay at most four marks; resident harvest and consumption continue after the pool is exhausted",
+              "pass": true,
+              "actual": "4 distinct requests, 4 marks, 4 further harvests"
+            },
+            {
+              "name": "Real local delivery time (Pinewatch Garden)",
+              "expected": "Loaded food spends at least its surface distance / speed between reservation and completed delivery",
+              "pass": true,
+              "actual": "28.800 m at 1.4 m/s; first reservation→delivery 25 s; peak 1.400000 m/s"
+            },
+            {
+              "name": "Harvest, shipment and meal conservation (Alder Garden)",
+              "expected": "New overflow, reusable seeds, crop food and finite starter portions balance through every reservation, carried meal and consumption bucket",
+              "pass": true,
+              "actual": "28 grown + 4 starter portions; 16 eaten; maximum balance error 1.9895196601282805e-13"
+            },
+            {
+              "name": "Reload all active stages (Alder Garden)",
+              "expected": "Exact strict saves preserve growing, harvesting, loading, loaded transit, unloading and eating",
+              "pass": true,
+              "actual": "growth, eat, harvest, load, transit, unload"
+            },
+            {
+              "name": "Meals improve real work (Alder Garden)",
+              "expected": "Both stable new residents eat real food, lower hunger and cross a productive work-rate threshold",
+              "pass": true,
+              "actual": "8 gardener and 1 pantry-worker rate improvements"
+            },
+            {
+              "name": "Finite requests and renewable work (Alder Garden)",
+              "expected": "Four distinct crop jobs pay at most four marks; resident harvest and consumption continue after the pool is exhausted",
+              "pass": true,
+              "actual": "4 distinct requests, 4 marks, 4 further harvests"
+            },
+            {
+              "name": "Real local delivery time (Alder Garden)",
+              "expected": "Loaded food spends at least its surface distance / speed between reservation and completed delivery",
+              "pass": true,
+              "actual": "28.800 m at 1.4 m/s; first reservation→delivery 25 s; peak 1.400000 m/s"
+            },
+            {
+              "name": "Harvest, shipment and meal conservation (Northreach Garden)",
+              "expected": "New overflow, reusable seeds, crop food and finite starter portions balance through every reservation, carried meal and consumption bucket",
+              "pass": true,
+              "actual": "28 grown + 4 starter portions; 16 eaten; maximum balance error 1.8474111129762605e-13"
+            },
+            {
+              "name": "Reload all active stages (Northreach Garden)",
+              "expected": "Exact strict saves preserve growing, harvesting, loading, loaded transit, unloading and eating",
+              "pass": true,
+              "actual": "growth, eat, harvest, load, transit, unload"
+            },
+            {
+              "name": "Meals improve real work (Northreach Garden)",
+              "expected": "Both stable new residents eat real food, lower hunger and cross a productive work-rate threshold",
+              "pass": true,
+              "actual": "8 gardener and 1 pantry-worker rate improvements"
+            },
+            {
+              "name": "Finite requests and renewable work (Northreach Garden)",
+              "expected": "Four distinct crop jobs pay at most four marks; resident harvest and consumption continue after the pool is exhausted",
+              "pass": true,
+              "actual": "4 distinct requests, 4 marks, 4 further harvests"
+            },
+            {
+              "name": "Real local delivery time (Northreach Garden)",
+              "expected": "Loaded food spends at least its surface distance / speed between reservation and completed delivery",
+              "pass": true,
+              "actual": "28.800 m at 1.4 m/s; first reservation→delivery 25 s; peak 1.400000 m/s"
+            },
+            {
+              "name": "Finite shelves pause and resume production",
+              "expected": "A full source and occupied store stop planting until real eating frees capacity",
+              "pass": true,
+              "actual": "Full capacity observed true; later harvest true"
+            },
+            {
+              "name": "Old ledgers and terrain resources remain separate",
+              "expected": "Every V31/V32 active tick matches the no-food control; no old resident, collector, store, harvest or inventory state is changed by food",
+              "pass": true,
+              "actual": "Exact old supply/trade control payloads and old ownership records"
+            },
+            {
+              "name": "Bounded payload and identities",
+              "expected": "Three farms, six new stable actors, at most fifteen receipts and less than 45 KB of food state",
+              "pass": true,
+              "actual": "7751 peak bytes; 15 receipts"
+            },
+            {
+              "name": "Disposable campaign isolation",
+              "expected": "All setup and observation used fresh states without mutating the starting earned campaign",
+              "pass": true,
+              "actual": "Starting campaign remains byte-exact; no live storage accepted"
+            }
+          ],
+          "farms": [
+            {
+              "id": "region:1:73129/food/0",
+              "name": "Pinewatch Garden",
+              "surfaceMetres": 28.8,
+              "observedActivities": [
+                "empty/outbound",
+                "growing/outbound",
+                "growing/unloading",
+                "growing/eating",
+                "growing/returning",
+                "ripe/returning",
+                "ripe/outbound",
+                "empty/returning",
+                "empty/loading",
+                "empty/idle",
+                "growing/loading",
+                "empty/unloading",
+                "empty/eating"
+              ],
+              "checkpoints": [
+                "growth",
+                "eat",
+                "harvest",
+                "load",
+                "transit",
+                "unload"
+              ],
+              "maxBalanceError": 1.8474111129762605e-13,
+              "firstMealSeconds": 26,
+              "cycles": 7,
+              "consumed": 16,
+              "final": {
+                "harvested": 28,
+                "starterGranted": 4,
+                "stock": 8,
+                "reserved": 0,
+                "cargo": 0,
+                "store": 8,
+                "meals": 16,
+                "returnMeal": 0,
+                "farmerMeal": 0,
+                "carrierMeal": 0,
+                "seeds": 2,
+                "seedsSown": 7,
+                "seedsReturned": 7,
+                "water": 6,
+                "waterCaptured": 20,
+                "waterUsed": 14,
+                "waterLost": 128.48,
+                "stewardship": 4,
+                "farmerHunger": 32,
+                "carrierHunger": 32
+              }
+            },
+            {
+              "id": "region:1:73129/food/1",
+              "name": "Alder Garden",
+              "surfaceMetres": 28.8,
+              "observedActivities": [
+                "empty/outbound",
+                "growing/outbound",
+                "growing/unloading",
+                "growing/eating",
+                "growing/returning",
+                "ripe/returning",
+                "ripe/outbound",
+                "empty/returning",
+                "empty/loading",
+                "empty/idle",
+                "growing/loading",
+                "empty/unloading",
+                "empty/eating"
+              ],
+              "checkpoints": [
+                "growth",
+                "eat",
+                "harvest",
+                "load",
+                "transit",
+                "unload"
+              ],
+              "maxBalanceError": 1.9895196601282805e-13,
+              "firstMealSeconds": 26,
+              "cycles": 7,
+              "consumed": 16,
+              "final": {
+                "harvested": 28,
+                "starterGranted": 4,
+                "stock": 8,
+                "reserved": 0,
+                "cargo": 0,
+                "store": 8,
+                "meals": 16,
+                "returnMeal": 0,
+                "farmerMeal": 0,
+                "carrierMeal": 0,
+                "seeds": 2,
+                "seedsSown": 7,
+                "seedsReturned": 7,
+                "water": 6,
+                "waterCaptured": 20,
+                "waterUsed": 14,
+                "waterLost": 92.54,
+                "stewardship": 4,
+                "farmerHunger": 32,
+                "carrierHunger": 32
+              }
+            },
+            {
+              "id": "region:1:73129/food/2",
+              "name": "Northreach Garden",
+              "surfaceMetres": 28.799999,
+              "observedActivities": [
+                "empty/outbound",
+                "growing/outbound",
+                "growing/unloading",
+                "growing/eating",
+                "growing/returning",
+                "ripe/outbound",
+                "ripe/returning",
+                "ripe/loading",
+                "empty/returning",
+                "empty/idle",
+                "growing/loading",
+                "empty/unloading",
+                "empty/eating",
+                "empty/loading"
+              ],
+              "checkpoints": [
+                "growth",
+                "eat",
+                "harvest",
+                "load",
+                "transit",
+                "unload"
+              ],
+              "maxBalanceError": 1.8474111129762605e-13,
+              "firstMealSeconds": 26,
+              "cycles": 7,
+              "consumed": 16,
+              "final": {
+                "harvested": 28,
+                "starterGranted": 4,
+                "stock": 8,
+                "reserved": 0,
+                "cargo": 0,
+                "store": 8,
+                "meals": 16,
+                "returnMeal": 0,
+                "farmerMeal": 0,
+                "carrierMeal": 0,
+                "seeds": 2,
+                "seedsSown": 7,
+                "seedsReturned": 7,
+                "water": 6,
+                "waterCaptured": 20,
+                "waterUsed": 14,
+                "waterLost": 65.55,
+                "stewardship": 4,
+                "farmerHunger": 32,
+                "carrierHunger": 32
+              }
+            }
+          ],
+          "metrics": {
+            "simulationSeconds": 757,
+            "oldPrerequisiteSeconds": 9018,
+            "finiteStarterMeals": 12,
+            "grownFood": 84,
+            "consumedFood": 48,
+            "activeTickCalls": 757,
+            "activeTickMeanMilliseconds": 2.254385030383074,
+            "activeTickMaximumMilliseconds": 9.054893999997148,
+            "elapsedMilliseconds": 9442.252838,
+            "peakStateBytes": 7751,
+            "finalStateBytes": 7738,
+            "serializedCheckpoints": 13,
+            "checkpointParseMeanMilliseconds": 3.0515976923069013,
+            "checkpointParseMaximumMilliseconds": 3.937087000002066,
+            "stewardshipPoolExhaustedAtSeconds": 140,
+            "maximumCarrierMetresPerSecond": 1.4000000000000021,
+            "liveCampaignAccess": false
+          }
+        },
+        {
+          "iteration": 3,
+          "checks": [
+            {
+              "name": "Mature-save opt-in preserves old progress",
+              "expected": "New food starts at zero local time and zero water; existing spill is only a discarded watermark",
+              "pass": true,
+              "actual": "1728.580, 1274.090, 1047.463 historic spilled litres excluded from new inventory"
+            },
+            {
+              "name": "Harvest, shipment and meal conservation (Pinewatch Garden)",
+              "expected": "New overflow, reusable seeds, crop food and finite starter portions balance through every reservation, carried meal and consumption bucket",
+              "pass": true,
+              "actual": "28 grown + 4 starter portions; 16 eaten; maximum balance error 1.8474111129762605e-13"
+            },
+            {
+              "name": "Reload all active stages (Pinewatch Garden)",
+              "expected": "Exact strict saves preserve growing, harvesting, loading, loaded transit, unloading and eating",
+              "pass": true,
+              "actual": "growth, eat, harvest, load, transit, unload"
+            },
+            {
+              "name": "Meals improve real work (Pinewatch Garden)",
+              "expected": "Both stable new residents eat real food, lower hunger and cross a productive work-rate threshold",
+              "pass": true,
+              "actual": "8 gardener and 1 pantry-worker rate improvements"
+            },
+            {
+              "name": "Finite requests and renewable work (Pinewatch Garden)",
+              "expected": "Four distinct crop jobs pay at most four marks; resident harvest and consumption continue after the pool is exhausted",
+              "pass": true,
+              "actual": "4 distinct requests, 4 marks, 4 further harvests"
+            },
+            {
+              "name": "Real local delivery time (Pinewatch Garden)",
+              "expected": "Loaded food spends at least its surface distance / speed between reservation and completed delivery",
+              "pass": true,
+              "actual": "28.800 m at 1.4 m/s; first reservation→delivery 25 s; peak 1.400000 m/s"
+            },
+            {
+              "name": "Harvest, shipment and meal conservation (Alder Garden)",
+              "expected": "New overflow, reusable seeds, crop food and finite starter portions balance through every reservation, carried meal and consumption bucket",
+              "pass": true,
+              "actual": "28 grown + 4 starter portions; 16 eaten; maximum balance error 1.9895196601282805e-13"
+            },
+            {
+              "name": "Reload all active stages (Alder Garden)",
+              "expected": "Exact strict saves preserve growing, harvesting, loading, loaded transit, unloading and eating",
+              "pass": true,
+              "actual": "growth, eat, harvest, load, transit, unload"
+            },
+            {
+              "name": "Meals improve real work (Alder Garden)",
+              "expected": "Both stable new residents eat real food, lower hunger and cross a productive work-rate threshold",
+              "pass": true,
+              "actual": "8 gardener and 1 pantry-worker rate improvements"
+            },
+            {
+              "name": "Finite requests and renewable work (Alder Garden)",
+              "expected": "Four distinct crop jobs pay at most four marks; resident harvest and consumption continue after the pool is exhausted",
+              "pass": true,
+              "actual": "4 distinct requests, 4 marks, 4 further harvests"
+            },
+            {
+              "name": "Real local delivery time (Alder Garden)",
+              "expected": "Loaded food spends at least its surface distance / speed between reservation and completed delivery",
+              "pass": true,
+              "actual": "28.800 m at 1.4 m/s; first reservation→delivery 25 s; peak 1.400000 m/s"
+            },
+            {
+              "name": "Harvest, shipment and meal conservation (Northreach Garden)",
+              "expected": "New overflow, reusable seeds, crop food and finite starter portions balance through every reservation, carried meal and consumption bucket",
+              "pass": true,
+              "actual": "28 grown + 4 starter portions; 16 eaten; maximum balance error 1.8474111129762605e-13"
+            },
+            {
+              "name": "Reload all active stages (Northreach Garden)",
+              "expected": "Exact strict saves preserve growing, harvesting, loading, loaded transit, unloading and eating",
+              "pass": true,
+              "actual": "growth, eat, harvest, load, transit, unload"
+            },
+            {
+              "name": "Meals improve real work (Northreach Garden)",
+              "expected": "Both stable new residents eat real food, lower hunger and cross a productive work-rate threshold",
+              "pass": true,
+              "actual": "8 gardener and 1 pantry-worker rate improvements"
+            },
+            {
+              "name": "Finite requests and renewable work (Northreach Garden)",
+              "expected": "Four distinct crop jobs pay at most four marks; resident harvest and consumption continue after the pool is exhausted",
+              "pass": true,
+              "actual": "4 distinct requests, 4 marks, 4 further harvests"
+            },
+            {
+              "name": "Real local delivery time (Northreach Garden)",
+              "expected": "Loaded food spends at least its surface distance / speed between reservation and completed delivery",
+              "pass": true,
+              "actual": "28.800 m at 1.4 m/s; first reservation→delivery 25 s; peak 1.400000 m/s"
+            },
+            {
+              "name": "Finite shelves pause and resume production",
+              "expected": "A full source and occupied store stop planting until real eating frees capacity",
+              "pass": true,
+              "actual": "Full capacity observed true; later harvest true"
+            },
+            {
+              "name": "Old ledgers and terrain resources remain separate",
+              "expected": "Every V31/V32 active tick matches the no-food control; no old resident, collector, store, harvest or inventory state is changed by food",
+              "pass": true,
+              "actual": "Exact old supply/trade control payloads and old ownership records"
+            },
+            {
+              "name": "Bounded payload and identities",
+              "expected": "Three farms, six new stable actors, at most fifteen receipts and less than 45 KB of food state",
+              "pass": true,
+              "actual": "7751 peak bytes; 15 receipts"
+            },
+            {
+              "name": "Disposable campaign isolation",
+              "expected": "All setup and observation used fresh states without mutating the starting earned campaign",
+              "pass": true,
+              "actual": "Starting campaign remains byte-exact; no live storage accepted"
+            }
+          ],
+          "farms": [
+            {
+              "id": "region:1:73129/food/0",
+              "name": "Pinewatch Garden",
+              "surfaceMetres": 28.8,
+              "observedActivities": [
+                "empty/outbound",
+                "growing/outbound",
+                "growing/unloading",
+                "growing/eating",
+                "growing/returning",
+                "ripe/returning",
+                "ripe/outbound",
+                "empty/returning",
+                "empty/loading",
+                "empty/idle",
+                "growing/loading",
+                "empty/unloading",
+                "empty/eating"
+              ],
+              "checkpoints": [
+                "growth",
+                "eat",
+                "harvest",
+                "load",
+                "transit",
+                "unload"
+              ],
+              "maxBalanceError": 1.8474111129762605e-13,
+              "firstMealSeconds": 26,
+              "cycles": 7,
+              "consumed": 16,
+              "final": {
+                "harvested": 28,
+                "starterGranted": 4,
+                "stock": 8,
+                "reserved": 0,
+                "cargo": 0,
+                "store": 8,
+                "meals": 16,
+                "returnMeal": 0,
+                "farmerMeal": 0,
+                "carrierMeal": 0,
+                "seeds": 2,
+                "seedsSown": 7,
+                "seedsReturned": 7,
+                "water": 6,
+                "waterCaptured": 20,
+                "waterUsed": 14,
+                "waterLost": 128.48,
+                "stewardship": 4,
+                "farmerHunger": 32,
+                "carrierHunger": 32
+              }
+            },
+            {
+              "id": "region:1:73129/food/1",
+              "name": "Alder Garden",
+              "surfaceMetres": 28.8,
+              "observedActivities": [
+                "empty/outbound",
+                "growing/outbound",
+                "growing/unloading",
+                "growing/eating",
+                "growing/returning",
+                "ripe/returning",
+                "ripe/outbound",
+                "empty/returning",
+                "empty/loading",
+                "empty/idle",
+                "growing/loading",
+                "empty/unloading",
+                "empty/eating"
+              ],
+              "checkpoints": [
+                "growth",
+                "eat",
+                "harvest",
+                "load",
+                "transit",
+                "unload"
+              ],
+              "maxBalanceError": 1.9895196601282805e-13,
+              "firstMealSeconds": 26,
+              "cycles": 7,
+              "consumed": 16,
+              "final": {
+                "harvested": 28,
+                "starterGranted": 4,
+                "stock": 8,
+                "reserved": 0,
+                "cargo": 0,
+                "store": 8,
+                "meals": 16,
+                "returnMeal": 0,
+                "farmerMeal": 0,
+                "carrierMeal": 0,
+                "seeds": 2,
+                "seedsSown": 7,
+                "seedsReturned": 7,
+                "water": 6,
+                "waterCaptured": 20,
+                "waterUsed": 14,
+                "waterLost": 92.54,
+                "stewardship": 4,
+                "farmerHunger": 32,
+                "carrierHunger": 32
+              }
+            },
+            {
+              "id": "region:1:73129/food/2",
+              "name": "Northreach Garden",
+              "surfaceMetres": 28.799999,
+              "observedActivities": [
+                "empty/outbound",
+                "growing/outbound",
+                "growing/unloading",
+                "growing/eating",
+                "growing/returning",
+                "ripe/outbound",
+                "ripe/returning",
+                "ripe/loading",
+                "empty/returning",
+                "empty/idle",
+                "growing/loading",
+                "empty/unloading",
+                "empty/eating",
+                "empty/loading"
+              ],
+              "checkpoints": [
+                "growth",
+                "eat",
+                "harvest",
+                "load",
+                "transit",
+                "unload"
+              ],
+              "maxBalanceError": 1.8474111129762605e-13,
+              "firstMealSeconds": 26,
+              "cycles": 7,
+              "consumed": 16,
+              "final": {
+                "harvested": 28,
+                "starterGranted": 4,
+                "stock": 8,
+                "reserved": 0,
+                "cargo": 0,
+                "store": 8,
+                "meals": 16,
+                "returnMeal": 0,
+                "farmerMeal": 0,
+                "carrierMeal": 0,
+                "seeds": 2,
+                "seedsSown": 7,
+                "seedsReturned": 7,
+                "water": 6,
+                "waterCaptured": 20,
+                "waterUsed": 14,
+                "waterLost": 65.55,
+                "stewardship": 4,
+                "farmerHunger": 32,
+                "carrierHunger": 32
+              }
+            }
+          ],
+          "metrics": {
+            "simulationSeconds": 757,
+            "oldPrerequisiteSeconds": 9018,
+            "finiteStarterMeals": 12,
+            "grownFood": 84,
+            "consumedFood": 48,
+            "activeTickCalls": 757,
+            "activeTickMeanMilliseconds": 2.8057402760899586,
+            "activeTickMaximumMilliseconds": 8.131482999997388,
+            "elapsedMilliseconds": 9873.719599,
+            "peakStateBytes": 7751,
+            "finalStateBytes": 7738,
+            "serializedCheckpoints": 13,
+            "checkpointParseMeanMilliseconds": 3.4191000769228244,
+            "checkpointParseMaximumMilliseconds": 6.353086999999505,
+            "stewardshipPoolExhaustedAtSeconds": 140,
+            "maximumCarrierMetresPerSecond": 1.4000000000000021,
+            "liveCampaignAccess": false
+          }
+        }
+      ]
+    },
+    "cycles": {
+      "regionalFoodCycles": 1,
+      "scope": "Independent seeded earned-input production loops with recurring crops and meals beyond the bounded stewardship request set.",
+      "seeds": [
+        {
+          "seed": 0,
+          "farms": [
+            {
+              "id": "region:1:0/food/0",
+              "name": "Pinewatch Garden",
+              "surfaceMetres": 28.8,
+              "observedActivities": [
+                "empty/outbound",
+                "growing/outbound",
+                "growing/unloading",
+                "growing/eating",
+                "growing/returning",
+                "ripe/outbound",
+                "ripe/returning",
+                "empty/returning",
+                "empty/loading",
+                "empty/idle",
+                "growing/loading",
+                "empty/unloading",
+                "empty/eating"
+              ],
+              "checkpoints": [
+                "growth",
+                "eat",
+                "harvest",
+                "load",
+                "transit",
+                "unload"
+              ],
+              "maxBalanceError": 1.9895196601282805e-13,
+              "firstMealSeconds": 26,
+              "cycles": 7,
+              "consumed": 16,
+              "final": {
+                "harvested": 28,
+                "starterGranted": 4,
+                "stock": 8,
+                "reserved": 0,
+                "cargo": 0,
+                "store": 8,
+                "meals": 16,
+                "returnMeal": 0,
+                "farmerMeal": 0,
+                "carrierMeal": 0,
+                "seeds": 2,
+                "seedsSown": 7,
+                "seedsReturned": 7,
+                "water": 6,
+                "waterCaptured": 20,
+                "waterUsed": 14,
+                "waterLost": 121.52,
+                "stewardship": 4,
+                "farmerHunger": 32,
+                "carrierHunger": 32
+              }
+            },
+            {
+              "id": "region:1:0/food/1",
+              "name": "Alder Garden",
+              "surfaceMetres": 28.799999,
+              "observedActivities": [
+                "empty/outbound",
+                "growing/outbound",
+                "growing/unloading",
+                "growing/eating",
+                "growing/returning",
+                "ripe/outbound",
+                "ripe/returning",
+                "ripe/loading",
+                "empty/returning",
+                "empty/idle",
+                "growing/loading",
+                "empty/unloading",
+                "empty/eating",
+                "empty/loading"
+              ],
+              "checkpoints": [
+                "growth",
+                "eat",
+                "harvest",
+                "load",
+                "transit",
+                "unload"
+              ],
+              "maxBalanceError": 1.2789769243681803e-13,
+              "firstMealSeconds": 26,
+              "cycles": 7,
+              "consumed": 16,
+              "final": {
+                "harvested": 28,
+                "starterGranted": 4,
+                "stock": 8,
+                "reserved": 0,
+                "cargo": 0,
+                "store": 8,
+                "meals": 16,
+                "returnMeal": 0,
+                "farmerMeal": 0,
+                "carrierMeal": 0,
+                "seeds": 2,
+                "seedsSown": 7,
+                "seedsReturned": 7,
+                "water": 6,
+                "waterCaptured": 20,
+                "waterUsed": 14,
+                "waterLost": 84.8,
+                "stewardship": 4,
+                "farmerHunger": 32,
+                "carrierHunger": 32
+              }
+            },
+            {
+              "id": "region:1:0/food/2",
+              "name": "Northreach Garden",
+              "surfaceMetres": 28.8,
+              "observedActivities": [
+                "empty/outbound",
+                "growing/outbound",
+                "growing/unloading",
+                "growing/eating",
+                "growing/returning",
+                "ripe/returning",
+                "ripe/outbound",
+                "empty/returning",
+                "empty/loading",
+                "empty/idle",
+                "growing/loading",
+                "empty/unloading",
+                "empty/eating"
+              ],
+              "checkpoints": [
+                "growth",
+                "eat",
+                "harvest",
+                "load",
+                "transit",
+                "unload"
+              ],
+              "maxBalanceError": 1.8474111129762605e-13,
+              "firstMealSeconds": 26,
+              "cycles": 7,
+              "consumed": 16,
+              "final": {
+                "harvested": 28,
+                "starterGranted": 4,
+                "stock": 8,
+                "reserved": 0,
+                "cargo": 0,
+                "store": 8,
+                "meals": 16,
+                "returnMeal": 0,
+                "farmerMeal": 0,
+                "carrierMeal": 0,
+                "seeds": 2,
+                "seedsSown": 7,
+                "seedsReturned": 7,
+                "water": 6,
+                "waterCaptured": 20,
+                "waterUsed": 14,
+                "waterLost": 71.9,
+                "stewardship": 4,
+                "farmerHunger": 32,
+                "carrierHunger": 32
+              }
+            }
+          ],
+          "metrics": {
+            "simulationSeconds": 757,
+            "oldPrerequisiteSeconds": 9435,
+            "finiteStarterMeals": 12,
+            "grownFood": 84,
+            "consumedFood": 48,
+            "activeTickCalls": 757,
+            "activeTickMeanMilliseconds": 2.1095922258916016,
+            "activeTickMaximumMilliseconds": 5.872067999996943,
+            "elapsedMilliseconds": 8865.717880999997,
+            "peakStateBytes": 7579,
+            "finalStateBytes": 7555,
+            "serializedCheckpoints": 13,
+            "checkpointParseMeanMilliseconds": 2.9132093846167733,
+            "checkpointParseMaximumMilliseconds": 3.59341900000436,
+            "stewardshipPoolExhaustedAtSeconds": 140,
+            "maximumCarrierMetresPerSecond": 1.4000000000000021,
+            "liveCampaignAccess": false
+          }
+        },
+        {
+          "seed": 42,
+          "farms": [
+            {
+              "id": "region:1:42/food/0",
+              "name": "Pinewatch Garden",
+              "surfaceMetres": 28.8,
+              "observedActivities": [
+                "empty/outbound",
+                "empty/unloading",
+                "growing/eating",
+                "growing/returning",
+                "growing/outbound",
+                "ripe/outbound",
+                "growing/unloading",
+                "growing/loading",
+                "ripe/returning",
+                "empty/returning",
+                "empty/idle",
+                "empty/eating",
+                "empty/loading"
+              ],
+              "checkpoints": [
+                "growth",
+                "eat",
+                "harvest",
+                "load",
+                "transit",
+                "unload"
+              ],
+              "maxBalanceError": 2.2737367544323206e-13,
+              "firstMealSeconds": 26,
+              "cycles": 7,
+              "consumed": 16,
+              "final": {
+                "harvested": 28,
+                "starterGranted": 4,
+                "stock": 8,
+                "reserved": 0,
+                "cargo": 0,
+                "store": 8,
+                "meals": 16,
+                "returnMeal": 0,
+                "farmerMeal": 0,
+                "carrierMeal": 0,
+                "seeds": 2,
+                "seedsSown": 7,
+                "seedsReturned": 7,
+                "water": 6,
+                "waterCaptured": 20,
+                "waterUsed": 14,
+                "waterLost": 127.2,
+                "stewardship": 4,
+                "farmerHunger": 32,
+                "carrierHunger": 32
+              }
+            },
+            {
+              "id": "region:1:42/food/1",
+              "name": "Alder Garden",
+              "surfaceMetres": 28.8,
+              "observedActivities": [
+                "empty/outbound",
+                "empty/unloading",
+                "empty/eating",
+                "empty/returning",
+                "growing/returning",
+                "growing/outbound",
+                "ripe/outbound",
+                "growing/unloading",
+                "growing/eating",
+                "growing/loading",
+                "ripe/returning",
+                "empty/idle",
+                "empty/loading"
+              ],
+              "checkpoints": [
+                "eat",
+                "growth",
+                "harvest",
+                "load",
+                "transit",
+                "unload"
+              ],
+              "maxBalanceError": 2.1316282072803006e-13,
+              "firstMealSeconds": 26,
+              "cycles": 7,
+              "consumed": 16,
+              "final": {
+                "harvested": 28,
+                "starterGranted": 4,
+                "stock": 8,
+                "reserved": 0,
+                "cargo": 0,
+                "store": 8,
+                "meals": 16,
+                "returnMeal": 0,
+                "farmerMeal": 0,
+                "carrierMeal": 0,
+                "seeds": 2,
+                "seedsSown": 7,
+                "seedsReturned": 7,
+                "water": 6,
+                "waterCaptured": 20,
+                "waterUsed": 14,
+                "waterLost": 90.86,
+                "stewardship": 4,
+                "farmerHunger": 32,
+                "carrierHunger": 32
+              }
+            },
+            {
+              "id": "region:1:42/food/2",
+              "name": "Northreach Garden",
+              "surfaceMetres": 28.799999,
+              "observedActivities": [
+                "empty/outbound",
+                "empty/unloading",
+                "empty/eating",
+                "empty/returning",
+                "growing/returning",
+                "growing/outbound",
+                "growing/unloading",
+                "ripe/eating",
+                "ripe/returning",
+                "growing/loading",
+                "ripe/outbound",
+                "ripe/idle",
+                "ripe/loading",
+                "growing/eating",
+                "empty/idle",
+                "empty/loading"
+              ],
+              "checkpoints": [
+                "eat",
+                "growth",
+                "harvest",
+                "load",
+                "transit",
+                "unload"
+              ],
+              "maxBalanceError": 1.8474111129762605e-13,
+              "firstMealSeconds": 26,
+              "cycles": 7,
+              "consumed": 16,
+              "final": {
+                "harvested": 28,
+                "starterGranted": 4,
+                "stock": 8,
+                "reserved": 0,
+                "cargo": 0,
+                "store": 8,
+                "meals": 16,
+                "returnMeal": 0,
+                "farmerMeal": 0,
+                "carrierMeal": 0,
+                "seeds": 2,
+                "seedsSown": 7,
+                "seedsReturned": 7,
+                "water": 6,
+                "waterCaptured": 20,
+                "waterUsed": 14,
+                "waterLost": 66.4,
+                "stewardship": 4,
+                "farmerHunger": 32,
+                "carrierHunger": 32
+              }
+            }
+          ],
+          "metrics": {
+            "simulationSeconds": 757,
+            "oldPrerequisiteSeconds": 8831,
+            "finiteStarterMeals": 12,
+            "grownFood": 84,
+            "consumedFood": 48,
+            "activeTickCalls": 757,
+            "activeTickMeanMilliseconds": 1.9567973157199874,
+            "activeTickMaximumMilliseconds": 4.356368000000657,
+            "elapsedMilliseconds": 7194.069273000001,
+            "peakStateBytes": 7627,
+            "finalStateBytes": 7603,
+            "serializedCheckpoints": 12,
+            "checkpointParseMeanMilliseconds": 2.8581047499986503,
+            "checkpointParseMaximumMilliseconds": 3.3494290000016917,
+            "stewardshipPoolExhaustedAtSeconds": 142,
+            "maximumCarrierMetresPerSecond": 1.4000000000000021,
+            "liveCampaignAccess": false
+          }
+        }
+      ]
+    },
+    "shortage": {
+      "regionalFoodShortage": 1,
+      "scope": "Actual earned completed stores with unbuilt collectors, finite starter food exhaustion, real canonical gathered collector materials, real building and rain overflow followed by resumed crops and meals; no invented water or crop stock.",
+      "drySeconds": 240,
+      "resumptionSeconds": 512,
+      "farms": [
+        {
+          "id": "region:1:73129/food/0",
+          "starterGranted": 4,
+          "harvests": 5,
+          "harvested": 20,
+          "meals": 12,
+          "waterCaptured": 18,
+          "waterUsed": 12
+        },
+        {
+          "id": "region:1:73129/food/1",
+          "starterGranted": 4,
+          "harvests": 5,
+          "harvested": 20,
+          "meals": 11,
+          "waterCaptured": 16,
+          "waterUsed": 10
+        },
+        {
+          "id": "region:1:73129/food/2",
+          "starterGranted": 4,
+          "harvests": 3,
+          "harvested": 12,
+          "meals": 8,
+          "waterCaptured": 12,
+          "waterUsed": 8
+        }
+      ],
+      "actorIds": [
+        "region:1:73129/food/0/gardener",
+        "region:1:73129/food/0/carrier",
+        "region:1:73129/food/1/gardener",
+        "region:1:73129/food/1/carrier",
+        "region:1:73129/food/2/gardener",
+        "region:1:73129/food/2/carrier"
+      ]
+    },
+    "coldReplay": {
+      "regionalFoodColdReplay": 1,
+      "scope": "3600 accepted one-second game-model updates, then production save parsing and forgery rejection in a fresh ordinary Node process with only JSON bytes. Local CPU observations, not a device-performance benchmark or offline production.",
+      "foodActiveSeconds": 3600,
+      "activeElapsedMilliseconds": 7976.209470000002,
+      "activeTickMeanMilliseconds": 2.21001490861097,
+      "activeTickMaximumMilliseconds": 60.15373499999987,
+      "foodBytes": 6599,
+      "campaignBytes": 23391,
+      "coldParseMilliseconds": 1077.190521,
+      "exact": true,
+      "forgedWaterRejected": true,
+      "runtime": "v22.23.0",
+      "farms": [
+        {
+          "id": "region:1:73129/food/0",
+          "harvests": 20,
+          "harvested": 80,
+          "meals": 70,
+          "starterGranted": 4,
+          "seeds": 2,
+          "seedsReturned": 20
+        },
+        {
+          "id": "region:1:73129/food/1",
+          "harvests": 20,
+          "harvested": 80,
+          "meals": 70,
+          "starterGranted": 4,
+          "seeds": 2,
+          "seedsReturned": 20
+        },
+        {
+          "id": "region:1:73129/food/2",
+          "harvests": 20,
+          "harvested": 80,
+          "meals": 70,
+          "starterGranted": 4,
+          "seeds": 2,
+          "seedsReturned": 20
+        }
+      ]
+    },
+    "geometry": {
+      "regionalFoodGeometry": 1,
+      "scope": "Quarter-metre samples on actual generated terrain and standing-capsule clearance against every nearby original feature/shelter, old V31 collector envelope and V32 source/store solid. New plots are nonsolid. No rendered or device QA.",
+      "samples": 4408,
+      "minimumClearance": 0.019999999999999074,
+      "maxSupportError": 0,
+      "seeds": [
+        {
+          "seed": 73129,
+          "farms": [
+            {
+              "id": "region:1:73129/food/0",
+              "surfaceMetres": 28.8,
+              "pathCells": [
+                "-11:8",
+                "-12:8"
+              ]
+            },
+            {
+              "id": "region:1:73129/food/1",
+              "surfaceMetres": 28.8,
+              "pathCells": [
+                "-6:3",
+                "-6:2"
+              ]
+            },
+            {
+              "id": "region:1:73129/food/2",
+              "surfaceMetres": 28.799999,
+              "pathCells": [
+                "18:17",
+                "18:18"
+              ]
+            }
+          ],
+          "routeSamples": 450,
+          "minimumClearance": 0.019999999999999074,
+          "generatedNeighborhoods": 8
+        },
+        {
+          "seed": 0,
+          "farms": [
+            {
+              "id": "region:1:0/food/0",
+              "surfaceMetres": 28.8,
+              "pathCells": [
+                "-11:8"
+              ]
+            },
+            {
+              "id": "region:1:0/food/1",
+              "surfaceMetres": 28.799999,
+              "pathCells": [
+                "-5:1",
+                "-5:2"
+              ]
+            },
+            {
+              "id": "region:1:0/food/2",
+              "surfaceMetres": 28.8,
+              "pathCells": [
+                "19:18",
+                "18:18"
+              ]
+            }
+          ],
+          "routeSamples": 450,
+          "minimumClearance": 0.019999999999999074,
+          "generatedNeighborhoods": 6
+        },
+        {
+          "seed": 1,
+          "farms": [
+            {
+              "id": "region:1:1/food/0",
+              "surfaceMetres": 28.8,
+              "pathCells": [
+                "-11:9"
+              ]
+            },
+            {
+              "id": "region:1:1/food/1",
+              "surfaceMetres": 28.799999,
+              "pathCells": [
+                "-4:1",
+                "-4:2"
+              ]
+            },
+            {
+              "id": "region:1:1/food/2",
+              "surfaceMetres": 28.799999,
+              "pathCells": [
+                "18:18",
+                "18:19"
+              ]
+            }
+          ],
+          "routeSamples": 450,
+          "minimumClearance": 0.019999999999999074,
+          "generatedNeighborhoods": 6
+        },
+        {
+          "seed": 42,
+          "farms": [
+            {
+              "id": "region:1:42/food/0",
+              "surfaceMetres": 28.8,
+              "pathCells": [
+                "-11:9",
+                "-12:9"
+              ]
+            },
+            {
+              "id": "region:1:42/food/1",
+              "surfaceMetres": 28.8,
+              "pathCells": [
+                "-6:2"
+              ]
+            },
+            {
+              "id": "region:1:42/food/2",
+              "surfaceMetres": 28.799999,
+              "pathCells": [
+                "18:17",
+                "18:18"
+              ]
+            }
+          ],
+          "routeSamples": 450,
+          "minimumClearance": 0.019999999999999074,
+          "generatedNeighborhoods": 6
+        },
+        {
+          "seed": 12345,
+          "farms": [
+            {
+              "id": "region:1:12345/food/0",
+              "surfaceMetres": 28.800001,
+              "pathCells": [
+                "-12:8"
+              ]
+            },
+            {
+              "id": "region:1:12345/food/1",
+              "surfaceMetres": 28.799999,
+              "pathCells": [
+                "-5:3"
+              ]
+            },
+            {
+              "id": "region:1:12345/food/2",
+              "surfaceMetres": 28.799999,
+              "pathCells": [
+                "18:18"
+              ]
+            }
+          ],
+          "routeSamples": 450,
+          "minimumClearance": 0.019999999999999074,
+          "generatedNeighborhoods": 4
+        },
+        {
+          "seed": 4294967295,
+          "farms": [
+            {
+              "id": "region:1:4294967295/food/0",
+              "surfaceMetres": 28.8,
+              "pathCells": [
+                "-11:9"
+              ]
+            },
+            {
+              "id": "region:1:4294967295/food/1",
+              "surfaceMetres": 28.799999,
+              "pathCells": [
+                "-6:1"
+              ]
+            },
+            {
+              "id": "region:1:4294967295/food/2",
+              "surfaceMetres": 28.799999,
+              "pathCells": [
+                "19:19"
+              ]
+            }
+          ],
+          "routeSamples": 450,
+          "minimumClearance": 0.019999999999999074,
+          "generatedNeighborhoods": 5
+        }
+      ]
+    },
+    "compiledPhysics": {
+      "regionalFoodCompiledPhysics": 1,
+      "scope": "Actual client-build emitted Rapier production physics worker. All three real local paths walked both ways and garden/store/collector approaches, each with unchanged V31 scaffold/completed envelopes, all V32 sources/stores, streamed terrain crossings, atomic replacement, physical unload and saved revisit. No browser rendering or device benchmark.",
+      "workerSha256": "c197b6752171629d53ddf16ae8d26729d60de83c87e8cf5dca4dc9bf571ba35d",
+      "seed": 73129,
+      "probes": [
+        {
+          "phase": "scaffold",
+          "farmId": "region:1:73129/food/0",
+          "plannedMetres": 28.8,
+          "route": {
+            "samples": 1080,
+            "groundedFraction": 1,
+            "metres": 28.744837800718546,
+            "simulationSeconds": 18,
+            "maxGroundError": 0.0012628173828090894,
+            "blocked": 0,
+            "visitedCells": 12,
+            "peakResidentCells": 9,
+            "peakCellColliders": 328
+          },
+          "storeApproach": {
+            "samples": 51,
+            "groundedFraction": 1,
+            "metres": 1.3544130093780158,
+            "simulationSeconds": 0.85,
+            "maxGroundError": 0.0012094116210903394,
+            "blocked": 0,
+            "visitedCells": 12,
+            "peakResidentCells": 9,
+            "peakCellColliders": 328
+          },
+          "gardenReturn": {
+            "samples": 1220,
+            "groundedFraction": 1,
+            "metres": 32.307960257495864,
+            "simulationSeconds": 20.333333333333332,
+            "maxGroundError": 0.0033265686035122144,
+            "blocked": 0,
+            "visitedCells": 12,
+            "peakResidentCells": 9,
+            "peakCellColliders": 328
+          },
+          "collectorApproach": {
+            "samples": 171,
+            "groundedFraction": 1,
+            "metres": 4.764426460955048,
+            "simulationSeconds": 2.85,
+            "maxGroundError": 0.0021440124511684644,
+            "blocked": 0
+          }
+        },
+        {
+          "phase": "scaffold",
+          "farmId": "region:1:73129/food/1",
+          "plannedMetres": 28.8,
+          "route": {
+            "samples": 1082,
+            "groundedFraction": 1,
+            "metres": 28.74758646706072,
+            "simulationSeconds": 18.033333333333335,
+            "maxGroundError": 0.0023137664794923296,
+            "blocked": 0,
+            "visitedCells": 12,
+            "peakResidentCells": 9,
+            "peakCellColliders": 193
+          },
+          "storeApproach": {
+            "samples": 63,
+            "groundedFraction": 1,
+            "metres": 1.6762625208792499,
+            "simulationSeconds": 1.05,
+            "maxGroundError": 0.002620849609375142,
+            "blocked": 0,
+            "visitedCells": 12,
+            "peakResidentCells": 9,
+            "peakCellColliders": 193
+          },
+          "gardenReturn": {
+            "samples": 1221,
+            "groundedFraction": 1,
+            "metres": 32.623401012384974,
+            "simulationSeconds": 20.35,
+            "maxGroundError": 0.0020543670654298296,
+            "blocked": 0,
+            "visitedCells": 12,
+            "peakResidentCells": 9,
+            "peakCellColliders": 193
+          },
+          "collectorApproach": {
+            "samples": 171,
+            "groundedFraction": 1,
+            "metres": 4.766614817807087,
+            "simulationSeconds": 2.85,
+            "maxGroundError": 0.0021945571899415484,
+            "blocked": 0
+          }
+        },
+        {
+          "phase": "scaffold",
+          "farmId": "region:1:73129/food/2",
+          "plannedMetres": 28.799999,
+          "route": {
+            "samples": 1081,
+            "groundedFraction": 1,
+            "metres": 28.742668714277013,
+            "simulationSeconds": 18.016666666666666,
+            "maxGroundError": 0.0021268463134767046,
+            "blocked": 0,
+            "visitedCells": 12,
+            "peakResidentCells": 9,
+            "peakCellColliders": 188
+          },
+          "storeApproach": {
+            "samples": 38,
+            "groundedFraction": 1,
+            "metres": 1.014567029549155,
+            "simulationSeconds": 0.6333333333333333,
+            "maxGroundError": 0.0012590026855470171,
+            "blocked": 0,
+            "visitedCells": 12,
+            "peakResidentCells": 9,
+            "peakCellColliders": 188
+          },
+          "gardenReturn": {
+            "samples": 1196,
+            "groundedFraction": 1,
+            "metres": 31.953918449181884,
+            "simulationSeconds": 19.933333333333334,
+            "maxGroundError": 0.0027715301513673296,
+            "blocked": 0,
+            "visitedCells": 12,
+            "peakResidentCells": 9,
+            "peakCellColliders": 188
+          },
+          "collectorApproach": {
+            "samples": 171,
+            "groundedFraction": 1,
+            "metres": 4.771457301103037,
+            "simulationSeconds": 2.85,
+            "maxGroundError": 0.003078613281250142,
+            "blocked": 0
+          }
+        },
+        {
+          "phase": "completed",
+          "farmId": "region:1:73129/food/0",
+          "plannedMetres": 28.8,
+          "route": {
+            "samples": 1080,
+            "groundedFraction": 1,
+            "metres": 28.744837800718546,
+            "simulationSeconds": 18,
+            "maxGroundError": 0.0012628173828090894,
+            "blocked": 0,
+            "visitedCells": 12,
+            "peakResidentCells": 9,
+            "peakCellColliders": 328
+          },
+          "storeApproach": {
+            "samples": 51,
+            "groundedFraction": 1,
+            "metres": 1.3544130093780158,
+            "simulationSeconds": 0.85,
+            "maxGroundError": 0.0012094116210903394,
+            "blocked": 0,
+            "visitedCells": 12,
+            "peakResidentCells": 9,
+            "peakCellColliders": 328
+          },
+          "gardenReturn": {
+            "samples": 1220,
+            "groundedFraction": 1,
+            "metres": 32.307960257495864,
+            "simulationSeconds": 20.333333333333332,
+            "maxGroundError": 0.0033265686035122144,
+            "blocked": 0,
+            "visitedCells": 12,
+            "peakResidentCells": 9,
+            "peakCellColliders": 328
+          },
+          "collectorApproach": {
+            "samples": 171,
+            "groundedFraction": 1,
+            "metres": 4.764426460955048,
+            "simulationSeconds": 2.85,
+            "maxGroundError": 0.0021440124511684644,
+            "blocked": 0
+          }
+        },
+        {
+          "phase": "completed",
+          "farmId": "region:1:73129/food/1",
+          "plannedMetres": 28.8,
+          "route": {
+            "samples": 1082,
+            "groundedFraction": 1,
+            "metres": 28.74758646706072,
+            "simulationSeconds": 18.033333333333335,
+            "maxGroundError": 0.0023137664794923296,
+            "blocked": 0,
+            "visitedCells": 12,
+            "peakResidentCells": 9,
+            "peakCellColliders": 193
+          },
+          "storeApproach": {
+            "samples": 63,
+            "groundedFraction": 1,
+            "metres": 1.6762625208792499,
+            "simulationSeconds": 1.05,
+            "maxGroundError": 0.002620849609375142,
+            "blocked": 0,
+            "visitedCells": 12,
+            "peakResidentCells": 9,
+            "peakCellColliders": 193
+          },
+          "gardenReturn": {
+            "samples": 1221,
+            "groundedFraction": 1,
+            "metres": 32.623401012384974,
+            "simulationSeconds": 20.35,
+            "maxGroundError": 0.0020543670654298296,
+            "blocked": 0,
+            "visitedCells": 12,
+            "peakResidentCells": 9,
+            "peakCellColliders": 193
+          },
+          "collectorApproach": {
+            "samples": 171,
+            "groundedFraction": 1,
+            "metres": 4.766614817807087,
+            "simulationSeconds": 2.85,
+            "maxGroundError": 0.0021945571899415484,
+            "blocked": 0
+          }
+        },
+        {
+          "phase": "completed",
+          "farmId": "region:1:73129/food/2",
+          "plannedMetres": 28.799999,
+          "route": {
+            "samples": 1081,
+            "groundedFraction": 1,
+            "metres": 28.742668714277013,
+            "simulationSeconds": 18.016666666666666,
+            "maxGroundError": 0.0021268463134767046,
+            "blocked": 0,
+            "visitedCells": 12,
+            "peakResidentCells": 9,
+            "peakCellColliders": 188
+          },
+          "storeApproach": {
+            "samples": 38,
+            "groundedFraction": 1,
+            "metres": 1.014567029549155,
+            "simulationSeconds": 0.6333333333333333,
+            "maxGroundError": 0.0012590026855470171,
+            "blocked": 0,
+            "visitedCells": 12,
+            "peakResidentCells": 9,
+            "peakCellColliders": 188
+          },
+          "gardenReturn": {
+            "samples": 1196,
+            "groundedFraction": 1,
+            "metres": 31.953918449181884,
+            "simulationSeconds": 19.933333333333334,
+            "maxGroundError": 0.0027715301513673296,
+            "blocked": 0,
+            "visitedCells": 12,
+            "peakResidentCells": 9,
+            "peakCellColliders": 188
+          },
+          "collectorApproach": {
+            "samples": 171,
+            "groundedFraction": 1,
+            "metres": 4.771457301103037,
+            "simulationSeconds": 2.85,
+            "maxGroundError": 0.003078613281250142,
+            "blocked": 0
+          }
+        }
+      ],
+      "revisit": {
+        "samples": 1080,
+        "groundedFraction": 1,
+        "metres": 28.744837800718546,
+        "simulationSeconds": 18,
+        "maxGroundError": 0.0012628173828090894,
+        "blocked": 0,
+        "visitedCells": 12,
+        "peakResidentCells": 9,
+        "peakCellColliders": 547
+      },
+      "sourceCampaignSaveExact": true
+    }
+  },
+  "checks": {
+    "exitCode": 0,
+    "sourceUnchangedDuringRun": true,
+    "elapsedMilliseconds": 175718.395712
+  }
+}

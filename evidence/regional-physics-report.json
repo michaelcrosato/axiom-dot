@@ -1,0 +1,186 @@
+{
+  "version": 1,
+  "status": "verified",
+  "measuredAt": "2026-10-01T22:31:55.961Z",
+  "source": {
+    "head": "108331fe05295c21e5e4dcc952d99321fcf97f02",
+    "workingTreeDirty": true,
+    "worker": "src/physics.worker.ts",
+    "sha256": {
+      "src/physics.worker.ts": "05a79fa9411f4285ce6a7dcd12e3a3e6626802f6162a924f4c09dde41aaa657f",
+      "src/regional-bounds.ts": "01e1877d9ab1a34d7e8c5e5a0a38aae010ad061363629dcc1609a27455aa2ba9",
+      "src/locomotion.ts": "b138b894d61d68c6765a5260490252bbff638536cd374319582c3707d6c0efc5",
+      "src/tuning.ts": "7e7c9fae5b6546e9e7efd107c836b543bba02b7e31049b1b2601e8a61b534053",
+      "src/contact-physics.ts": "785cc37cf93e11cb748e18b495b14261c5ab9bcf2b7e3ab0302bd7bbf979e414",
+      "src/player-contact.ts": "7deb547429e2d6ad1dfc84cc8061a110bdc441454de23e9fdfc884a7fb4842af",
+      "src/ledge-mantle.ts": "64d68205951405f0597d5b877b5c295867c8ccd3194a3ba38cb57b1195688f39",
+      "src/lab-script.ts": "cfd892ca992ce1553936c7141f7ac91e9a79e7ca030d816b344b2b67efecc5d1",
+      "src/regional-world.ts": "cb7903f27255c1f59f4abaa61af76a60701e71a90c70d4ca8097c9fba446b174",
+      "src/regional-metrics.ts": "90cfb462776dc51a76437d0f996fbf8cb6f0e39066a7c1a4e67cf32625999c22",
+      "src/wilderness-geometry.ts": "68ade05e6fa8d2e76db846b17438bfc80ae091abb514ac1bf5dbb17d5b57438f",
+      "src/procedural.ts": "86115ea107413e67fdfa21f757a7d6571ae5952e8ae01311c51a79f5ba7f15a4",
+      "src/valley.ts": "8c1cc44784fb7d25b79a2ad7adf296d2a6091ec6855bd993499169112966ca4e",
+      "src/building.ts": "8d8901adeadfff7be1b94c92bcedfcd9158344bb1f9ac2fcf2d2f4517f2d8dfa",
+      "tests/regional-metrics.test.ts": "72cd9f1ad23ecc7f68afc1444a4ff4e500b778533d35a4b927e28d7bd03e61d6",
+      "tests/regional-physics.test.ts": "06b7587989ce0790db22163df470f6b7ac3babcbf340140f4adeca601882b7cd",
+      "tests/regional-travel-physics.test.ts": "0f9dd8a8968911a31cbe0fe0717eca2be1d12d6a02b856160f77e0ac77a66ea0",
+      "tests/helpers/regional-physics.ts": "5fa8ccb279788fdfef0f27a16ecc86a90ea9d4e472764936b2e75b8b1f4b12b6",
+      "scripts/measure-regional-world.mts": "baf93c21a0ed8f3f872890a46e8d6d3159cbc2840399da74b18556de2bfc2095",
+      "package.json": "d5d0ee7cb3bfa753c33408135d772f983d7371f1ad371ac6d3dd39d980d5e9ef",
+      "package-lock.json": "10ffd31c5f9406511b2fd7bdd1f2ca5f019d245e3f71fedc9dc9cd4763280a32"
+    },
+    "driver": "scripts/measure-regional-world.mts",
+    "runtime": "v22.23.0"
+  },
+  "scope": "Real Rapier WASM and production controller, manually clocked at exactly 60 Hz. One world unit is one metre. Journey metres are cumulative collision-resolved horizontal distance. Includes acceleration, turns, waypoint approaches and live bounded terrain/solid residency. These are simulation measurements, not a physical-device FPS, visual, or network test.",
+  "world": {
+    "areaSquareMetres": 10000000,
+    "boundMetres": 1581.1388300841897,
+    "widthMetres": 3162.2776601683795,
+    "chunkMetres": 64,
+    "terrainStepMetres": 2
+  },
+  "controller": {
+    "hz": 60,
+    "accelerationMetresPerSecondSquared": 22,
+    "brakingMetresPerSecondSquared": 30,
+    "sprintConsumesStamina": false,
+    "staminaScope": "Combat attack and guard actions only"
+  },
+  "command": "node --experimental-strip-types --test --test-reporter=spec tests/regional-metrics.test.ts tests/regional-physics.test.ts tests/regional-travel-physics.test.ts",
+  "testFiles": [
+    "tests/regional-metrics.test.ts",
+    "tests/regional-physics.test.ts",
+    "tests/regional-travel-physics.test.ts"
+  ],
+  "calibration": [
+    {
+      "gait": "walk",
+      "inputStrength": 0.36,
+      "inputMode": "touch-analog",
+      "steadySpeed": 1.9999603272034663,
+      "expectedSpeed": 2.0000000000000004,
+      "accelerationSeconds": 0.1,
+      "distanceMetres": 19.92459106457213,
+      "seconds": 10,
+      "samples": 600,
+      "groundedFraction": 1,
+      "pass": true
+    },
+    {
+      "gait": "jog",
+      "inputStrength": 0.58,
+      "inputMode": "touch-analog",
+      "steadySpeed": 3.999887085126133,
+      "expectedSpeed": 4,
+      "accelerationSeconds": 0.18333333333333332,
+      "distanceMetres": 39.66868591427646,
+      "seconds": 10,
+      "samples": 600,
+      "groundedFraction": 1,
+      "pass": true
+    },
+    {
+      "gait": "run",
+      "inputStrength": 0.8,
+      "inputMode": "touch-analog",
+      "steadySpeed": 5.999903869918775,
+      "expectedSpeed": 6,
+      "accelerationSeconds": 0.2833333333333333,
+      "distanceMetres": 59.23008728379001,
+      "seconds": 10,
+      "samples": 600,
+      "groundedFraction": 1,
+      "pass": true
+    },
+    {
+      "gait": "sprint",
+      "inputStrength": 1,
+      "inputMode": "touch-analog",
+      "steadySpeed": 7.999812603040316,
+      "expectedSpeed": 8,
+      "accelerationSeconds": 0.36666666666666664,
+      "distanceMetres": 78.6103339223588,
+      "seconds": 10,
+      "samples": 600,
+      "groundedFraction": 1,
+      "pass": true
+    },
+    {
+      "gait": "run",
+      "inputStrength": 0.69,
+      "inputMode": "keyboard",
+      "steadySpeed": 4.9998825076770625,
+      "expectedSpeed": 4.999999999999999,
+      "accelerationSeconds": 0.23333333333333334,
+      "distanceMetres": 49.47244644493045,
+      "seconds": 10,
+      "samples": 600,
+      "groundedFraction": 1,
+      "pass": true
+    },
+    {
+      "gait": "sprint",
+      "inputStrength": 1,
+      "inputMode": "keyboard-shift",
+      "steadySpeed": 7.999812603040316,
+      "expectedSpeed": 8,
+      "accelerationSeconds": 0.36666666666666664,
+      "distanceMetres": 78.6103339223588,
+      "seconds": 10,
+      "samples": 600,
+      "groundedFraction": 1,
+      "pass": true
+    }
+  ],
+  "journeys": [
+    {
+      "route": "full playable flat east/west span",
+      "worldWidthMetres": 3162.2776601683795,
+      "marginMetres": 1,
+      "out": {
+        "metres": 3161.333644861325,
+        "seconds": 398.25,
+        "samples": 23895,
+        "groundedFraction": 1,
+        "maxGroundError": 0.013464007377624505,
+        "blocked": 0,
+        "visited": 150,
+        "peakCells": 9,
+        "peakColliders": 9,
+        "resident": 6
+      },
+      "back": {
+        "metres": 3161.2863871758213,
+        "seconds": 400.8666666666667,
+        "samples": 24052,
+        "groundedFraction": 1,
+        "maxGroundError": 0.008082304000854485,
+        "blocked": 0,
+        "visited": 150,
+        "peakCells": 9,
+        "peakColliders": 9,
+        "resident": 6
+      }
+    },
+    {
+      "route": "Alder Waystation to Farwatch Cairn via Pinewatch Camp through open trail junctions",
+      "seed": 42,
+      "metres": 1233.804291109359,
+      "seconds": 163.46666666666667,
+      "samples": 9808,
+      "groundedFraction": 1,
+      "maxGroundError": 0.00882282989564942,
+      "blocked": 0,
+      "visited": 88,
+      "peakCells": 9,
+      "peakColliders": 360,
+      "resident": 9
+    }
+  ],
+  "checks": {
+    "exitCode": 0,
+    "sourceUnchangedDuringRun": true,
+    "measurementsComplete": true
+  }
+}

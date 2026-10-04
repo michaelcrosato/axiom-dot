@@ -1,0 +1,31 @@
+/* Shared by the campaign inspector and the disposable life-model workbench. */
+.town-life{font-size:14px;line-height:1.5}
+.town-life p{font-size:14px;line-height:1.5}
+.town-life button,.town-life input,.town-life select,.town-life summary{min-height:44px}
+.town-life input,.town-life select,.town-life textarea{box-sizing:border-box;width:100%;min-width:0;background:#102f29;color:#ecf0db;border:1px solid #91b6a066;border-radius:6px;padding:9px;font:inherit}
+.town-life label{display:block;margin:12px 0 5px}
+.town-life :focus-visible{outline:2px solid #f5d58e;outline-offset:3px}
+.town-life .life-notice{padding:10px 12px;border-left:3px solid #d2b977;background:#d2b97712}
+.town-life .life-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.town-life .life-card{border:1px solid #94bba744;background:#14382c88;padding:12px;border-radius:8px;margin:10px 0;overflow-wrap:anywhere}
+.town-life .life-card h3,.town-life .life-card h4{margin:0 0 8px}
+.town-life .life-need{padding:9px 10px;border:1px solid #94bba733;border-radius:7px}
+.town-life .life-need-label{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px;font-variant-numeric:tabular-nums}
+.town-life meter{display:block;width:100%;height:14px;margin-top:5px;accent-color:#9bd5ac}
+.town-life .life-need[data-low="true"]{border-color:#dfaf7155;background:#dfaf7110}
+.town-life .life-need[data-low="true"] meter{accent-color:#dfaf71}
+.town-life small{display:block;font-size:12px;line-height:1.5;color:#c9d7c3}
+.town-life .life-action{margin:12px 0}.town-life .life-action button{width:100%}
+.town-life .life-controls{display:grid;grid-template-columns:minmax(0,1fr) 100px;gap:8px;align-items:center}
+.town-life .life-controls input[type="range"]{padding:0;accent-color:#d9c487}
+.town-life .life-applied{display:block;font-size:12px;color:#becab7;margin:5px 0}
+.town-life canvas{display:block;width:100%;height:auto;background:#0b211e;border:1px solid #9ebaa644;border-radius:8px;margin:12px 0}
+.town-life pre{white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.5 monospace;max-height:340px;overflow:auto;background:#0a251f;padding:10px}
+.town-life textarea{font:12px/1.5 monospace;resize:vertical}
+.town-life .life-journal{padding-left:22px;max-height:300px;overflow:auto}.town-life .life-journal li{margin:8px 0}
+.town-life .life-status{min-height:2.5em;color:#ead59c}
+.town-life .life-legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px}
+.town-life details[open]>summary{margin-bottom:8px}
+@media(max-width:420px){.town-life .life-grid{grid-template-columns:1fr}.town-life .life-controls{grid-template-columns:minmax(0,1fr) 86px}}
+
+.town-life input[type="checkbox"]{width:22px;min-height:22px;height:22px;vertical-align:middle;margin-right:8px}

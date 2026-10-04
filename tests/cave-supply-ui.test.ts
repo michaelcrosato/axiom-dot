@@ -1,0 +1,11 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync} from 'node:fs';import {stripTypeScriptTypes} from 'node:module';
+import * as cave from '../src/cave-water.ts';import * as supply from '../src/cave-supply.ts';
+const source=readFileSync(new URL('../src/cave-ui.ts',import.meta.url),'utf8');
+class Panel {html='';buttons=new Map<string,{onclick?:()=>void;disabled:boolean}>();set innerHTML(value:string){this.html=value;this.buttons.clear();for(const match of value.matchAll(/<button([^>]*)>/g)){const key=match[1]!.includes('class="close"')?'.close':'#'+(/id="([^"]+)"/.exec(match[1]!)?.[1]??'');this.buttons.set(key,{disabled:match[1]!.includes('disabled')});}}querySelector(key:string){return this.buttons.get(key)??null;}}
+const deps={...cave,...supply};const mount=new Function(...Object.keys(deps),stripTypeScriptTypes(source.replace(/^import[^\n]+\n/gm,'').replace('export function','function'),{mode:'strip'})+';return mountCavePanel;')(...Object.values(deps));
+test('cave panel exposes bounded paid diversion only at dry control and dispatches exact callback without mutation',()=>{
+ const state=cave.createCaveWater(73129),bridge=supply.createCaveSupply(73129,state),panel=new Panel(),before=JSON.stringify({state,bridge}),calls:string[]=[];
+ const render=(near:string|null,scrap:number,s=bridge)=>mount(panel,{state,supply:s,inventory:{scrap,core:0},near,act:()=>{},connect:()=>calls.push('connect-outfall'),close:()=>calls.push('close')});
+ render('valve',2);assert.equal(panel.buttons.get('#cave-connect')!.disabled,true);render('drain',1);assert.equal(panel.buttons.get('#cave-connect')!.disabled,true);render('drain',2);assert.equal(panel.buttons.get('#cave-connect')!.disabled,false);assert.match(panel.html,/0.5 L\/s/);assert.match(panel.html,/Carriers must deliver/);assert.match(panel.html,/does not clear/);panel.buttons.get('#cave-connect')!.onclick!();assert.deepEqual(calls,['connect-outfall']);assert.equal(JSON.stringify({state,bridge}),before);render('drain',2,{...bridge,connected:true,connectedAt:0});assert.equal(panel.buttons.get('#cave-connect')!.disabled,true);
+ mount(panel,{state,inventory:{scrap:2,core:0},near:'drain',act:()=>{},close:()=>{}});assert.equal(panel.buttons.has('#cave-connect'),false,'legacy generation has no unsupported household action');
+});

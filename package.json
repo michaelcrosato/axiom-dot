@@ -1,0 +1,23 @@
+{
+  "name": "axiom-living-frontier",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.server.json",
+    "build": "node scripts/build.mjs",
+    "test": "node --experimental-strip-types --test tests/*.test.ts"
+  },
+  "dependencies": {
+    "@dimforge/rapier3d-compat": "0.20.0",
+    "drizzle-orm": "0.45.3",
+    "three": "0.186.0"
+  },
+  "devDependencies": {
+    "@types/three": "0.186.0",
+    "drizzle-kit": "0.31.11",
+    "typescript": "7.0.2",
+    "vite": "8.3.1"
+  }
+}

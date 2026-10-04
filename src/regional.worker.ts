@@ -1,0 +1,2 @@
+import {generateRegionalChunk} from './regional-world.ts';
+self.onmessage=(event:MessageEvent)=>{const m=event.data;if(m?.type!=='generate'||!Number.isSafeInteger(m.id))return;try{const chunk=generateRegionalChunk(m.seed,m.cx,m.cz);self.postMessage({type:'chunk',id:m.id,seed:m.seed,cx:m.cx,cz:m.cz,chunk});}catch(error){self.postMessage({type:'error',id:m.id,message:error instanceof Error?error.message:'Regional generation failed'});}};

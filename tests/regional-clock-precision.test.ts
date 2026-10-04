@@ -1,0 +1,33 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {createRegionalState,enableRegionalSupply,enableRegionalTrade,enableRegionalFood,applyAction,validateSave,parseSave,serializeSave,type State} from '../src/world.ts';
+import {createRegionalSupply,advanceRegionalSupply,validRegionalSupply,immutableRegionalSupply} from '../src/regional-supply.ts';
+import {createRegionalTrade,advanceRegionalTrade,validRegionalTrade,immutableRegionalTrade} from '../src/regional-trade.ts';
+import {regionalClockAdvance,regionalClockDifference} from '../src/regional-clock.ts';
+import {regionalFoodConservation} from '../src/regional-food.ts';
+import {readyFoodCampaign,foodCommand} from './helpers/regional-food-campaign.ts';
+const clone=<T>(v:T):T=>JSON.parse(JSON.stringify(v));
+const edges=[.24999999,.249999999,.2499999995,.2499999999,.24999999999,.25,.2500000001];
+const sequences=[...edges.map(dt=>[dt]),[.249999999,1e-9],[.2499999995,5e-10],[.2499999999,1e-10],[.1,.1499999995,5e-10],[.125,.1249999995,5e-10],[Number.EPSILON,.25-Number.EPSILON],[.25-1e-8,1e-8],[.9999999995,5e-10],Array.from({length:60},()=>1/60)];
+function roundtrip(state:State,label:string){assert(validateSave(state),label+' current');const raw=JSON.stringify(state),decoded=JSON.parse(raw);assert(validateSave(decoded),label+' raw');const parsed=parseSave(raw);assert(parsed,label+' parse');assert.equal(serializeSave(parsed),raw,label+' exact roundtrip');for(const s of [state.frontierSupply,state.frontierTrade,state.frontierFood])if(s)assert(s.remainder>=0&&s.remainder<.25,label+' remainder');return parsed;}
+
+test('supply and freight use an exact picosecond subquarter accumulator and serialize exact half-open quarter remainders',()=>{
+ const ctx=createRegionalState(42);
+ for(const dt of edges){let supply=advanceRegionalSupply(createRegionalSupply(42),dt),trade=advanceRegionalTrade(createRegionalTrade(42),dt);const expected=Math.floor(Math.round(dt*1e12)/250_000_000_000);assert.equal(supply.ticks,expected,String(dt));assert.equal(trade.ticks,expected,String(dt));assert(supply.remainder>=0&&supply.remainder<.25);assert(trade.remainder>=0&&trade.remainder<.25);assert(validRegionalSupply(clone(supply),ctx),String(dt));assert(validRegionalTrade(clone(trade),ctx),String(dt));assert.deepEqual(immutableRegionalSupply(clone(supply),ctx),supply);assert.deepEqual(immutableRegionalTrade(clone(trade),ctx),trade);}
+ for(const remainder of [0,Number.EPSILON,.13,.24999999,.249999999,.2499999995,.2499999999,.24999999999999997]){assert(validRegionalSupply({...clone(createRegionalSupply(42)),remainder},ctx));assert(validRegionalTrade({...clone(createRegionalTrade(42)),remainder},ctx));}
+ for(const remainder of [-Number.EPSILON,-1e-10,-1,.25,.250000001,NaN,Infinity]){const supply={...clone(createRegionalSupply(42)),remainder},trade={...clone(createRegionalTrade(42)),remainder};assert.equal(validRegionalSupply(supply,ctx),false,String(remainder));assert.equal(validRegionalTrade(trade,ctx),false,String(remainder));assert.equal(advanceRegionalSupply(supply,.25),supply);assert.equal(advanceRegionalTrade(trade,.25),trade);}
+});
+test('all three regional clocks roundtrip every near-quarter and split frame without future-source queries',()=>{
+ let cases=0;
+ for(const prefix of [0,.13,.2499999995,.2499999999])for(const dts of sequences){let state=enableRegionalTrade(enableRegionalSupply(createRegionalState(42)));if(prefix)state=roundtrip(applyAction(state,{type:'tick',dt:prefix}),`prefix ${prefix}`);state=enableRegionalFood(state);for(const [i,dt]of dts.entries()){const label=`prefix ${prefix}, ${JSON.stringify(dts)}, frame ${i}`,sourceExpected=regionalClockAdvance(state.frontierSupply!,dt),tradeExpected=regionalClockAdvance(state.frontierTrade!,dt);assert.doesNotThrow(()=>{state=applyAction(state,{type:'tick',dt});},label);assert.deepEqual({ticks:state.frontierSupply!.ticks,remainder:state.frontierSupply!.remainder},{ticks:sourceExpected.ticks,remainder:sourceExpected.remainder},label+' accepted source step');assert.deepEqual({ticks:state.frontierTrade!.ticks,remainder:state.frontierTrade!.remainder},{ticks:tradeExpected.ticks,remainder:tradeExpected.remainder},label+' accepted trade step');assert.deepEqual({ticks:state.frontierFood!.ticks,remainder:state.frontierFood!.remainder},regionalClockDifference(state.frontierSupply!,{ticks:state.frontierFood!.supplyStartTick,remainder:state.frontierFood!.supplyStartRemainder}),label+' accepted food step');state=roundtrip(state,label);assert.equal(state.frontierTrade!.ticks,state.frontierSupply!.ticks,label+' source clocks');assert(state.frontierFood!.supplyStartTick+state.frontierFood!.ticks<=state.frontierSupply!.ticks,label+' food source bound');cases++;}}
+ console.log(JSON.stringify({regionalFractionalClockMatrix:1,acceptedFrames:cases,prefixes:4,sequences:sequences.length,sourcePhaseQuantumSeconds:1e-12,remainderInterval:'[0, 0.25)'}));
+});
+test('started mature food retains starter, seed, water and cargo conservation through near-quarter frames',{timeout:120_000},()=>{
+ let state=readyFoodCampaign();state=applyAction(state,foodCommand(state));for(const [n,dts]of sequences.entries())for(const [i,dt]of dts.entries()){assert.doesNotThrow(()=>{state=applyAction(state,{type:'tick',dt});});state=roundtrip(state,`active ${n}:${i}`);assert(regionalFoodConservation(state.frontierFood!).every(r=>r.balanced));}assert.equal(state.frontierFood!.farms[0]!.starterGranted,4);
+});
+
+test('source, trade and food retain honest differing legacy phases through 20,001 dust-sized quarter overshoots',{timeout:120_000},()=>{
+ let state=enableRegionalTrade(enableRegionalSupply(createRegionalState(42)));state={...state,frontierSupply:advanceRegionalSupply(state.frontierSupply!,.13),frontierTrade:advanceRegionalTrade(state.frontierTrade!,.07)};state=enableRegionalFood(state);
+ for(let i=0;i<20_001;i++){state=applyAction(state,{type:'tick',dt:.25000000005});if(i%1000===0)state=roundtrip(state,`long phase frame ${i}`);}state=roundtrip(state,'long phase final');const food=state.frontierFood!,elapsed=regionalClockDifference(state.frontierSupply!,{ticks:food.supplyStartTick,remainder:food.supplyStartRemainder});assert.equal(food.ticks,20_001);assert.equal(food.ticks,elapsed.ticks);assert.equal(food.remainder,elapsed.remainder);assert.equal(state.frontierTrade!.ticks,20_001);assert.equal(food.remainder,.00000100005);assert.equal(state.frontierSupply!.remainder,.13000100005);assert.equal(state.frontierTrade!.remainder,.07000100005);
+ console.log(JSON.stringify({regionalThreeClockLongFraction:1,frames:20_001,dt:.25000000005,sourceInitialPhase:.13,tradeInitialPhase:.07,foodTicks:food.ticks,foodPhase:food.remainder}));
+});

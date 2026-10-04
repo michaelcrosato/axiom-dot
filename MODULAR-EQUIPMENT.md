@@ -1,0 +1,31 @@
+# Modular equipment · resonant staff pack v1 / editable recipes v2
+
+Settings → Modular equipment workbench opens editable grip / shaft / head recipes for builds A and B, seed suggestions, bounded JSON import/export, an equal-scale geometry comparison, exact stats, material costs and the compiler inspector. Developer lab has the same workbench for isolated practice. The four action slots are unchanged.
+
+## Generated assembly
+
+This bounded pack makes eight genuinely different staffs from two grip standards, four shaft definitions and four head definitions. It is the first modular equipment family, not an armor, tool or arbitrary weapon system. Named seed streams choose a grip and compatible shaft/head independently. Shaft length, width, material density and head geometry come from immutable registered axioms. No random stat roll is added.
+
+Three semantic nodes compile through the existing v1 compiler. Coincident, opposed, required typed attachment sockets enforce the light/heavy standards. Required connectivity and a five-scrap/one-core budget are part of the recipe; expansion is bounded to three nodes, 900 operations and depth five. Invalid combinations fail without installation. Exposed dominant/support hand sockets sit on the grip.
+
+Mass is the sum of shape volume × effective material density. These game-oriented densities describe hollow/composite parts, not certified real materials. Center of mass and rotational inertia about the dominant grip’s local Z axis (including off-axis prong parallel-axis terms) are computed from the same solids. Physical length plus the head's authored focus determines projected energy reach. Inertia determines commitment and stamina; mass determines damage/recoil. All attacks still pass through the common bounded combo sanitizer. The exact attack definitions drive the active energy boundary and damage predicate, including vertical separation, front arc, solid-wall occlusion and at-most-one contact per target/attack ID. Generated equipment remains a resonant staff: the visible energy volume deliberately extends beyond the physical mesh. The weapon is not a new dynamic rigid-body collision system.
+
+The renderer draws every compiled cuboid directly. Generated attacks solve both arms to the exposed sockets; there is no free-floating hand approximation. Long staffs stow across the pack for sprinting, gathering, low traversal and airborne motion. Whole-weapon vertical clearances, geometry identity and both grips are numerically tested. These checks do not establish visual polish on an actual screen.
+
+## Finite materials and saves
+
+Campaign refitting is available alive in the valley. Only one generated assembly is owned at a time. Assembling a replacement recycles exactly the old assembly's paid materials, then spends the new cost. Restoring the original survey staff refunds the entire assembly. Repeated refits cannot create salvage. This is intentionally a small reversible loadout system, with no additional shop, infinite stock or reward economy.
+
+An optional `equipment` extension to schema6 stores the independently versioned equipment manifest plus active seed/hash (legacy ref v1) or explicit validated parts plus seed/hash (custom ref v2). Existing generation, causal, framework and pack manifests are unchanged. Older saves without the extension retain their original survey staff and historical bytes; the extension is materialized on their first refit. New saves initialize it to the survey default. Unknown equipment versions, content hashes, recipe hashes and invalid seeds fail validation. Save conservation and causal recoverable-material calculations include the assembly, so refitting neither fabricates materials nor falsely records pump repairs. Refit commands do not refill stamina or erase attack recovery. The live handler refuses a swap while preparation, contact, recovery, stun or cancellation lock is in progress. Online, the host alone manages the shared kit; every connected actor must finish staff and guard commitments. Retired sessions discard old hit/buffer intent while keeping paid stamina, regen delay, stun, guard cooldown and the remaining recovery lock. See EDITABLE-EQUIPMENT.md for the bounded authoring and authority contract.
+
+## Lab comparison and isolation
+
+The equipment workbench's edited-recipe A/B comparison executes the actual combat model at fixed 60Hz against identical stationary snapshots: a 2.5m target, a 3.15m target, one beyond all reach and one behind a solid wall. Each build runs three reset copies of each case. Exactly one three-stage chain is requested; the diagnostic target does not die. Reports retain seed, recipe/content identity, derived stats, attack definitions, complete conditions, hit timestamps, final combat state and observed repeat/wall/range/once-only checks. This is model evidence, explicitly not a rendering, frame-rate, moving-target or Rapier performance test.
+
+Practice loadout is separate from campaign data and costs nothing in the sandbox. Exiting uses the captured campaign equipment and existing full checkpoint restoration. Lab refits never mutate campaign inventory or call its save writer. Starting the full nine-scenario movement suite explicitly resets the practice loadout to the original survey-staff baseline (including after interruption), and labels that equipment in the report. This preserves meaningful prior release comparisons; use A/B checks and hands-on practice to inspect the new assemblies.
+
+## Verification boundary
+
+Strict TypeScript, full repository tests and production build are release gates. New tests cover actual geometry variation, incompatible ports and budgets, physically derived stats, exact ledger recycling, both world generations, legacy preservation, invalid manifest rejection, two-hand socket IK, whole-weapon posture clearance, range/wall/exactly-once combat behavior, committed timing and live swap guards, deterministic A/B resets and lab/campaign isolation.
+
+Browser rendering, forced WebGL2/WebGPU, screen-reader flow, physical phone touch comfort and device performance remain unverified. The earlier restricted live Site route was not retried or bypassed. Dependencies remain pinned at Three.js 0.186.0, Rapier 0.20.0, TypeScript 7.0.2 and Vite 8.3.1.

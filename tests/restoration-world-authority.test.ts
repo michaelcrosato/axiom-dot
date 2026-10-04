@@ -1,0 +1,50 @@
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import {createRegionalState,enableRestoration,enableStartingTown,applyAction,worldRestorationPlan,serializeSave,parseSave,validateSave,type State} from '../src/world.ts';
+import {startingTown} from '../src/starting-town.ts';
+import {worldHeight} from '../src/generation.ts';
+import {advanceRestoration,immutableRestoration,restorationBalances,restorationMachinePosition,restorationPlayerCost,RESTORATION_DEFAULTS,type RestorationCommand} from '../src/restoration.ts';
+import {createRoom,joinRoom,syncRoom,advanceRoom,snapshot,playerMotion,type CoopRoom,type RoomPlayer} from '../server/coop-authority.ts';
+import {createVertical} from '../server/coop-vertical.ts';
+import {action} from '../server/coop-validation.ts';
+const seed=73129,zero={waterMl:0,contaminant:0,energy:0,smoke:0,scent:0,organic:0,filter:0};
+function stocked(){let s=createRegionalState(seed);assert.equal(s.inventory.scrap,0);s={...s,player:{...s.player,...startingTown(seed).shops[0]!.entry}};s=applyAction(s,{type:'town-purchase',command:{offerId:'arrival-kit',expectedRevision:0}});assert.equal(s.inventory.scrap,3);assert(validateSave(s));s=enableRestoration(enableStartingTown(s));const site=worldRestorationPlan(seed).sites[0]!;return {...s,player:{...s.player,x:site.x,z:site.z-2.5}};}
+function cmd(s:State,kind:RestorationCommand['kind'],extra:Record<string,unknown>={}):RestorationCommand{return {kind,targetId:worldRestorationPlan(seed).sites[0]!.id,expectedRevision:s.restoration!.revision,...extra} as RestorationCommand;}
+function refit(s:State){return cmd(s,'refit',{recipe:{version:1,seed,support:'nimble',shell:'reed',organ:'filter'},ability:{version:1,organ:'filter',strength:1,tempo:'steady'}});}
+function commit(s:State,c:RestorationCommand){return applyAction(s,{type:'restoration',command:c});}
+function pose(room:CoopRoom,p:RoomPlayer,x:number,z:number){p.player={...p.player,x,z};const y=worldHeight({...room.world,zone:p.zone},x,z);p.motion=createVertical(y);p.pose={...p.pose,x,z,y,grounded:true,crouched:false};}
+function send(room:CoopRoom,user:string,p:RoomPlayer,command:RestorationCommand,now:number){return syncRoom(room,user,{seq:p.seq+1,sessionId:p.sessionId,actions:[{type:'restoration',command}]},now);}
+
+test('earned arrival scrap pays exactly for filter body; finite service/deploy/work survives save/reload',()=>{
+ let s=stocked();const plan=worldRestorationPlan(seed),site=plan.sites[0]!,before=serializeSave(s),total=site.initialFilter;
+ const r=refit(s);s=commit(s,r);assert.equal(s.inventory.scrap,0);assert.equal(restorationPlayerCost(s.restoration).scrap,3);assert.equal(s.restoration!.machine?.status,'packed');assert(validateSave(s));const paid=s;s=commit(s,r);assert.equal(s,paid);
+ s=commit(s,cmd(s,'service'));assert.equal(s.restoration!.machine!.charge,100);assert.equal(s.restoration!.sites[0]!.chargeReserve,site.initialCharge-100);assert.equal(s.restoration!.machine!.filter,total);const full=s;s=commit(s,cmd(s,'service'));assert.equal(s,full,'a full finite dock cannot mint repeated charge');
+ s=commit(s,cmd(s,'deploy'));assert.equal(s.restoration!.machine!.status,'idle');s=commit(s,cmd(s,'start',{sourceId:site.dockCellId,targetId:site.dockCellId}));assert.equal(s.restoration!.machine!.status,'working');const revision=s.restoration!.revision;
+ for(let n=0;n<20;n++)s=applyAction(s,{type:'tick',dt:.25});assert.equal(s.restoration!.revision,revision);assert(s.restoration!.machine!.waste>0);assert.equal(s.restoration!.machine!.filter+s.restoration!.machine!.waste,total);assert.equal(s.restoration!.sinks.filter,s.restoration!.machine!.waste);assert.deepEqual(restorationBalances(s.restoration!,plan),zero);assert(validateSave(s));
+ let reloaded=parseSave(serializeSave(s))!;assert(reloaded);assert.deepEqual(reloaded,s);for(let n=0;n<12;n++){s=applyAction(s,{type:'tick',dt:.25});reloaded=applyAction(reloaded,{type:'tick',dt:.25});assert.deepEqual(reloaded,s);}assert.notEqual(serializeSave(s),before);
+});
+
+test('world default tuning and conservation cannot be replaced by forged client/save fields',()=>{
+ let s=stocked();s=commit(s,refit(s));const plan=worldRestorationPlan(seed),expected=advanceRestoration(s.restoration!,plan,.25,{actors:[{x:s.player.x,z:s.player.z}],player:s.player},RESTORATION_DEFAULTS),ticked=applyAction(s,{type:'tick',dt:.25});assert.deepEqual(ticked.restoration,expected);
+ for(const mutate of [(v:any)=>v.inventory.scrap++,(v:any)=>v.restoration.machine.charge++,(v:any)=>v.restoration.sites[0].cells[0].contaminant++,(v:any)=>v.restoration.tuning={...RESTORATION_DEFAULTS,machineSpeedPercent:150},(v:any)=>v.restoration.machine.recipe.cost={scrap:0,core:0},(v:any)=>v.restoration.seed++, (v:any)=>v.restoration.machine.ability.strength=Infinity]){const raw=structuredClone(s);mutate(raw);assert(!validateSave(raw));assert.equal(parseSave(JSON.stringify(raw)),null);}
+ const valid={type:'restoration',command:cmd(s,'service')};assert.deepEqual(action(valid),valid);for(const invalid of [{...valid,state:s.restoration},{...valid,inventory:{scrap:1000,core:1,water:1}},{...valid,tuning:RESTORATION_DEFAULTS},{type:'restoration',command:{...valid.command,expectedRevision:NaN}},{type:'restoration',command:{...valid.command,tuning:{machineSpeedPercent:150}}}])assert.equal(action(invalid),null);
+ const remote={...s,player:{...s.player,x:0,z:0}},dead={...s,player:{...s.player,hp:0}},wrongZone={...s,zone:'cave' as const};for(const unavailable of [remote,dead,wrongZone])assert.equal(commit(unavailable,cmd(unavailable,'service')),unavailable);
+ const site=plan.sites[0]!,occupied={...s,player:{...s.player,x:site.x,z:site.z}};assert.equal(commit(occupied,cmd(occupied,'deploy')),occupied);assert.equal(applyAction(s,{type:'restoration',command:cmd(s,'deploy')},[{x:site.x,y:site.y,z:site.z}]),s);
+});
+
+test('real in-memory co-op authority keeps shared costs, host-only refits, command revisions and duplicate-packet idempotence',()=>{
+ const room=createRoom('host','Host',stocked(),1000),host=room.players[0]!,peer=joinRoom(room,'peer','Peer',1000),site=worldRestorationPlan(seed).sites[0]!;pose(room,peer,site.x+5,site.z-2.5);
+ const initial=room.world.restoration!,peerNotices=send(room,'peer',peer,refit(room.world),1000);assert.match(peerNotices.join(' '),/host manages/i);assert.equal(room.world.restoration,initial);assert.equal(room.world.inventory.scrap,3);
+ const input={seq:host.seq+1,sessionId:host.sessionId,actions:[{type:'restoration' as const,command:refit(room.world)}]};assert.deepEqual(syncRoom(room,'host',input,1000),[]);assert.equal(room.world.inventory.scrap,0);assert.equal(room.world.restoration!.revision,1);const first=JSON.stringify(room.world);syncRoom(room,'host',input,1000);assert.equal(JSON.stringify(room.world),first);
+ advanceRoom(room,1250);assert.equal(room.world.restoration!.revision,1);const service=cmd(room.world,'service');assert.deepEqual(send(room,'host',host,service,1250),[]);assert.equal(room.world.restoration!.revision,2);assert.equal(room.world.restoration!.machine!.charge,100);
+ pose(room,peer,site.x,site.z);const before=room.world.restoration;send(room,'host',host,cmd(room.world,'deploy'),1250);assert.equal(room.world.restoration,before,'peer occupancy guards the full body deployment');pose(room,peer,site.x+5,site.z-2.5);assert.deepEqual(send(room,'host',host,cmd(room.world,'deploy'),1250),[]);assert.equal(room.world.restoration!.machine!.status,'idle');
+ const start=cmd(room.world,'start',{sourceId:site.dockCellId,targetId:site.dockCellId});assert.deepEqual(send(room,'host',host,start,1250),[]);const revision=room.world.restoration!.revision;for(let n=1;n<=12;n++)advanceRoom(room,1250+n*250);assert.equal(room.world.restoration!.revision,revision);assert(room.world.restoration!.machine!.waste>0);assert.equal(room.world.inventory.scrap+restorationPlayerCost(room.world.restoration).scrap,3);assert(validateSave(room.world));assert.deepEqual(snapshot(room,'peer',4250).world.restoration,room.world.restoration);
+});
+
+test('co-op lowered-staff/ground guards and a nearby peer can tow a conserved depleted rig while host stays away',()=>{
+ let s=stocked();s=commit(s,refit(s));s=commit(s,cmd(s,'service'));s=commit(s,cmd(s,'deploy'));const plan=worldRestorationPlan(seed),site=plan.sites[0]!,target=site.cells[1]!;s=commit(s,cmd(s,'start',{sourceId:target.id,targetId:target.id}));for(let n=0;n<5;n++)s=applyAction(s,{type:'tick',dt:.25});assert.equal(restorationMachinePosition(s.restoration!,plan)!.x,target.x);
+ const raw=structuredClone(s.restoration!);raw.sinks.heat+=raw.machine!.charge;raw.machine!.charge=0;s={...s,restoration:immutableRestoration(raw,plan)};assert(validateSave(s));const room=createRoom('host','Host',s,1000),host=room.players[0]!,peer=joinRoom(room,'peer','Peer',1000);pose(room,host,site.x-12,site.z-2.5);pose(room,peer,target.x,target.z-2.5);
+ const before=room.world.restoration;peer.motion!.crouched=true;peer.pose.crouched=true;send(room,'peer',peer,cmd(room.world,'recall'),1000);assert.equal(room.world.restoration,before);pose(room,peer,target.x,target.z-2.5);peer.motion!.grounded=false;peer.motion!.feetY+=1;peer.motion!.vy=1;send(room,'peer',peer,cmd(room.world,'recall'),1000);assert.equal(room.world.restoration,before);pose(room,peer,target.x,target.z-2.5);
+ assert.deepEqual(send(room,'peer',peer,cmd(room.world,'recall'),1000),[]);assert.equal(room.world.restoration!.machine!.status,'returning');const position=restorationMachinePosition(room.world.restoration!,plan)!;advanceRoom(room,1250);const moved=restorationMachinePosition(room.world.restoration!,plan)!;assert(moved.x<position.x,'peer, not the remote first/host clock player, is selected to tow');assert.equal(room.world.restoration!.machine!.charge,0);
+ peer.player={...peer.player,hp:0};const blocked=restorationMachinePosition(room.world.restoration!,plan);advanceRoom(room,1500);assert.deepEqual(restorationMachinePosition(room.world.restoration!,plan),blocked);assert.deepEqual(restorationBalances(room.world.restoration!,plan),zero);assert(validateSave(room.world));
+});

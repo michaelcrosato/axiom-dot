@@ -1,0 +1,37 @@
+import {townDirectorGoalText,applyTownDirectorCommand,type TownDirectorState,type TownDirectorCommand,type TownEpisode} from './town-director.ts';
+import {townLifeFacilities,type TownLifeState} from './town-life.ts';
+import {townResidents} from './town-residents.ts';
+import {escapeTownLifeText as esc} from './town-life-ui.ts';
+
+export const townEpisodeTitle=(episode:TownEpisode)=>({'water-shortage':'Water for the neighborhood','material-shortage':'Materials for town upkeep','service-wear':'Restore a worn service','resident-support':'A neighbor could use support'}[episode.kind]);
+const active=(episode:TownEpisode)=>episode.status==='offered'||episode.status==='accepted';
+export interface TownDirectorPanelContext {seed:number;zone:string;player:{x:number;z:number;hp:number};townLife?:TownLifeState;townDirector?:TownDirectorState}
+/** This board reads authoritative opportunities. Buttons never pay or complete an episode locally. */
+export function mountTownDirectorPanel(panel:HTMLElement,options:{state:()=>TownDirectorPanelContext;act:(command:TownDirectorCommand)=>void;help:(episode:TownEpisode)=>void;visit:()=>void;close:()=>void;ready:()=>boolean}){
+ let alive=true,pending:number|null=null,locked=false;const seed=options.state().seed;
+ panel.innerHTML=`<div class="town-life"><button class="close" type="button" aria-label="Close town requests">×</button><span class="eyebrow">Hearthmere · cause and consequence</span><h2>Town requests</h2><p>These requests follow real shortages, worn services and neighbors who need support. Accept at the listed service, then help through the ordinary town actions. Residents can solve needs themselves.</p><div class="row"><button id="director-visit" type="button">Visit town</button><button id="director-refresh" type="button">Refresh requests</button></div><p id="director-status" role="status">Accepting changes no supplies. There are no additional currency or item rewards.</p><p id="director-summary"></p><div id="director-current"></div><details><summary>Permanent local history</summary><div id="director-history"></div></details><details><summary>Causal evidence</summary><pre id="director-evidence"></pre></details><p>Solo menus pause deadlines; online time continues. A maximum of 24 lifetime episodes keeps this history bounded. The underlying town continues after that history is full.</p></div>`;
+ const q=<T extends HTMLElement>(id:string)=>panel.querySelector<T>('#'+id)!;
+ function command(episode:TownEpisode,kind:'accept'|'decline',director:TownDirectorState,life:TownLifeState):TownDirectorCommand{return {kind,episodeId:episode.id,expectedRevision:director.revision,expectedLifeRevision:life.revision};}
+ function refresh(){
+  if(!alive)return;const context=options.state(),life=context.townLife,director=context.townDirector;
+  if(context.seed!==seed||!life||!director){q('director-current').replaceChildren();q('director-history').replaceChildren();q('director-status').textContent='This world has no matching town request record. Close and reopen after the world is ready.';return;}
+  if(pending!==null&&pending!==director.revision){pending=null;q('director-status').textContent='The authoritative request record changed. Current outcomes are shown below.';}
+  const fs=townLifeFacilities(seed),people=townResidents(seed),live=director.episodes.filter(active);
+  q('director-summary').textContent=`${live.length} active requests · ${director.episodes.length} / 24 recorded episodes · ${director.episodes.filter(e=>e.status==='completed').length} helped by an accepted player contribution`;
+  function card(e:TownEpisode){const facility=fs.find(f=>f.id===e.serviceId),issuer=people.find(p=>p.id===e.issuerId),can=(kind:'accept'|'decline')=>options.ready()&&!locked&&pending===null&&!!applyTownDirectorCommand(director!,life!,{seed:context.seed,zone:context.zone,player:context.player},command(e,kind,director!,life!));
+   return `<article class="frontier-job" data-director-episode="${esc(e.id)}"><h3>${esc(townEpisodeTitle(e))}</h3><p>${esc(townDirectorGoalText(e))}</p><p>${esc(e.status.replaceAll('-',' '))}${active(e)?` · ${(e.remainingSteps*.5).toFixed(0)} active seconds remaining`:''}</p><p>${esc(issuer?.name??'A town resident')} · ${esc(facility?.label??e.serviceId)}${facility?` · x ${facility.x.toFixed(1)}, z ${facility.z.toFixed(1)}`:''}</p><p>${esc(e.kind==='water-shortage'?'Raise the real water supply. A donation or resident water work can relieve this need.':e.kind==='material-shortage'?'Restore useful town materials. Donations and resident recovery use the existing conserved stores.':e.kind==='service-wear'?'Restore this service’s actual condition. Resident maintenance can also resolve it.':'Help this neighbor feel connected and less strained. Ordinary conversation support and social activity remain available.')}</p>${active(e)?`<div class="row">${e.status==='offered'?`<button type="button" data-director-accept="${esc(e.id)}" ${can('accept')?'':'disabled'}>Accept here</button>`:''}<button type="button" data-director-help="${esc(e.id)}">Inspect real help actions</button><button type="button" data-director-decline="${esc(e.id)}" ${can('decline')?'':'disabled'}>Decline here</button></div><small>Acceptance and decline require a living explorer within 3.5 m of the listed service, with controls ready. Inspecting help does not move you or spend supplies.</small>`:`<p>${esc(e.outcome===null?'No outcome recorded.':typeof e.outcome==='string'?e.outcome:JSON.stringify(e.outcome))}</p>`}</article>`;
+  }
+  q('director-current').innerHTML=live.length?live.map(card).join(''):'<p>No active request right now. The director waits for a genuine need and a rest period; it does not create shortages to keep the board busy.</p>';
+  q('director-history').innerHTML=director.episodes.filter(e=>!active(e)).slice().reverse().map(card).join('')||'<p>No resolved episodes yet.</p>';
+  q('director-evidence').textContent=JSON.stringify(director,null,2);
+  for(const button of panel.querySelectorAll<HTMLButtonElement>('[data-director-help]'))button.onclick=()=>{if(!alive)return;const e=options.state().townDirector?.episodes.find(e=>e.id===button.dataset.directorHelp);if(e)options.help(e);};
+  for(const kind of ['accept','decline'] as const)for(const button of panel.querySelectorAll<HTMLButtonElement>('[data-director-'+kind+']'))button.onclick=()=>{
+   if(!alive||locked||pending!==null||!options.ready())return;const now=options.state(),d=now.townDirector,l=now.townLife,e=d?.episodes.find(e=>e.id===button.getAttribute('data-director-'+kind));
+   if(now.seed!==seed||!d||!l||!e)return;const c=command(e,kind,d,l);if(!applyTownDirectorCommand(d,l,{seed:now.seed,zone:now.zone,player:now.player},c)){refresh();return;}locked=true;pending=d.revision;
+   try{options.act(c);q('director-status').textContent='Request sent. Waiting for the authoritative record.';}catch{pending=null;q('director-status').textContent='The request could not be sent. Refresh before trying again.';}refresh();
+  };
+ }
+ const dispose=()=>{if(!alive)return;alive=false;clearInterval(timer);};
+ panel.querySelector<HTMLButtonElement>('.close')!.onclick=()=>{if(!alive)return;dispose();options.close();};q<HTMLButtonElement>('director-visit').onclick=()=>{if(!alive)return;dispose();options.visit();};q<HTMLButtonElement>('director-refresh').onclick=()=>{locked=false;pending=null;refresh();};
+ const timer=setInterval(()=>{locked=false;refresh();},500);refresh();return dispose;
+}

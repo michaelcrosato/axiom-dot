@@ -1,0 +1,33 @@
+/* Quiet ink, warm lamplight and open space: the world is the conversation backdrop. */
+.conversation[hidden],.conversation-speaker-marker[hidden]{display:none!important}
+.conversation{position:fixed;z-index:32;left:50%;bottom:0;transform:translateX(-50%);width:min(950px,100%);box-sizing:border-box;padding:28px 42px max(22px,env(safe-area-inset-bottom));color:#faf2d9;font-family:Georgia,'Times New Roman',serif;isolation:isolate;max-height:70dvh;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#947957 transparent;animation:conversation-arrive .22s ease-out}
+.conversation:before{content:'';position:fixed;z-index:-1;inset:-85px -50vw -40px;pointer-events:none;background:linear-gradient(0deg,rgba(10,22,23,.98) 0%,rgba(12,26,26,.94) 47%,rgba(13,29,28,.70) 76%,transparent 100%)}
+.conversation-heading{display:flex;align-items:baseline;gap:13px;flex-wrap:wrap;position:relative;margin-bottom:14px;padding-right:105px}
+.conversation-kicker{font:10px/1.4 system-ui,sans-serif;letter-spacing:.20em;text-transform:uppercase;color:#c8b68c;width:100%}
+.conversation-name{font:normal clamp(22px,2.6vw,30px)/1.1 Georgia,serif;margin:0;color:#f6dca4;text-shadow:0 2px 9px #122526}
+.conversation-role{font:italic 13px/1.4 Georgia,serif;color:#c7d1c0;text-transform:capitalize}
+.conversation button{font-family:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;box-shadow:none;border-radius:0;min-height:44px;color:inherit}
+.conversation button:focus-visible{outline:2px solid #edd497;outline-offset:3px}
+.conversation-leave{position:absolute;right:0;bottom:-6px;font:12px/1.2 system-ui,sans-serif!important;background:transparent;border:0;color:#c7cebd!important;padding:10px 0 10px 16px}
+.conversation-speech{min-height:74px;margin-bottom:15px;max-width:800px}
+.conversation-player-line{font:italic 13px/1.4 Georgia,serif;color:#a8bcb2;margin:0 0 9px}
+.conversation-line{font:normal clamp(19px,2.05vw,25px)/1.43 Georgia,serif;letter-spacing:.006em;margin:0;text-wrap:pretty;text-shadow:0 1px 5px #122526}
+.conversation-manner{font:italic 12px/1.4 Georgia,serif;color:#9eb9ab;margin:8px 0 0}
+.conversation-choices{display:grid;grid-template-columns:1fr 1fr;column-gap:28px;row-gap:3px}
+.conversation-choice{display:flex;align-items:center;gap:12px;text-align:left;padding:10px 8px 10px 3px;background:transparent;border:0;border-top:1px solid rgba(213,188,132,.18);font:15px/1.35 Georgia,serif;transition:background .12s,color .12s}
+.conversation-choice:hover,.conversation-choice:focus-visible{background:linear-gradient(90deg,rgba(200,167,99,.13),transparent);color:#ffe6ad}
+.conversation-choice-number{flex:0 0 22px;width:22px;height:22px;display:grid;place-items:center;color:#d4b981;font:11px system-ui,sans-serif;border:1px solid rgba(216,186,117,.34);border-radius:50%}
+.conversation-navigation{display:flex;gap:12px;align-items:center;margin-top:9px;flex-wrap:wrap}
+.conversation-nav,.conversation-page{background:transparent;border:0;font:12px/1.3 system-ui,sans-serif!important;padding:8px 0;color:#d8c494!important}
+.conversation-page{min-width:36px;font-size:23px!important}
+.conversation-page-count{font:11px system-ui,sans-serif;color:#94aa9f;letter-spacing:.08em}
+.conversation-help{font:10px system-ui,sans-serif;color:#8da397;margin-left:auto}
+.conversation-speaker-marker{position:fixed;z-index:25;transform:translate(-50%,-100%);padding:0 0 12px;color:#fff2cb;pointer-events:none;font:14px Georgia,serif;white-space:nowrap;text-shadow:0 2px 5px #092629,0 0 12px #092629}
+.conversation-speaker-marker:after{content:'◇';position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);font-size:13px;color:#efcf84}
+.conversation-open .hud>.quest,.conversation-open .hud>.bottom-left,.conversation-open .hud>.bottom-center,.conversation-open .hud>.map-wrap,.conversation-open #combat-meter,.conversation-open #interact,.conversation-open .hud>.backend{opacity:0!important;pointer-events:none!important;visibility:hidden}
+.conversation-open .top-buttons{opacity:.35}.conversation-open .top-buttons:hover,.conversation-open .top-buttons:focus-within{opacity:1}
+.conversation-open .location{opacity:.55}
+@keyframes conversation-arrive{from{opacity:0;translate:0 10px}to{opacity:1;translate:0 0}}
+@media(max-width:640px){.conversation{padding:20px 20px max(15px,env(safe-area-inset-bottom));max-height:68dvh}.conversation-heading{gap:5px 10px;margin-bottom:10px}.conversation-choices{grid-template-columns:1fr;gap:0}.conversation-choice{padding:8px 2px;min-height:44px!important;font-size:14px}.conversation-speech{min-height:unset;margin-bottom:12px}.conversation-line{font-size:19px;line-height:1.35}.conversation-manner{margin-top:5px}.conversation-help{display:none}.conversation-player-line{font-size:12px;margin-bottom:6px}.conversation-navigation{margin-top:3px;gap:12px}.conversation-role{font-size:12px}.conversation-kicker{font-size:9px}.conversation-open .top-buttons{opacity:.25}}
+@media(max-height:520px) and (min-width:641px){.conversation{padding:10px 32px 8px;max-height:78dvh}.conversation-heading{margin-bottom:7px}.conversation-kicker,.conversation-manner,.conversation-help{display:none}.conversation-name{font-size:22px}.conversation-line{font-size:18px;line-height:1.3}.conversation-speech{min-height:unset;margin-bottom:7px}.conversation-choice{min-height:42px!important;padding:7px 2px;font-size:14px}.conversation-navigation{margin-top:0}.conversation-player-line{font-size:12px;margin-bottom:4px}}
+@media(prefers-reduced-motion:reduce){.conversation{animation:none}.conversation-choice{transition:none}}

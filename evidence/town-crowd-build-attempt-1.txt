@@ -1,0 +1,46 @@
+(node:6) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:16) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+vite v8.3.1 building client environment for production...
+transforming...
+✓ 148 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/client/visual-review.html                              0.83 kB │ gzip:   0.43 kB
+dist/client/system-workbench.html                           0.90 kB │ gzip:   0.45 kB
+dist/client/index.html                                     22.02 kB │ gzip:   8.11 kB
+dist/client/assets/generation.worker-ZtO_rc1C.js           48.90 kB
+dist/client/assets/regional.worker-CRHFRhpz.js             59.61 kB
+dist/client/assets/system-workbench.worker-DYWmuNZ5.js    316.59 kB
+dist/client/assets/physics.worker-DCJ9sQt_.js           2,915.92 kB
+dist/client/assets/visualReview-DmLGc_Zm.css                3.53 kB │ gzip:   1.36 kB
+dist/client/assets/systemWorkbench-HFq8o4RD.css             6.06 kB │ gzip:   1.97 kB
+dist/client/assets/main-gmh8KcHx.css                       33.61 kB │ gzip:   7.55 kB
+dist/client/assets/modulepreload-polyfill-P2Xu9kJm.js       0.67 kB │ gzip:   0.38 kB
+dist/client/assets/game-CkJrY60b.js                         1.86 kB │ gzip:   1.03 kB
+dist/client/assets/regional-food-lab-Dcdf-Fch.js           23.53 kB │ gzip:   9.22 kB
+dist/client/assets/systemWorkbench-BoJ2bnrB.js             29.94 kB │ gzip:  10.74 kB
+dist/client/assets/visualReview-GGwvsDve.js                37.48 kB │ gzip:  13.85 kB
+dist/client/assets/guard-view-BIIskZYf.js                  74.82 kB │ gzip:  27.90 kB
+dist/client/assets/world-DJa88xfn.js                      289.06 kB │ gzip:  94.27 kB
+dist/client/assets/main-3q7cmcNw.js                       474.94 kB │ gzip: 165.27 kB
+dist/client/assets/town-projection-Dyz_EyYF.js            846.30 kB │ gzip: 236.29 kB
+
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 953ms
+(node:54) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+vite v8.3.1 building ssr environment for production...
+transforming...
+✓ 57 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/server/index.js  7,258.14 kB │ gzip: 2,788.91 kB
+
+✓ built in 525ms
+{"sourceRevision":"9b03ad5d028b3570a7024ba25724a892e77bf98a-working","assets":20,"assetBytes":5186887,"workerBytes":7258141}

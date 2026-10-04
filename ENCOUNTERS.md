@@ -1,0 +1,11 @@
+# Responsive sentries and a second body family
+
+This pack adds bounded quadruped sentries to existing valley/vault identities without regenerating terrain, resources, workshops, or dungeon foundations. The optional `encounters` save extension retains partial HP, position, locked attack phase and home anchor. Older saves enable the pack on play; their existing defeated IDs remain defeated. Generation manifests and schema 6 are unchanged.
+
+The enemy authority runs at fixed 60 Hz from physics snapshots. Sentries see living players within 8.5 m with a clear solid-box line of sight, pursue at 2.3 m/s and remain within a 7.5 m home leash. This is bounded reactive movement with wall rejection, not a general navigation planner. They stop against blocked terrain rather than passing through walls. Off-zone enemies pause.
+
+At 2.1 m a sentry locks its heading for a 0.72 s amber windup. Its low 2.25 m, 1.4-radian attack then remains active for 0.18 s with one 12-HP contact per player, followed by 1.05 s recovery. Sidestepping outside the locked sector, moving out of reach, jumping above its low bite, or using a staff contact to stagger it provides counterplay. No old invisible proximity damage is applied while this pack is enabled. Staff damage continues through the existing authoritative attack timeline. Disabled identities remain persistently clear for causal route jobs.
+
+A separate quadruped recipe has four two-link supports, named front/back/left/right limbs, sensor/emitter sockets, bounded segment sizes, a diagonal gait and planted-foot/swing phases. The renderer projects authority positions and phases. It never authorizes hits. This is a bounded second family; it is not a universal body-graph/skinning compiler or imported animation library.
+
+Tests cover fixed-step repeatability, immutable state, windup locking, one-contact strikes, jump and solid-wall counterplay, multi-player target ordering, pursuit/leash limits, stagger/death, invalid-state rejection and save round trips. The existing 245-test baseline also passed after integration. Visual quality remains separately reviewable through the new actual-frame tooling; neither data assertions nor successful builds certify appearance on a device.

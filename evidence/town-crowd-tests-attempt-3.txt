@@ -1,0 +1,124 @@
+(node:6) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+TAP version 13
+# (node:13) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:13) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: real worker prepares crowd paused at exact fractional time and menu pause freezes its authority
+ok 1 - real worker prepares crowd paused at exact fractional time and menu pause freezes its authority
+  ---
+  duration_ms: 919.231705
+  type: 'test'
+  ...
+# (node:13) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: online worker repeated render inputs do not restart the shared snapshot prediction window
+ok 2 - online worker repeated render inputs do not restart the shared snapshot prediction window
+  ---
+  duration_ms: 652.925765
+  type: 'test'
+  ...
+# (node:13) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: actual Rapier player advances through yielding crowd without crossing a body or town wall
+ok 3 - actual Rapier player advances through yielding crowd without crossing a body or town wall
+  ---
+  duration_ms: 1606.228736
+  type: 'test'
+  ...
+# Subtest: co-op uses all peer actors for the same crowd sweep and cannot tunnel on a long movement packet
+ok 4 - co-op uses all peer actors for the same crowd sweep and cannot tunnel on a long movement packet
+  ---
+  duration_ms: 355.50785
+  type: 'test'
+  ...
+# Subtest: leaving and returning regenerates identical crowd from save time without crowd save payload
+ok 5 - leaving and returning regenerates identical crowd from save time without crowd save payload
+  ---
+  duration_ms: 28.503185
+  type: 'test'
+  ...
+# (node:14) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: fine shared town clock includes fractional accumulator without changing the causal ledger
+ok 6 - fine shared town clock includes fractional accumulator without changing the causal ledger
+  ---
+  duration_ms: 2.122069
+  type: 'test'
+  ...
+# Subtest: canonical crowd positions agree at common timestamps across 30 60 and 120 Hz and query order
+ok 7 - canonical crowd positions agree at common timestamps across 30 60 and 120 Hz and query order
+  ---
+  duration_ms: 416.654562
+  type: 'test'
+  ...
+# Subtest: presentation clock interpolates 60 Hz and 4 Hz anchors at 120 Hz then bounds stalls and pauses
+ok 8 - presentation clock interpolates 60 Hz and 4 Hz anchors at 120 Hz then bounds stalls and pauses
+  ---
+  duration_ms: 1.852349
+  type: 'test'
+  ...
+# Subtest: all 100 canonical bodies stay finite and clear town solids for ordinary full-cycle samples
+ok 9 - all 100 canonical bodies stay finite and clear town solids for ordinary full-cycle samples
+  ---
+  duration_ms: 4562.324218
+  type: 'test'
+  ...
+# Subtest: crowd actors are deterministic in peer order, yield within bounded offsets and retain open door corridors
+ok 10 - crowd actors are deterministic in peer order, yield within bounded offsets and retain open door corridors
+  ---
+  duration_ms: 22.021789
+  type: 'test'
+  ...
+# Subtest: swept body contacts block long crossing, preserve tangential movement, allow overlap escape and ignore roof height
+ok 11 - swept body contacts block long crossing, preserve tangential movement, allow overlap escape and ignore roof height
+  ---
+  duration_ms: 0.34507
+  type: 'test'
+  ...
+# Subtest: bounded render correction is smooth at 30 60 and 120 Hz, freezes paused poses and resets teleports
+ok 12 - bounded render correction is smooth at 30 60 and 120 Hz, freezes paused poses and resets teleports
+  ---
+  duration_ms: 455.341755
+  type: 'test'
+  ...
+# Subtest: appearance has seeded legible silhouette diversity and immutable stable identity across seed cache eviction
+ok 13 - appearance has seeded legible silhouette diversity and immutable stable identity across seed cache eviction
+  ---
+  duration_ms: 6.693684
+  type: 'test'
+  ...
+# Subtest: articulated gait alternates planted and lifted soles with connected equal-length leg segments
+ok 14 - articulated gait alternates planted and lifted soles with connected equal-length leg segments
+  ---
+  duration_ms: 25.885353
+  type: 'test'
+  ...
+# Subtest: default stance foot is world-stationary on straight constant-speed travel and diagnostic gait knob really changes output
+ok 15 - default stance foot is world-stationary on straight constant-speed travel and diagnostic gait knob really changes output
+  ---
+  duration_ms: 1.331495
+  type: 'test'
+  ...
+# Subtest: view updates every frame while retaining 10/2 Hz activity budgets and bounded instance resources
+ok 16 - view updates every frame while retaining 10/2 Hz activity budgets and bounded instance resources
+  ---
+  duration_ms: 176.130305
+  type: 'test'
+  ...
+# Subtest: version-two registry validates low default and high values; unknown legacy settings fail explicitly
+ok 17 - version-two registry validates low default and high values; unknown legacy settings fail explicitly
+  ---
+  duration_ms: 0.956402
+  type: 'test'
+  ...
+1..17
+# tests 17
+# suites 0
+# pass 17
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 6033.481737

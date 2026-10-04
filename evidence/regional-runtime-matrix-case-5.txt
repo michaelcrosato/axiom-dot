@@ -1,0 +1,10 @@
+✔ regional schema-valid outer-edge spawn teleport and grounded or airborne checkpoints normalize consistently (391.616877ms)
+ℹ {"scope":"Exact±B schema poses normalize to shared inward-float32 limit; grounded feet resampled, paused airborne height/vy preserved, legacy48m extent unchanged","limit":1580.798828125,"groundedFeetY":17.803292236328126,"airborneFeetY":20.78795524597168,"airborneVy":4.5}
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 732.024778

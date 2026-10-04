@@ -1,0 +1,10 @@
+✔ all eight outer-boundary cases retain radius+skin clearance during prolonged crouch and repeated outward jumps (2772.364673ms)
+ℹ {"scope":"All8 generated boundary cases,30s full outward crouch plus6 actual jumps; strict radius+skin domain","cases":[{"direction":{"x":-1,"z":-1},"crouchTicks":1800,"jumpTicks":540,"jumps":6,"maxJumpHeight":1.1549439430236816,"finalX":-1580.798828125,"finalZ":-1580.798828125},{"direction":{"x":-1,"z":1},"crouchTicks":1800,"jumpTicks":540,"jumps":6,"maxJumpHeight":1.1543426513671875,"finalX":-1580.7978515625,"finalZ":1580.797607421875},{"direction":{"x":1,"z":-1},"crouchTicks":1800,"jumpTicks":540,"jumps":6,"maxJumpHeight":1.1549873352050781,"finalX":1580.7978515625,"finalZ":-1580.798828125},{"direction":{"x":1,"z":1},"crouchTicks":1800,"jumpTicks":540,"jumps":6,"maxJumpHeight":1.154989242553711,"finalX":1580.798828125,"finalZ":1580.798828125},{"direction":{"x":1,"z":0},"crouchTicks":1800,"jumpTicks":540,"jumps":6,"maxJumpHeight":1.1550002098083496,"finalX":1580.798828125,"finalZ":31.871196746826172},{"direction":{"x":-1,"z":0},"crouchTicks":1800,"jumpTicks":540,"jumps":6,"maxJumpHeight":1.1550006866455078,"finalX":-1580.798828125,"finalZ":31.68379783630371},{"direction":{"x":0,"z":1},"crouchTicks":1800,"jumpTicks":540,"jumps":6,"maxJumpHeight":1.1549339294433594,"finalX":32.0350341796875,"finalZ":1580.798828125},{"direction":{"x":0,"z":-1},"crouchTicks":1800,"jumpTicks":540,"jumps":6,"maxJumpHeight":1.1550006866455078,"finalX":31.882448196411133,"finalZ":-1580.798828125}]}
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2959.885393

@@ -1,0 +1,130 @@
+(node:28) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+TAP version 13
+# (node:35) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:35) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: real Rapier initial town preload remains paused, has clear square spawn and moves after explicit input
+ok 1 - real Rapier initial town preload remains paused, has clear square spawn and moves after explicit input
+  ---
+  duration_ms: 779.769059
+  type: 'test'
+  ...
+# (node:35) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: real controller recovers old new-wall overlap before ready and open-front shop entrance is physically walkable
+ok 2 - real controller recovers old new-wall overlap before ready and open-front shop entrance is physically walkable
+  ---
+  duration_ms: 835.666486
+  type: 'test'
+  ...
+# Subtest: town connector centerline is continuous, terrain-matched and below the 30% walking grade across representative seeds
+ok 3 - town connector centerline is continuous, terrain-matched and below the 30% walking grade across representative seeds
+  ---
+  duration_ms: 411.515528
+  type: 'test'
+  ...
+# (node:36) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: one hundred additional residents have unique stable IDs, names, and visible combinations
+ok 4 - one hundred additional residents have unique stable IDs, names, and visible combinations
+  ---
+  duration_ms: 9.758651
+  type: 'test'
+  ...
+# Subtest: rosters are deterministic and deeply frozen, while a changed seed changes names and appearances
+ok 5 - rosters are deterministic and deeply frozen, while a changed seed changes names and appearances
+  ---
+  duration_ms: 14.753667
+  type: 'test'
+  ...
+# Subtest: affine name and appearance permutations stay unique across a seed sample
+ok 6 - affine name and appearance permutations stay unique across a seed sample
+  ---
+  duration_ms: 134.814359
+  type: 'test'
+  ...
+# Subtest: strong roster caching is LRU and bounded to four seeds
+ok 7 - strong roster caching is LRU and bounded to four seeds
+  ---
+  duration_ms: 5.662554
+  type: 'test'
+  ...
+# Subtest: all seven business keepers remain discoverable at their assigned shop
+ok 8 - all seven business keepers remain discoverable at their assigned shop
+  ---
+  duration_ms: 1.936344
+  type: 'test'
+  ...
+# Subtest: walkers visit every phase of a bounded, staggered cyclic routine
+ok 9 - walkers visit every phase of a bounded, staggered cyclic routine
+  ---
+  duration_ms: 2.774854
+  type: 'test'
+  ...
+# Subtest: every phase transition and the day wrap are position-continuous
+ok 10 - every phase transition and the day wrap are position-continuous
+  ---
+  duration_ms: 4.52489
+  type: 'test'
+  ...
+# Subtest: one full population cycle remains finite, on open street bands, and below 2.2 m/s
+ok 11 - one full population cycle remains finite, on open street bands, and below 2.2 m/s
+  ---
+  duration_ms: 55.589051
+  type: 'test'
+  ...
+# Subtest: all home, work, and square dwell stations are distinct and clear of the trunk
+ok 12 - all home, work, and square dwell stations are distinct and clear of the trunk
+  ---
+  duration_ms: 2.66913
+  type: 'test'
+  ...
+# Subtest: absolute-time queries are order independent, periodic, and robust to invalid elapsed time
+ok 13 - absolute-time queries are order independent, periodic, and robust to invalid elapsed time
+  ---
+  duration_ms: 1.149956
+  type: 'test'
+  ...
+# Subtest: invalid seeds, addresses, and layout contracts fail explicitly
+ok 14 - invalid seeds, addresses, and layout contracts fail explicitly
+  ---
+  duration_ms: 1.370471
+  type: 'test'
+  ...
+# Subtest: actual town walls and lamps clear every sampled route by the player body margin
+ok 15 - actual town walls and lamps clear every sampled route by the player body margin
+  ---
+  duration_ms: 1419.812889
+  type: 'test'
+  ...
+# (node:37) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: town directory dispatches exact expected revision, recovers pending rejection and disposes polling
+ok 16 - town directory dispatches exact expected revision, recovers pending rejection and disposes polling
+  ---
+  duration_ms: 160.226192
+  type: 'test'
+  ...
+# Subtest: disposable town model applies actual knobs, stages strict import, resets and never mutates campaign
+ok 17 - disposable town model applies actual knobs, stages strict import, resets and never mutates campaign
+  ---
+  duration_ms: 29.220867
+  type: 'test'
+  ...
+# Subtest: town startup, normal visit and developer access retain existing readiness and lifecycle gates
+ok 18 - town startup, normal visit and developer access retain existing readiness and lifecycle gates
+  ---
+  duration_ms: 1.999853
+  type: 'test'
+  ...
+1..18
+# tests 18
+# suites 0
+# pass 18
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2226.526509

@@ -1,0 +1,12 @@
+/** Registration-only inventory. Test callbacks are never executed or counted as passed. */
+import {registerHooks} from 'node:module';
+import {readFileSync,readdirSync,writeFileSync} from 'node:fs';
+import {resolve} from 'node:path';import {pathToFileURL} from 'node:url';import {execFileSync} from 'node:child_process';import assert from 'node:assert/strict';
+const excluded=[...readFileSync('EXPERIMENTAL-PREVIEW.md','utf8').matchAll(/^- (tests\/[^\n]+\.test\.ts)$/gm)].map(m=>m[1]);assert.equal(excluded.length,13);
+const files=readdirSync('tests').filter(f=>f.endsWith('.test.ts')).map(f=>'tests/'+f).filter(f=>!excluded.includes(f)).sort();
+const entries=[];globalThis.__axiomTestCatalog={file:'',add(name,options){assert.equal(typeof name,'string','Each registered test needs a stable string name');assert(!options?.skip&&!options?.todo&&!options?.only,'The safe inventory must contain no disabled tests');entries.push({file:this.file,name});}};
+const source=`const register=(name,options)=>globalThis.__axiomTestCatalog.add(name,typeof options==='object'?options:undefined);register.skip=register.todo=register.only=()=>{throw Error('Disabled catalog case')};export const test=register,it=register;export default register;export const before=()=>{},after=()=>{},beforeEach=()=>{},afterEach=()=>{};export const describe=()=>{throw Error('Suite inventory requires explicit nested discovery')};export const mock={};`;
+const hooks=registerHooks({resolve(specifier,context,next){if(specifier==='node:test')return {url:'axiom:test-catalog',shortCircuit:true};return next(specifier,context);},load(url,context,next){if(url==='axiom:test-catalog')return {format:'module',source,shortCircuit:true};return next(url,context);}});
+try{for(const file of files){globalThis.__axiomTestCatalog.file=file;await import(pathToFileURL(resolve(file)).href);}}finally{hooks.deregister();delete globalThis.__axiomTestCatalog;}
+for(const file of files)assert(entries.some(e=>e.file===file),'No registered cases in '+file);
+const report={kind:'axiom-safe-test-inventory',mode:'registration-only; no test callbacks run',head:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),files,excluded,cases:entries};const output=process.argv[2];if(output)writeFileSync(output,JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({files:files.length,cases:entries.length,excluded:excluded.length,output}));

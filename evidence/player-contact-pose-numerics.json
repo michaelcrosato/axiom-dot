@@ -1,0 +1,65 @@
+{
+  "source": "Actual production physics.worker + animationReviewFrames + createAvatar matrix measurements",
+  "summary": {
+    "none": {
+      "poses": 1278,
+      "anchors": 0,
+      "clamped": 0,
+      "minError": null,
+      "maxError": 0,
+      "strongMaxError": 0,
+      "minRelativeY": 0.01999999970197619,
+      "maxRelativeY": 2.0599999964237146
+    },
+    "wall": {
+      "poses": 588,
+      "anchors": 744,
+      "clamped": 0,
+      "minError": 5.750416230271901e-06,
+      "maxError": 0.7258921136967931,
+      "strongMaxError": 0.0002083319281933804,
+      "minRelativeY": 0.01999999970197619,
+      "maxRelativeY": 2.0599894621937147
+    },
+    "push": {
+      "poses": 543,
+      "anchors": 1086,
+      "clamped": 0,
+      "minError": 0,
+      "maxError": 9.171947447016606e-16,
+      "strongMaxError": 9.171947447016606e-16,
+      "minRelativeY": 0.019999999701976533,
+      "maxRelativeY": 2.0091622206022475
+    },
+    "pull": {
+      "poses": 177,
+      "anchors": 354,
+      "clamped": 0,
+      "minError": 0,
+      "maxError": 8.049116928532385e-16,
+      "strongMaxError": 8.049116928532385e-16,
+      "minRelativeY": 0.019999999701976644,
+      "maxRelativeY": 2.0054495952799734
+    },
+    "hang": {
+      "poses": 69,
+      "anchors": 138,
+      "clamped": 0,
+      "minError": 2.7755575615628914e-17,
+      "maxError": 4.972820174300706e-16,
+      "strongMaxError": 4.972820174300706e-16,
+      "minRelativeY": 0.2599999997019766,
+      "maxRelativeY": 2.104855167905942
+    },
+    "climb": {
+      "poses": 225,
+      "anchors": 156,
+      "clamped": 0,
+      "minError": 2.7755575615628914e-17,
+      "maxError": 8.955206467987463e-16,
+      "strongMaxError": 8.955206467987463e-16,
+      "minRelativeY": 0.020000025701802926,
+      "maxRelativeY": 2.103927334845314
+    }
+  }
+}

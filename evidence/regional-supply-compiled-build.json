@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "status": "verified",
+  "scope": "Compiled Worker invoked directly with native Request/Response and SQLite; filesystem-exact static assets. No network, browser, device or production-site test.",
+  "runtime": "v22.23.0",
+  "assetFiles": [
+    "/assets/creature-view-mqIa9FLW.js",
+    "/assets/game-CPyrc8YB.js",
+    "/assets/game-Df-6747T.css",
+    "/assets/generation.worker-yNf7CSeE.js",
+    "/assets/physics.worker-BPDbkYWA.js",
+    "/assets/regional.worker-B3SlCRGp.js",
+    "/assets/visualReview-DmLGc_Zm.css",
+    "/assets/visualReview-hcnVM2Hc.js",
+    "/favicon.svg",
+    "/index.html",
+    "/visual-review.html"
+  ],
+  "assetBytes": 4541361,
+  "workerBytes": 6322664,
+  "workerSha256": "51e626d77971a8059bb6e099280a40089e82cae37435cd4462853ad735a399ee",
+  "checks": [
+    "ESM fetch export",
+    "all bundled assets byte-exact",
+    "ETag and HEAD",
+    "missing asset404",
+    "authenticated compiled room creation",
+    "compiled delivery and build",
+    "sequence replay exact-once",
+    "material conservation",
+    "unrelated account denied"
+  ]
+}

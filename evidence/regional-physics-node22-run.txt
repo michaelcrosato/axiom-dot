@@ -1,0 +1,67 @@
+(node:8) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:23) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:23) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ flat metres/second and acceleration are calibrated using actual production controller 60 Hz traces (978.943558ms)
+ℹ {"gait":"walk","inputStrength":0.36,"inputMode":"touch-analog","steadySpeed":1.9999603272034663,"expectedSpeed":2.0000000000000004,"accelerationSeconds":0.1,"distanceMetres":19.92459106457213,"seconds":10,"samples":600,"groundedFraction":1,"pass":true}
+ℹ {"gait":"jog","inputStrength":0.58,"inputMode":"touch-analog","steadySpeed":3.999887085126133,"expectedSpeed":4,"accelerationSeconds":0.18333333333333332,"distanceMetres":39.66868591427646,"seconds":10,"samples":600,"groundedFraction":1,"pass":true}
+ℹ {"gait":"run","inputStrength":0.8,"inputMode":"touch-analog","steadySpeed":5.999903869918775,"expectedSpeed":6,"accelerationSeconds":0.2833333333333333,"distanceMetres":59.23008728379001,"seconds":10,"samples":600,"groundedFraction":1,"pass":true}
+ℹ {"gait":"sprint","inputStrength":1,"inputMode":"touch-analog","steadySpeed":7.999812603040316,"expectedSpeed":8,"accelerationSeconds":0.36666666666666664,"distanceMetres":78.6103339223588,"seconds":10,"samples":600,"groundedFraction":1,"pass":true}
+ℹ {"gait":"run","inputStrength":0.69,"inputMode":"keyboard","steadySpeed":4.9998825076770625,"expectedSpeed":4.999999999999999,"accelerationSeconds":0.23333333333333334,"distanceMetres":49.47244644493045,"seconds":10,"samples":600,"groundedFraction":1,"pass":true}
+ℹ {"gait":"sprint","inputStrength":1,"inputMode":"keyboard-shift","steadySpeed":7.999812603040316,"expectedSpeed":8,"accelerationSeconds":0.36666666666666664,"distanceMetres":78.6103339223588,"seconds":10,"samples":600,"groundedFraction":1,"pass":true}
+✔ cancelled calibration terminates its disposable worker and cannot become a completed report (6.110442ms)
+(node:24) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:24) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ streamed triangle chunks cross positive, negative and zero seams in both directions without a universal floor (1384.839193ms)
+(node:24) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ missing chunk stops the safety disk, late collision readiness resumes movement, and unsafe unload defers (281.469303ms)
+(node:24) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ cold distant spawn, negative elevation teleport, and exact paused checkpoint restoration sample resident triangles (181.33104ms)
+(node:24) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ invalid and stale terrain packets leave both old triangles and solid collision intact (279.845602ms)
+(node:24) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ bounded real collider unload/revisit soak never leaks shapes or loses negative-coordinate support (1244.329607ms)
+(node:24) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ active-cell and history budgets fail closed without evicting stale-revision protection (273.078229ms)
+(node:24) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ native allocation failure rolls back staged terrain and retains the previous cell revision and generation (313.4032ms)
+(node:24) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ malformed missing-spawn worlds and terrain-removal replacements cannot turn a live streamed floor into air (199.129395ms)
+(node:24) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ float32 seam rounding at distant coordinates cannot create a false residency gap (353.199273ms)
+(node:25) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:25) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ real controller traverses the entire 3.162km-region flat span and returns with only radius-one colliders resident (12929.538888ms)
+ℹ {"route":"full playable flat east/west span","worldWidthMetres":3162.2776601683795,"marginMetres":1,"out":{"metres":3161.333644861325,"seconds":398.25,"samples":23895,"groundedFraction":1,"maxGroundError":0.013464007377624505,"blocked":0,"visited":150,"peakCells":9,"peakColliders":9,"resident":6},"back":{"metres":3161.2863871758213,"seconds":400.8666666666667,"samples":24052,"groundedFraction":1,"maxGroundError":0.008082304000854485,"blocked":0,"visited":150,"peakCells":9,"peakColliders":9,"resident":6}}
+(node:25) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ real controller follows over a kilometre of generated regional trail with streamed terrain, trees, rocks and shelters (3727.337927ms)
+ℹ {"route":"Alder Waystation to Farwatch Cairn via Pinewatch Camp through open trail junctions","seed":42,"metres":1233.804291109359,"seconds":163.46666666666667,"samples":9808,"groundedFraction":1,"maxGroundError":0.00882282989564942,"blocked":0,"visited":88,"peakCells":9,"peakColliders":360,"resident":9}
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 16801.145702
+(node:16) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+Verified regional physics evidence: evidence/regional-physics-report.json
+
+EXPLICIT_NODE22_EXIT_CODE=0

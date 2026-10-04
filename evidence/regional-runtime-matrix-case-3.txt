@@ -1,0 +1,10 @@
+✔ legacy actual valley to distant regional corner to core region and back to legacy restores correct collision without duplicates (794.700172ms)
+ℹ {"scope":"Three real-worker legacy→distant-region→starting-region→legacy cycles, exact native collider counts and checkpoint restore; includes rejected missing-destination preload recovery","seed":42,"cycles":[{"cycle":0,"terrainCells":9,"terrainVertices":9801,"terrainTriangles":18432,"featureObjects":44,"structureObjects":0,"solidColliders":44,"collisionInputBufferBytes":338796,"actualCellColliders":375,"actualTotalColliders":464,"coreFeatureObjects":322,"coreFeatureColliders":322,"fixedCoreColliders":84,"expectedTotalColliders":464},{"cycle":1,"terrainCells":9,"terrainVertices":9801,"terrainTriangles":18432,"featureObjects":44,"structureObjects":0,"solidColliders":44,"collisionInputBufferBytes":338796,"actualCellColliders":375,"actualTotalColliders":464,"coreFeatureObjects":322,"coreFeatureColliders":322,"fixedCoreColliders":84,"expectedTotalColliders":464},{"cycle":2,"terrainCells":9,"terrainVertices":9801,"terrainTriangles":18432,"featureObjects":44,"structureObjects":0,"solidColliders":44,"collisionInputBufferBytes":338796,"actualCellColliders":375,"actualTotalColliders":464,"coreFeatureObjects":322,"coreFeatureColliders":322,"fixedCoreColliders":84,"expectedTotalColliders":464}]}
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 979.54528

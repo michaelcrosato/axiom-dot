@@ -1,0 +1,17 @@
+import {createRestoration,advanceRestoration,applyRestorationCommand,restorationPlan,restorationBalances,type RestorationState,type RestorationCommand,type RestorationContext,type HabitatSiteDescriptor} from './restoration.ts';
+export const RESTORATION_PRACTICE_SPAWN=Object.freeze({x:-14,y:0,z:9.5});
+export function restorationPracticeDescriptors():readonly HabitatSiteDescriptor[]{return [-12,-1,10].map((x,site)=>{const z=13,id=`practice-habitat-${site}`,cells=Array.from({length:6},(_,i)=>({id:`${id}-cell-${i}`,x:x+(i%3-1)*2,y:0,z:z+(Math.floor(i/3)-.5)*2}));return {id,label:['Water & contamination','Heat & air','Scent & growth'][site]!,x:cells[0]!.x,y:0,z:cells[0]!.z,dockCellId:cells[0]!.id,cells,edges:[[0,1],[1,2],[3,4],[4,5],[0,3],[1,4],[2,5]].map(([a,b],i)=>({id:`${id}-edge-${i}`,a:cells[a!]!.id,b:cells[b!]!.id,path:[{x:cells[a!]!.x,y:0,z:cells[a!]!.z},{x:cells[b!]!.x,y:0,z:cells[b!]!.z}]}))};});}
+/** Real explorer practice uses the production kernels and an independent finite inventory. */
+export class RestorationPractice {
+ readonly seed:number;readonly source:string;readonly plan;state:RestorationState;inventory={scrap:16,core:1,water:2};hp=70;steps=0;droppedSteps=0;lastStep:number|null=null;readonly actions:unknown[]=[];actionsTruncated=false;
+ constructor(seed:number,source:string){this.seed=seed;this.source=source;this.plan=restorationPlan(seed,restorationPracticeDescriptors());this.state=createRestoration(this.plan);}
+ context(player:{x:number;z:number}):RestorationContext{return {seed:this.seed,zone:'valley',player:{...player,hp:this.hp},inventory:this.inventory,actors:[{x:player.x,y:0,z:player.z}]};}
+ command(command:RestorationCommand,player:{x:number;z:number}){const result=applyRestorationCommand(this.state,this.plan,this.context(player),command),accepted=result.state!==this.state;this.record({kind:'command',command,player,accepted,atStep:this.steps});if(accepted){this.state=result.state;this.inventory=result.inventory;this.hp=result.hp;}return result;}
+ step(snapshot:{step?:number;x:number;z:number;feetY:number;grounded:boolean}){
+  if(typeof snapshot.step!=='number'||!Number.isSafeInteger(snapshot.step)||snapshot.step<0||this.lastStep!==null&&snapshot.step<=this.lastStep||this.steps>=72_000)return;
+  if(this.lastStep!==null&&snapshot.step!==this.lastStep+1)this.droppedSteps+=Math.max(0,snapshot.step-this.lastStep-1);
+  this.lastStep=snapshot.step;this.steps++;const player={x:snapshot.x,z:snapshot.z,hp:this.hp};this.state=advanceRestoration(this.state,this.plan,1/60,{player:Math.abs(snapshot.feetY)<.45&&snapshot.grounded?player:{...player,hp:0},actors:[{x:snapshot.x,y:snapshot.feetY,z:snapshot.z}]});
+ }
+ record(action:unknown){if(this.actions.length<128)this.actions.push(action);else this.actionsTruncated=true;}
+ report(){return {kind:'axiom-restoration-playable-evidence',version:1,mode:'isolated-real-explorer',seed:this.seed,source:this.source,steps:this.steps,seconds:this.steps/60,droppedPhysicsSteps:this.droppedSteps,limitSeconds:1200,actions:this.actions,actionsTruncated:this.actionsTruncated,inventory:this.inventory,hp:this.hp,state:this.state,balances:restorationBalances(this.state,this.plan),limits:['Independent finite practice stock; campaign and room writes are locked.','Recorded worker steps and model results are numerical evidence; rendered/browser/device appearance remains unverified.','Missing physics snapshots are counted, never replayed as offline progress.']};}
+}

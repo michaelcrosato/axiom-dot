@@ -1,0 +1,99 @@
+{
+  "kind": "axiom-starting-town-measurement",
+  "seed": 73129,
+  "scope": "Node22 CPU/geometry only; no GPU, browser render, frame-time, mobile or device-performance certification",
+  "roster": 100,
+  "homes": 20,
+  "shops": 7,
+  "tuning": {
+    "population": 100,
+    "activeBudget": 24,
+    "activityScale": 1
+  },
+  "samples": 12000,
+  "updateMeanMs": 0.015551058833333386,
+  "updateP95Ms": 0.02728300000001127,
+  "updateP99Ms": 0.07405299999999215,
+  "updateMaxMs": 26.91414800000001,
+  "sampledResidentUpdates": 74696,
+  "projectionMs": 2.1594649999999547,
+  "residentTriangles": 11200,
+  "render": {
+    "roster": 100,
+    "visible": 100,
+    "active": 24,
+    "sampledUpdates": 100,
+    "meshes": 6,
+    "maximumInstances": 600,
+    "fullPhysicsBrains": 0,
+    "nearHz": 10,
+    "farHz": 2
+  },
+  "initialChunks": [
+    {
+      "key": "-4:-4",
+      "ms": 143.28032999999994,
+      "structures": 0,
+      "features": 13,
+      "vertices": 1089
+    },
+    {
+      "key": "-3:-4",
+      "ms": 11.595440999999937,
+      "structures": 0,
+      "features": 13,
+      "vertices": 1089
+    },
+    {
+      "key": "-2:-4",
+      "ms": 10.061844999999948,
+      "structures": 0,
+      "features": 15,
+      "vertices": 1089
+    },
+    {
+      "key": "-4:-3",
+      "ms": 12.404988000000003,
+      "structures": 43,
+      "features": 0,
+      "vertices": 1089
+    },
+    {
+      "key": "-3:-3",
+      "ms": 9.878795999999966,
+      "structures": 91,
+      "features": 0,
+      "vertices": 1089
+    },
+    {
+      "key": "-2:-3",
+      "ms": 8.594187000000034,
+      "structures": 1,
+      "features": 6,
+      "vertices": 1089
+    },
+    {
+      "key": "-4:-2",
+      "ms": 7.743233000000032,
+      "structures": 24,
+      "features": 6,
+      "vertices": 1089
+    },
+    {
+      "key": "-3:-2",
+      "ms": 13.423101999999972,
+      "structures": 47,
+      "features": 2,
+      "vertices": 1089
+    },
+    {
+      "key": "-2:-2",
+      "ms": 10.320873000000006,
+      "structures": 1,
+      "features": 2,
+      "vertices": 1089
+    }
+  ],
+  "initialStructurePieces": 207,
+  "maxChunkStructurePieces": 91
+}

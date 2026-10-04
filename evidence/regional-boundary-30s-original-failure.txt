@@ -1,0 +1,41 @@
+✔ all four generated clipped corners cold-spawn grounded and block sustained diagonal sprint at both boundaries (1875.548975ms)
+ℹ {"scope":"Production generated clipped corners, real 60Hz Rapier; diagonal input magnitude is capped at1","seed":42,"corners":[{"maxCapsuleEnvelopeBeyondBoundary":0.023821282997687376,"maxFeetError":0.0019050278514995966,"finalVelocity":{"x":0.06591796875,"z":0.02197265625},"steadyBoundaryRange":0.03515625,"corner":[-1,-1],"x":-1580.8074951171875,"z":-1580.80517578125,"feetY":4.177448425292969,"groundedFraction":1,"terrainCells":1,"terrainVertices":576,"terrainTriangles":1058,"featureObjects":15,"structureObjects":0,"solidColliders":15,"collisionInputBufferBytes":19608,"actualCellColliders":16,"actualTotalColliders":21},{"maxCapsuleEnvelopeBeyondBoundary":0.010881829872687376,"maxFeetError":0.0021480331237668793,"finalVelocity":{"x":-0.05859375,"z":-0.205078125},"steadyBoundaryRange":0.0142822265625,"corner":[1,-1],"x":1580.800537109375,"z":-1580.80517578125,"feetY":42.47387329101562,"groundedFraction":1,"terrainCells":1,"terrainVertices":576,"terrainTriangles":1058,"featureObjects":23,"structureObjects":0,"solidColliders":23,"collisionInputBufferBytes":19608,"actualCellColliders":24,"actualTotalColliders":29},{"maxCapsuleEnvelopeBeyondBoundary":0.025408197060187376,"maxFeetError":0.01178433515197952,"finalVelocity":{"x":0.05859375,"z":-0.05859375},"steadyBoundaryRange":0.0068359375,"corner":[-1,1],"x":-1580.84130859375,"z":1580.8240966796875,"feetY":19.376163635253906,"groundedFraction":1,"terrainCells":1,"terrainVertices":576,"terrainTriangles":1058,"featureObjects":39,"structureObjects":0,"solidColliders":39,"collisionInputBufferBytes":19608,"actualCellColliders":40,"actualTotalColliders":45},{"maxCapsuleEnvelopeBeyondBoundary":-0.00034863887731262366,"maxFeetError":0.004563207417479731,"finalVelocity":{"x":-0.05859375,"z":-0.05859375},"steadyBoundaryRange":0.013671875,"corner":[1,1],"x":1580.8111572265625,"z":1580.8126220703125,"feetY":17.803861770629883,"groundedFraction":1,"terrainCells":1,"terrainVertices":576,"terrainTriangles":1058,"featureObjects":18,"structureObjects":0,"solidColliders":18,"collisionInputBufferBytes":19608,"actualCellColliders":19,"actualTotalColliders":24}]}
+[mutex.cc : 451] RAW: Lock blocking 0x7f39b00002e0   @ 0x25f54d8 0x25f5b65 0x78060b 0x25f5d89 0x277eb22 0x18b0f7d 0x18d05ec 0x18d07d1 0x18a862f 0x18ab42c 0x174055f 0x7f37abe76d09 0x7f37abe6c9d2 0x58174f9480c 0x58174facaa5 0x58174fac0cc 0x58174faa1e1 0x58174fa6f91 0x58174fa2604 0x7f37abe6c1d2 0x7f37abf5642b 0x7f378c07bfe0 0x7f378c07c4d3 0x7f378c078361 0x7f37abdcd654 0x7f37abdcd654 0x7f37abdcd654 0x7f37abdcd654 0x7f37abdcb21c 0x7f37abdcaf67 0xe04d61 0xe05c0f 0xc687d7 0x7f9b97 0x816f0e 0x98cc03 0x19e2283 0x19f908a 0x19e34b7 0x7fd735
+[mutex.cc : 451] RAW: Lock returning 0x7f39b00002e0   @ 0x25f5b65 0x78060b 0x25f5d89 0x277eb22 0x18b0f7d 0x18d05ec 0x18d07d1 0x18a862f 0x18ab42c 0x174055f 0x7f37abe76d09 0x7f37abe6c9d2 0x58174f9480c 0x58174facaa5 0x58174fac0cc 0x58174faa1e1 0x58174fa6f91 0x58174fa2604 0x7f37abe6c1d2 0x7f37abf5642b 0x7f378c07bfe0 0x7f378c07c4d3 0x7f378c078361 0x7f37abdcd654 0x7f37abdcd654 0x7f37abdcd654 0x7f37abdcd654 0x7f37abdcb21c 0x7f37abdcaf67 0xe04d61 0xe05c0f 0xc687d7 0x7f9b97 0x816f0e 0x98cc03 0x19e2283 0x19f908a 0x19e34b7 0x7fd735 0xaa1d24
+
+
+#
+# Fatal error in , line 0
+# Check failed: jit_page.has_value().
+#
+#
+#
+#FailureMessage Object: 0x7f39c1fe7780
+----- Native stack trace -----
+
+ 1: 0x9cc081  [/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node]
+ 2: 0x2778d13 V8_Fatal(char const*, ...) [/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node]
+ 3: 0xd4e709  [/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node]
+ 4: 0x18b0ce3  [/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node]
+ 5: 0x18b0f8c  [/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node]
+ 6: 0x18d05ec  [/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node]
+ 7: 0x18d07d1  [/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node]
+ 8: 0x18a862f  [/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node]
+ 9: 0x18ab42c  [/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node]
+10: 0x174055f  [/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node]
+11: 0x7f37abe76d09 
+✖ tests/regional-boundary-physics.test.ts (2305.580094ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 1
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2313.101501
+
+✖ failing tests:
+
+test at tests/regional-boundary-physics.test.ts:1:1
+✖ tests/regional-boundary-physics.test.ts (2305.580094ms)
+  'test failed'

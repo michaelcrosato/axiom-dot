@@ -1,0 +1,43 @@
+(node:5) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+> axiom-living-frontier@0.1.0 build
+> node scripts/build.mjs
+
+(node:18) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:28) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+vite v8.3.1 building client environment for production...
+transforming...
+✓ 113 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/client/visual-review.html                        0.58 kB │ gzip:   0.37 kB
+dist/client/index.html                                0.69 kB │ gzip:   0.43 kB
+dist/client/assets/generation.worker-yNf7CSeE.js     48.90 kB
+dist/client/assets/regional.worker-B3SlCRGp.js       55.42 kB
+dist/client/assets/physics.worker-BPDbkYWA.js     2,894.01 kB
+dist/client/assets/visualReview-DmLGc_Zm.css          3.53 kB │ gzip:   1.36 kB
+dist/client/assets/game-Df-6747T.css                 29.30 kB │ gzip:   6.76 kB
+dist/client/assets/visualReview-hcnVM2Hc.js          37.37 kB │ gzip:  13.81 kB
+dist/client/assets/game-CPyrc8YB.js                 358.75 kB │ gzip: 127.89 kB
+dist/client/assets/creature-view-mqIa9FLW.js      1,112.53 kB │ gzip: 324.22 kB
+
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 1.29s
+(node:66) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+vite v8.3.1 building ssr environment for production...
+transforming...
+✓ 48 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/server/index.js  6,322.66 kB │ gzip: 2,439.37 kB
+
+✓ built in 444ms
+{"sourceRevision":"3023c392947f50845b89a57b82ab6cb7878f7083-working","assets":11,"assetBytes":4541361,"workerBytes":6322664}

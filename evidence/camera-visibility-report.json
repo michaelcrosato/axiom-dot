@@ -1,0 +1,276 @@
+{
+  "version": 1,
+  "scope": "Node22 numerical geometry/model checks; no rendered or device validation",
+  "camera": {
+    "minZoom": 17,
+    "maxZoom": 58,
+    "fadeStart": 28,
+    "clearZoom": 42,
+    "far": 512,
+    "elevation": 0.88,
+    "sceneryFloor": -32
+  },
+  "fogSamples": [
+    {
+      "zoom": 17,
+      "cameraTargetDepth": 22.645123095271526,
+      "oldFocalFogFraction": 0,
+      "newFocalFogFraction": 0,
+      "newFog": {
+        "fade": 0,
+        "near": 45,
+        "far": 95
+      }
+    },
+    {
+      "zoom": 28,
+      "cameraTargetDepth": 37.29784980397663,
+      "oldFocalFogFraction": 0,
+      "newFocalFogFraction": 0,
+      "newFog": {
+        "fade": 0,
+        "near": 45,
+        "far": 95
+      }
+    },
+    {
+      "zoom": 36,
+      "cameraTargetDepth": 47.95437831939853,
+      "oldFocalFogFraction": 0.010061431877609647,
+      "newFocalFogFraction": 0,
+      "newFog": {
+        "fade": 0.6064139941690961,
+        "near": 328.801749271137,
+        "far": 396.9941690962099
+      }
+    },
+    {
+      "zoom": 42,
+      "cameraTargetDepth": 55.94677470596495,
+      "oldFocalFogFraction": 0.12280989088802205,
+      "newFocalFogFraction": 0,
+      "newFog": {
+        "fade": 1,
+        "near": 513,
+        "far": 593
+      }
+    },
+    {
+      "zoom": 58,
+      "cameraTargetDepth": 77.25983173680874,
+      "oldFocalFogFraction": 0.7116728629783469,
+      "newFocalFogFraction": 0,
+      "newFog": {
+        "fade": 1,
+        "near": 513,
+        "far": 593
+      }
+    }
+  ],
+  "geometry": [
+    {
+      "aspect": 0.5625,
+      "targetY": 1,
+      "footprint": {
+        "minX": -320,
+        "maxX": 320,
+        "minZ": -320,
+        "maxZ": 320
+      },
+      "tiles": 96,
+      "vertices": 18432,
+      "triangles": 16896,
+      "rebuilds": 1,
+      "renderOnly": true,
+      "coldGeometryMs": 304.035894,
+      "unchanged100UpdatesMs": 2.1252629999999613
+    },
+    {
+      "aspect": 0.5625,
+      "targetY": 50,
+      "footprint": {
+        "minX": -448,
+        "maxX": 448,
+        "minZ": -448,
+        "maxZ": 448
+      },
+      "tiles": 200,
+      "vertices": 38400,
+      "triangles": 35200,
+      "rebuilds": 1,
+      "renderOnly": true,
+      "coldGeometryMs": 267.158183,
+      "unchanged100UpdatesMs": 3.3308110000000397
+    },
+    {
+      "aspect": 0.5625,
+      "targetY": 70,
+      "footprint": {
+        "minX": -512,
+        "maxX": 512,
+        "minZ": -512,
+        "maxZ": 512
+      },
+      "tiles": 60,
+      "vertices": 19584,
+      "triangles": 18624,
+      "rebuilds": 1,
+      "renderOnly": true,
+      "coldGeometryMs": 108.12253700000008,
+      "unchanged100UpdatesMs": 4.184468000000038
+    },
+    {
+      "aspect": 1.7777777777777777,
+      "targetY": 1,
+      "footprint": {
+        "minX": -384,
+        "maxX": 384,
+        "minZ": -384,
+        "maxZ": 384
+      },
+      "tiles": 144,
+      "vertices": 27648,
+      "triangles": 25344,
+      "rebuilds": 1,
+      "renderOnly": true,
+      "coldGeometryMs": 151.46289000000002,
+      "unchanged100UpdatesMs": 1.4780680000000075
+    },
+    {
+      "aspect": 1.7777777777777777,
+      "targetY": 50,
+      "footprint": {
+        "minX": -512,
+        "maxX": 512,
+        "minZ": -512,
+        "maxZ": 512
+      },
+      "tiles": 60,
+      "vertices": 19584,
+      "triangles": 18624,
+      "rebuilds": 1,
+      "renderOnly": true,
+      "coldGeometryMs": 109.2186099999999,
+      "unchanged100UpdatesMs": 2.4573840000000473
+    },
+    {
+      "aspect": 1.7777777777777777,
+      "targetY": 70,
+      "footprint": {
+        "minX": -576,
+        "maxX": 576,
+        "minZ": -576,
+        "maxZ": 576
+      },
+      "tiles": 71,
+      "vertices": 25920,
+      "triangles": 24784,
+      "rebuilds": 1,
+      "renderOnly": true,
+      "coldGeometryMs": 144.99551100000008,
+      "unchanged100UpdatesMs": 6.583364999999958
+    },
+    {
+      "aspect": 3.5555555555555554,
+      "targetY": 1,
+      "footprint": {
+        "minX": -512,
+        "maxX": 512,
+        "minZ": -512,
+        "maxZ": 512
+      },
+      "tiles": 60,
+      "vertices": 19584,
+      "triangles": 18624,
+      "rebuilds": 1,
+      "renderOnly": true,
+      "coldGeometryMs": 104.6239230000001,
+      "unchanged100UpdatesMs": 3.241245999999819
+    },
+    {
+      "aspect": 3.5555555555555554,
+      "targetY": 50,
+      "footprint": {
+        "minX": -768,
+        "maxX": 768,
+        "minZ": -768,
+        "maxZ": 768
+      },
+      "tiles": 84,
+      "vertices": 33408,
+      "triangles": 32064,
+      "rebuilds": 1,
+      "renderOnly": true,
+      "coldGeometryMs": 180.37229899999988,
+      "unchanged100UpdatesMs": 4.581686999999874
+    },
+    {
+      "aspect": 3.5555555555555554,
+      "targetY": 70,
+      "footprint": {
+        "minX": -832,
+        "maxX": 832,
+        "minZ": -832,
+        "maxZ": 832
+      },
+      "tiles": 99,
+      "vertices": 42048,
+      "triangles": 40464,
+      "rebuilds": 1,
+      "renderOnly": true,
+      "coldGeometryMs": 222.72880899999996,
+      "unchanged100UpdatesMs": 5.933224000000109
+    },
+    {
+      "aspect": 4,
+      "targetY": 1,
+      "footprint": {
+        "minX": -576,
+        "maxX": 576,
+        "minZ": -576,
+        "maxZ": 576
+      },
+      "tiles": 71,
+      "vertices": 25920,
+      "triangles": 24784,
+      "rebuilds": 1,
+      "renderOnly": true,
+      "coldGeometryMs": 154.56058899999994,
+      "unchanged100UpdatesMs": 4.12544899999989
+    },
+    {
+      "aspect": 4,
+      "targetY": 50,
+      "footprint": {
+        "minX": -768,
+        "maxX": 768,
+        "minZ": -768,
+        "maxZ": 768
+      },
+      "tiles": 84,
+      "vertices": 33408,
+      "triangles": 32064,
+      "rebuilds": 1,
+      "renderOnly": true,
+      "coldGeometryMs": 174.72539700000016,
+      "unchanged100UpdatesMs": 5.270273999999972
+    },
+    {
+      "aspect": 4,
+      "targetY": 70,
+      "footprint": {
+        "minX": -896,
+        "maxX": 896,
+        "minZ": -896,
+        "maxZ": 896
+      },
+      "tiles": 99,
+      "vertices": 42048,
+      "triangles": 40464,
+      "rebuilds": 1,
+      "renderOnly": true,
+      "coldGeometryMs": 221.90596900000037,
+      "unchanged100UpdatesMs": 6.98397900000009
+    }
+  ]
+}

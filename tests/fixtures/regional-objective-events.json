@@ -1,0 +1,134 @@
+{
+  "sourceCommit": "5bdbd3b7725aae0512577b572c3cba9fe422a62c",
+  "scenario": "v1-settlement-regional-regional-s73129-t14400",
+  "sourceFinalFingerprint": "28f357e8",
+  "seconds": 2500,
+  "events": [
+    {
+      "tick": 0,
+      "action": "start-source",
+      "domain": "trade",
+      "targetId": "region:1:73129/trade/0/source",
+      "accepted": true
+    },
+    {
+      "tick": 0,
+      "action": "start-source",
+      "domain": "trade",
+      "targetId": "region:1:73129/trade/1/source",
+      "accepted": true
+    },
+    {
+      "tick": 844,
+      "action": "clear-route",
+      "domain": "trade",
+      "targetId": "region:1:73129/trade/0/route",
+      "accepted": true
+    },
+    {
+      "tick": 860,
+      "action": "clear-route",
+      "domain": "trade",
+      "targetId": "region:1:73129/trade/1/route",
+      "accepted": true
+    },
+    {
+      "tick": 1880,
+      "action": "build-store",
+      "domain": "trade",
+      "targetId": "region:1:73129/trade/0/freight-store",
+      "accepted": true
+    },
+    {
+      "tick": 1888,
+      "action": "build-store",
+      "domain": "trade",
+      "targetId": "region:1:73129/trade/1/freight-store",
+      "accepted": true
+    },
+    {
+      "tick": 1952,
+      "action": "start-farm",
+      "domain": "food",
+      "targetId": "region:1:73129/food/1",
+      "accepted": true
+    },
+    {
+      "tick": 4452,
+      "action": "withdraw-reserve",
+      "domain": "trade",
+      "targetId": "region:1:73129/trade/0/freight-store",
+      "accepted": true
+    },
+    {
+      "tick": 4452,
+      "action": "deliver",
+      "domain": "supply",
+      "targetId": "region:1:73129/site/0",
+      "accepted": true
+    },
+    {
+      "tick": 4460,
+      "action": "withdraw-reserve",
+      "domain": "trade",
+      "targetId": "region:1:73129/trade/1/freight-store",
+      "accepted": true
+    },
+    {
+      "tick": 4460,
+      "action": "deliver",
+      "domain": "supply",
+      "targetId": "region:1:73129/site/0",
+      "accepted": true
+    },
+    {
+      "tick": 4460,
+      "action": "build",
+      "domain": "supply",
+      "targetId": "region:1:73129/site/0",
+      "accepted": true
+    },
+    {
+      "tick": 7024,
+      "action": "withdraw-reserve",
+      "domain": "trade",
+      "targetId": "region:1:73129/trade/0/freight-store",
+      "accepted": true
+    },
+    {
+      "tick": 7032,
+      "action": "withdraw-reserve",
+      "domain": "trade",
+      "targetId": "region:1:73129/trade/1/freight-store",
+      "accepted": true
+    },
+    {
+      "tick": 9240,
+      "action": "tend-crop",
+      "domain": "food",
+      "targetId": "region:1:73129/food/1",
+      "accepted": true
+    },
+    {
+      "tick": 9480,
+      "action": "tend-crop",
+      "domain": "food",
+      "targetId": "region:1:73129/food/1",
+      "accepted": true
+    },
+    {
+      "tick": 9720,
+      "action": "tend-crop",
+      "domain": "food",
+      "targetId": "region:1:73129/food/1",
+      "accepted": true
+    },
+    {
+      "tick": 9908,
+      "action": "tend-crop",
+      "domain": "food",
+      "targetId": "region:1:73129/food/1",
+      "accepted": true
+    }
+  ]
+}

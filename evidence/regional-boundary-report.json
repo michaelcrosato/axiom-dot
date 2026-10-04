@@ -1,0 +1,829 @@
+{
+  "version": 2,
+  "status": "verified",
+  "measuredAt": "2026-10-01T22:32:06.003Z",
+  "source": {
+    "head": "108331fe05295c21e5e4dcc952d99321fcf97f02",
+    "workingTreeDirty": true,
+    "sha256": {
+      "package-lock.json": "10ffd31c5f9406511b2fd7bdd1f2ca5f019d245e3f71fedc9dc9cd4763280a32",
+      "package.json": "d5d0ee7cb3bfa753c33408135d772f983d7371f1ad371ac6d3dd39d980d5e9ef",
+      "scripts/measure-regional-boundary.mts": "7ee51d4693155ed259638c479ad491c9faee48bf719c5d7a7704c73de91528fa",
+      "src/building.ts": "8d8901adeadfff7be1b94c92bcedfcd9158344bb1f9ac2fcf2d2f4517f2d8dfa",
+      "src/causal.ts": "6ca27e8329bdc49155082475a3d518f232630e8ca1f5b4346bdb9dfb890ccef3",
+      "src/cave-receipts.ts": "1c0d54a607cbbf43677da0681a7376b4e1485228f113d5a53db30b7d7f639dfd",
+      "src/cave-supply.ts": "550d99b820d60a71c26f541e863688e66bc9307390b69603871ebbc7a11b37c4",
+      "src/cave-water.ts": "f944678a92813fad5237f3f41ccb863bd9e9daf7f0de80875994347340d1b83f",
+      "src/combat.ts": "a358b340db3d6af82eaece6231c43e2d846de493eda4dc928f6e48e9aff80edb",
+      "src/commons-trade.ts": "44976baa885200ff7bb19f245ec28412104d741d7c7b89d1df4c0d51dbcb9a12",
+      "src/contact-physics.ts": "785cc37cf93e11cb748e18b495b14261c5ab9bcf2b7e3ab0302bd7bbf979e414",
+      "src/dungeon-plan.ts": "30f898710f7df6df4c8c223344e1b4ca6e7afccad20859118e83e4565dba57b1",
+      "src/dungeon.ts": "5e398c95b37f42c976f64ff57a891235b62f3dc1c36d2ce64af300c0ed0d12ce",
+      "src/ecology.ts": "e6b0198a0efbf9987ae90adc736b52fae3519aba29e861e4ad68d6ab1bad991a",
+      "src/economy.ts": "0781804a1765a32bc06b1583d0ff79fc769ba7de19fdd44eda9897a1dcc08fe9",
+      "src/encounters.ts": "202b4b74f6a6f24d67c1aca330326a24f54ee73136af442a9e479d4c4036d494",
+      "src/equipment.ts": "74e28bdc37c594f22d76b17b59a76d7ebf088ff0cfd6d6bf0708648f87c91de3",
+      "src/generation-client.ts": "71f3fa5a84a4bdf8e1a26c82f772f8baaff88824ab965665e377be91aa787c8a",
+      "src/generation-compile.ts": "ace29c3d85b3e8b326a6bb7287fdc7975a3a4f83f71bc74bf002ac805efb65fc",
+      "src/generation-manifest.ts": "7fdec33fd75028bf7c34ec183ff803f136deada6cd4a54b8592829de04e9dd6b",
+      "src/generation-protocol.ts": "a93b8ecfd7827260540f3c0858bd28074b442f616d47fc0608568e8741786873",
+      "src/generation.ts": "5b7fe91c8242e4409af420a19b89dd92a7287cf4f330aabb6d422fe0d51773a3",
+      "src/lab-script.ts": "cfd892ca992ce1553936c7141f7ac91e9a79e7ca030d816b344b2b67efecc5d1",
+      "src/ledge-mantle.ts": "64d68205951405f0597d5b877b5c295867c8ccd3194a3ba38cb57b1195688f39",
+      "src/locomotion.ts": "b138b894d61d68c6765a5260490252bbff638536cd374319582c3707d6c0efc5",
+      "src/natural-cave.ts": "a4a205c468c12f887b666e39a765dfbce49fc16656ee2e7e58c0c414d57d6999",
+      "src/physics.worker.ts": "05a79fa9411f4285ce6a7dcd12e3a3e6626802f6162a924f4c09dde41aaa657f",
+      "src/player-contact.ts": "7deb547429e2d6ad1dfc84cc8061a110bdc441454de23e9fdfc884a7fb4842af",
+      "src/procedural.ts": "86115ea107413e67fdfa21f757a7d6571ae5952e8ae01311c51a79f5ba7f15a4",
+      "src/regional-bounds.ts": "01e1877d9ab1a34d7e8c5e5a0a38aae010ad061363629dcc1609a27455aa2ba9",
+      "src/regional-world.ts": "cb7903f27255c1f59f4abaa61af76a60701e71a90c70d4ca8097c9fba446b174",
+      "src/settlement.ts": "b12b76ea7d7e05dcdfd9b700b8a4e60d2a4e94f8963dd7b926962feee4b777e0",
+      "src/traversal-world.ts": "5e28153aebdee1a46f4da5634e10ce4a6f0365ad0e10637d35b781b50c663657",
+      "src/tuning.ts": "7e7c9fae5b6546e9e7efd107c836b543bba02b7e31049b1b2601e8a61b534053",
+      "src/valley.ts": "8c1cc44784fb7d25b79a2ad7adf296d2a6091ec6855bd993499169112966ca4e",
+      "src/water-requests.ts": "73abfb43ab087fa339dedbb3945300e546731fea40d687cb375c33df8c7ca90f",
+      "src/waterworks.ts": "80be7d65a4d9655700ad0c49e326762856357f44743f51440fc583b67ba6925f",
+      "src/wilderness-geometry.ts": "68ade05e6fa8d2e76db846b17438bfc80ae091abb514ac1bf5dbb17d5b57438f",
+      "src/wilderness-state.ts": "1ed057c900ee76646e65d9ae6f195effccf38523306cdfcc7897959f062028d0",
+      "src/wilderness.ts": "7028595f5fd1b368e8c425723baa6e6e73834005ac829335d19e761f64f959e1",
+      "src/world.ts": "ae723bb19367dd284a82c1d4db4933df7b2173e81b90ef19165a28b1e78209ea",
+      "tests/helpers/regional-physics.ts": "5fa8ccb279788fdfef0f27a16ecc86a90ea9d4e472764936b2e75b8b1f4b12b6",
+      "tests/regional-boundary-long-physics.test.ts": "e9eff08d260461005707a1126e128f27d5469b272f6b50db0be6ad52c18e9bb8",
+      "tests/regional-boundary-physics.test.ts": "aee5bf9670944e9f824ee545fa1c04bd9ae16bbc0cffa891e32951af183269a6",
+      "tests/regional-prop-residency.test.ts": "4f192e5be2b0ef3c1bec1397d48057ba1d967a774b4edb9e1f0f9cf90c06289b"
+    },
+    "runtime": "v22.23.0"
+  },
+  "command": "node --experimental-strip-types --test --test-reporter=spec tests/regional-boundary-physics.test.ts tests/regional-boundary-long-physics.test.ts tests/regional-prop-residency.test.ts",
+  "scope": "Corrected production Rapier regional outer-domain constraint, actual generated clipped terrain/solids,30-second boundary behavior, crouch/jump/tangent/receipt/restore paths, finite movable-prop dormancy and future-footprint readiness. Legacy behavior remains independently tested. Simulation evidence only; not browser visual or device FPS approval.",
+  "hz": 60,
+  "seed": 42,
+  "boundary": {
+    "worldHalfExtentMetres": 1581.1388300841897,
+    "playerRadiusMetres": 0.32,
+    "skinMetres": 0.02,
+    "acceptedFloat32CenterLimit": 1580.798828125,
+    "strictCenterLimitToleranceMetres": 1e-7,
+    "capsuleEnvelopePenetrationAllowedMetres": 0,
+    "minimumMeasuredCapsuleEnvelopeClearanceMetres": 0.020001959189812624,
+    "maximumLateNormalMotionEnvelopeMetres": 0.001220703125,
+    "maximumFeetTerrainErrorMetres": 0.0116771454307667
+  },
+  "boundaryRuns": [
+    {
+      "scope": "Production generated clipped corners, real 60Hz Rapier; diagonal input magnitude is capped at1",
+      "boundaryTicks": 1800,
+      "seed": 42,
+      "corners": [
+        {
+          "maxCapsuleEnvelopeBeyondBoundary": -0.020001959189812624,
+          "maxFeetError": 0.0013135033640931937,
+          "finalVelocity": {
+            "x": 0,
+            "z": 0.05859375
+          },
+          "steadyBoundaryRange": 0.0009765625,
+          "corner": [
+            -1,
+            -1
+          ],
+          "x": -1580.798828125,
+          "z": -1580.7978515625,
+          "feetY": 4.178064498901367,
+          "groundedFraction": 1,
+          "terrainCells": 1,
+          "terrainVertices": 576,
+          "terrainTriangles": 1058,
+          "featureObjects": 15,
+          "structureObjects": 0,
+          "solidColliders": 15,
+          "collisionInputBufferBytes": 19608,
+          "actualCellColliders": 16,
+          "actualTotalColliders": 21
+        },
+        {
+          "maxCapsuleEnvelopeBeyondBoundary": -0.020001959189812624,
+          "maxFeetError": 0.0012416001222632644,
+          "finalVelocity": {
+            "x": 0.05859375,
+            "z": 0
+          },
+          "steadyBoundaryRange": 0.0009765625,
+          "corner": [
+            1,
+            -1
+          ],
+          "x": 1580.798828125,
+          "z": -1580.798828125,
+          "feetY": 42.47396865844726,
+          "groundedFraction": 1,
+          "terrainCells": 1,
+          "terrainVertices": 576,
+          "terrainTriangles": 1058,
+          "featureObjects": 23,
+          "structureObjects": 0,
+          "solidColliders": 23,
+          "collisionInputBufferBytes": 19608,
+          "actualCellColliders": 24,
+          "actualTotalColliders": 29
+        },
+        {
+          "maxCapsuleEnvelopeBeyondBoundary": -0.020001959189812624,
+          "maxFeetError": 0.0116771454307667,
+          "finalVelocity": {
+            "x": 0,
+            "z": 0
+          },
+          "steadyBoundaryRange": 0.001220703125,
+          "corner": [
+            -1,
+            1
+          ],
+          "x": -1580.7978515625,
+          "z": 1580.7978515625,
+          "feetY": 19.37698760986328,
+          "groundedFraction": 1,
+          "terrainCells": 1,
+          "terrainVertices": 576,
+          "terrainTriangles": 1058,
+          "featureObjects": 39,
+          "structureObjects": 0,
+          "solidColliders": 39,
+          "collisionInputBufferBytes": 19608,
+          "actualCellColliders": 40,
+          "actualTotalColliders": 45
+        },
+        {
+          "maxCapsuleEnvelopeBeyondBoundary": -0.020001959189812624,
+          "maxFeetError": 0.0011812590125579447,
+          "finalVelocity": {
+            "x": -0.05859375,
+            "z": -0.05859375
+          },
+          "steadyBoundaryRange": 0.0009765625,
+          "corner": [
+            1,
+            1
+          ],
+          "x": 1580.7978515625,
+          "z": 1580.7978515625,
+          "feetY": 17.804514083862305,
+          "groundedFraction": 1,
+          "terrainCells": 1,
+          "terrainVertices": 576,
+          "terrainTriangles": 1058,
+          "featureObjects": 18,
+          "structureObjects": 0,
+          "solidColliders": 18,
+          "collisionInputBufferBytes": 19608,
+          "actualCellColliders": 19,
+          "actualTotalColliders": 24
+        }
+      ]
+    },
+    {
+      "scope": "Production generated clipped perimeter, full analog input1 toward each boundary",
+      "boundaryTicks": 1800,
+      "seed": 42,
+      "edges": [
+        {
+          "maxCapsuleEnvelopeBeyondBoundary": -0.020001959189812624,
+          "maxFeetError": 0.0011452971806740209,
+          "finalVelocity": {
+            "x": 0,
+            "z": -0.012359619140625
+          },
+          "steadyBoundaryRange": 0.0009765625,
+          "direction": {
+            "x": 1,
+            "z": 0
+          },
+          "x": 1580.798828125,
+          "z": 31.665008544921875,
+          "feetY": 5.607836399078369,
+          "terrainCells": 1,
+          "terrainVertices": 792,
+          "terrainTriangles": 1472,
+          "featureObjects": 21,
+          "structureObjects": 0,
+          "solidColliders": 21,
+          "collisionInputBufferBytes": 27168,
+          "actualCellColliders": 22,
+          "actualTotalColliders": 27
+        },
+        {
+          "maxCapsuleEnvelopeBeyondBoundary": -0.020001959189812624,
+          "maxFeetError": 0.002530096451941688,
+          "finalVelocity": {
+            "x": 0,
+            "z": -0.025177001953125
+          },
+          "steadyBoundaryRange": 0.0010986328125,
+          "direction": {
+            "x": -1,
+            "z": 0
+          },
+          "x": -1580.798828125,
+          "z": 31.163053512573242,
+          "feetY": 13.215279731750488,
+          "terrainCells": 1,
+          "terrainVertices": 792,
+          "terrainTriangles": 1472,
+          "featureObjects": 12,
+          "structureObjects": 0,
+          "solidColliders": 12,
+          "collisionInputBufferBytes": 27168,
+          "actualCellColliders": 13,
+          "actualTotalColliders": 18
+        },
+        {
+          "maxCapsuleEnvelopeBeyondBoundary": -0.020001959189812624,
+          "maxFeetError": 0.0011185687371302322,
+          "finalVelocity": {
+            "x": 0.0034332275390625,
+            "z": 0
+          },
+          "steadyBoundaryRange": 0,
+          "direction": {
+            "x": 0,
+            "z": 1
+          },
+          "x": 32.108238220214844,
+          "z": 1580.798828125,
+          "feetY": 19.851829681396485,
+          "terrainCells": 1,
+          "terrainVertices": 792,
+          "terrainTriangles": 1472,
+          "featureObjects": 14,
+          "structureObjects": 0,
+          "solidColliders": 14,
+          "collisionInputBufferBytes": 27168,
+          "actualCellColliders": 15,
+          "actualTotalColliders": 20
+        },
+        {
+          "maxCapsuleEnvelopeBeyondBoundary": -0.020001959189812624,
+          "maxFeetError": 0.0011345633725099447,
+          "finalVelocity": {
+            "x": -0.01132965087890625,
+            "z": 0
+          },
+          "steadyBoundaryRange": 0.0009765625,
+          "direction": {
+            "x": 0,
+            "z": -1
+          },
+          "x": 31.66997528076172,
+          "z": -1580.798828125,
+          "feetY": 12.649303588867188,
+          "terrainCells": 1,
+          "terrainVertices": 792,
+          "terrainTriangles": 1472,
+          "featureObjects": 17,
+          "structureObjects": 0,
+          "solidColliders": 17,
+          "collisionInputBufferBytes": 27168,
+          "actualCellColliders": 18,
+          "actualTotalColliders": 23
+        }
+      ]
+    },
+    {
+      "scope": "Production generated clipped corners, real 60Hz Rapier; diagonal input magnitude is capped at1",
+      "boundaryTicks": 600,
+      "seed": 42,
+      "corners": [
+        {
+          "maxCapsuleEnvelopeBeyondBoundary": -0.020001959189812624,
+          "maxFeetError": 0.0013135033640931937,
+          "finalVelocity": {
+            "x": 0,
+            "z": 0.05859375
+          },
+          "steadyBoundaryRange": 0.0009765625,
+          "corner": [
+            -1,
+            -1
+          ],
+          "x": -1580.798828125,
+          "z": -1580.7978515625,
+          "feetY": 4.178064498901367,
+          "groundedFraction": 1,
+          "terrainCells": 1,
+          "terrainVertices": 576,
+          "terrainTriangles": 1058,
+          "featureObjects": 15,
+          "structureObjects": 0,
+          "solidColliders": 15,
+          "collisionInputBufferBytes": 19608,
+          "actualCellColliders": 16,
+          "actualTotalColliders": 21
+        },
+        {
+          "maxCapsuleEnvelopeBeyondBoundary": -0.020001959189812624,
+          "maxFeetError": 0.0012416001222632644,
+          "finalVelocity": {
+            "x": 0.05859375,
+            "z": 0
+          },
+          "steadyBoundaryRange": 0.0009765625,
+          "corner": [
+            1,
+            -1
+          ],
+          "x": 1580.798828125,
+          "z": -1580.798828125,
+          "feetY": 42.47396865844726,
+          "groundedFraction": 1,
+          "terrainCells": 1,
+          "terrainVertices": 576,
+          "terrainTriangles": 1058,
+          "featureObjects": 23,
+          "structureObjects": 0,
+          "solidColliders": 23,
+          "collisionInputBufferBytes": 19608,
+          "actualCellColliders": 24,
+          "actualTotalColliders": 29
+        },
+        {
+          "maxCapsuleEnvelopeBeyondBoundary": -0.020001959189812624,
+          "maxFeetError": 0.0116771454307667,
+          "finalVelocity": {
+            "x": 0.00732421875,
+            "z": 0.05859375
+          },
+          "steadyBoundaryRange": 0.001220703125,
+          "corner": [
+            -1,
+            1
+          ],
+          "x": -1580.7977294921875,
+          "z": 1580.798828125,
+          "feetY": 19.377050552368164,
+          "groundedFraction": 1,
+          "terrainCells": 1,
+          "terrainVertices": 576,
+          "terrainTriangles": 1058,
+          "featureObjects": 39,
+          "structureObjects": 0,
+          "solidColliders": 39,
+          "collisionInputBufferBytes": 19608,
+          "actualCellColliders": 40,
+          "actualTotalColliders": 45
+        },
+        {
+          "maxCapsuleEnvelopeBeyondBoundary": -0.020001959189812624,
+          "maxFeetError": 0.0011812590125579447,
+          "finalVelocity": {
+            "x": -0.05859375,
+            "z": -0.05859375
+          },
+          "steadyBoundaryRange": 0.0009765625,
+          "corner": [
+            1,
+            1
+          ],
+          "x": 1580.7978515625,
+          "z": 1580.7978515625,
+          "feetY": 17.804514083862305,
+          "groundedFraction": 1,
+          "terrainCells": 1,
+          "terrainVertices": 576,
+          "terrainTriangles": 1058,
+          "featureObjects": 18,
+          "structureObjects": 0,
+          "solidColliders": 18,
+          "collisionInputBufferBytes": 19608,
+          "actualCellColliders": 19,
+          "actualTotalColliders": 24
+        }
+      ]
+    },
+    {
+      "scope": "Production generated clipped perimeter, full analog input1 toward each boundary",
+      "boundaryTicks": 600,
+      "seed": 42,
+      "edges": [
+        {
+          "maxCapsuleEnvelopeBeyondBoundary": -0.020001959189812624,
+          "maxFeetError": 0.0011452971806740209,
+          "finalVelocity": {
+            "x": 0,
+            "z": -0.01110076904296875
+          },
+          "steadyBoundaryRange": 0.0009765625,
+          "direction": {
+            "x": 1,
+            "z": 0
+          },
+          "x": 1580.798828125,
+          "z": 31.8884220123291,
+          "feetY": 5.608810577392578,
+          "terrainCells": 1,
+          "terrainVertices": 792,
+          "terrainTriangles": 1472,
+          "featureObjects": 21,
+          "structureObjects": 0,
+          "solidColliders": 21,
+          "collisionInputBufferBytes": 27168,
+          "actualCellColliders": 22,
+          "actualTotalColliders": 27
+        },
+        {
+          "maxCapsuleEnvelopeBeyondBoundary": -0.020001959189812624,
+          "maxFeetError": 0.002530096451941688,
+          "finalVelocity": {
+            "x": 0,
+            "z": -0.03055572509765625
+          },
+          "steadyBoundaryRange": 0.0009765625,
+          "direction": {
+            "x": -1,
+            "z": 0
+          },
+          "x": -1580.798828125,
+          "z": 31.728239059448242,
+          "feetY": 13.228113327026367,
+          "terrainCells": 1,
+          "terrainVertices": 792,
+          "terrainTriangles": 1472,
+          "featureObjects": 12,
+          "structureObjects": 0,
+          "solidColliders": 12,
+          "collisionInputBufferBytes": 27168,
+          "actualCellColliders": 13,
+          "actualTotalColliders": 18
+        },
+        {
+          "maxCapsuleEnvelopeBeyondBoundary": -0.020001959189812624,
+          "maxFeetError": 0.0011185687371302322,
+          "finalVelocity": {
+            "x": 0.0016021728515625,
+            "z": 0
+          },
+          "steadyBoundaryRange": 0.0009765625,
+          "direction": {
+            "x": 0,
+            "z": 1
+          },
+          "x": 32.0439453125,
+          "z": 1580.798828125,
+          "feetY": 19.852020416259766,
+          "terrainCells": 1,
+          "terrainVertices": 792,
+          "terrainTriangles": 1472,
+          "featureObjects": 14,
+          "structureObjects": 0,
+          "solidColliders": 14,
+          "collisionInputBufferBytes": 27168,
+          "actualCellColliders": 15,
+          "actualTotalColliders": 20
+        },
+        {
+          "maxCapsuleEnvelopeBeyondBoundary": -0.020001959189812624,
+          "maxFeetError": 0.0010870812552852271,
+          "finalVelocity": {
+            "x": -0.01064300537109375,
+            "z": 0
+          },
+          "steadyBoundaryRange": 0.0009765625,
+          "direction": {
+            "x": 0,
+            "z": -1
+          },
+          "x": 31.892810821533203,
+          "z": -1580.798828125,
+          "feetY": 12.65027442932129,
+          "terrainCells": 1,
+          "terrainVertices": 792,
+          "terrainTriangles": 1472,
+          "featureObjects": 17,
+          "structureObjects": 0,
+          "solidColliders": 17,
+          "collisionInputBufferBytes": 27168,
+          "actualCellColliders": 18,
+          "actualTotalColliders": 23
+        }
+      ]
+    }
+  ],
+  "tangential": {
+    "scope": "Full analog tangent1 along four actual generated outer planes,30s each; complete6-chunk strips preloaded and native displacement velocities verified",
+    "measurements": [
+      {
+        "direction": {
+          "x": 1,
+          "z": 0
+        },
+        "metres": 238.59942626953125,
+        "seconds": 30,
+        "steadySpeed": 7.999560546875,
+        "residentCells": 6,
+        "groundedFraction": 1,
+        "blocked": 0
+      },
+      {
+        "direction": {
+          "x": -1,
+          "z": 0
+        },
+        "metres": 238.57369995117188,
+        "seconds": 30,
+        "steadySpeed": 7.999127197265625,
+        "residentCells": 6,
+        "groundedFraction": 1,
+        "blocked": 0
+      },
+      {
+        "direction": {
+          "x": 0,
+          "z": 1
+        },
+        "metres": 238.59671020507812,
+        "seconds": 30,
+        "steadySpeed": 7.99967041015625,
+        "residentCells": 6,
+        "groundedFraction": 1,
+        "blocked": 0
+      },
+      {
+        "direction": {
+          "x": 0,
+          "z": -1
+        },
+        "metres": 237.06942749023438,
+        "seconds": 30,
+        "steadySpeed": 7.8482208251953125,
+        "residentCells": 6,
+        "groundedFraction": 1,
+        "blocked": 0
+      }
+    ]
+  },
+  "additionalRecords": [
+    {
+      "scope": "Three real-worker legacy→distant-region→starting-region→legacy cycles, exact native collider counts and checkpoint restore; includes rejected missing-destination preload recovery",
+      "seed": 42,
+      "cycles": [
+        {
+          "cycle": 0,
+          "terrainCells": 9,
+          "terrainVertices": 9801,
+          "terrainTriangles": 18432,
+          "featureObjects": 44,
+          "structureObjects": 0,
+          "solidColliders": 44,
+          "collisionInputBufferBytes": 338796,
+          "actualCellColliders": 375,
+          "actualTotalColliders": 464,
+          "coreFeatureObjects": 322,
+          "coreFeatureColliders": 322,
+          "fixedCoreColliders": 84,
+          "expectedTotalColliders": 464
+        },
+        {
+          "cycle": 1,
+          "terrainCells": 9,
+          "terrainVertices": 9801,
+          "terrainTriangles": 18432,
+          "featureObjects": 44,
+          "structureObjects": 0,
+          "solidColliders": 44,
+          "collisionInputBufferBytes": 338796,
+          "actualCellColliders": 375,
+          "actualTotalColliders": 464,
+          "coreFeatureObjects": 322,
+          "coreFeatureColliders": 322,
+          "fixedCoreColliders": 84,
+          "expectedTotalColliders": 464
+        },
+        {
+          "cycle": 2,
+          "terrainCells": 9,
+          "terrainVertices": 9801,
+          "terrainTriangles": 18432,
+          "featureObjects": 44,
+          "structureObjects": 0,
+          "solidColliders": 44,
+          "collisionInputBufferBytes": 338796,
+          "actualCellColliders": 375,
+          "actualTotalColliders": 464,
+          "coreFeatureObjects": 322,
+          "coreFeatureColliders": 322,
+          "fixedCoreColliders": 84,
+          "expectedTotalColliders": 464
+        }
+      ]
+    },
+    {
+      "scope": "All8 generated boundary cases,30s full outward crouch plus6 actual jumps; strict radius+skin domain",
+      "cases": [
+        {
+          "direction": {
+            "x": -1,
+            "z": -1
+          },
+          "crouchTicks": 1800,
+          "jumpTicks": 540,
+          "jumps": 6,
+          "maxJumpHeight": 1.1549439430236816,
+          "finalX": -1580.798828125,
+          "finalZ": -1580.798828125
+        },
+        {
+          "direction": {
+            "x": -1,
+            "z": 1
+          },
+          "crouchTicks": 1800,
+          "jumpTicks": 540,
+          "jumps": 6,
+          "maxJumpHeight": 1.1543426513671875,
+          "finalX": -1580.7978515625,
+          "finalZ": 1580.797607421875
+        },
+        {
+          "direction": {
+            "x": 1,
+            "z": -1
+          },
+          "crouchTicks": 1800,
+          "jumpTicks": 540,
+          "jumps": 6,
+          "maxJumpHeight": 1.1549873352050781,
+          "finalX": 1580.7978515625,
+          "finalZ": -1580.798828125
+        },
+        {
+          "direction": {
+            "x": 1,
+            "z": 1
+          },
+          "crouchTicks": 1800,
+          "jumpTicks": 540,
+          "jumps": 6,
+          "maxJumpHeight": 1.154989242553711,
+          "finalX": 1580.798828125,
+          "finalZ": 1580.798828125
+        },
+        {
+          "direction": {
+            "x": 1,
+            "z": 0
+          },
+          "crouchTicks": 1800,
+          "jumpTicks": 540,
+          "jumps": 6,
+          "maxJumpHeight": 1.1550002098083496,
+          "finalX": 1580.798828125,
+          "finalZ": 31.871196746826172
+        },
+        {
+          "direction": {
+            "x": -1,
+            "z": 0
+          },
+          "crouchTicks": 1800,
+          "jumpTicks": 540,
+          "jumps": 6,
+          "maxJumpHeight": 1.1550006866455078,
+          "finalX": -1580.798828125,
+          "finalZ": 31.68379783630371
+        },
+        {
+          "direction": {
+            "x": 0,
+            "z": 1
+          },
+          "crouchTicks": 1800,
+          "jumpTicks": 540,
+          "jumps": 6,
+          "maxJumpHeight": 1.1549339294433594,
+          "finalX": 32.0350341796875,
+          "finalZ": 1580.798828125
+        },
+        {
+          "direction": {
+            "x": 0,
+            "z": -1
+          },
+          "crouchTicks": 1800,
+          "jumpTicks": 540,
+          "jumps": 6,
+          "maxJumpHeight": 1.1550006866455078,
+          "finalX": 31.882448196411133,
+          "finalZ": -1580.798828125
+        }
+      ]
+    },
+    {
+      "scope": "Exact±B schema poses normalize to shared inward-float32 limit; grounded feet resampled, paused airborne height/vy preserved, legacy48m extent unchanged",
+      "limit": 1580.798828125,
+      "groundedFeetY": 17.803292236328126,
+      "airborneFeetY": 20.78795524597168,
+      "airborneVy": 4.5
+    },
+    {
+      "scope": "Grounded and airborne online-equivalent receipts at schema extent normalize before local application;30s outward prediction retains bound",
+      "limit": 1580.798828125,
+      "groundedX": 1580.798828125,
+      "airborneX": 1580.798828125
+    },
+    {
+      "scope": "Main-style explicit oldXZ terrain-height spawn and teleport resample at accepted normalizedXZ; deliberate airborne height remains unchanged",
+      "oldGround": 17.787954330444336,
+      "newGround": 17.803292928749283,
+      "acceptedX": 1580.798828125,
+      "acceptedZ": 1580.798828125,
+      "groundedFeetY": 17.803291473388672,
+      "airborneFeetY": 20.787954483032227
+    },
+    {
+      "scope": "Three real-worker legacy→distant-region→starting-region→legacy cycles, exact native collider counts and checkpoint restore; includes rejected missing-destination preload recovery",
+      "seed": 42,
+      "cycles": [
+        {
+          "cycle": 0,
+          "terrainCells": 9,
+          "terrainVertices": 9801,
+          "terrainTriangles": 18432,
+          "featureObjects": 44,
+          "structureObjects": 0,
+          "solidColliders": 44,
+          "collisionInputBufferBytes": 338796,
+          "actualCellColliders": 375,
+          "actualTotalColliders": 464,
+          "coreFeatureObjects": 322,
+          "coreFeatureColliders": 322,
+          "fixedCoreColliders": 84,
+          "expectedTotalColliders": 464
+        },
+        {
+          "cycle": 1,
+          "terrainCells": 9,
+          "terrainVertices": 9801,
+          "terrainTriangles": 18432,
+          "featureObjects": 44,
+          "structureObjects": 0,
+          "solidColliders": 44,
+          "collisionInputBufferBytes": 338796,
+          "actualCellColliders": 375,
+          "actualTotalColliders": 464,
+          "coreFeatureObjects": 322,
+          "coreFeatureColliders": 322,
+          "fixedCoreColliders": 84,
+          "expectedTotalColliders": 464
+        },
+        {
+          "cycle": 2,
+          "terrainCells": 9,
+          "terrainVertices": 9801,
+          "terrainTriangles": 18432,
+          "featureObjects": 44,
+          "structureObjects": 0,
+          "solidColliders": 44,
+          "collisionInputBufferBytes": 338796,
+          "actualCellColliders": 375,
+          "actualTotalColliders": 464,
+          "coreFeatureObjects": 322,
+          "coreFeatureColliders": 322,
+          "fixedCoreColliders": 84,
+          "expectedTotalColliders": 464
+        }
+      ]
+    },
+    {
+      "scope": "One actual dropped prop,30s after supporting chunk unload, then reload/revisit",
+      "dormantY": 0.7783331871032715,
+      "revisitedY": 0.7783331871032715,
+      "remoteTotalColliders": 7
+    },
+    {
+      "scope": "Cold distant saved prop plus partial footprint,30s dormancy each; actual gravity resumes only after complete terrain readiness",
+      "farRestY": 0.7400000095367432,
+      "partialRestY": 0.7783331871032715
+    },
+    {
+      "scope": "Actual30s paired push plus near-edge saved crate normalization",
+      "halfExtent": 0.56,
+      "centerBound": 1580.5587158203125,
+      "finalCrateX": 1580.5587158203125
+    }
+  ],
+  "memory": {
+    "meaning": "collisionInputBufferBytes records are exact Float32 vertex plus Uint32 index buffer lengths from actual resident arrays; they exclude JS overhead, native/WASM memory, renderer and GPU memory.",
+    "runtimeRamOrGpuMeasured": false
+  },
+  "priorFailures": {
+    "preFixBoundaryEvidence": "evidence/regional-boundary-pre-fix-report.json",
+    "preFix30SecondDiagnosis": "evidence/regional-boundary-30s-diagnostic.json",
+    "v8Disclosure": "A prior auxiliary30-second probe had a native Node/V8 jit_page.has_value assertion in WebAssembly code reclamation/tiering. The isolated pre-fix reruns did not reproduce that engine fatal, but exposed a separate46.160150mm boundary tolerance failure. These are historical failures, not omitted passing results; no specific engine-crash cause or engine fix is claimed."
+  },
+  "checks": {
+    "tests": 15,
+    "pass": 15,
+    "fail": 0,
+    "exitCode": 0,
+    "sourceUnchangedDuringRun": true
+  }
+}

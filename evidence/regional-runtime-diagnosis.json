@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "status": "runtime-risk-requires-release-review",
+  "updatedAt": "2026-10-01T22:29:02.193Z",
+  "productionChangedForThisDiagnosis": false,
+  "observedRuntime": {
+    "node": "24.19.0",
+    "v8": "13.6.233.17-node.51"
+  },
+  "observedNativeFailures": [
+    {
+      "assertion": "jit_page.has_value()",
+      "phase": "Auxiliary pre-fix30s probe",
+      "evidence": "evidence/regional-boundary-30s-original-failure.txt"
+    },
+    {
+      "assertion": "jit_page_->allocations_.erase(addr) == 1",
+      "phase": "Corrected boundary-report regeneration",
+      "evidence": "evidence/regional-boundary-runtime-failed-log.txt",
+      "failedReport": "evidence/regional-boundary-runtime-failed-report.json"
+    }
+  ],
+  "upstreamPrimarySources": [
+    {
+      "url": "https://github.com/nodejs/node/issues/66366",
+      "checkedAt": "2026-10-01T22:29:02.193Z",
+      "description": "Node issue opened September28,2026 reports Node24/V813.6 worker-lifecycle WebAssembly failure with the identical allocation-erasure assertion and code-reclamation/tiering stack. The issue reporter links an upstream V8 fix and reports a patched-vs-unpatched experiment."
+    },
+    {
+      "url": "https://github.com/v8/v8/commit/9b8ca54d5a",
+      "checkedAt": "2026-10-01T22:29:02.193Z",
+      "description": "Official V8 change updates dying shared import-wrapper references atomically to prevent a code object being freed twice during reclamation."
+    }
+  ],
+  "inference": "Our exact fatal signature, mapped stack, runtime family and repeated worker/Wasm lifecycle strongly match the upstream report. This is an evidence-based match, not a demonstrated installation of that fix or a verified engine patch. No OOM or workload-concurrency cause is established.",
+  "unchangedCodeMatrix": {
+    "evidence": "evidence/regional-runtime-matrix.json",
+    "wholeFile": {
+      "runs": 1,
+      "exitCode": 0,
+      "passed": 8,
+      "failed": 0
+    },
+    "separateNamedCases": {
+      "processes": 8,
+      "passedProcesses": 8,
+      "exactlyOneTestEach": true
+    },
+    "engineFlagsAdded": false,
+    "protectionsDisabled": false,
+    "testsWeakened": false,
+    "sourceUnchanged": true
+  },
+  "preservedCurrentState": "The corrected code passed its game assertions in the bounded matrix and prior complete runs, but its most recent combined boundary-regeneration run aborted in V8. That failed report has not been overwritten or reclassified here. Release review remains required.",
+  "evidenceSha256": {
+    "evidence/regional-boundary-30s-diagnostic.json": "874392136525d93ec506fc6c1e63880e06fa9bb30a2ca5725522364b31bc03a1",
+    "evidence/regional-boundary-runtime-failed-log.txt": "883dd9bf0050b103dcb9d6663053ef8fb0c7feac9d0ce28cb63e911b2892e622",
+    "evidence/regional-boundary-runtime-failed-report.json": "72b0968e24580fdf216f8cdffb71dbb9e0e6b63e22a13fda298a040debf9accf",
+    "evidence/regional-runtime-matrix.json": "9ff428e633a6e20ac2869247bbcdd050581b4b2584c0e8ab5971133028f93d3a"
+  }
+}

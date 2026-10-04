@@ -1,0 +1,19 @@
+node_modules/
+dist/
+.sites-runtime/
+*.log
+
+server/generated-assets.ts
+
+# Source import: exclude local symlinks, secrets, and transient tooling state.
+node_modules
+.env
+.env.*
+!.env.example
+.npmrc
+.netrc
+.openai/*
+!.openai/hosting.json
+.cache/
+coverage/
+.DS_Store

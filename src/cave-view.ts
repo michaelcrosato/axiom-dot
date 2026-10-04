@@ -1,0 +1,19 @@
+import type {CaveSupplyState} from './cave-supply';
+import * as THREE from 'three/webgpu';
+import {naturalCave} from './natural-cave';
+import {caveDepth,type CaveWaterState} from './cave-water';
+export function createCaveView(seed:number){
+ const plan=naturalCave(seed),root=new THREE.Group(),objects=new Map<string,THREE.Group>(),surfaces:{mesh:THREE.Mesh;basin:0|1|2}[]=[];
+ const outfallMeter=new THREE.Group();outfallMeter.name='outfall-meter';root.add(outfallMeter);outfallMeter.position.set(plan.anchors.drain.x,0,plan.anchors.drain.z);outfallMeter.visible=false;
+ root.name='natural-river-cave';const materials=new Map<string,THREE.MeshStandardMaterial>();
+ const material=(color:string)=>{let m=materials.get(color);if(!m){m=new THREE.MeshStandardMaterial({color,roughness:.9,flatShading:true});materials.set(color,m);}return m;};
+ const mesh=(geo:THREE.BufferGeometry,color:string,parent:THREE.Object3D,x:number,y:number,z:number)=>{const m=new THREE.Mesh(geo,material(color));m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m;};
+ for(const t of plan.tiles){mesh(new THREE.BoxGeometry(1.99,.16,1.99),t.basin===null?'#647773':'#365b62',root,t.x,-.08,t.z);if(t.basin!==null){const water=new THREE.Mesh(new THREE.PlaneGeometry(2.01,2.01),new THREE.MeshStandardMaterial({color:'#64bec5',roughness:.24,metalness:.1,transparent:true,opacity:.74,side:THREE.DoubleSide}));water.rotation.x=-Math.PI/2;water.position.set(t.x,.9,t.z);root.add(water);surfaces.push({mesh:water,basin:t.basin});}}
+ for(const w of plan.walls){const m=mesh(new THREE.BoxGeometry(w.hx*2,w.hy*2,w.hz*2),'#4f6667',root,w.x,w.hy,w.z);m.userData.caveWall=true;}
+ for(const [i,c]of plan.chambers.entries()){const ring=mesh(new THREE.TorusGeometry(1.15,.04,4,32),i===0?'#e8c587':'#8fe1ca',root,c.x,.04,c.z);ring.rotation.x=-Math.PI/2;}
+ for(const o of plan.objects){const g=new THREE.Group();g.position.set(o.x,0,o.z);g.name=o.id;root.add(g);objects.set(o.id,g);const color=o.kind==='exit'?'#efd397':o.kind==='core'?'#97e7d5':o.kind==='water'?'#99dbea':'#dec08c';mesh(o.kind==='exit'?new THREE.TorusGeometry(.8,.1,5,16):new THREE.OctahedronGeometry(.36),color,g,0,o.kind==='exit'?1:.65,0);if(o.kind==='exit'){mesh(new THREE.CylinderGeometry(.04,.04,2.8,5),color,g,.9,1.4,0);}}
+ for(const [kind,p] of Object.entries(plan.anchors)){const g=new THREE.Group();g.position.set(p.x,0,p.z);root.add(g);mesh(new THREE.CylinderGeometry(.55,.65,.5,8),'#778f89',g,0,.25,0);mesh(new THREE.BoxGeometry(.55,.8,.55),kind==='valve'?'#d3b575':kind==='pump'?'#7bbbbb':'#c68f75',g,0,.8,0);const ring=mesh(new THREE.TorusGeometry(.85,.05,4,32),'#e8c587',g,0,.035,0);ring.rotation.x=-Math.PI/2;}
+ const meterFace=mesh(new THREE.CylinderGeometry(.16,.16,.035,12),'#73bcb0',outfallMeter,.16,.9,.3);meterFace.rotation.x=Math.PI/2;const meterNeedle=mesh(new THREE.BoxGeometry(.025,.22,.02),'#fff0b7',outfallMeter,.16,.9,.33);meterNeedle.name='outfall-meter-needle';mesh(new THREE.CylinderGeometry(.055,.055,.5,6),'#d0b67f',outfallMeter,.25,.43,.3);
+ for(const [i,w]of plan.walls.entries())if(i%17===0){const crystal=mesh(new THREE.ConeGeometry(.16,.9,5),'#9cdccf',root,w.x+(w.x>0?-.3:.3),.48,w.z);crystal.rotation.z=(i%3-1)*.25;}
+ return {root,objects,plan,sync(water:CaveWaterState|undefined,collected:readonly string[],supply?:CaveSupplyState){outfallMeter.visible=!!supply?.connected;if(supply)meterNeedle.rotation.z=-((supply.pumped.captured+supply.drained.captured)*1000%1)*Math.PI*2;for(const [id,g]of objects)g.visible=!collected.includes(id);if(water)for(const s of surfaces){const depth=caveDepth(water,s.basin,plan);s.mesh.visible=depth>.002;s.mesh.position.y=Math.max(.003,depth);}},dispose(){root.traverse(o=>{if(o instanceof THREE.Mesh)o.geometry.dispose();});for(const m of materials.values())m.dispose();for(const s of surfaces)(s.mesh.material as THREE.Material).dispose();}};
+}

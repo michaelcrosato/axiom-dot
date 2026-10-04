@@ -1,0 +1,213 @@
+(node:6) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+TAP version 13
+# (node:13) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:13) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# Subtest: zoom fades atmosphere smoothly and removes it completely throughout the far-clipped scene by42
+ok 1 - zoom fades atmosphere smoothly and removes it completely throughout the far-clipped scene by42
+  ---
+  duration_ms: 2.86701
+  type: 'test'
+  ...
+# Subtest: footprints include tilted actual Three frustum rays through terrain and scenic water for portrait/ultrawide, orbit, zoom and elevation
+ok 2 - footprints include tilted actual Three frustum rays through terrain and scenic water for portrait/ultrawide, orbit, zoom and elevation
+  ---
+  duration_ms: 35.083722
+  type: 'test'
+  ...
+# Subtest: LOD tile borders exactly match every authoritative2m terrain sample, including negative and clipped cells
+ok 3 - LOD tile borders exactly match every authoritative2m terrain sample, including negative and clipped cells
+  ---
+  duration_ms: 145.757009
+  type: 'test'
+  ...
+# Subtest: landscape fills every uncommitted tile, removes only committed terrain, never compiles props, and disposes replaced buffers
+ok 4 - landscape fills every uncommitted tile, removes only committed terrain, never compiles props, and disposes replaced buffers
+  ---
+  duration_ms: 10.818959
+  type: 'test'
+  ...
+# Subtest: repeated zoom, resize, rotation, world-edge moves and scenery disposal keep bounded render-only geometry
+ok 5 - repeated zoom, resize, rotation, world-edge moves and scenery disposal keep bounded render-only geometry
+  ---
+  duration_ms: 1256.366444
+  type: 'test'
+  ...
+# Subtest: whole-world extreme-aspect fallback is budgeted and committed world-edge skirts remain
+ok 6 - whole-world extreme-aspect fallback is budgeted and committed world-edge skirts remain
+  ---
+  duration_ms: 1116.681152
+  type: 'test'
+  ...
+# Subtest: reserved landscape contains every zoom/orbit footprint without zoom-driven geometry rebuilds
+ok 7 - reserved landscape contains every zoom/orbit footprint without zoom-driven geometry rebuilds
+  ---
+  duration_ms: 241.854886
+  type: 'test'
+  ...
+# Subtest: actual shared visibility hook follows zoom in paused menus, repeated resize and zone changes
+ok 8 - actual shared visibility hook follows zoom in paused menus, repeated resize and zone changes
+  ---
+  duration_ms: 15.541479
+  type: 'test'
+  ...
+# Subtest: actual pagehide retains renderer scenery for BFCache and disposes on final unload; startup primes before showing play
+ok 9 - actual pagehide retains renderer scenery for BFCache and disposes on final unload; startup primes before showing play
+  ---
+  duration_ms: 2.360258
+  type: 'test'
+  ...
+# (node:21) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:21) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# Subtest: snapshot-only barter UI exposes actual scarcity/consequences and stale callbacks cannot duplicate a transaction
+ok 10 - snapshot-only barter UI exposes actual scarcity/consequences and stale callbacks cannot duplicate a transaction
+  ---
+  duration_ms: 156.332642
+  type: 'test'
+  ...
+# Subtest: barter panel gives actionable absent-water and distance feedback from real authority conditions
+ok 11 - barter panel gives actionable absent-water and distance feedback from real authority conditions
+  ---
+  duration_ms: 4.125174
+  type: 'test'
+  ...
+# Subtest: actual main barter handlers dispatch solo and online through the production action boundary without touching lab state
+ok 12 - actual main barter handlers dispatch solo and online through the production action boundary without touching lab state
+  ---
+  duration_ms: 12.645408
+  type: 'test'
+  ...
+# Subtest: online-style remount retains open receipt history and current keyboard target while authority changes
+ok 13 - online-style remount retains open receipt history and current keyboard target while authority changes
+  ---
+  duration_ms: 3.304302
+  type: 'test'
+  ...
+# (node:29) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:29) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# Subtest: main F/G handlers apply trace authority once and never run static aids or double-debit HP
+ok 14 - main F/G handlers apply trace authority once and never run static aids or double-debit HP
+  ---
+  duration_ms: 223.070367
+  type: 'test'
+  ...
+# Subtest: main worker gate rejects stale/duplicate frames, pauses gaps, and requires honest resume
+ok 15 - main worker gate rejects stale/duplicate frames, pauses gaps, and requires honest resume
+  ---
+  duration_ms: 32.68162
+  type: 'test'
+  ...
+# Subtest: main live entry rejects co-op active/pending; exit and suite permanently retire their recorder
+ok 16 - main live entry rejects co-op active/pending; exit and suite permanently retire their recorder
+  ---
+  duration_ms: 103.256224
+  type: 'test'
+  ...
+# Subtest: main latches loadout/tuning and requires explicit fresh-epoch reset after death or defeat
+ok 17 - main latches loadout/tuning and requires explicit fresh-epoch reset after death or defeat
+  ---
+  duration_ms: 3372.634485
+  type: 'test'
+  ...
+# Subtest: main capture observes render immediately before afterRender, exact case/tick metadata and cancellation; no image evidence
+ok 18 - main capture observes render immediately before afterRender, exact case/tick metadata and cancellation; no image evidence
+  ---
+  duration_ms: 24.129823
+  type: 'test'
+  ...
+# (node:29) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: production worker plus actual main G blocks one timed front contact with one cost
+ok 19 - production worker plus actual main G blocks one timed front contact with one cost
+  ---
+  duration_ms: 280.156249
+  type: 'test'
+  ...
+# (node:29) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: production worker plus actual main F completes a costed three-hit chain and freezes defeat until reset
+ok 20 - production worker plus actual main F completes a costed three-hit chain and freezes defeat until reset
+  ---
+  duration_ms: 352.58114
+  type: 'test'
+  ...
+# (node:29) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: production main/worker lab roundtrip restores campaign bytes, HP, combo, guard, camera and actual airborne checkpoint with zero writes
+ok 21 - production main/worker lab roundtrip restores campaign bytes, HP, combo, guard, camera and actual airborne checkpoint with zero writes
+  ---
+  duration_ms: 220.066851
+  type: 'test'
+  ...
+# Subtest: main diagnostic export retains a bounded replayable prefix while authority continues
+ok 22 - main diagnostic export retains a bounded replayable prefix while authority continues
+  ---
+  duration_ms: 208.81568
+  type: 'test'
+  ...
+# Subtest: malformed main worker step pauses without replaying unseen ticks and reset rejects the old epoch
+ok 23 - malformed main worker step pauses without replaying unseen ticks and reset rejects the old epoch
+  ---
+  duration_ms: 20.352763
+  type: 'test'
+  ...
+# (node:29) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: actual live-to-suite switch completes all original nine production-worker cases without live authority contamination
+ok 24 - actual live-to-suite switch completes all original nine production-worker cases without live authority contamination
+  ---
+  duration_ms: 622.730373
+  type: 'test'
+  ...
+# (node:29) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:29) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: actual main live authority agrees under immediate and forty-frame production-worker delivery
+ok 25 - actual main live authority agrees under immediate and forty-frame production-worker delivery
+  ---
+  duration_ms: 589.34233
+  type: 'test'
+  ...
+# Subtest: actual menu/close handlers retire paid staff buffers and guard interception without refunding costs or cooldown
+ok 26 - actual menu/close handlers retire paid staff buffers and guard interception without refunding costs or cooldown
+  ---
+  duration_ms: 24.444411
+  type: 'test'
+  ...
+# Subtest: explicit live Start returns keyboard focus to gameplay so immediate Space reaches actual jump input
+ok 27 - explicit live Start returns keyboard focus to gameplay so immediate Space reaches actual jump input
+  ---
+  duration_ms: 17.773677
+  type: 'test'
+  ...
+# Subtest: explicit live Resume returns keyboard focus to gameplay so immediate Space reaches actual jump input
+ok 28 - explicit live Resume returns keyboard focus to gameplay so immediate Space reaches actual jump input
+  ---
+  duration_ms: 17.317178
+  type: 'test'
+  ...
+# Subtest: explicit live Capture returns keyboard focus to gameplay so immediate Space reaches actual jump input
+ok 29 - explicit live Capture returns keyboard focus to gameplay so immediate Space reaches actual jump input
+  ---
+  duration_ms: 22.205877
+  type: 'test'
+  ...
+# Subtest: generic modal Close restores opener focus and preserves native button/input keyboard handling
+ok 30 - generic modal Close restores opener focus and preserves native button/input keyboard handling
+  ---
+  duration_ms: 18.003674
+  type: 'test'
+  ...
+1..30
+# tests 30
+# suites 0
+# pass 30
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 10347.586578

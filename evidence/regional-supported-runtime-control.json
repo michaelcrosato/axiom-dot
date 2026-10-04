@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "status": "supported-control-passed",
+  "completedAt": "2026-10-01T22:33:21.257Z",
+  "runtime": {
+    "executable": "/tmp/axiom-runtime-diagnostics/node-official/node-v22.23.0-linux-x64/bin/node",
+    "node": "v22.23.0",
+    "v8": "12.4.254.21-node.56",
+    "binarySha256": "b587d8a062552ab52ecae2a7b0bcd079351d1dc61cf2555fd5994f558274ae58",
+    "officialArchive": "node-v22.23.0-linux-x64.tar.xz",
+    "officialArchiveSha256": "14d7de44f235534799f8b171a4050d9a6a4bc99c87e053a25d3d54afa580aa20",
+    "archiveProvenance": "Independent runtime control verified the official archive against nodejs.org SHASUMS256; this task rechecked the executable hash before running."
+  },
+  "execution": {
+    "commands": [
+      "/tmp/axiom-runtime-diagnostics/node-official/node-v22.23.0-linux-x64/bin/node --experimental-strip-types scripts/measure-regional-world.mts",
+      "/tmp/axiom-runtime-diagnostics/node-official/node-v22.23.0-linux-x64/bin/node --experimental-strip-types scripts/measure-regional-boundary.mts"
+    ],
+    "engineFlagsAdded": false,
+    "protectionsDisabled": false,
+    "testsOrDurationsChanged": false,
+    "productionChangedBetweenFailureAndControl": false,
+    "physics": {
+      "tests": 13,
+      "pass": 13,
+      "fail": 0,
+      "exitCode": 0,
+      "log": "evidence/regional-physics-node22-run.txt"
+    },
+    "boundary": {
+      "tests": 15,
+      "pass": 15,
+      "fail": 0,
+      "exitCode": 0,
+      "log": "evidence/regional-boundary-node22-run.txt"
+    }
+  },
+  "reports": [
+    {
+      "file": "evidence/regional-physics-report.json",
+      "status": "verified",
+      "runtime": "v22.23.0",
+      "sourceFingerprints": 21,
+      "mismatches": [],
+      "checks": {
+        "exitCode": 0,
+        "sourceUnchangedDuringRun": true,
+        "measurementsComplete": true
+      },
+      "sha256": "40880a10aaa8b4b7c9ffb70509b6d5c6bc05747b20d6e7469a58f99f2c09dddd"
+    },
+    {
+      "file": "evidence/regional-boundary-report.json",
+      "status": "verified",
+      "runtime": "v22.23.0",
+      "sourceFingerprints": 45,
+      "mismatches": [],
+      "checks": {
+        "tests": 15,
+        "pass": 15,
+        "fail": 0,
+        "exitCode": 0,
+        "sourceUnchangedDuringRun": true
+      },
+      "sha256": "fef6c7ee8aa4e32bfd74dfa2f2b29c5af1f2055704f9d61e067475f511b8f785"
+    }
+  ],
+  "node24History": {
+    "diagnosis": "evidence/regional-runtime-diagnosis.json",
+    "failedCombinedReport": "evidence/regional-boundary-runtime-failed-report.json",
+    "failedCombinedLog": "evidence/regional-boundary-runtime-failed-log.txt",
+    "unchangedMatrix": "evidence/regional-runtime-matrix.json",
+    "physicsPassingReport": "evidence/regional-physics-node24-report.json",
+    "note": "Node24 native failures remain factual and preserved. These clean normalNode22 runs do not claim the Node24 engine bug was fixed or that browser/device runtime behavior was visually tested."
+  },
+  "logSha256": {
+    "evidence/regional-physics-node22-run.txt": "1dfd18fbf4f012a10c9d43bea8bd2316b8aab4d898640e4fa7eecd44999362b2",
+    "evidence/regional-boundary-node22-run.txt": "681827c6f10931596ea82a28a77e0a382325c79248d006e797678a6c8d4fd85a"
+  }
+}

@@ -1,0 +1,129 @@
+(node:6) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+TAP version 13
+# (node:13) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:13) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# Subtest: executed food main makes journal/map inspection read-only and switches farm without closing panel
+ok 1 - executed food main makes journal/map inspection read-only and switches farm without closing panel
+  ---
+  duration_ms: 15.673098
+  type: 'test'
+  ...
+# Subtest: executed food main requires acknowledged visible ground, reach, upright grounded live control and clear line before command
+ok 2 - executed food main requires acknowledged visible ground, reach, upright grounded live control and clear line before command
+  ---
+  duration_ms: 2.765987
+  type: 'test'
+  ...
+# Subtest: executed food presentation pauses in solo menu and background but follows accepted online room while menu is open
+ok 3 - executed food presentation pauses in solo menu and background but follows accepted online room while menu is open
+  ---
+  duration_ms: 2.043464
+  type: 'test'
+  ...
+# Subtest: food main uses existing E/X interaction and protected recovery, clears/disposes projection with world lifecycle
+ok 4 - food main uses existing E/X interaction and protected recovery, clears/disposes projection with world lifecycle
+  ---
+  duration_ms: 0.341702
+  type: 'test'
+  ...
+# (node:21) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: food atlas marks have distinct legend, exact pantry dispatch, and live read-only detail
+ok 5 - food atlas marks have distinct legend, exact pantry dispatch, and live read-only detail
+  ---
+  duration_ms: 253.911354
+  type: 'test'
+  ...
+# (node:29) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: food buttons reread authoritative revision, recheck E/X safety and send one intent per render
+ok 6 - food buttons reread authoritative revision, recheck E/X safety and send one intent per render
+  ---
+  duration_ms: 243.507211
+  type: 'test'
+  ...
+# Subtest: food disclosure and focus survive live rerender, while removed/disabled actions fall back to Close
+ok 7 - food disclosure and focus survive live rerender, while removed/disabled actions fall back to Close
+  ---
+  duration_ms: 3.691674
+  type: 'test'
+  ...
+# Subtest: journal and atlas expose bounded source, pantry, actual routes and loaded cargo without production
+ok 8 - journal and atlas expose bounded source, pantry, actual routes and loaded cargo without production
+  ---
+  duration_ms: 2.761266
+  type: 'test'
+  ...
+# Subtest: water, seed and capacity shortages stay distinct while loaded, held and consumed food balance exactly
+ok 9 - water, seed and capacity shortages stay distinct while loaded, held and consumed food balance exactly
+  ---
+  duration_ms: 1.787823
+  type: 'test'
+  ...
+# Subtest: water overflow wording keeps historical loss outside the captured-water balance
+ok 10 - water overflow wording keeps historical loss outside the captured-water balance
+  ---
+  duration_ms: 0.656649
+  type: 'test'
+  ...
+# Subtest: specific missing collector and store prerequisites link to their existing community panels
+ok 11 - specific missing collector and store prerequisites link to their existing community panels
+  ---
+  duration_ms: 1.214302
+  type: 'test'
+  ...
+# (node:37) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: food projection follows full arc distance at actual speed, never a chord or catch-up warp
+ok 12 - food projection follows full arc distance at actual speed, never a chord or catch-up warp
+  ---
+  duration_ms: 11.185913
+  type: 'test'
+  ...
+# Subtest: food plots and rigs require accepted visible ground and pantry uses the existing exact store receipt
+ok 13 - food plots and rigs require accepted visible ground and pantry uses the existing exact store receipt
+  ---
+  duration_ms: 269.061061
+  type: 'test'
+  ...
+# Subtest: crop stage, source units, loaded food and each held meal come only from the latest ledger
+ok 14 - crop stage, source units, loaded food and each held meal come only from the latest ledger
+  ---
+  duration_ms: 14.311811
+  type: 'test'
+  ...
+# Subtest: unloading at a stopped authority endpoint can finish interpolation without losing ground support or inventing work
+ok 15 - unloading at a stopped authority endpoint can finish interpolation without losing ground support or inventing work
+  ---
+  duration_ms: 23.874921
+  type: 'test'
+  ...
+# Subtest: menu, resume, reconnect, backwards clock and explicit bfcache clear discard stale interpolation
+ok 16 - menu, resume, reconnect, backwards clock and explicit bfcache clear discard stale interpolation
+  ---
+  duration_ms: 29.327674
+  type: 'test'
+  ...
+# Subtest: interpolated points and humanoid support patches cannot render over unconfirmed terrain
+ok 17 - interpolated points and humanoid support patches cannot render over unconfirmed terrain
+  ---
+  duration_ms: 9.435531
+  type: 'test'
+  ...
+# Subtest: farm residency is bounded, IDs never duplicate existing residents and all GPU resources release
+ok 18 - farm residency is bounded, IDs never duplicate existing residents and all GPU resources release
+  ---
+  duration_ms: 24.265473
+  type: 'test'
+  ...
+1..18
+# tests 18
+# suites 0
+# pass 18
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2064.457944

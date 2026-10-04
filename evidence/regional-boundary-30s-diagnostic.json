@@ -1,0 +1,109 @@
+{
+  "version": 1,
+  "status": "release-review-required",
+  "diagnosedAt": "2026-10-01T22:06:53.518Z",
+  "productionHead": "108331fe05295c21e5e4dcc952d99321fcf97f02",
+  "runtime": {
+    "node": "v24.19.0",
+    "v8": "13.6.233.17-node.51"
+  },
+  "source": {
+    "sha256": {
+      "src/physics.worker.ts": "33482f5f88a10b28d514f2c389807eae7df912591a82dbc37976e04b00186894",
+      "src/regional-world.ts": "cb7903f27255c1f59f4abaa61af76a60701e71a90c70d4ca8097c9fba446b174",
+      "tests/regional-boundary-physics.test.ts": "70fed51265ed15cc37e106542d0358bc05a24a60d2b0378dd54edf2cb96aaed2",
+      "evidence/regional-boundary-30s-original-probe-source.ts": "c921409dd112d364e561bf3285fe82c8c7db9196a524f8e24241f0b36c987053",
+      "evidence/regional-boundary-30s-isolated-pre-fix-source.ts": "0975bed2d4f969d648e8c8c632c263d40f3fa51f164d46deaf3450b316f4d712",
+      "evidence/regional-boundary-30s-original-failure.txt": "93c1c59cc19a835dd7bdb84357620311d87a893949cdb1fa2621024d27264fbc",
+      "evidence/regional-boundary-30s-isolated-rerun.txt": "f852cedce3c62bb1a256979bf023a353c46b96813ee9aabcfcd7beae8595c16d"
+    },
+    "prior20FingerprintsUnchanged": true,
+    "committedProductionSourcesModified": false
+  },
+  "originalFailure": {
+    "command": "node --experimental-strip-types --test tests/regional-boundary-physics.test.ts > /tmp/axiom-regional-boundary-long.log 2>&1",
+    "fatalText": "Fatal error in , line 0\nCheck failed: jit_page.has_value().",
+    "log": "evidence/regional-boundary-30s-original-failure.txt",
+    "sourceVariant": "evidence/regional-boundary-30s-original-probe-source.ts",
+    "sourceVariantProvenance": "Reconstructed from the saved600-tick diagnostic probe at /tmp/regional-boundary-final-probe.ts by the exact original replacement: await p.tick(600) \u2192 await p.tick(1800), at its two boundary loops. Original diagnostic assertions allowed5cm envelope and speed<2; these were not final release protections. This source artifact is for inspection; the isolated reproducer below retains final stronger assertions.",
+    "completed": "All four30-second generated corner cases passed; process failed during perimeter case test. Native fatal prevented the suite completing.",
+    "nativeLocation": "Installed Node binary addr2line resolves the fatal path to V8 WebAssembly code reclamation/tiering.",
+    "addressLookup": [
+      [
+        "0x18b0ce3",
+        "v8::internal::wasm::WasmCodeAllocator::FreeCode"
+      ],
+      [
+        "0x18b0f8c",
+        "v8::internal::wasm::NativeModule::FreeCode"
+      ],
+      [
+        "0x18d05ec",
+        "v8::internal::wasm::WasmEngine::FreeDeadCodeLocked"
+      ],
+      [
+        "0x18d07d1",
+        "v8::internal::wasm::WasmEngine::FreeDeadCode"
+      ],
+      [
+        "0x18a862f",
+        "v8::internal::wasm::WasmCode::DecrementRefCount"
+      ],
+      [
+        "0x18ab42c",
+        "v8::internal::wasm::WasmCodeRefScope::~WasmCodeRefScope"
+      ],
+      [
+        "0x174055f",
+        "v8::internal::Runtime_TierUpWasmToJSWrapper"
+      ]
+    ]
+  },
+  "isolatedRerun": {
+    "command": "node --experimental-strip-types --test tests/auxiliary-regional-boundary-30s.test.ts > /tmp/axiom-regional-boundary-30s-isolated.log 2>&1",
+    "test": "tests/auxiliary-regional-boundary-30s.test.ts",
+    "log": "evidence/regional-boundary-30s-isolated-rerun.txt",
+    "runCount": 1,
+    "sourceVariant": "Exact committed boundary suite copied into a separate file; only the two600-tick loops changed to1800ticks. No engine flags, helper changes, concurrency flags, or weakened assertions.",
+    "v8FatalReproduced": false,
+    "exitCode": 1,
+    "tests": 3,
+    "passed": 2,
+    "failed": 1,
+    "assertionFailure": {
+      "case": "north generated perimeter",
+      "tick": 1177,
+      "secondsSincePhysicsStepZero": 19.616666666666667,
+      "zMetres": 1580.850830078125,
+      "regionBoundMetres": 1581.1388300841897,
+      "radiusMetres": 0.32,
+      "observedPenetrationAtLeastMetres": 0.031999993935187376,
+      "assertionLimitMetres": 0.03,
+      "grounded": true,
+      "centerOutsideWorld": false,
+      "scopeNote": "The assertion output retains the final three violating snapshots, so this is a measured lower bound, not a claimed maximum over all1800ticks."
+    },
+    "archivedExactSource": "evidence/regional-boundary-30s-isolated-pre-fix-source.ts"
+  },
+  "environmentObservations": {
+    "beforeIsolatedRerun": {
+      "otherNodeProcessesObserved": 0,
+      "systemMemoryAvailableMiB": 7783,
+      "totalSystemMemoryMiB": 9967,
+      "swapMiB": 0
+    },
+    "limitations": "These observations are from before the isolated rerun, not the original crash. No evidence establishes OOM, resource pressure, cross-process concurrency, or any specific cause of the original V8 fatal."
+  },
+  "conclusion": "The V8 fatal is located in engine WebAssembly code reclamation/tiering but was not reproduced in the two isolated pre-fix diagnostic runs; its cause remains undetermined. Separately, the unchanged stronger30-second test failed the30mm contact limit. Full-trace logging proved46.160150mm maximum penetration at the north edge. Corrected production behavior and passing evidence are recorded separately; these failed results are retained without reinterpretation.",
+  "scope": "Historical pre-fix diagnosis against production commit108331f. Later corrected passing measurements are kept separately in regional-boundary-report.json.",
+  "fullTraceMeasurementBeforeFix": {
+    "command": "node --experimental-strip-types --test tests/auxiliary-regional-boundary-30s.test.ts > /tmp/axiom-regional-boundary-30s-max.log 2>&1",
+    "sourceChange": "Added diagnostic output immediately before existing assertions; same1800-tick cases and unchanged assertions. No production or engine changes.",
+    "log": "evidence/regional-boundary-30s-pre-fix-full-trace.txt",
+    "exitCode": 1,
+    "v8FatalReproduced": false,
+    "exactMaximumNorthEdgeCapsuleEnvelopePenetrationMetres": 0.046160150185187376,
+    "ticks": 1800,
+    "limitMetres": 0.03
+  }
+}

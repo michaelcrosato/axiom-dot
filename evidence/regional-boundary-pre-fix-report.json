@@ -1,0 +1,344 @@
+{
+  "version": 1,
+  "status": "verified",
+  "measuredAt": "2026-10-01T22:00:34.464Z",
+  "source": {
+    "head": "429e6138062e08dc4130bb4e7a9bdbd601815bdf",
+    "workingTreeDirty": true,
+    "sha256": {
+      "src/physics.worker.ts": "33482f5f88a10b28d514f2c389807eae7df912591a82dbc37976e04b00186894",
+      "src/regional-world.ts": "cb7903f27255c1f59f4abaa61af76a60701e71a90c70d4ca8097c9fba446b174",
+      "tests/regional-boundary-physics.test.ts": "70fed51265ed15cc37e106542d0358bc05a24a60d2b0378dd54edf2cb96aaed2"
+    },
+    "priorPhysicsEvidence": "evidence/regional-physics-report.json",
+    "prior20FingerprintsUnchanged": true
+  },
+  "command": "node --experimental-strip-types --test tests/regional-boundary-physics.test.ts",
+  "seed": 42,
+  "hz": 60,
+  "scope": "Actual production Rapier worker, generated clipped corner/perimeter terrain and solids, plus actual legacy valley terrain/structures/features and checkpoint restoration. No production sources changed. This is simulation verification, not browser visual or physical-device performance approval.",
+  "boundaryInput": {
+    "analog": true,
+    "requestedStrength": 1,
+    "cornerDirection": "diagonal x/z signs; motor magnitude capped at1",
+    "edgeDirection": "normal toward boundary",
+    "sustainedTicks": 600,
+    "sustainedSeconds": 10
+  },
+  "assertions": {
+    "cases": 8,
+    "allGrounded": true,
+    "centerNeverOutsideRegion": true,
+    "capsuleEnvelopeToleranceMetres": 0.03,
+    "last120TickNormalMotionEnvelopeMetres": 0.04,
+    "observedMaximumCapsuleEnvelopePenetrationMetres": 0.025408197060187376,
+    "observedMaximumLateNormalMotionEnvelopeMetres": 0.0380859375,
+    "observedMaximumFeetTerrainErrorMetres": 0.01178433515197952,
+    "collisionToleranceNote": "Bounded solver contact jitter and penetration are reported explicitly; this does not claim zero wall penetration. Minimum observed center clearance from true boundary remains approximately0.294592m."
+  },
+  "corners": [
+    {
+      "maxCapsuleEnvelopeBeyondBoundary": 0.004534173622687376,
+      "maxFeetError": 0.0016482540596491901,
+      "finalVelocity": {
+        "x": -0.205078125,
+        "z": 0.05859375
+      },
+      "steadyBoundaryRange": 0.0223388671875,
+      "corner": [
+        -1,
+        -1
+      ],
+      "x": -1580.8023681640625,
+      "z": -1580.798095703125,
+      "feetY": 4.177858028411865,
+      "groundedFraction": 1,
+      "terrainCells": 1,
+      "terrainVertices": 576,
+      "terrainTriangles": 1058,
+      "featureObjects": 15,
+      "structureObjects": 0,
+      "solidColliders": 15,
+      "collisionInputBufferBytes": 19608,
+      "actualCellColliders": 16,
+      "actualTotalColliders": 21
+    },
+    {
+      "maxCapsuleEnvelopeBeyondBoundary": 0.010881829872687376,
+      "maxFeetError": 0.0021480331237668793,
+      "finalVelocity": {
+        "x": 0.1611328125,
+        "z": 0.05859375
+      },
+      "steadyBoundaryRange": 0.0145263671875,
+      "corner": [
+        1,
+        -1
+      ],
+      "x": 1580.8006591796875,
+      "z": -1580.8043212890625,
+      "feetY": 42.47406021118164,
+      "groundedFraction": 1,
+      "terrainCells": 1,
+      "terrainVertices": 576,
+      "terrainTriangles": 1058,
+      "featureObjects": 23,
+      "structureObjects": 0,
+      "solidColliders": 23,
+      "collisionInputBufferBytes": 19608,
+      "actualCellColliders": 24,
+      "actualTotalColliders": 29
+    },
+    {
+      "maxCapsuleEnvelopeBeyondBoundary": 0.025408197060187376,
+      "maxFeetError": 0.01178433515197952,
+      "finalVelocity": {
+        "x": 0.05859375,
+        "z": -0.05859375
+      },
+      "steadyBoundaryRange": 0.0068359375,
+      "corner": [
+        -1,
+        1
+      ],
+      "x": -1580.84130859375,
+      "z": 1580.8240966796875,
+      "feetY": 19.376163635253906,
+      "groundedFraction": 1,
+      "terrainCells": 1,
+      "terrainVertices": 576,
+      "terrainTriangles": 1058,
+      "featureObjects": 39,
+      "structureObjects": 0,
+      "solidColliders": 39,
+      "collisionInputBufferBytes": 19608,
+      "actualCellColliders": 40,
+      "actualTotalColliders": 45
+    },
+    {
+      "maxCapsuleEnvelopeBeyondBoundary": -0.00034863887731262366,
+      "maxFeetError": 0.004563207417479731,
+      "finalVelocity": {
+        "x": -0.05859375,
+        "z": -0.05859375
+      },
+      "steadyBoundaryRange": 0.013671875,
+      "corner": [
+        1,
+        1
+      ],
+      "x": 1580.8111572265625,
+      "z": 1580.8126220703125,
+      "feetY": 17.803861770629883,
+      "groundedFraction": 1,
+      "terrainCells": 1,
+      "terrainVertices": 576,
+      "terrainTriangles": 1058,
+      "featureObjects": 18,
+      "structureObjects": 0,
+      "solidColliders": 18,
+      "collisionInputBufferBytes": 19608,
+      "actualCellColliders": 19,
+      "actualTotalColliders": 24
+    }
+  ],
+  "edges": [
+    {
+      "maxCapsuleEnvelopeBeyondBoundary": 0.006975579872687376,
+      "maxFeetError": 0.0015690805897090598,
+      "finalVelocity": {
+        "x": -0.05859375,
+        "z": 0.155181884765625
+      },
+      "steadyBoundaryRange": 0.01416015625,
+      "direction": {
+        "x": 1,
+        "z": 0
+      },
+      "x": 1580.8079833984375,
+      "z": 32.50898361206055,
+      "feetY": 5.614513072967529,
+      "terrainCells": 1,
+      "terrainVertices": 792,
+      "terrainTriangles": 1472,
+      "featureObjects": 21,
+      "structureObjects": 0,
+      "solidColliders": 21,
+      "collisionInputBufferBytes": 27168,
+      "actualCellColliders": 22,
+      "actualTotalColliders": 27
+    },
+    {
+      "maxCapsuleEnvelopeBeyondBoundary": 0.004412103310187376,
+      "maxFeetError": 0.002530096451941688,
+      "finalVelocity": {
+        "x": 0.02197265625,
+        "z": 0.04428863525390625
+      },
+      "steadyBoundaryRange": 0.012939453125,
+      "direction": {
+        "x": -1,
+        "z": 0
+      },
+      "x": -1580.8023681640625,
+      "z": 31.93686294555664,
+      "feetY": 13.231785926818848,
+      "terrainCells": 1,
+      "terrainVertices": 792,
+      "terrainTriangles": 1472,
+      "featureObjects": 12,
+      "structureObjects": 0,
+      "solidColliders": 12,
+      "collisionInputBufferBytes": 27168,
+      "actualCellColliders": 13,
+      "actualTotalColliders": 18
+    },
+    {
+      "maxCapsuleEnvelopeBeyondBoundary": -0.0010810607523126237,
+      "maxFeetError": 0.00136756833173024,
+      "finalVelocity": {
+        "x": -0.002288818359375,
+        "z": -0.05859375
+      },
+      "steadyBoundaryRange": 0.0130615234375,
+      "direction": {
+        "x": 0,
+        "z": 1
+      },
+      "x": 31.43157958984375,
+      "z": 1580.80615234375,
+      "feetY": 19.853172454833985,
+      "terrainCells": 1,
+      "terrainVertices": 792,
+      "terrainTriangles": 1472,
+      "featureObjects": 14,
+      "structureObjects": 0,
+      "solidColliders": 14,
+      "collisionInputBufferBytes": 27168,
+      "actualCellColliders": 15,
+      "actualTotalColliders": 20
+    },
+    {
+      "maxCapsuleEnvelopeBeyondBoundary": 0.023210931435187376,
+      "maxFeetError": 0.0014624665507696477,
+      "finalVelocity": {
+        "x": -0.0936126708984375,
+        "z": 0.05859375
+      },
+      "steadyBoundaryRange": 0.0380859375,
+      "direction": {
+        "x": 0,
+        "z": -1
+      },
+      "x": 31.668790817260742,
+      "z": -1580.80908203125,
+      "feetY": 12.6492578125,
+      "terrainCells": 1,
+      "terrainVertices": 792,
+      "terrainTriangles": 1472,
+      "featureObjects": 17,
+      "structureObjects": 0,
+      "solidColliders": 17,
+      "collisionInputBufferBytes": 27168,
+      "actualCellColliders": 18,
+      "actualTotalColliders": 23
+    }
+  ],
+  "loadingRecovery": {
+    "cycles": 3,
+    "sequence": "legacy valley \u2192 distant regional corner \u2192 starting regional core \u2192 legacy valley",
+    "failedDestinationPreloadRecovered": true,
+    "duplicateColliders": false,
+    "actualTotalCollidersEveryCoreReturn": 464,
+    "measurements": [
+      {
+        "cycle": 0,
+        "terrainCells": 9,
+        "terrainVertices": 9801,
+        "terrainTriangles": 18432,
+        "featureObjects": 44,
+        "structureObjects": 0,
+        "solidColliders": 44,
+        "collisionInputBufferBytes": 338796,
+        "actualCellColliders": 375,
+        "actualTotalColliders": 464,
+        "coreFeatureObjects": 322,
+        "coreFeatureColliders": 322,
+        "fixedCoreColliders": 84,
+        "expectedTotalColliders": 464
+      },
+      {
+        "cycle": 1,
+        "terrainCells": 9,
+        "terrainVertices": 9801,
+        "terrainTriangles": 18432,
+        "featureObjects": 44,
+        "structureObjects": 0,
+        "solidColliders": 44,
+        "collisionInputBufferBytes": 338796,
+        "actualCellColliders": 375,
+        "actualTotalColliders": 464,
+        "coreFeatureObjects": 322,
+        "coreFeatureColliders": 322,
+        "fixedCoreColliders": 84,
+        "expectedTotalColliders": 464
+      },
+      {
+        "cycle": 2,
+        "terrainCells": 9,
+        "terrainVertices": 9801,
+        "terrainTriangles": 18432,
+        "featureObjects": 44,
+        "structureObjects": 0,
+        "solidColliders": 44,
+        "collisionInputBufferBytes": 338796,
+        "actualCellColliders": 375,
+        "actualTotalColliders": 464,
+        "coreFeatureObjects": 322,
+        "coreFeatureColliders": 322,
+        "fixedCoreColliders": 84,
+        "expectedTotalColliders": 464
+      }
+    ]
+  },
+  "measuredPeakCounts": {
+    "cornersAndEdges": {
+      "terrainCells": 1,
+      "terrainVertices": 792,
+      "terrainTriangles": 1472,
+      "featureObjects": 39,
+      "cellColliders": 40,
+      "totalColliders": 45
+    },
+    "coreRecoveryFixture": {
+      "terrainCells": 9,
+      "terrainVertices": 9801,
+      "terrainTriangles": 18432,
+      "regionalFeatureObjects": 44,
+      "coreFeatureObjects": 322,
+      "fixedCoreSolids": 84,
+      "cellColliders": 375,
+      "totalColliders": 464
+    },
+    "fixtureNote": "Measured native counts for these exact fixtures. Core recovery intentionally loads the complete pinned core feature catalog. These are not main-runtime residency cap measurements."
+  },
+  "memory": {
+    "peakTerrainCollisionInputBufferBytes": 338796,
+    "meaning": "Exact packed Float32 vertex plus Uint32 index input byte count derived from actual resident terrain arrays; excludes JS object/array overhead, native Rapier/WASM data, renderer and GPU memory.",
+    "runtimeRamOrGpuMeasurement": null
+  },
+  "journeyInputClarification": {
+    "existingReport": "evidence/regional-physics-report.json",
+    "travel": "Analog true, input vector normalized to strength1 for full sprint; strength0.36 for2m/s walking approaches within1.5m of each waypoint; sequential waypoint steering and acceleration included",
+    "metrics": "Calibration separately measures touch analog strengths0.36,0.58,0.8,1, keyboard-mapped0.69, and Shift-mapped1 at60Hz"
+  },
+  "checks": {
+    "tests": 3,
+    "pass": 3,
+    "fail": 0
+  },
+  "limitations": [
+    "No browser, physical-device RAM/GPU/FPS or internet multiplayer measurement",
+    "An additional exploratory 30-second boundary probe terminated with a Node/V8 jit_page fatal error after corner checks. Its cause was not established and it is not claimed as a pass. The committed 10-second-per-case suite reran successfully."
+  ]
+}

@@ -1,0 +1,10 @@
+✔ full tangential sprint remains real8m/s travel along every outer plane with enough resident terrain (2006.425638ms)
+ℹ {"scope":"Full analog tangent1 along four actual generated outer planes,30s each; complete6-chunk strips preloaded and native displacement velocities verified","measurements":[{"direction":{"x":1,"z":0},"metres":238.59942626953125,"seconds":30,"steadySpeed":7.999560546875,"residentCells":6,"groundedFraction":1,"blocked":0},{"direction":{"x":-1,"z":0},"metres":238.57369995117188,"seconds":30,"steadySpeed":7.999127197265625,"residentCells":6,"groundedFraction":1,"blocked":0},{"direction":{"x":0,"z":1},"metres":238.59671020507812,"seconds":30,"steadySpeed":7.99967041015625,"residentCells":6,"groundedFraction":1,"blocked":0},{"direction":{"x":0,"z":-1},"metres":237.06942749023438,"seconds":30,"steadySpeed":7.8482208251953125,"residentCells":6,"groundedFraction":1,"blocked":0}]}
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2189.337407

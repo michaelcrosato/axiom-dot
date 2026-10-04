@@ -1,0 +1,19 @@
+(node:6) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+{
+  "count": 100,
+  "planFailures": 0,
+  "gradeFailures": 0,
+  "collisionSamples": 0,
+  "maxGrade": 0.2698831558227539,
+  "worst": {
+    "seed": 1662112984,
+    "x": -44,
+    "z": -34,
+    "road": "region:1:1662112984/road/core-exit-0"
+  },
+  "minTrailMetres": 10230.916677335994,
+  "maxTrailMetres": 10864.215131413372,
+  "sampledTrailMetres": 1056898.9404945383,
+  "failures": []
+}

@@ -1,0 +1,177 @@
+(node:6) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+TAP version 13
+# (node:13) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:13) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: real worker prepares crowd paused at exact fractional time and menu pause freezes its authority
+ok 1 - real worker prepares crowd paused at exact fractional time and menu pause freezes its authority
+  ---
+  duration_ms: 1123.192498
+  type: 'test'
+  ...
+# (node:13) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: online worker repeated render inputs do not restart the shared snapshot prediction window
+ok 2 - online worker repeated render inputs do not restart the shared snapshot prediction window
+  ---
+  duration_ms: 665.723378
+  type: 'test'
+  ...
+# (node:13) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: actual Rapier player advances through yielding crowd without crossing a body or town wall
+ok 3 - actual Rapier player advances through yielding crowd without crossing a body or town wall
+  ---
+  duration_ms: 1941.273821
+  type: 'test'
+  ...
+# Subtest: co-op uses all peer actors for the same crowd sweep and cannot tunnel on a long movement packet
+ok 4 - co-op uses all peer actors for the same crowd sweep and cannot tunnel on a long movement packet
+  ---
+  duration_ms: 424.188631
+  type: 'test'
+  ...
+# Subtest: leaving and returning regenerates identical crowd from save time without crowd save payload
+ok 5 - leaving and returning regenerates identical crowd from save time without crowd save payload
+  ---
+  duration_ms: 29.827331
+  type: 'test'
+  ...
+# Subtest: co-op town broadphase covers the whole allowed movement segment from outside town
+not ok 6 - co-op town broadphase covers the whole allowed movement segment from outside town
+  ---
+  duration_ms: 36.559876
+  type: 'test'
+  location: '/workspace/scratch/85cbbff567f9/axiom-experimental-preview/tests/town-crowd-authority.test.ts:12:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The expression evaluated to a falsy value:
+    
+      assert(host.player.x<target.x-.2)
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/scratch/85cbbff567f9/axiom-experimental-preview/tests/town-crowd-authority.test.ts:12:658)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# (node:14) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: fine shared town clock includes fractional accumulator without changing the causal ledger
+ok 7 - fine shared town clock includes fractional accumulator without changing the causal ledger
+  ---
+  duration_ms: 1.938128
+  type: 'test'
+  ...
+# Subtest: canonical crowd positions agree at common timestamps across 30 60 and 120 Hz and query order
+ok 8 - canonical crowd positions agree at common timestamps across 30 60 and 120 Hz and query order
+  ---
+  duration_ms: 558.462362
+  type: 'test'
+  ...
+# Subtest: presentation clock interpolates 60 Hz and 4 Hz anchors at 120 Hz then bounds stalls and pauses
+ok 9 - presentation clock interpolates 60 Hz and 4 Hz anchors at 120 Hz then bounds stalls and pauses
+  ---
+  duration_ms: 2.36947
+  type: 'test'
+  ...
+# Subtest: all 100 canonical bodies stay finite and clear town solids for ordinary full-cycle samples
+ok 10 - all 100 canonical bodies stay finite and clear town solids for ordinary full-cycle samples
+  ---
+  duration_ms: 5137.305769
+  type: 'test'
+  ...
+# Subtest: crowd actors are deterministic in peer order, yield within bounded offsets and retain open door corridors
+ok 11 - crowd actors are deterministic in peer order, yield within bounded offsets and retain open door corridors
+  ---
+  duration_ms: 23.128148
+  type: 'test'
+  ...
+# Subtest: swept body contacts block long crossing, preserve tangential movement, allow overlap escape and ignore roof height
+ok 12 - swept body contacts block long crossing, preserve tangential movement, allow overlap escape and ignore roof height
+  ---
+  duration_ms: 0.329118
+  type: 'test'
+  ...
+# Subtest: bounded render correction is smooth at 30 60 and 120 Hz, freezes paused poses and resets teleports
+ok 13 - bounded render correction is smooth at 30 60 and 120 Hz, freezes paused poses and resets teleports
+  ---
+  duration_ms: 490.706731
+  type: 'test'
+  ...
+# Subtest: appearance has seeded legible silhouette diversity and immutable stable identity across seed cache eviction
+ok 14 - appearance has seeded legible silhouette diversity and immutable stable identity across seed cache eviction
+  ---
+  duration_ms: 6.997962
+  type: 'test'
+  ...
+# Subtest: articulated gait alternates planted and lifted soles with connected equal-length leg segments
+ok 15 - articulated gait alternates planted and lifted soles with connected equal-length leg segments
+  ---
+  duration_ms: 32.00014
+  type: 'test'
+  ...
+# Subtest: default stance foot is world-stationary on straight constant-speed travel and diagnostic gait knob really changes output
+ok 16 - default stance foot is world-stationary on straight constant-speed travel and diagnostic gait knob really changes output
+  ---
+  duration_ms: 2.085566
+  type: 'test'
+  ...
+# Subtest: view updates every frame while retaining 10/2 Hz activity budgets and bounded instance resources
+ok 17 - view updates every frame while retaining 10/2 Hz activity budgets and bounded instance resources
+  ---
+  duration_ms: 205.496601
+  type: 'test'
+  ...
+# Subtest: version-two registry validates low default and high values; unknown legacy settings fail explicitly
+ok 18 - version-two registry validates low default and high values; unknown legacy settings fail explicitly
+  ---
+  duration_ms: 0.781081
+  type: 'test'
+  ...
+# Subtest: two-peer pinch points retain NPC spacing as well as player and wall exclusion
+ok 19 - two-peer pinch points retain NPC spacing as well as player and wall exclusion
+  ---
+  duration_ms: 12.398035
+  type: 'test'
+  ...
+# (node:15) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: town directory dispatches exact expected revision, recovers pending rejection and disposes polling
+ok 20 - town directory dispatches exact expected revision, recovers pending rejection and disposes polling
+  ---
+  duration_ms: 181.541484
+  type: 'test'
+  ...
+# Subtest: disposable town model applies actual knobs, stages strict import, resets and never mutates campaign
+ok 21 - disposable town model applies actual knobs, stages strict import, resets and never mutates campaign
+  ---
+  duration_ms: 44.159002
+  type: 'test'
+  ...
+# Subtest: town startup, normal visit and developer access retain existing readiness and lifecycle gates
+ok 22 - town startup, normal visit and developer access retain existing readiness and lifecycle gates
+  ---
+  duration_ms: 3.376505
+  type: 'test'
+  ...
+1..22
+# tests 22
+# suites 0
+# pass 21
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 6878.399043

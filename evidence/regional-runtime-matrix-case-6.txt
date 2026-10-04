@@ -1,0 +1,10 @@
+✔ regional online motion receipts cannot bypass the shared capsule center domain (563.29913ms)
+ℹ {"scope":"Grounded and airborne online-equivalent receipts at schema extent normalize before local application;30s outward prediction retains bound","limit":1580.798828125,"groundedX":1580.798828125,"airborneX":1580.798828125}
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 742.882564

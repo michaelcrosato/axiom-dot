@@ -1,0 +1,14 @@
+import * as THREE from 'three/webgpu';
+import {Worker} from 'node:worker_threads';
+import {execFileSync} from 'node:child_process';
+import {writeFile} from 'node:fs/promises';
+import {createAnimationReviewRunner,animationClip,type ReviewWorker} from '../src/animation-review.ts';
+import {createAvatar} from '../src/avatar.ts';
+const runner=createAnimationReviewRunner(()=>{const native=new Worker(`const {parentPort}=require('node:worker_threads');globalThis.self=globalThis;self.postMessage=m=>parentPort.postMessage(m);let ready=false,q=[];parentPort.on('message',m=>ready?self.onmessage({data:m}):q.push(m));import(${JSON.stringify(new URL('../src/physics.worker.ts',import.meta.url).href)}).then(()=>{ready=true;for(const m of q)self.onmessage({data:m});});`,{eval:true,execArgv:['--experimental-strip-types']});const w:ReviewWorker={onmessage:null,onerror:null,postMessage:m=>native.postMessage(m),terminate(){void native.terminate();}};native.on('message',data=>w.onmessage?.({data}));native.on('error',e=>w.onerror?.({message:e.message}));return w;});
+const run=await runner.load(animationClip('ledge-climb'));runner.dispose();const avatar=createAvatar(),results:any[]=[],issues:any[]=[];
+for(const f of run.frames){const p=f.physics,c=p.contact;avatar.root.position.set(p.x,p.feetY,p.z);avatar.update(f.animation,null,0,undefined,c);const e=avatar.getPoseEvidence();const penetrating:Record<string,number>={};if(c.mode==='hang'||c.mode==='climb')avatar.root.traverse(o=>{if(!(o instanceof THREE.Mesh))return;const a=o.geometry.getAttribute('position');for(let i=0;i<a.count;i++){const v=new THREE.Vector3().fromBufferAttribute(a,i).applyMatrix4(o.matrixWorld);if(v.y<2.38&&v.x>.72&&v.x<2.28&&Math.abs(v.z)<1.98)penetrating[o.parent?.name??'?']=Math.max(penetrating[o.parent?.name??'?']??0,Math.min(2.4-v.y,v.x-.7));}});
+const issue={tick:f.tick,t:c.mantle?.progress,phase:c.mantle?.phase,anchorL:e.anchors.left.error,anchorR:e.anchors.right.error,clampL:e.anchors.left.clamped,clampR:e.anchors.right.clamped,penetrating,kneeError:c.mantle?.leftKnee?new THREE.Vector3().fromArray(e.joints.leftKnee!.world.position).distanceTo(new THREE.Vector3(c.mantle.leftKnee.x,c.mantle.leftKnee.y,c.mantle.leftKnee.z)):null};
+if(issue.clampL||issue.clampR||Object.keys(penetrating).length||issue.kneeError&&issue.kneeError>.005)issues.push(issue);results.push({...f,rig:e,issue});}
+const file=process.argv[2]??'/tmp/axiom-mantle-trace.json',revision=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
+await writeFile(file,JSON.stringify({source:run.source,sourceRevision:revision,rendered:false,visualReview:'not-reviewed',frames:results},null,2));
+console.log(JSON.stringify({file,sourceRevision:revision,frames:results.length,numericIssues:issues.length,issues,rendered:false,visualReview:'not-reviewed'},null,2));

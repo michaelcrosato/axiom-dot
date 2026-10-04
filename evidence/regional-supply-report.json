@@ -1,0 +1,529 @@
+{
+  "version": 1,
+  "status": "verified",
+  "measuredAt": "2026-10-02T06:37:40.169Z",
+  "source": {
+    "head": "3023c392947f50845b89a57b82ab6cb7878f7083",
+    "workingTreeDirty": true,
+    "sha256": {
+      "src/regional-view.ts": "9d9441c2b87a51cd3b922f71c335e26aa08791769d5ecf4530d7c8370dffad78",
+      "src/main.ts": "1a310131bb68ce0cdbd7f2d434ad787dea5c27f7aeb0b992f07b7e3ccf56ca18",
+      "src/session.ts": "4f6d197886f486f507695d31a3fbd7b1c10e71344eaf91e39ad89ecdece7e542",
+      "src/world-map-view.ts": "8766d0ab66135ed82814b646b2832668c66b2f64849879b5bae86db1629923c3",
+      "src/regional-supply-ui.ts": "029e8aa5ccf57e250407a88c1f0edc805882588f7e046bddf570a588bd76d6dc",
+      "src/regional-supply-view.ts": "44c9dffc40d652ff2959fcee463e8b5d2a7f063e744fc25d910e40dc9ecd7ce1",
+      "server/coop-authority.ts": "91794e3d3df7c4bc553fbbb14823693770f250f0f4bb630230fb22e53613454b",
+      "server/coop-api.ts": "133e672149644d8ecc24f08ebdbae95963fd3b1cb03b666095667db1affd20cd",
+      "server/coop-validation.ts": "ad6806cd7e70159bedcc19b5964d8960241dce913c3c837933606d3bf34a4a21",
+      "src/regional-supply.ts": "51cd8d9c1177aab50be3068e24197fb38f9315cf94aa7b28a36538074642a525",
+      "src/regional-supply-lab.ts": "dfebb67202171a04b39a286a8b015b3422b0b8d71e03d0df779bd7a319f11a48",
+      "src/world.ts": "b36a30a414ab8813dd6560d12d9cea94f9534dec585f7d91b97c35ecf0056062",
+      "src/regional-world.ts": "cb7903f27255c1f59f4abaa61af76a60701e71a90c70d4ca8097c9fba446b174",
+      "src/wilderness-state.ts": "1ed057c900ee76646e65d9ae6f195effccf38523306cdfcc7897959f062028d0",
+      "src/wilderness.ts": "7028595f5fd1b368e8c425723baa6e6e73834005ac829335d19e761f64f959e1",
+      "src/wilderness-geometry.ts": "68ade05e6fa8d2e76db846b17438bfc80ae091abb514ac1bf5dbb17d5b57438f",
+      "src/ecology.ts": "e6b0198a0efbf9987ae90adc736b52fae3519aba29e861e4ad68d6ab1bad991a",
+      "src/physics.worker.ts": "05a79fa9411f4285ce6a7dcd12e3a3e6626802f6162a924f4c09dde41aaa657f",
+      "src/tuning.ts": "7e7c9fae5b6546e9e7efd107c836b543bba02b7e31049b1b2601e8a61b534053",
+      "src/contact-physics.ts": "785cc37cf93e11cb748e18b495b14261c5ab9bcf2b7e3ab0302bd7bbf979e414",
+      "src/player-contact.ts": "7deb547429e2d6ad1dfc84cc8061a110bdc441454de23e9fdfc884a7fb4842af",
+      "src/locomotion.ts": "b138b894d61d68c6765a5260490252bbff638536cd374319582c3707d6c0efc5",
+      "src/ledge-mantle.ts": "64d68205951405f0597d5b877b5c295867c8ccd3194a3ba38cb57b1195688f39",
+      "tests/helpers/regional-physics.ts": "5fa8ccb279788fdfef0f27a16ecc86a90ea9d4e472764936b2e75b8b1f4b12b6",
+      "tests/regional-supply-integration.test.ts": "e845c793b5a7165a941b0c2af0eeb6a0c5b70c63f52ff92475aa27f48c1e3ef2",
+      "tests/regional-supply-physics.test.ts": "9eae2d4b42d0e493bedd132cd673f673d1ee74e6adc792acd1e8861eed364c48",
+      "tests/regional-supply-terrain-physics.test.ts": "d10566a482ad2abb2099e656538a37a8912c7b4795b620770c51b63fc07665ea",
+      "tests/regional-supply-main.test.ts": "15e9a689aae9109b4e481cbd51713db76439214a7e4ad2d42a88cc604a425759",
+      "scripts/measure-regional-supply.mts": "7402b870a516bfdb01cb2ca17012f137c57630600f3becaca59d187bd56c9fe0",
+      "package.json": "d5d0ee7cb3bfa753c33408135d772f983d7371f1ad371ac6d3dd39d980d5e9ef",
+      "package-lock.json": "10ffd31c5f9406511b2fd7bdd1f2ca5f019d245e3f71fedc9dc9cd4763280a32"
+    },
+    "runtime": "v22.23.0"
+  },
+  "scope": "Disposable deterministic production-model scenarios with canonical resource gathering, accepted reach/elevation/occlusion, clear standing-capsule approaches, resident route/work/water ledgers, and save reload. Movement between approaches is assigned through model actions. No live campaign/storage access. Model geometry checks are not a Rapier-controller traversal, browser visual approval, device frame-rate measurement, or multiplayer transport test.",
+  "command": "node --experimental-strip-types --test --test-reporter=spec tests/regional-supply-integration.test.ts tests/regional-supply-physics.test.ts tests/regional-supply-terrain-physics.test.ts tests/regional-supply-main.test.ts",
+  "testFiles": [
+    "tests/regional-supply-integration.test.ts",
+    "tests/regional-supply-physics.test.ts",
+    "tests/regional-supply-terrain-physics.test.ts",
+    "tests/regional-supply-main.test.ts"
+  ],
+  "lab": {
+    "version": 1,
+    "seed": 73129,
+    "iterations": 3,
+    "sourceRevision": "3023c392947f50845b89a57b82ab6cb7878f7083",
+    "scope": "Disposable deterministic production-model scenarios with canonical resource gathering, accepted reach/elevation/occlusion, clear standing-capsule approaches, resident route/work/water ledgers, and save reload. Movement between approaches is assigned through model actions. No live campaign/storage access. Model geometry checks are not a Rapier-controller traversal, browser visual approval, device frame-rate measurement, or multiplayer transport test.",
+    "status": "complete",
+    "runs": [
+      {
+        "iteration": 1,
+        "checks": [
+          {
+            "name": "Earned finite raw materials",
+            "expected": "Every unit comes from a distinct reachable canonical source; repeated gathering adds nothing",
+            "pass": true,
+            "actual": "5 wood, 4 stone; 9 unique source IDs; minimum standing-body clearance 0.4800 m"
+          },
+          {
+            "name": "Delivery requires presence",
+            "expected": "A remote delivery is rejected before any stock allocation",
+            "pass": true,
+            "actual": "Remote board action rejected"
+          },
+          {
+            "name": "Atomic bounded local delivery",
+            "expected": "Only the requested project cost is allocated; lifetime harvest counts stay unchanged",
+            "pass": true,
+            "actual": "4 wood + 3 stone delivered; 1 wood + 1 stone still available"
+          },
+          {
+            "name": "Duplicate delivery is inert",
+            "expected": "A satisfied project cannot consume the remaining pack",
+            "pass": true,
+            "actual": "No state, stock or revision change"
+          },
+          {
+            "name": "Scaffold starts physical work",
+            "expected": "Paid construction exposes project geometry and requires resident work",
+            "pass": true,
+            "actual": "2 project shapes; 0 work ticks on start"
+          },
+          {
+            "name": "Duplicate start is inert",
+            "expected": "Repeated build commands never restart or complete construction",
+            "pass": true,
+            "actual": "Second build start leaves the active project unchanged"
+          },
+          {
+            "name": "In-progress reload",
+            "expected": "Reload preserves construction work, residents and exact material allocation",
+            "pass": true,
+            "actual": "12.5 work ticks; 11937 campaign bytes"
+          },
+          {
+            "name": "Conserved caught water",
+            "expected": "Captured rain equals stored, carried, consumed and spilled water, with no unexplained creation",
+            "pass": true,
+            "actual": "Residual -2.220e-16 L; consumed 2.000000 L equals resident drinking"
+          },
+          {
+            "name": "Resident construction completes",
+            "expected": "Resident route/work progression completes the paid catchment after nonzero simulated time",
+            "pass": true,
+            "actual": "48/48 work ticks; completed after 15 simulation seconds"
+          },
+          {
+            "name": "Rain reaches real resident needs",
+            "expected": "Residents collect catchment water, drink it and have less thirst than the same-time unbuilt control",
+            "pass": true,
+            "actual": "2.000000 L drunk; thirst 40.250, 40.250 vs dry 65.250, 65.250"
+          },
+          {
+            "name": "Completed tank replaces scaffold appearance",
+            "expected": "The completed project keeps its authorized physical envelope and changes construction material",
+            "pass": true,
+            "actual": "2 construction shapes → 2 completed shapes"
+          },
+          {
+            "name": "Leave, revisit and reload",
+            "expected": "Project, people, water and exhausted source records survive cache eviction and exact serialization",
+            "pass": true,
+            "actual": "11915 campaign bytes; 3476 supply-state bytes; exact round trip true"
+          },
+          {
+            "name": "Legacy plan is unchanged",
+            "expected": "Six new supply records reuse the original six outpost IDs; roads remain the original regional plan",
+            "pass": true,
+            "actual": "6 stable outpost IDs; 16 original roads"
+          },
+          {
+            "name": "Bounded state and geometry",
+            "expected": "Only six projects and twelve resident actors are persisted; supply payload stays below 20 KB",
+            "pass": true,
+            "actual": "3476 supply bytes; 12 actors; 2 active project colliders; 491.9 ms local CPU wall time"
+          },
+          {
+            "name": "Campaign isolation",
+            "expected": "The fixture did not mutate its starting campaign; no live state or storage is accepted by the API",
+            "pass": true,
+            "actual": "Fresh isolated state remains unchanged"
+          }
+        ],
+        "metrics": {
+          "sourceIds": [
+            "region:1:73129/chunk:-5:3/feature:4",
+            "region:1:73129/chunk:-5:3/feature:39",
+            "region:1:73129/chunk:-5:3/feature:5",
+            "region:1:73129/chunk:-5:3/feature:17",
+            "region:1:73129/chunk:-5:2/feature:14",
+            "region:1:73129/chunk:-5:3/feature:14",
+            "region:1:73129/chunk:-5:2/feature:2",
+            "region:1:73129/chunk:-5:3/feature:3",
+            "region:1:73129/chunk:-6:2/feature:0"
+          ],
+          "harvestedWood": 5,
+          "harvestedStone": 4,
+          "minimumGatherBodyClearance": 0.4800000000000227,
+          "outpostId": "region:1:73129/site/0",
+          "outpostName": "Alder Waystation",
+          "biome": "meadow",
+          "modelSeconds": 43.75,
+          "workCompletionSeconds": 15,
+          "workTicks": 48,
+          "waterDrunkLitres": 2,
+          "waterStoredLitres": 0.01,
+          "capturedLitres": 2.01,
+          "precipitationLitres": 4.8,
+          "spilledLitres": 0,
+          "consumedLitres": 2,
+          "residentCount": 2,
+          "waterBalanceErrorLitres": 2.220446049250313e-16,
+          "supplyStateBytes": 3476,
+          "saveBytes": 11915,
+          "projectColliderCount": 2,
+          "actorCount": 12,
+          "elapsedMilliseconds": 491.9204039999995
+        }
+      },
+      {
+        "iteration": 2,
+        "checks": [
+          {
+            "name": "Earned finite raw materials",
+            "expected": "Every unit comes from a distinct reachable canonical source; repeated gathering adds nothing",
+            "pass": true,
+            "actual": "5 wood, 4 stone; 9 unique source IDs; minimum standing-body clearance 0.4800 m"
+          },
+          {
+            "name": "Delivery requires presence",
+            "expected": "A remote delivery is rejected before any stock allocation",
+            "pass": true,
+            "actual": "Remote board action rejected"
+          },
+          {
+            "name": "Atomic bounded local delivery",
+            "expected": "Only the requested project cost is allocated; lifetime harvest counts stay unchanged",
+            "pass": true,
+            "actual": "4 wood + 3 stone delivered; 1 wood + 1 stone still available"
+          },
+          {
+            "name": "Duplicate delivery is inert",
+            "expected": "A satisfied project cannot consume the remaining pack",
+            "pass": true,
+            "actual": "No state, stock or revision change"
+          },
+          {
+            "name": "Scaffold starts physical work",
+            "expected": "Paid construction exposes project geometry and requires resident work",
+            "pass": true,
+            "actual": "2 project shapes; 0 work ticks on start"
+          },
+          {
+            "name": "Duplicate start is inert",
+            "expected": "Repeated build commands never restart or complete construction",
+            "pass": true,
+            "actual": "Second build start leaves the active project unchanged"
+          },
+          {
+            "name": "In-progress reload",
+            "expected": "Reload preserves construction work, residents and exact material allocation",
+            "pass": true,
+            "actual": "12.5 work ticks; 11937 campaign bytes"
+          },
+          {
+            "name": "Conserved caught water",
+            "expected": "Captured rain equals stored, carried, consumed and spilled water, with no unexplained creation",
+            "pass": true,
+            "actual": "Residual -2.220e-16 L; consumed 2.000000 L equals resident drinking"
+          },
+          {
+            "name": "Resident construction completes",
+            "expected": "Resident route/work progression completes the paid catchment after nonzero simulated time",
+            "pass": true,
+            "actual": "48/48 work ticks; completed after 15 simulation seconds"
+          },
+          {
+            "name": "Rain reaches real resident needs",
+            "expected": "Residents collect catchment water, drink it and have less thirst than the same-time unbuilt control",
+            "pass": true,
+            "actual": "2.000000 L drunk; thirst 40.250, 40.250 vs dry 65.250, 65.250"
+          },
+          {
+            "name": "Completed tank replaces scaffold appearance",
+            "expected": "The completed project keeps its authorized physical envelope and changes construction material",
+            "pass": true,
+            "actual": "2 construction shapes → 2 completed shapes"
+          },
+          {
+            "name": "Leave, revisit and reload",
+            "expected": "Project, people, water and exhausted source records survive cache eviction and exact serialization",
+            "pass": true,
+            "actual": "11915 campaign bytes; 3476 supply-state bytes; exact round trip true"
+          },
+          {
+            "name": "Legacy plan is unchanged",
+            "expected": "Six new supply records reuse the original six outpost IDs; roads remain the original regional plan",
+            "pass": true,
+            "actual": "6 stable outpost IDs; 16 original roads"
+          },
+          {
+            "name": "Bounded state and geometry",
+            "expected": "Only six projects and twelve resident actors are persisted; supply payload stays below 20 KB",
+            "pass": true,
+            "actual": "3476 supply bytes; 12 actors; 2 active project colliders; 260.4 ms local CPU wall time"
+          },
+          {
+            "name": "Campaign isolation",
+            "expected": "The fixture did not mutate its starting campaign; no live state or storage is accepted by the API",
+            "pass": true,
+            "actual": "Fresh isolated state remains unchanged"
+          }
+        ],
+        "metrics": {
+          "sourceIds": [
+            "region:1:73129/chunk:-5:3/feature:4",
+            "region:1:73129/chunk:-5:3/feature:39",
+            "region:1:73129/chunk:-5:3/feature:5",
+            "region:1:73129/chunk:-5:3/feature:17",
+            "region:1:73129/chunk:-5:2/feature:14",
+            "region:1:73129/chunk:-5:3/feature:14",
+            "region:1:73129/chunk:-5:2/feature:2",
+            "region:1:73129/chunk:-5:3/feature:3",
+            "region:1:73129/chunk:-6:2/feature:0"
+          ],
+          "harvestedWood": 5,
+          "harvestedStone": 4,
+          "minimumGatherBodyClearance": 0.4800000000000227,
+          "outpostId": "region:1:73129/site/0",
+          "outpostName": "Alder Waystation",
+          "biome": "meadow",
+          "modelSeconds": 43.75,
+          "workCompletionSeconds": 15,
+          "workTicks": 48,
+          "waterDrunkLitres": 2,
+          "waterStoredLitres": 0.01,
+          "capturedLitres": 2.01,
+          "precipitationLitres": 4.8,
+          "spilledLitres": 0,
+          "consumedLitres": 2,
+          "residentCount": 2,
+          "waterBalanceErrorLitres": 2.220446049250313e-16,
+          "supplyStateBytes": 3476,
+          "saveBytes": 11915,
+          "projectColliderCount": 2,
+          "actorCount": 12,
+          "elapsedMilliseconds": 260.3844960000006
+        }
+      },
+      {
+        "iteration": 3,
+        "checks": [
+          {
+            "name": "Earned finite raw materials",
+            "expected": "Every unit comes from a distinct reachable canonical source; repeated gathering adds nothing",
+            "pass": true,
+            "actual": "5 wood, 4 stone; 9 unique source IDs; minimum standing-body clearance 0.4800 m"
+          },
+          {
+            "name": "Delivery requires presence",
+            "expected": "A remote delivery is rejected before any stock allocation",
+            "pass": true,
+            "actual": "Remote board action rejected"
+          },
+          {
+            "name": "Atomic bounded local delivery",
+            "expected": "Only the requested project cost is allocated; lifetime harvest counts stay unchanged",
+            "pass": true,
+            "actual": "4 wood + 3 stone delivered; 1 wood + 1 stone still available"
+          },
+          {
+            "name": "Duplicate delivery is inert",
+            "expected": "A satisfied project cannot consume the remaining pack",
+            "pass": true,
+            "actual": "No state, stock or revision change"
+          },
+          {
+            "name": "Scaffold starts physical work",
+            "expected": "Paid construction exposes project geometry and requires resident work",
+            "pass": true,
+            "actual": "2 project shapes; 0 work ticks on start"
+          },
+          {
+            "name": "Duplicate start is inert",
+            "expected": "Repeated build commands never restart or complete construction",
+            "pass": true,
+            "actual": "Second build start leaves the active project unchanged"
+          },
+          {
+            "name": "In-progress reload",
+            "expected": "Reload preserves construction work, residents and exact material allocation",
+            "pass": true,
+            "actual": "12.5 work ticks; 11937 campaign bytes"
+          },
+          {
+            "name": "Conserved caught water",
+            "expected": "Captured rain equals stored, carried, consumed and spilled water, with no unexplained creation",
+            "pass": true,
+            "actual": "Residual -2.220e-16 L; consumed 2.000000 L equals resident drinking"
+          },
+          {
+            "name": "Resident construction completes",
+            "expected": "Resident route/work progression completes the paid catchment after nonzero simulated time",
+            "pass": true,
+            "actual": "48/48 work ticks; completed after 15 simulation seconds"
+          },
+          {
+            "name": "Rain reaches real resident needs",
+            "expected": "Residents collect catchment water, drink it and have less thirst than the same-time unbuilt control",
+            "pass": true,
+            "actual": "2.000000 L drunk; thirst 40.250, 40.250 vs dry 65.250, 65.250"
+          },
+          {
+            "name": "Completed tank replaces scaffold appearance",
+            "expected": "The completed project keeps its authorized physical envelope and changes construction material",
+            "pass": true,
+            "actual": "2 construction shapes → 2 completed shapes"
+          },
+          {
+            "name": "Leave, revisit and reload",
+            "expected": "Project, people, water and exhausted source records survive cache eviction and exact serialization",
+            "pass": true,
+            "actual": "11915 campaign bytes; 3476 supply-state bytes; exact round trip true"
+          },
+          {
+            "name": "Legacy plan is unchanged",
+            "expected": "Six new supply records reuse the original six outpost IDs; roads remain the original regional plan",
+            "pass": true,
+            "actual": "6 stable outpost IDs; 16 original roads"
+          },
+          {
+            "name": "Bounded state and geometry",
+            "expected": "Only six projects and twelve resident actors are persisted; supply payload stays below 20 KB",
+            "pass": true,
+            "actual": "3476 supply bytes; 12 actors; 2 active project colliders; 247.7 ms local CPU wall time"
+          },
+          {
+            "name": "Campaign isolation",
+            "expected": "The fixture did not mutate its starting campaign; no live state or storage is accepted by the API",
+            "pass": true,
+            "actual": "Fresh isolated state remains unchanged"
+          }
+        ],
+        "metrics": {
+          "sourceIds": [
+            "region:1:73129/chunk:-5:3/feature:4",
+            "region:1:73129/chunk:-5:3/feature:39",
+            "region:1:73129/chunk:-5:3/feature:5",
+            "region:1:73129/chunk:-5:3/feature:17",
+            "region:1:73129/chunk:-5:2/feature:14",
+            "region:1:73129/chunk:-5:3/feature:14",
+            "region:1:73129/chunk:-5:2/feature:2",
+            "region:1:73129/chunk:-5:3/feature:3",
+            "region:1:73129/chunk:-6:2/feature:0"
+          ],
+          "harvestedWood": 5,
+          "harvestedStone": 4,
+          "minimumGatherBodyClearance": 0.4800000000000227,
+          "outpostId": "region:1:73129/site/0",
+          "outpostName": "Alder Waystation",
+          "biome": "meadow",
+          "modelSeconds": 43.75,
+          "workCompletionSeconds": 15,
+          "workTicks": 48,
+          "waterDrunkLitres": 2,
+          "waterStoredLitres": 0.01,
+          "capturedLitres": 2.01,
+          "precipitationLitres": 4.8,
+          "spilledLitres": 0,
+          "consumedLitres": 2,
+          "residentCount": 2,
+          "waterBalanceErrorLitres": 2.220446049250313e-16,
+          "supplyStateBytes": 3476,
+          "saveBytes": 11915,
+          "projectColliderCount": 2,
+          "actorCount": 12,
+          "elapsedMilliseconds": 247.6614440000003
+        }
+      }
+    ]
+  },
+  "coverage": {
+    "allOutposts": {
+      "regionalSupplyAllOutposts": 1,
+      "projectCount": 6,
+      "costs": [
+        "4/3",
+        "5/3",
+        "4/4",
+        "6/5",
+        "3/6"
+      ],
+      "harvested": {
+        "wood": 26,
+        "stone": 24
+      },
+      "simulationSeconds": 68,
+      "supplyBytes": 4660,
+      "waterDrunk": [
+        {
+          "id": "region:1:73129/site/0",
+          "drunk": 2
+        },
+        {
+          "id": "region:1:73129/site/1",
+          "drunk": 2
+        },
+        {
+          "id": "region:1:73129/site/5",
+          "drunk": 2
+        },
+        {
+          "id": "region:1:73129/site/6",
+          "drunk": 2
+        },
+        {
+          "id": "region:1:73129/site/8",
+          "drunk": 2
+        },
+        {
+          "id": "region:1:73129/site/11",
+          "drunk": 2
+        }
+      ]
+    },
+    "geometry": {
+      "regionalSupplyGeometry": 1,
+      "scope": "Production model geometry, capsule-distance and road-corridor checks; not an executed physics traversal",
+      "samples": 354,
+      "minimumClearance": 0.019999999999999074
+    },
+    "physics": {
+      "regionalSupplyPhysics": 1,
+      "scope": "Actual production Rapier controller in isolated flat-ground project fixtures; no browser visual, regional path traversal, or device benchmark",
+      "scaffoldColliders": 2,
+      "completedColliders": 2,
+      "scaffoldSamples": 100,
+      "completedSamples": 100,
+      "minimumScaffoldClearance": 0.020594959259021828,
+      "minimumCompletedClearance": 0.020594959259021828,
+      "savedGeometryExact": true
+    },
+    "regionalTerrainPhysics": {
+      "regionalSupplyTerrainPhysics": 1,
+      "scope": "Actual generated regional 3×3 terrain chunks, original shelter/tree/rock solids, production Rapier controller and new project colliders; actual unload/reload and persisted completed tank. No browser visual or device benchmark.",
+      "seed": 73129,
+      "outpostId": "region:1:73129/site/0",
+      "samples": 458,
+      "minimumProjectClearance": 0.02066249999995079,
+      "maxTerrainSupportError": 0.002017173767089986,
+      "residentTerrainCells": 9,
+      "cellColliders": 178,
+      "savedStructureExact": true
+    }
+  },
+  "checks": {
+    "exitCode": 0,
+    "sourceUnchangedDuringRun": true
+  }
+}

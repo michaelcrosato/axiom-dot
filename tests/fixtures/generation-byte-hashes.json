@@ -1,0 +1,40 @@
+{
+  "revision": "aec8b2b88772926107b85719678de800706def39",
+  "fixtures": [
+    {
+      "seed": 0,
+      "valley": "f7a424c91b352734642e5da85ea9393071eb1f03f919ebd5de95d4cb06a14779",
+      "dungeon": "2fc7bc63c4ace140032df0ac6896d32c151bf292228d15719fedd0b193030e82",
+      "legacyDungeon": "4de81bf3b870b4ecabb284be1567ae89650e25cf68e109b8320799ab47b604ef",
+      "workshop": "e8edee4b85f5ddd35e9bab3242c891aa111d1d6260064600b1dc7e1f55035f8f"
+    },
+    {
+      "seed": 1,
+      "valley": "8ec14a2d9717e2f6d857a422b87de174647b5c464fc77f12f32a0ad457b0d6d0",
+      "dungeon": "6d58a0a3bf079d97674a5a1d88fd8cbb8b43bfe9100957e529a109441cac7ac1",
+      "legacyDungeon": "aa0d13f0688c1112efdc5ff777cc6c0f1a6c36d22d07e51195ba64cdb01b0861",
+      "workshop": "4dfdcd392cc7f5ad4f453a6489201f49919551a637794db7d5044bc4318abe4e"
+    },
+    {
+      "seed": 606,
+      "valley": "2992b1a91156ada7d5f595eba1143c66b0210a95f1430786c5d5ec074d62bbce",
+      "dungeon": "d7e792bfc06f3fb7e03164cdfd6a6e9f98d6725876c42e0d4124aa88f24f80c3",
+      "legacyDungeon": "147abbb7d5663876f4bd0ebbe2987a3dc2950895c4a4476d67b80ce32d0536ca",
+      "workshop": "d0aa84a5d7ae39631cf96c35b834738795d404e1998c25af6d7fc90bec0d1130"
+    },
+    {
+      "seed": 73129,
+      "valley": "cf41fac50a98d0d4ecea53c9f8cbdff39383fcd5818aaaadf80e314f32fe6bb3",
+      "dungeon": "bf06359359a217dc108962e7cb77db3bf845a5ef6438c57c0f636904774cea7d",
+      "legacyDungeon": "41cf545b58e2f3475159495388866685373ef00ed09ad9df9f6f1b1a3a22510a",
+      "workshop": "ff21d65d4108a343762e6bd7c4954a9f99db61366efe3cfc3799c9e59c22b20a"
+    },
+    {
+      "seed": 4294967295,
+      "valley": "ba0f1719bf1921cd777b54924eb2ab926e9f651f06b7a1a2cdc5d4da22c0b468",
+      "dungeon": "ada4665e8548d432117aa0e5f8e74be113cf2b57fe500b2380df90e7da22fbcb",
+      "legacyDungeon": "ab70536332f15571f2bc3f54dcfba005086237fabb5f975697e75ae1703161ea",
+      "workshop": "81c8619f55fc7ebf91e34d1037e28e265586222b75aa83372a78c70a3d0307b5"
+    }
+  ]
+}

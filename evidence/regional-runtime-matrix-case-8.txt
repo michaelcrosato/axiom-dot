@@ -1,0 +1,10 @@
+✔ explicit old-coordinate terrain heights normalize before edge spawn and teleport without changing intentional airborne heights (357.289648ms)
+ℹ {"scope":"Main-style explicit oldXZ terrain-height spawn and teleport resample at accepted normalizedXZ; deliberate airborne height remains unchanged","oldGround":17.787954330444336,"newGround":17.803292928749283,"acceptedX":1580.798828125,"acceptedZ":1580.798828125,"groundedFeetY":17.803291473388672,"airborneFeetY":20.787954483032227}
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 743.998419

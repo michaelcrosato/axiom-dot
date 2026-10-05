@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --host 0.0.0.0",
+    "dev": "vite --config vite.client.config.ts --host 0.0.0.0",
     "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.server.json",
     "build": "node scripts/build.mjs",
     "test": "node --experimental-strip-types --test tests/*.test.ts"

@@ -7,4 +7,4 @@ if [[ "$version" != "v22.23.0" ]]; then
   exit 1
 fi
 # A remote workspace must provide its own authorized private port forwarding.
-exec node node_modules/vite/bin/vite.js --host 127.0.0.1
+exec node node_modules/vite/bin/vite.js --config vite.client.config.ts --host 127.0.0.1

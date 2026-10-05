@@ -32,6 +32,8 @@ Town-local portions are separate from campaign scrap, cores and sealed water can
 - Cook: 4 harvest + 0.8 water → 6 pantry
 - Draw water: 12 aquifer units → 12 town water
 - Recover materials: 4 salvage units → 4 materials
+
+Field, aquifer and salvage units are extracted when the work completes. A new garden, water-drawing or salvage activity is therefore admitted only when the source also covers every batch already being worked (audit fix): previously, in lean stores, many gardeners could start on one small field and about a third of garden labor ended with partial or no harvest. Openings and well-supplied towns are unchanged; save format is unchanged. Regression: `tests/town-life-long-run.test.ts`.
 - Maintain a service: 1.5 materials; restorative care: 0.5 materials + 0.4 water
 
 These are abstract life-simulation portions, not literal mass units. The bounded field, aquifer and recoverable-salvage pools recharge at 0.4, 0.8 and 0.045 units per active second, up to 800, 1200 and 600. This explicitly models local regrowth, water recharge and recoverable town discards. It is not connected to the regional farm, rainfall, freight or original food ledgers. Separate source and store ledgers account for initial quantities, recharge/production, extraction/consumption, donations and overflow. Accounting epochs rebase before bounded counters overflow; player spending never rebases or silently saturates.

@@ -163,7 +163,10 @@ function available(f:TownLifeFacilityState){return f.closedFor<=0&&f.condition>=
 function costs(action:TownLifeActionKind,t:TownLifeTuning):Partial<Record<TownLifeResource,number>>{
  switch(action){case'eat':return{pantry:1,water:.2};case'wash':return{water:.65};case'garden':return{water:.35*t.productionRate};case'cook':return{harvest:4*t.productionRate,water:.8*t.productionRate};case'maintain':return{materials:1.5};case'recover':return{materials:.5,water:.4};default:return{};}
 }
-function inputsReady(s:TownLifeState,a:TownLifeActionKind,t:TownLifeTuning){if(a==='garden'&&s.sources.field<8*t.productionRate||a==='draw-water'&&s.sources.aquifer<12*t.productionRate||a==='craft'&&s.sources.salvage<4*t.productionRate)return false;return Object.entries(costs(a,t)).every(([k,n])=>s.resources[k as TownLifeResource]+1e-8>=n);}
+/** Source units already promised to occupied production. Sources are extracted at
+ * completion, so a new worker must not count units an earlier worker will take. */
+function pendingSource(s:TownLifeState,a:'garden'|'draw-water'|'craft'){const unit=a==='garden'?8:a==='draw-water'?12:4;let n=0;for(const r of s.residents)if(r.status==='acting'&&r.action===a)n+=unit*r.batch;return n;}
+function inputsReady(s:TownLifeState,a:TownLifeActionKind,t:TownLifeTuning){if(a==='garden'&&s.sources.field<8*t.productionRate+pendingSource(s,a)||a==='draw-water'&&s.sources.aquifer<12*t.productionRate+pendingSource(s,a)||a==='craft'&&s.sources.salvage<4*t.productionRate+pendingSource(s,a))return false;return Object.entries(costs(a,t)).every(([k,n])=>s.resources[k as TownLifeResource]+1e-8>=n);}
 function contributed(s:TownLifeState):Record<TownLifeResource,number>{return {pantry:0,water:s.contributions['donate-water']*12,materials:s.contributions['donate-supplies']*12,harvest:0};}
 function ledgerRoom(s:TownLifeState){if(RESOURCES.some(k=>['produced','consumed','donated','overflow'].some(c=>s.ledger[c as 'produced'][k]>TOWN_LIFE_COUNTER_LIMIT-100))){s.ledger={epochs:count(s.ledger.epochs),donationBaseline:contributed(s),initial:{...s.resources},produced:zero(),consumed:zero(),donated:zero(),overflow:zero()};}}
 function debit(s:TownLifeState,k:TownLifeResource,n:number){ledgerRoom(s);s.resources[k]=quant(s.resources[k]-n);s.ledger.consumed[k]=quant(s.ledger.consumed[k]+n);}

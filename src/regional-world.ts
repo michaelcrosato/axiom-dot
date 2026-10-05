@@ -141,7 +141,11 @@ function context(seed:number):Context {
  const street=(key:string,points:Vec3[],width=4)=>townRoads.push({id:`town:1:${seed}/road/${key}`,from:'town',to:'town',width,points});
  for(const z of [-44,-24,0,24,44])street('row-'+z,[{x:tc.x-48,y:6,z:tc.z+z},{x:tc.x+48,y:6,z:tc.z+z}],z===0?6:4);
  for(const x of [-48,0,48])street('lane-'+x,[{x:tc.x+x,y:6,z:tc.z+(x===0?0:-44)},{x:tc.x+x,y:6,z:tc.z+44}]);
- const gate=gateways[0]!.position;street('valley-access',[{x:tc.x+48,y:6,z:tc.z},{x:-100,y:6,z:tc.z},{x:-100,y:gate.y,z:gate.z},{...gate}],4);
+ // The connector's final leg shares the west trail's centreline. Join it at the
+ // trail's own graded profile: a flat gateway-height leg left a ~1 m step where
+ // its blend ended (up to 0.5 grade on about one seed in ten).
+ const gate=gateways[0]!.position,join=segments([roads[0]!]).map(s=>nearSegment(-100,gate.z,s)).reduce((a,b)=>b.distance<a.distance?b:a);
+ street('valley-access',[{x:tc.x+48,y:6,z:tc.z},{x:-100,y:6,z:tc.z},{x:-100,y:Math.fround(join.y),z:gate.z},{...gate}],4);
  const result:Context={townRoads:freeze(townRoads),townSegments:segments(townRoads),plan:freeze(plan),valley,phases,roads:roadSegments,rivers:riverSegments,roadIndex:indexSegments(roadSegments,16),riverIndex:indexSegments(riverSegments,16)};
  if(contexts.size>=REGIONAL_CONTEXT_CACHE_LIMIT)contexts.delete(contexts.keys().next().value!);contexts.set(seed,result);return result;
 }

@@ -1,8 +1,9 @@
 /** Reproducible bounded seed sweep: node --experimental-strip-types tests/helpers/regional-generation-stress.ts */
 import {regionalPlan,regionalHeight,generateRegionalChunk,regionalChunkAt,REGIONAL_MAX_ROAD_GRADE} from '../../src/regional-world.ts';
+import {regionalTrailGradeAudit} from '../../src/regional-routes.ts';
 import {obstacleSegmentIntersects,type WildernessObstacle} from '../../src/wilderness-geometry.ts';
 export function runRegionalGenerationStress(count=100){
- let maxGrade=0,worst:{seed:number;x:number;z:number;road:string}|null=null,minTrailMetres=Infinity,maxTrailMetres=0,collisionSamples=0,gradeFailures=0,planFailures=0,sampledTrailMetres=0;
+ let maxGrade=0,worst:{seed:number;x:number;z:number;road:string}|null=null,minTrailMetres=Infinity,maxTrailMetres=0,collisionSamples=0,gradeFailures=0,planFailures=0,sampledTrailMetres=0,townMaxGrade=0,townGradeFailures=0,townWorst:{seed:number;x:number;z:number;road:string}|null=null;
  const failures:string[]=[];
  for(let j=0;j<count;j++){
   const seed=Math.imul(j+1,2654435761)>>>0;let plan;
@@ -21,7 +22,11 @@ export function runRegionalGenerationStress(count=100){
   }
   sampledTrailMetres+=trailMetres;minTrailMetres=Math.min(minTrailMetres,trailMetres);maxTrailMetres=Math.max(maxTrailMetres,trailMetres);
   if(seedMaxGrade>REGIONAL_MAX_ROAD_GRADE){gradeFailures++;failures.push(`Seed ${seed}: road grade ${seedMaxGrade}`);}
+  // Hearthmere streets share the regional surface; their connector joins the west trail.
+  const town=regionalTrailGradeAudit(seed).trails.filter(t=>t.kind==='town'),steepTown=town.reduce((a,b)=>b.maxGrade>a.maxGrade?b:a);
+  if(steepTown.maxGrade>townMaxGrade){townMaxGrade=steepTown.maxGrade;townWorst={seed,...steepTown.at,road:steepTown.id};}
+  if(steepTown.maxGrade>REGIONAL_MAX_ROAD_GRADE){townGradeFailures++;failures.push(`Seed ${seed}: town street grade ${steepTown.maxGrade}`);}
  }
- return {count,planFailures,gradeFailures,collisionSamples,maxGrade,worst,minTrailMetres,maxTrailMetres,sampledTrailMetres,failures};
+ return {count,planFailures,gradeFailures,collisionSamples,maxGrade,worst,townGradeFailures,townMaxGrade,townWorst,minTrailMetres,maxTrailMetres,sampledTrailMetres,failures};
 }
-if(process.argv[1]?.endsWith('regional-generation-stress.ts')){const report=runRegionalGenerationStress();console.log(JSON.stringify(report,null,2));if(report.planFailures||report.gradeFailures||report.collisionSamples)process.exitCode=1;}
+if(process.argv[1]?.endsWith('regional-generation-stress.ts')){const report=runRegionalGenerationStress();console.log(JSON.stringify(report,null,2));if(report.planFailures||report.gradeFailures||report.townGradeFailures||report.collisionSamples)process.exitCode=1;}

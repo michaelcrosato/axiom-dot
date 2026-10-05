@@ -192,7 +192,9 @@ function agentStep(c:CausalState,p:CausalPlan,ctx:CausalContext,a:AgentState){
  if(!a.route.length){
   if(a.cargo>EPS)beginTask(a,'deliver',home.id);
   else if(a.thirst>55&&home.reserve>=1)beginTask(a,'drink',home.id);
-  else if(a.fatigue>70)beginTask(a,'rest',home.id);
+  // Hysteresis: a tired resident finishes resting at home (down to 30) instead of
+  // stopping at the 70 threshold, walking out, and immediately turning back.
+  else if(a.fatigue>70||a.fatigue>30&&a.task?.kind==='rest'&&a.nodeId===homeDef.nodeId)beginTask(a,'rest',home.id);
   else if(def.role==='carrier')beginTask(a,home.reserve<14?'fetch':'rest',home.id);
   else if(def.role==='caretaker')beginTask(a,'work',def.workplaceId!);
   else{

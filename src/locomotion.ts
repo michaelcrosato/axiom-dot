@@ -52,17 +52,23 @@ export interface GroundLimbSupport{target:GroundPoint;anchor:GroundPoint|null;he
 export interface GroundSupportState{position:GroundPoint;heading:number;leftFoot:GroundLimbSupport;rightFoot:GroundLimbSupport;leftHand:GroundLimbSupport|null;rightHand:GroundLimbSupport|null}
 export interface AnimationState{speed:number;phase:number;heading:number;lean:number;turn:number;crouch:number;slide:number;travel:number;gait:Gait;airborne:boolean;vertical:number;landing:number;takeoff:number;brake:number;support:GroundSupportState|null}
 export const idleAnimation=():AnimationState=>({speed:0,phase:0,heading:0,lean:0,turn:0,crouch:0,slide:0,travel:0,gait:'idle',airborne:false,vertical:0,landing:0,takeoff:0,brake:0,support:null});
+/** Fastest supported presentation travel (8 m/s sprint × 1.6 lab top-speed scale, rounded up).
+ * Per-frame gait/support limits scale with the frame's elapsed time so a slow frame keeps the
+ * same phase and planted anchors as many fast ones; at 60 Hz the historical .6/.75 m limits apply. */
+export const GAIT_TRAVEL_SPEED_LIMIT=13;
 export function angleDelta(a:number,b:number){return Math.atan2(Math.sin(b-a),Math.cos(b-a));}
 export function stepAnimation(a:AnimationState,vx:number,vz:number,grounded:boolean,crouched:boolean,sliding:boolean,dt:number,distance:number,physicalStance?:number,verticalVelocity=0,landing=0,tuning:LabTuning=DEFAULT_TUNING):AnimationState{
  dt=Math.max(0,Math.min(.1,Number.isFinite(dt)?dt:0));
  distance=Math.max(0,Number.isFinite(distance)?distance:0);
+ // One corrupt velocity sample must not poison every later smoothed value.
+ if(!Number.isFinite(vx)||!Number.isFinite(vz)){vx=0;vz=0;}
  // Horizontal momentum survives flight. Zeroing it manufactured a braking impulse
  // at takeoff and another acceleration impulse on touchdown. Only support changes.
  const actualSpeed=Math.hypot(vx,vz),speed=grounded?actualSpeed:0,blend=1-Math.exp(-dt*14),smooth=a.speed+(actualSpeed-a.speed)*blend;
  const delta=actualSpeed>.08?angleDelta(a.heading,Math.atan2(vx,vz)):0,turnStep=Math.max(-dt*tuning.turnRate,Math.min(dt*tuning.turnRate,delta));
  const nextCrouch=physicalStance===undefined?a.crouch+((crouched?1:0)-a.crouch)*blend:Math.max(0,Math.min(1,physicalStance)),stride=strideFor(smooth,nextCrouch);
  // Distance, not a wall-clock oscillator, advances foot contact. Collisions stop the gait.
- const phase=(a.phase+(grounded&&!sliding?Math.min(distance,.6)*supportDutyFor(smooth,nextCrouch)/Math.max(1e-6,stride):0))%1;
+ const phase=(a.phase+(grounded&&!sliding?Math.min(distance,Math.max(.6,dt*GAIT_TRAVEL_SPEED_LIMIT))*supportDutyFor(smooth,nextCrouch)/Math.max(1e-6,stride):0))%1;
  const acceleration=grounded&&!a.airborne?(smooth-a.speed)/Math.max(dt,.001):0,leanTarget=Math.max(-.18,Math.min(.28,acceleration*.014+smooth*.015));
  const takeoff=!grounded&&!a.airborne&&verticalVelocity>.1?1:Math.max(0,a.takeoff-dt*7);
  return {support:null,takeoff,brake:a.brake+(Math.max(0,Math.min(1,-acceleration/18))-a.brake)*blend,speed:smooth,phase,heading:a.heading+turnStep,lean:a.lean+(leanTarget-a.lean)*blend,turn:a.turn+(Math.max(-.13,Math.min(.13,-turnStep/Math.max(dt,.001)*.014))-a.turn)*blend,crouch:nextCrouch,slide:a.slide+((sliding?1:0)-a.slide)*blend,travel:a.travel+distance,gait:gaitFor(speed,crouched,sliding),airborne:!grounded,vertical:Number.isFinite(verticalVelocity)?verticalVelocity:0,landing:grounded?Math.max(0,Math.min(1,landing)):0};
@@ -104,7 +110,7 @@ export function stepGroundSupport(previous:AnimationState,next:AnimationState,po
  // displacement as walking momentum after the planted standing finish.
  if(mode==='climb')return {...next,support:null,speed:0,phase:0,brake:0,lean:0,turn:0,takeoff:0,landing:0};
  if(next.airborne||next.slide>.01||mode==='slide'||mode==='hang'||mode==='climb'||![position.x,position.y,position.z,next.heading].every(Number.isFinite))return {...next,support:null};
- const old=previous.support,continuous=!!old&&Math.hypot(position.x-old.position.x,position.z-old.position.z)<=.75&&Math.abs(position.y-old.position.y)<=.3;
+ const old=previous.support,continuous=!!old&&Math.hypot(position.x-old.position.x,position.z-old.position.z)<=Math.max(.75,dt*GAIT_TRAVEL_SPEED_LIMIT)&&Math.abs(position.y-old.position.y)<=.3;
  const prior=continuous?old:null,move=Math.min(1,Math.max(0,next.speed)/.45),run=Math.min(1,Math.max(0,(next.speed-2)/6));
  const effort=mode==='push'||mode==='pull'||mode==='wall',duty=effort?.6:supportDutyFor(next.speed,next.crouch),stride=Math.min(effort?.4:Infinity,strideFor(next.speed,next.crouch)),lift=(.055+run*.16)*(1-next.crouch*.45),backward=mode==='pull';
  const limb=(phase:number,x:number,height:number,zOffset:number,clearance:number,reach:number,neutralZ:number,oldLimb:GroundLimbSupport|null|undefined):GroundLimbSupport=>{

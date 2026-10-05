@@ -7,7 +7,8 @@ the existing production state, not a new quest system or simulation.
 ## Selection and priorities
 
 - The closest fixed community/work-point anchors select a community. A transient
-  UI cursor retains it until another is both 64 m and 25% closer, or the player
+  UI cursor retains it until another is closer than three quarters of the
+  retained distance minus 64 m (new + 64 m < 0.75 × retained), or the player
   approaches a different work point within 3.5 m. Carrier movement, rain changes
   and task completion never rotate communities by themselves. Direct approach
   prevents an old incoming source from pinning a remote completed community.

@@ -19,5 +19,8 @@
     "drizzle-kit": "0.31.11",
     "typescript": "7.0.2",
     "vite": "8.3.1"
+  },
+  "engines": {
+    "node": "22.x"
   }
 }

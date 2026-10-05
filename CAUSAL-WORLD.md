@@ -74,3 +74,7 @@ household-water loop with observed relief, resident consumption, relapse, physic
 contribution, completion/claim deadlines, and the same original issuer budgets.
 See `WATER-REQUESTS.md` for the exact contract, compact receipt schema, authority,
 UI integration, conservation tests and unchanged import-size limit.
+
+## Rest hysteresis (audit fix)
+
+A resident who starts resting because fatigue exceeded 70 now keeps resting at home until fatigue is 30 or lower. Previously rest ended at 70 and the commute pushed fatigue back over the threshold on arrival, so after roughly 20 active minutes a caretaker spent more than 80% of its time walking between home and workplace and workshop service fell from about 540 to about 9 units per 10 minutes. The state schema, manifest and hash are unchanged; saved states load as before, but replays of existing states diverge from the previous build once a resident first tires. Regression: `tests/causal-long-run.test.ts`.

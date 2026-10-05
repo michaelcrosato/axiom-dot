@@ -1,5 +1,6 @@
 import {hashSeed} from './procedural.ts';
 import {CAVE_HASH,naturalCave,caveWalkable,type CavePlan,type CavePoint} from './natural-cave.ts';
+import {RESTORE_CAPSULE_RADIUS} from './building.ts';
 
 /** Finite-volume compartment water, not a pressure / Navier–Stokes fluid solver. */
 export const CAVE_WATER_VERSION=1;
@@ -95,8 +96,16 @@ export function caveNavigable(state:CaveWaterState,point:CavePoint,radius=.34,pl
  return caveWalkable(plan,point.x,point.z,radius)&&!caveFloodObstacles(state,plan).some(o=>Math.abs(point.x-o.x)<o.hx+radius&&Math.abs(point.z-o.z)<o.hz+radius);
 }
 /** Loading or newly rising water cannot embed or trap a player. Dry far-bank return remains available. */
+/** Restore-only check with a round 0.33 m footprint: the controller rests 0.02 m (skin)
+ * from walls and Rapier settles a few 1e-5 m inside that, so the square 0.34 m
+ * navigation test rejected legitimate wall- and corner-resting saved poses. */
+function caveRestorable(state:CaveWaterState,point:CavePoint,plan:CavePlan):boolean {
+ if(!Number.isFinite(point.x)||!Number.isFinite(point.z)||!plan.tiles.some(t=>Math.abs(t.x-point.x)<=1&&Math.abs(t.z-point.z)<=1))return false;
+ const touches=(o:{x:number;z:number;hx:number;hz:number})=>Math.hypot(Math.max(0,Math.abs(o.x-point.x)-o.hx),Math.max(0,Math.abs(o.z-point.z)-o.hz))<RESTORE_CAPSULE_RADIUS;
+ return !plan.walls.some(touches)&&!caveFloodObstacles(state,plan).some(touches);
+}
 export function safeCavePosition(state:CaveWaterState,point:CavePoint,plan=naturalCave(state.seed)):CavePoint {
- if(caveNavigable(state,point,.34,plan))return point;
+ if(caveRestorable(state,point,plan))return point;
  const banks=plan.returnAnchors.filter(p=>caveNavigable(state,p,.34,plan));
  banks.sort((a,b)=>Math.hypot(point.x-a.x,point.z-a.z)-Math.hypot(point.x-b.x,point.z-b.z));
  return {...(banks[0]??plan.spawn)};

@@ -156,5 +156,17 @@ export function compileWorkshop(seed:number,options:WorkshopOptions={}):Compiled
 export function workshopWalkable(workshop:CompiledWorkshop,point:WorkshopPoint,radius=.34):boolean {
  return !workshop.plan.shapes.some(s=>s.solid&&s.center.y+s.half.y>.05&&s.center.y-s.half.y<2.16&&Math.abs(s.center.x-point.x)<s.half.x+radius&&Math.abs(s.center.z-point.z)<s.half.z+radius);
 }
+/** Saved-position restore radius. The explorer capsule is 0.32 m and the character
+ * controller rests 0.02 m (skin) from solids, but Rapier can settle a few 1e-5 m
+ * inside that offset when pressed into a wall or corner. Restore checks therefore
+ * use 0.33 m and a round footprint: the old 0.34 m square test rejected legitimate
+ * wall-resting and furniture-corner poses on reload. Real overlaps are still rejected. */
+export const RESTORE_CAPSULE_RADIUS=.33;
+export interface RestoreSolid {center:{x:number;y:number;z:number};half:{x:number;y:number;z:number};solid:boolean}
+/** Circle-vs-box test over the standing span above `floorY`. Restore only; not a navigation clearance. */
+export function restoreClear(shapes:readonly RestoreSolid[],point:WorkshopPoint,floorY=0,radius=RESTORE_CAPSULE_RADIUS):boolean {
+ if(!Number.isFinite(point.x)||!Number.isFinite(point.z))return false;
+ return !shapes.some(s=>s.solid&&s.center.y+s.half.y>floorY+.05&&s.center.y-s.half.y<floorY+2.16&&Math.hypot(Math.max(0,Math.abs(s.center.x-point.x)-s.half.x),Math.max(0,Math.abs(s.center.z-point.z)-s.half.z))<radius);
+}
 /** Restoring a legacy position cannot leave the player inside newly introduced walls. */
-export function safeWorkshopSpawn(workshop:CompiledWorkshop,point:WorkshopPoint):WorkshopPoint {return workshopWalkable(workshop,point)?{...point}:{...workshop.spawn};}
+export function safeWorkshopSpawn(workshop:CompiledWorkshop,point:WorkshopPoint):WorkshopPoint {return restoreClear(workshop.plan.shapes,point)?{...point}:{...workshop.spawn};}

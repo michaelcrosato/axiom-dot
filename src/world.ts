@@ -23,11 +23,11 @@ import {createEncounters,advanceEncounters,hitEncounter,validEncounters,type Enc
 import {emptyEquipment,validEquipment,equipmentCost,refitEquipment,assembleEquipment,type EquipmentState,type EquipmentRecipeInput} from './equipment.ts';
 import {createCausalState,reconcileCausal,advanceCausal,applyCausalCommand,noteCausalWorldAction,validCausal,type CausalState,type CausalCommand,type CausalContext} from './causal.ts';
 import {GENERATION_MANIFEST,CONNECTED_GENERATION_MANIFEST,worldValley,worldDungeon,worldHeight,buildPlayer,buildOrigin,validGenerationManifest,worldWorkshop,type GenerationManifest} from './generation.ts';
-import {dungeonPlanWalkable} from './dungeon-plan.ts';
-import {safeWorkshopSpawn} from './building.ts';
+import {dungeonRestoreClear} from './dungeon-plan.ts';
+import {safeWorkshopSpawn,restoreClear,RESTORE_CAPSULE_RADIUS} from './building.ts';
 import {emptySettlement,emptyJobs,advanceSettlement,acceptCommission,claimCommission,validSettlement,validJobs,JOBS,type Settlement,type Jobs,type JobId} from './settlement.ts';
 import {emptyWaterworks,build,flow,supplyWorking,validMachine,validLegacyMachine,migrateLegacyMachine,safeMachineSpawn,machineCosts,machineObstacles,type Waterworks,type BuildCommand} from './waterworks.ts';
-import {generateDungeon,CAVE_ENTRANCE,CAVE_RETURN,DUNGEON_SPAWN,dungeonWalkable} from './dungeon.ts';
+import {generateDungeon,CAVE_ENTRANCE,CAVE_RETURN,DUNGEON_SPAWN} from './dungeon.ts';
 /** Deterministic, renderer-independent simulation. All transitions are immutable. */
 export type ObjectKind = 'scrap' | 'core' | 'water' | 'enemy' | 'pump' | 'settlement' | 'rock' | 'entrance' | 'exit';
 export interface WorldObject { id: string; kind: ObjectKind; x: number; z: number; y?:number; label: string }
@@ -136,7 +136,7 @@ export function worldObjects(s:Pick<State,'generation'|'seed'>):readonly WorldOb
 export function worldBound(s:Pick<State,'generation'|'seed'|'regional'>&{zone?:State['zone']}){return s.zone==='cave'?naturalCave(s.seed).bound:s.generation===2?(s.zone==='dungeon'?worldDungeon(s).bound:s.regional?.version===1?REGION_BOUND:worldValley(s.seed).terrain.bound):WORLD_BOUND;}
 export function dungeonSpawn(s:Pick<State,'generation'|'seed'>){return s.generation===2?worldDungeon(s).spawn:DUNGEON_SPAWN;}
 export function machineWorldObstacles(s:Pick<State,'generation'|'seed'|'waterworks'>){const origin=buildOrigin(s);return machineObstacles(s.waterworks).map(o=>({...o,x:o.x+origin.x,z:o.z+origin.z,y:o.hy+origin.y}));}
-function safeWorldSpawn(s:State,point:{x:number;z:number}){const origin=buildOrigin(s),local=safeMachineSpawn(s.waterworks,{x:point.x-origin.x,z:point.z-origin.z});let safe={x:local.x+origin.x,z:local.z+origin.z};if(s.generation===1)return safeWorkshopSpawn(worldWorkshop(s.seed),safe);for(const building of worldValley(s.seed).buildings){const blocked=building.plan.shapes.some(o=>o.solid&&o.center.y+o.half.y>building.elevation+.05&&o.center.y-o.half.y<building.elevation+2.16&&Math.abs(o.center.x-safe.x)<o.half.x+.34&&Math.abs(o.center.z-safe.z)<o.half.z+.34);if(blocked)safe={...building.spawn};}return safe;}
+function safeWorldSpawn(s:State,point:{x:number;z:number}){const origin=buildOrigin(s),local=safeMachineSpawn(s.waterworks,{x:point.x-origin.x,z:point.z-origin.z});let safe={x:local.x+origin.x,z:local.z+origin.z};if(s.generation===1)return safeWorkshopSpawn(worldWorkshop(s.seed),safe);for(const building of worldValley(s.seed).buildings){const blocked=!restoreClear(building.plan.shapes,safe,building.elevation);if(blocked)safe={...building.spawn};}return safe;}
 
 function record(state: State, message: string, patch: Partial<State> = {}): State {
   return { ...state, ...patch, revision: state.revision + 1, events: [...state.events, message].slice(-20) };
@@ -449,7 +449,7 @@ export function parseSave(text: string): State | null {
     if(object(parsed)&&Object.hasOwn(parsed,'townDirector'))parsed={...parsed,townDirector:immutableTownDirector(parsed.townDirector,parsed.townLife as TownLifeState)};
     if(!validateSave(parsed))return null;
     if(legacyValley&&(parsed.collected.some(id=>id.startsWith('dungeon:'))||parsed.defeated.some(id=>id.startsWith('dungeon:'))))return null;
-    if(parsed.zone==='dungeon'&&!(parsed.generation===2?dungeonPlanWalkable(parsed.seed,parsed.player.x,parsed.player.z):dungeonWalkable(parsed.seed,parsed.player.x,parsed.player.z)))return {...parsed,player:{...parsed.player,...dungeonSpawn(parsed)}};
+    if(parsed.zone==='dungeon'&&!dungeonRestoreClear(worldDungeon(parsed),parsed.player.x,parsed.player.z,RESTORE_CAPSULE_RADIUS))return {...parsed,player:{...parsed.player,...dungeonSpawn(parsed)}};
     if(parsed.zone==='cave'&&parsed.caveWater){const safe=safeCavePosition(parsed.caveWater,parsed.player);if(safe.x!==parsed.player.x||safe.z!==parsed.player.z)return {...parsed,player:{...parsed.player,...safe}};}
     if(parsed.zone==='valley'){const safe=safeWorldSpawn(parsed,parsed.player);if(safe.x!==parsed.player.x||safe.z!==parsed.player.z)return {...parsed,player:{...parsed.player,...safe}};}
     return parsed;

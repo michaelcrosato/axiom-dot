@@ -71,3 +71,9 @@ export function dungeonPlanWalkable(planOrSeed:DungeonPlan|number,x:number,z:num
  const plan=typeof planOrSeed==='number'?generateDungeonPlan(planOrSeed):planOrSeed;
  return plan.tiles.some(t=>Math.abs(t.x-x)<=1&&Math.abs(t.z-z)<=1)&&!plan.walls.some(w=>Math.abs(w.x-x)<w.hx+radius&&Math.abs(w.z-z)<w.hz+radius);
 }
+/** Saved-pose recovery for either vault generation: floor support plus a round
+ * (circle-vs-wall) clearance, so controller poses resting in corners survive reload. */
+export function dungeonRestoreClear(d:{tiles:readonly DungeonPoint[];walls:readonly Wall[]},x:number,z:number,radius:number):boolean {
+ if(!Number.isFinite(x)||!Number.isFinite(z)||!Number.isFinite(radius)||radius<0)return false;
+ return d.tiles.some(t=>Math.abs(t.x-x)<=1&&Math.abs(t.z-z)<=1)&&!d.walls.some(w=>Math.hypot(Math.max(0,Math.abs(w.x-x)-w.hx),Math.max(0,Math.abs(w.z-z)-w.hz))<radius);
+}

@@ -76,6 +76,7 @@ export function canSwapEquipment(combo:{phase:string;buffered:boolean;cancelLock
 /** Refit recycles the previous assembly exactly; no accumulating stock or free duplication. */
 export function refitEquipment(current:EquipmentState|undefined,inventory:{scrap:number;core:number;water:number},seed:number|null){
  const old=equipmentCost(current),plan=seed===null?null:compileEquipment(seed),cost=plan?.cost??{scrap:0,core:0};
+ if(![inventory.scrap,inventory.core,inventory.water].every(n=>Number.isFinite(n)&&n>=0))return null;
  const next={...inventory,scrap:inventory.scrap+old.scrap-cost.scrap,core:inventory.core+old.core-cost.core};
  if(next.scrap<0||next.core<0)return null;
  return {equipment:{manifest:EQUIPMENT_MANIFEST,active:plan?.ref??null},inventory:next};

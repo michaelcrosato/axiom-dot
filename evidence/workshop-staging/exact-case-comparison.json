@@ -1,0 +1,74 @@
+{
+  "kind": "independent-exact-case-comparison",
+  "result": "pass",
+  "sourceCommit": "812c0a09d928ccc7277287f98ad60887dbdd6af8",
+  "verifiedAt": "2026-10-06T09:50:30.403680+00:00",
+  "log": "/tmp/staging-final-safe.tap",
+  "logSha256": "016f93a9c58239ffd07729c4289938886c06539001cb79bc662f8e663cd9538e",
+  "catalogs": [
+    "/tmp/staging-independent-inventory.json",
+    "/tmp/staging-final-inventory.json"
+  ],
+  "catalogsExactlyEqual": true,
+  "registeredFiles": 269,
+  "registeredCases": 1864,
+  "executedCases": 1864,
+  "exactNameMultisetMatchBothCatalogs": true,
+  "subtestNamesMatchResultsInOrder": true,
+  "contiguousIds": true,
+  "terminalPlan": 1864,
+  "stats": {
+    "tests": 1864,
+    "suites": 0,
+    "pass": 1864,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "duration_ms": 2147311.14694
+  },
+  "missingCases": [],
+  "extraCases": [],
+  "noSkipTodoDirectivesOrBailouts": true,
+  "oldCases": {
+    "baselineCatalog": "evidence/campaign-guidance/registered-cases.json",
+    "retained": 1843,
+    "added": 21,
+    "fileAndNameMultisetRetention": true
+  },
+  "frozenSource": {
+    "manifest": "/tmp/staging-frozen-source.json",
+    "trackedFiles": 787,
+    "allHashesUnchanged": true,
+    "gitStatusClean": true
+  },
+  "heldFiles": {
+    "baseline": "bcacadbc96a693ee981dd48d60d43b93baf9ddbe",
+    "count": 13,
+    "exactExclusions": true,
+    "allBytesUnchanged": true,
+    "files": [
+      "tests/ecology.test.ts",
+      "tests/regional-clock-precision.test.ts",
+      "tests/regional-food-trade-witness.test.ts",
+      "tests/regional-food-world-authority.test.ts",
+      "tests/regional-food.test.ts",
+      "tests/regional-supply.test.ts",
+      "tests/regional-trade-integration.test.ts",
+      "tests/regional-trade-timeline.test.ts",
+      "tests/regional-trade.test.ts",
+      "tests/regional-weather-cold.test.ts",
+      "tests/regional-weather-trade-authority.test.ts",
+      "tests/regional-weather-trade.test.ts",
+      "tests/regional-weather.test.ts"
+    ]
+  },
+  "emittedReports": {
+    "count": 9,
+    "allAuditedReportsUnchanged": true,
+    "sourceHashEntries": 65,
+    "assetHashEntries": 19,
+    "audit": "/tmp/staging-independent-review.json"
+  },
+  "scope": "Completed permitted safe selection only; 13 documented held files excluded. No browser/GPU/device claim."
+}

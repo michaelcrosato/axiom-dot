@@ -1,0 +1,22 @@
+TAP version 13
+# Subtest: independent staging review keeps decorative corners inside every narrow and wide room envelope through completion
+ok 1 - independent staging review keeps decorative corners inside every narrow and wide room envelope through completion
+  ---
+  duration_ms: 120.590034
+  type: 'test'
+  ...
+# Subtest: independent staging review reconstructs earlier saved progress after a completed view without accepting stale physics acknowledgements
+ok 2 - independent staging review reconstructs earlier saved progress after a completed view without accepting stale physics acknowledgements
+  ---
+  duration_ms: 21.051963
+  type: 'test'
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 540.550294

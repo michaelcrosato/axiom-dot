@@ -1,0 +1,244 @@
+{
+  "kind": "independent-workshop-staging-review",
+  "verifiedAt": "2026-10-06T09:50:30.403680+00:00",
+  "sourceCommit": "812c0a09d928ccc7277287f98ad60887dbdd6af8",
+  "sourceReview": {
+    "kind": "independent-workshop-staging-review",
+    "baseline": "bcacadbc96a693ee981dd48d60d43b93baf9ddbe",
+    "assessment": "No remaining blocker found in reviewed source. Pure saved-work staging; unchanged full compiled solid envelopes and ACK signatures; decorations bounded inside each parent; no second resident movement owner or payment/progress ledger. Navigation owner now disposes only after accepted transition. Explicit selected source and delivery targets are revalidated by main.",
+    "findings": [
+      {
+        "issue": "Finishing copy claimed bracing still present though braces intentionally exist only in frame stage",
+        "resolution": "Root changed wording to temporary finish covers; confirmed intent matches actual geometry."
+      }
+    ],
+    "independentRegressionFile": "tests/workshop-staging-review.test.ts",
+    "sourceLog": "/tmp/staging-independent-source.tap",
+    "sourcePassed": 2,
+    "counterfactualLog": "/tmp/staging-independent-counterfactual.tap",
+    "counterfactualFailed": 2,
+    "counterfactualMethod": "Temporary module copies only. Expand fixture wrap beyond parent envelope; retain confirmed collision on reset. Both independent tests fail. Mutation sensitivity, not pre-feature red run.",
+    "coverage": [
+      "6 narrow/wide layouts across all room counts, seed extremes,5phase corner containment",
+      "fixed collision geometry across every stage",
+      "complete view replaced by earlier JSON-restored progress",
+      "stale ACK after reset cannot reveal geometry",
+      "120 repeated render/camera changes cannot earn progress",
+      "fresh and reused views reconstruct identical matrices/materials"
+    ],
+    "heldFiles": {
+      "count": 13,
+      "baselineUnchanged": true,
+      "files": [
+        "tests/ecology.test.ts",
+        "tests/regional-clock-precision.test.ts",
+        "tests/regional-food-trade-witness.test.ts",
+        "tests/regional-food-world-authority.test.ts",
+        "tests/regional-food.test.ts",
+        "tests/regional-supply.test.ts",
+        "tests/regional-trade-integration.test.ts",
+        "tests/regional-trade-timeline.test.ts",
+        "tests/regional-trade.test.ts",
+        "tests/regional-weather-cold.test.ts",
+        "tests/regional-weather-trade-authority.test.ts",
+        "tests/regional-weather-trade.test.ts",
+        "tests/regional-weather.test.ts"
+      ]
+    },
+    "limitations": [
+      "No browser/GPU/device visual acceptance.",
+      "Full frozen aggregate and emitted stage verification owned by root and pending."
+    ]
+  },
+  "registration": {
+    "independent": "/tmp/staging-independent-inventory.json",
+    "root": "/tmp/staging-final-inventory.json",
+    "exactCatalogEquality": true,
+    "files": 269,
+    "cases": 1864,
+    "excluded": 13,
+    "oldRegisteredCases": 1843,
+    "allOldFileNamePairsRetained": true,
+    "addedCases": 21,
+    "baselineCatalog": "evidence/campaign-guidance/registered-cases.json"
+  },
+  "frozenSource": {
+    "manifest": "/tmp/staging-frozen-source.json",
+    "trackedFiles": 787,
+    "allHashesUnchanged": true,
+    "gitStatusClean": true
+  },
+  "heldFiles": {
+    "baseline": "bcacadbc96a693ee981dd48d60d43b93baf9ddbe",
+    "exactExclusions": true,
+    "allUnchanged": true,
+    "files": [
+      {
+        "path": "tests/ecology.test.ts",
+        "sha256": "8dba88aa7fa9c7b5805fad5f617d728cb2b8181736b2c0f105a74a083b1c205d"
+      },
+      {
+        "path": "tests/regional-clock-precision.test.ts",
+        "sha256": "dab4d56ada5eea5cf93d0e77cd4d7ea8f2e7313646508299343cc2c2463e47ab"
+      },
+      {
+        "path": "tests/regional-food-trade-witness.test.ts",
+        "sha256": "d5c527b428cb0c4b8123353b3b16ef3559e3ca5f03ca42020e26ecfdbc3fd115"
+      },
+      {
+        "path": "tests/regional-food-world-authority.test.ts",
+        "sha256": "d93b967fb0b8f923dc96ae7f45c6ae29c39c01a4bd70933ae1aee7ef8f94f18c"
+      },
+      {
+        "path": "tests/regional-food.test.ts",
+        "sha256": "4421c33cad47d49db85ae7be0e256de9b710a449733b2800dc885c4ad3c8bf04"
+      },
+      {
+        "path": "tests/regional-supply.test.ts",
+        "sha256": "576861b39029f3f0f353fc741e23267acf7ee49ef3f4c3ccec8666050c428db7"
+      },
+      {
+        "path": "tests/regional-trade-integration.test.ts",
+        "sha256": "73822a613c5e4755694ea740f685c2131c9ee59461f8222263cb510c5d97e78c"
+      },
+      {
+        "path": "tests/regional-trade-timeline.test.ts",
+        "sha256": "b33ea23ead2a4bab6965f1b313226a9a067eb91c3d1aece64f0206e0957b57b7"
+      },
+      {
+        "path": "tests/regional-trade.test.ts",
+        "sha256": "c5596901e8ef929e869d332c86f87447f0c3f45c48836311366496ed57ab82b1"
+      },
+      {
+        "path": "tests/regional-weather-cold.test.ts",
+        "sha256": "15d9223233a03043b1b0d63219eb41cb6b366b72f8022b3c3f15eb491c312c91"
+      },
+      {
+        "path": "tests/regional-weather-trade-authority.test.ts",
+        "sha256": "580ef43e6f69bb9b9fad85776a3023be77a1fa59ce639913e0a0071f68b9c6c9"
+      },
+      {
+        "path": "tests/regional-weather-trade.test.ts",
+        "sha256": "05ecd2db4577c626123f5546580b7b74bc4e2df2ea3220a2894ffe13843be0de"
+      },
+      {
+        "path": "tests/regional-weather.test.ts",
+        "sha256": "fa8c437f8ae0e5b02fccf179e8c639474d0ce79b9953548e99909b0ca3c8a1d5"
+      }
+    ]
+  },
+  "documentationAndVerifierReview": {
+    "document": "CAMPAIGN-LOOP.md",
+    "verifier": "scripts/verify-workshop-staging-build.mts",
+    "assessment": "Claims match source: phases derive from achieved work; full collision from funding; no on-site worker; source/delivery map separation; failed navigation keeps controls live. Verifier exercises actual emitted view against source at 147 plan combinations and 8 work boundaries with 2 camera locations, exact solid equality, decorative containment and ACK/reset/retry. Numerical boundary fixtures are expressly distinct from actual earned work, which existing production gates verify. No browser/device claim."
+  },
+  "finalAggregate": {
+    "status": "passed",
+    "certification": "/tmp/staging-exact-case-comparison.json",
+    "sourceCommit": "812c0a09d928ccc7277287f98ad60887dbdd6af8",
+    "log": "/tmp/staging-final-safe.tap",
+    "logSha256": "016f93a9c58239ffd07729c4289938886c06539001cb79bc662f8e663cd9538e",
+    "registeredFiles": 269,
+    "registeredCases": 1864,
+    "executedCases": 1864,
+    "exactNameMultisetMatchBothCatalogs": true,
+    "contiguousIds": true,
+    "terminalPlan": 1864,
+    "stats": {
+      "tests": 1864,
+      "suites": 0,
+      "pass": 1864,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "duration_ms": 2147311.14694
+    }
+  },
+  "limits": [
+    "13 documented held files excluded.",
+    "No browser/GPU/touch/device acceptance."
+  ],
+  "preAggregateEmittedAudit": {
+    "sourceCommit": "812c0a09d928ccc7277287f98ad60887dbdd6af8",
+    "reportsAvailable": 9,
+    "reports": [
+      {
+        "report": "/tmp/staging-guidance-emitted.json",
+        "sha256": "a829b95ae754cbafa0b74637bec6f3d4a7b982c2a72f11af59bc4d3b3fe7265d",
+        "sourceEntriesChecked": 8,
+        "assetEntriesChecked": 2,
+        "scope": "Actual emitted read-only guidance and earned scenario engines, source parity, canonical finite supply/construction save roundtrips, achieved worker progress and paid repairs. Care preparation uses its declared finite disposable fixture, not an importable campaign save. No browser/GPU/device or full main startup claim."
+      },
+      {
+        "report": "/tmp/staging-supply-emitted.json",
+        "sha256": "d6b0881b80cbbad480a7eb795378427386ab87fab451d35180edeaa9d62a1b66",
+        "sourceEntriesChecked": 9,
+        "assetEntriesChecked": 3,
+        "scope": "Actual emitted supply, town and construction model engines; seven finite canonical sources, cargo accounting, unchanged normal donations, construction material payment, source/emitted HTTP and disposable SQLite. No browser/GPU/device or live-save claim."
+      },
+      {
+        "report": "/tmp/staging-care-emitted.json",
+        "sha256": "4baf877209fa918711539364d0eb97b10e7643887bbc921033703e9514a396ea",
+        "sourceEntriesChecked": 13,
+        "assetEntriesChecked": 3,
+        "scope": "Actual emitted restoration, care bridge and town engines, earned habitat preparation replay, conserved delivery and achieved care, source/emitted HTTP with disposable SQLite. No browser/GPU/device or live-player claim."
+      },
+      {
+        "report": "/tmp/staging-restoration-emitted.json",
+        "sha256": "d46145268e975f6c28a4e8d927dcbe8f7b74b7323b05c1a84faa7930a9767588",
+        "sourceEntriesChecked": 14,
+        "assetEntriesChecked": 4,
+        "scope": "Actual built production restoration engine and view chunks; actual source/emitted Three object matrices and Rapier WASM workers; actual source/emitted HTTP authority with in-memory SQLite and preview-only binding. Numerical/Node evidence; no browser/GPU/device or live-state claim."
+      },
+      {
+        "report": "/tmp/staging-town-life-emitted.json",
+        "sha256": "103e83158f8b2484a1ee57b34aacc1c51ff25293bba36e260fb6dca9533c5c48",
+        "sourceEntriesChecked": 0,
+        "assetEntriesChecked": 0,
+        "scope": "Local actual production engine, pose matrices, Rapier WASM worker and in-memory SQLite server. No browser/GPU/device/production-state probe."
+      },
+      {
+        "report": "/tmp/staging-workshop-emitted.json",
+        "sha256": "935e5501168e6c9bbb60db28d92ae1862d61ea0196e47b5d12657a9176792220",
+        "sourceEntriesChecked": 12,
+        "assetEntriesChecked": 3,
+        "scope": "Actual production engine/view chunks, Three object matrices, source/emitted Rapier WASM workers and HTTP with disposable in-memory SQLite. No browser/GPU/device/live-save claim."
+      },
+      {
+        "report": "/tmp/staging-main-emitted.json",
+        "sha256": "6e3b01396bfbdc5ce00e31952d690d805f19afc7ba35dc6f697c56e48656eaba",
+        "sourceEntriesChecked": 0,
+        "assetEntriesChecked": 3,
+        "scope": "Node 22 manual-clock production Rapier worker and real generated initial terrain; complete production main message handler, actual collision confirmations, world actions, contact packets and Three instance matrices. Intact town frame statements are executed in source order. Unrelated DOM/audio/combat effects are stubbed. No browser, GPU pixels, real worker timer, device FPS or regional food/terminal-clock review."
+      },
+      {
+        "report": "/tmp/staging-view-emitted.json",
+        "sha256": "7037dad2d0e2c25805cf1396a31cf8578c1f721e5bd6889fea356d558211942d",
+        "sourceEntriesChecked": 9,
+        "assetEntriesChecked": 1,
+        "scope": "Source and actual emitted Three geometry/material/matrix parity across all dimension extremes and achieved-work boundaries. Boundary snapshots are validated numerical fixtures, not claims that a player earned work or visited a location. Existing workshop emitted gate separately exercises earned work, actual Rapier routes and HTTP/save authority. No browser/GPU/touch/device acceptance."
+      },
+      {
+        "report": "/tmp/staging-startup-emitted.json",
+        "sha256": "3e33081f376508beff3fbab16ff4c4e5fa579e4c4c807cad7a0ad714716dbba3",
+        "sourceEntriesChecked": 0,
+        "assetEntriesChecked": 0,
+        "scope": "Source and actual emitted opening authority, resident matrices, portrait/landscape/wide camera frustum candidates, retained-save recovery and watchdog fault-injection parity. Node22 CPU only; no browser/GPU, occlusion or device approval."
+      }
+    ],
+    "sourceAndAssetHashEntriesMatch": true,
+    "limits": "Legacy reports without source-hash maps are not claimed to provide one; physics trace hashes are distinct from asset hashes. All nine available final reports audited. Aggregate certification remains pending.",
+    "viewBeforeAfter": {
+      "before": "/tmp/staging-view-before.tap",
+      "beforePass": 1,
+      "beforeFail": 2,
+      "after": "/tmp/staging-view-after.tap",
+      "afterPass": 3,
+      "afterFail": 0,
+      "method": "Prechange view bcacadbc substituted in temporary directory with current frozen test dependencies; final frozen view passes all three cases."
+    },
+    "finalizerReview": "Finalizer now checks matching source commits, independent/root catalog equality, exact certificate result pass and review finalAggregate passed. Final certificate will use result and sourceCommit; review finalAggregate will use status and sourceCommit.",
+    "allNineFinalReportsAudited": true
+  }
+}

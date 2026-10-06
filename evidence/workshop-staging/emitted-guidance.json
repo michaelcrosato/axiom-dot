@@ -1,0 +1,1606 @@
+{
+  "kind": "axiom-campaign-guidance-emitted-verification",
+  "version": 1,
+  "verifiedAt": "2026-10-06T09:07:09.748Z",
+  "scope": "Actual emitted read-only guidance and earned scenario engines, source parity, canonical finite supply/construction save roundtrips, achieved worker progress and paid repairs. Care preparation uses its declared finite disposable fixture, not an importable campaign save. No browser/GPU/device or full main startup claim.",
+  "sourceHashes": {
+    "src/campaign-guidance.ts": "c3d8a69f6f65139237e0f9d9016fcb276bd43dc850dc25e457893da38391d463",
+    "src/campaign-guidance-scenarios.ts": "db2840ee7c2ac376d12707d57e955f07abfac453a5d166c4d810da8e9700c542",
+    "src/campaign-guidance-storage.ts": "4b64bfa964c6b07480f7cf666ef1420b0834be8d33159f00695cf2ee4fc1cd88",
+    "src/campaign-guidance-ui.ts": "7a0d3c08036c90614c0cb06d7f520449674bad58963a56f355f78fa65cca0861",
+    "src/campaign-guidance-lab.ts": "3ac7c4d4cdeb8573762cfa07e6ccce7fd0517f124dd3e4b0f215252ef85789b2",
+    "src/campaign-guidance-map.ts": "dbf0130beb4e2c375fb1a4cd4b5190769628a24f1db59783e245de5d56ae25b4",
+    "src/main.ts": "d96f8f3106a67931aeb143082369c5cacbaddc98e9fbcf42876d664ab9a32067",
+    "src/world-map-view.ts": "be6b5a57d67b83921226d437b4cc015c9b03b20ad844899448b830dfccae8c2e"
+  },
+  "engines": [
+    {
+      "kind": "axiom-campaign-guidance",
+      "file": "campaign-guidance-engine-CeylMzM3.js",
+      "sha256": "402f3b9219feda89d687720976ccda440cefb0811a9b31592f9d2becf0f86d7a"
+    },
+    {
+      "kind": "axiom-campaign-guidance-scenarios",
+      "file": "campaign-guidance-scenarios-DlzQsU9p.js",
+      "sha256": "1c79521f41547e2286f882bab9a592d01a7e98dc31be6ad8dc61696a1cf0156a"
+    }
+  ],
+  "cases": [
+    {
+      "seed": 0,
+      "scenario": "opening",
+      "initialSha256": "11490a1e620ab7708f774baf19e20412c46ad0b2dbfccb8ea89e573d054424ce",
+      "finalSha256": "11490a1e620ab7708f774baf19e20412c46ad0b2dbfccb8ea89e573d054424ce",
+      "preparationSeconds": 0,
+      "manualSeconds": 0,
+      "preparedCommands": 0,
+      "ordinaryInventory": {
+        "scrap": 0,
+        "core": 0,
+        "water": 0
+      },
+      "hp": 75,
+      "materials": 0,
+      "guidance": [
+        {
+          "id": "supply",
+          "title": "Load finite valley scrap",
+          "status": "actionable",
+          "summary": "Choose a remaining cache. Loading reserves one real scrap as cargo; ordinary pickup remains a separate choice.",
+          "progress": "0/4 cargo · 7/7 caches remain · 0 deliveries · 0.0/600 materials",
+          "requirements": [
+            "Four-piece cargo capacity. Deliver two cargo for twelve shared materials; unload one at the same workshop into ordinary inventory."
+          ],
+          "target": {
+            "id": "town-supply/valley:2:0:scrap-1",
+            "label": "Salvage cache",
+            "x": -53,
+            "y": 1.5437999963760376,
+            "z": -6,
+            "panel": "town-supply",
+            "selectionId": "valley:2:0:scrap-1"
+          }
+        },
+        {
+          "id": "construction",
+          "title": "Commission the west workshop",
+          "status": "blocked",
+          "summary": "The default plan needs 31.0 more shared materials. Supply deliveries, ordinary donations and resident salvage feed the same store.",
+          "progress": "Default quote 31 materials · 0.0 available",
+          "requirements": [
+            "The construction panel owns the exact applied recipe and quote. No demolition or refunds. Materials remain shared until paid."
+          ],
+          "target": {
+            "id": "workshop-board",
+            "label": "Northwest workshop board",
+            "x": -226,
+            "y": 6,
+            "z": -193,
+            "panel": "workshop-construction"
+          }
+        },
+        {
+          "id": "restoration",
+          "title": "Restore a habitat",
+          "status": "blocked",
+          "summary": "Habitat restoration is not initialized in this saved world. Open the existing restoration controls when available.",
+          "progress": "Not initialized",
+          "requirements": [
+            "This guidance does not initialize or reset campaign systems."
+          ],
+          "target": null
+        },
+        {
+          "id": "care",
+          "title": "Bring restoration home",
+          "status": "blocked",
+          "summary": "Town life and habitat restoration must both be initialized before care deliveries.",
+          "progress": "Not initialized",
+          "requirements": [
+            "This guidance does not initialize or reset campaign systems."
+          ],
+          "target": null
+        },
+        {
+          "id": "regional",
+          "title": "Regional projects",
+          "status": "blocked",
+          "summary": "No regional objective is currently selected. Existing waterworks and town tasks remain available.",
+          "progress": "Not initialized",
+          "requirements": [
+            "This guidance does not initialize or reset campaign systems."
+          ],
+          "target": null
+        },
+        {
+          "id": "town",
+          "title": "Hearthmere · repair supplies are scarce",
+          "status": "available",
+          "summary": "Care and maintenance compete for materials. Contribute scrap at the workshop, or watch residents reclaim the available salvage.",
+          "progress": "100 residents · 0.0 shared materials",
+          "requirements": [
+            "Needs, routines, requests and their costs remain owned by the living-town model."
+          ],
+          "target": {
+            "id": "square",
+            "label": "Hearthmere meeting square",
+            "x": -176,
+            "y": 6,
+            "z": -134,
+            "panel": "town-life"
+          }
+        }
+      ],
+      "canonicalSaveChecked": true
+    },
+    {
+      "seed": 0,
+      "scenario": "supply-to-workshop",
+      "initialSha256": "d0f3cdc16da563072025b4a8257aeb9055dde946e07a2f2bdd10f3ce38e3fe41",
+      "finalSha256": "ffae09e44667ebfee434df00549aa25014a792f2dbd8be73c80bf19c03b71451",
+      "preparationSeconds": 20,
+      "manualSeconds": 200,
+      "preparedCommands": 14,
+      "finiteSupply": {
+        "version": 1,
+        "revision": 9,
+        "sources": [
+          "valley:2:0:build-scrap-0",
+          "valley:2:0:build-scrap-1",
+          "valley:2:0:build-scrap-2",
+          "valley:2:0:build-scrap-3",
+          "valley:2:0:scrap-1",
+          "valley:2:0:scrap-2"
+        ],
+        "carried": 0,
+        "unloaded": 0,
+        "deliveries": 3
+      },
+      "construction": {
+        "version": 1,
+        "revision": 2,
+        "parcelId": "hearthmere-west",
+        "parameters": {
+          "seed": 0,
+          "rearRooms": 2,
+          "width": 9,
+          "depth": 7.6,
+          "hallDepth": 3.4,
+          "doorwayWidth": 1.6
+        },
+        "workerId": "town-resident:0:000",
+        "materialsPaid": 35,
+        "work": 72,
+        "workRequired": 72,
+        "status": "complete",
+        "repairs": 1
+      },
+      "ordinaryInventory": {
+        "scrap": 0,
+        "core": 0,
+        "water": 0
+      },
+      "hp": 100,
+      "materials": 151.5,
+      "guidance": [
+        {
+          "id": "supply",
+          "title": "Load finite valley scrap",
+          "status": "actionable",
+          "summary": "Choose a remaining cache. Loading reserves one real scrap as cargo; ordinary pickup remains a separate choice.",
+          "progress": "0/4 cargo · 1/7 caches remain · 3 deliveries · 151.5/600 materials",
+          "requirements": [
+            "Four-piece cargo capacity. Deliver two cargo for twelve shared materials; unload one at the same workshop into ordinary inventory."
+          ],
+          "target": {
+            "id": "town-supply/valley:2:0:scrap-3",
+            "label": "Alloy fragments",
+            "x": 36,
+            "y": 2.259399890899658,
+            "z": -11,
+            "panel": "town-supply",
+            "selectionId": "valley:2:0:scrap-3"
+          }
+        },
+        {
+          "id": "construction",
+          "title": "Workshop complete · repair service ready",
+          "status": "complete",
+          "summary": "The permanent workshop is complete. Your suit is undamaged; its paid repair service remains available when needed.",
+          "progress": "1 repairs · 100/100 suit HP · 151.5 materials",
+          "requirements": [
+            "The completed building and its collision remain part of this saved world."
+          ],
+          "target": {
+            "id": "workshop-board",
+            "label": "Northwest workshop board",
+            "x": -226,
+            "y": 6,
+            "z": -193,
+            "panel": "workshop-construction"
+          }
+        },
+        {
+          "id": "restoration",
+          "title": "Restore a habitat",
+          "status": "blocked",
+          "summary": "Habitat restoration is not initialized in this saved world. Open the existing restoration controls when available.",
+          "progress": "Not initialized",
+          "requirements": [
+            "This guidance does not initialize or reset campaign systems."
+          ],
+          "target": null
+        },
+        {
+          "id": "care",
+          "title": "Bring restoration home",
+          "status": "blocked",
+          "summary": "Town life and habitat restoration must both be initialized before care deliveries.",
+          "progress": "Not initialized",
+          "requirements": [
+            "This guidance does not initialize or reset campaign systems."
+          ],
+          "target": null
+        },
+        {
+          "id": "regional",
+          "title": "Regional projects",
+          "status": "blocked",
+          "summary": "No regional objective is currently selected. Existing waterworks and town tasks remain available.",
+          "progress": "Not initialized",
+          "requirements": [
+            "This guidance does not initialize or reset campaign systems."
+          ],
+          "target": null
+        },
+        {
+          "id": "town",
+          "title": "Hearthmere · everyday lives unfolding",
+          "status": "available",
+          "summary": "Residents balance needs, work, company and personal ambitions. Ask about their day, inspect Town life or lend a hand at a service.",
+          "progress": "100 residents · 151.5 shared materials",
+          "requirements": [
+            "Needs, routines, requests and their costs remain owned by the living-town model."
+          ],
+          "target": {
+            "id": "square",
+            "label": "Hearthmere meeting square",
+            "x": -176,
+            "y": 6,
+            "z": -134,
+            "panel": "town-life"
+          }
+        }
+      ],
+      "canonicalSaveChecked": true
+    },
+    {
+      "seed": 0,
+      "scenario": "care-delivered",
+      "initialSha256": "fea23c3fa763f590db13e87f1d368622620773d0867ac3cd5a7207a182ac3285",
+      "finalSha256": "24c6b78f2d89feb1e54055c52bc85a4463f0861282594fac959a90992dc4336f",
+      "preparationSeconds": 151,
+      "manualSeconds": 60,
+      "preparedCommands": 1,
+      "care": {
+        "version": 1,
+        "revision": 2,
+        "carried": 0,
+        "delivered": 5,
+        "deliveries": 1
+      },
+      "clinic": {
+        "received": 5,
+        "stock": 3,
+        "used": 2
+      },
+      "ordinaryInventory": {
+        "scrap": 11,
+        "core": 0,
+        "water": 2
+      },
+      "hp": 70,
+      "materials": 119,
+      "guidance": [
+        {
+          "id": "supply",
+          "title": "Load finite valley scrap",
+          "status": "actionable",
+          "summary": "Choose a remaining cache. Loading reserves one real scrap as cargo; ordinary pickup remains a separate choice.",
+          "progress": "0/4 cargo · 7/7 caches remain · 0 deliveries · 119.0/600 materials",
+          "requirements": [
+            "Four-piece cargo capacity. Deliver two cargo for twelve shared materials; unload one at the same workshop into ordinary inventory."
+          ],
+          "target": {
+            "id": "town-supply/valley:2:0:scrap-1",
+            "label": "Salvage cache",
+            "x": -53,
+            "y": 1.5437999963760376,
+            "z": -6,
+            "panel": "town-supply",
+            "selectionId": "valley:2:0:scrap-1"
+          }
+        },
+        {
+          "id": "construction",
+          "title": "Commission the west workshop",
+          "status": "available",
+          "summary": "The default plan is funded. Review the bounded recipe and an available resident at the northwest board before committing.",
+          "progress": "Default quote 31 materials · 119.0 available",
+          "requirements": [
+            "The construction panel owns the exact applied recipe and quote. No demolition or refunds. Materials remain shared until paid."
+          ],
+          "target": {
+            "id": "workshop-board",
+            "label": "Northwest workshop board",
+            "x": -226,
+            "y": 6,
+            "z": -193,
+            "panel": "workshop-construction"
+          }
+        },
+        {
+          "id": "restoration",
+          "title": "Fern Hollow restoration · restoration recorded",
+          "status": "complete",
+          "summary": "This restored habitat currently has a collectible surplus for Greenlight care.",
+          "progress": "6/6 viable cells · 6/6 cells at 70 health · 151 collectible biomass",
+          "requirements": [
+            "Refits and servicing use existing finite inventory and dock reserves. Inspect exact current machine and cell blockers in restoration."
+          ],
+          "target": {
+            "id": "habitat-v1-0-site-0",
+            "label": "Fern Hollow restoration",
+            "x": -671.8216,
+            "y": 4.870190620422363,
+            "z": -576.486,
+            "panel": "restoration",
+            "selectionId": "habitat-v1-0-site-0"
+          }
+        },
+        {
+          "id": "care",
+          "title": "Care delivered · awaiting resident use",
+          "status": "waiting",
+          "summary": "3 portions remain at Greenlight. Residents must choose care and physically arrive before a portion is committed. Stock does not guarantee a visit or a completed treatment.",
+          "progress": "0/10 carried · 5 delivered · 3/20 stocked · 2 portions committed on actual care arrival",
+          "requirements": [
+            "One portion supports 1.5× energy, hygiene and comfort recovery only during achieved care work. Waiting and travel receive no bonus."
+          ],
+          "target": {
+            "id": "habitat-care/apothecary",
+            "label": "Greenlight care station",
+            "x": -152,
+            "y": 6,
+            "z": -141.8,
+            "panel": "restoration-care",
+            "selectionId": "apothecary"
+          }
+        },
+        {
+          "id": "regional",
+          "title": "Regional projects",
+          "status": "blocked",
+          "summary": "No regional objective is currently selected. Existing waterworks and town tasks remain available.",
+          "progress": "Not initialized",
+          "requirements": [
+            "This guidance does not initialize or reset campaign systems."
+          ],
+          "target": null
+        },
+        {
+          "id": "town",
+          "title": "Hearthmere · everyday lives unfolding",
+          "status": "available",
+          "summary": "Residents balance needs, work, company and personal ambitions. Ask about their day, inspect Town life or lend a hand at a service.",
+          "progress": "100 residents · 119.0 shared materials",
+          "requirements": [
+            "Needs, routines, requests and their costs remain owned by the living-town model."
+          ],
+          "target": {
+            "id": "square",
+            "label": "Hearthmere meeting square",
+            "x": -176,
+            "y": 6,
+            "z": -134,
+            "panel": "town-life"
+          }
+        }
+      ],
+      "canonicalSaveChecked": false
+    },
+    {
+      "seed": 0,
+      "scenario": "workshop-complete",
+      "initialSha256": "82a5c7046e1ad227f6fbdcf3bad4a8d0b4aa6f1caa4329ee0eb8d554311e6087",
+      "finalSha256": "82a5c7046e1ad227f6fbdcf3bad4a8d0b4aa6f1caa4329ee0eb8d554311e6087",
+      "preparationSeconds": 218.5,
+      "manualSeconds": 0,
+      "preparedCommands": 18,
+      "finiteSupply": {
+        "version": 1,
+        "revision": 11,
+        "sources": [
+          "valley:2:0:build-scrap-0",
+          "valley:2:0:build-scrap-1",
+          "valley:2:0:build-scrap-2",
+          "valley:2:0:build-scrap-3",
+          "valley:2:0:scrap-1",
+          "valley:2:0:scrap-2",
+          "valley:2:0:scrap-3"
+        ],
+        "carried": 0,
+        "unloaded": 1,
+        "deliveries": 3
+      },
+      "construction": {
+        "version": 1,
+        "revision": 2,
+        "parcelId": "hearthmere-west",
+        "parameters": {
+          "seed": 0,
+          "rearRooms": 2,
+          "width": 9,
+          "depth": 7.6,
+          "hallDepth": 3.4,
+          "doorwayWidth": 1.6
+        },
+        "workerId": "town-resident:0:000",
+        "materialsPaid": 35,
+        "work": 72,
+        "workRequired": 72,
+        "status": "complete",
+        "repairs": 1
+      },
+      "ordinaryInventory": {
+        "scrap": 1,
+        "core": 0,
+        "water": 0
+      },
+      "hp": 100,
+      "materials": 151.5,
+      "guidance": [
+        {
+          "id": "supply",
+          "title": "Finite supply route exhausted",
+          "status": "complete",
+          "summary": "All seven canonical valley caches are collected. Ordinary inventory donations and residents’ existing salvage work remain available; caches do not respawn.",
+          "progress": "0/4 cargo · 0/7 caches remain · 3 deliveries · 151.5/600 materials",
+          "requirements": [
+            "Four-piece cargo capacity. Deliver two cargo for twelve shared materials; unload one at the same workshop into ordinary inventory."
+          ],
+          "target": {
+            "id": "town-supply/workshop",
+            "label": "Second Life Salvage delivery station",
+            "x": -188,
+            "y": 6,
+            "z": -141.8,
+            "panel": "town-supply",
+            "selectionId": "workshop"
+          }
+        },
+        {
+          "id": "construction",
+          "title": "Workshop complete · repair service ready",
+          "status": "complete",
+          "summary": "The permanent workshop is complete. Your suit is undamaged; its paid repair service remains available when needed.",
+          "progress": "1 repairs · 100/100 suit HP · 151.5 materials",
+          "requirements": [
+            "The completed building and its collision remain part of this saved world."
+          ],
+          "target": {
+            "id": "workshop-board",
+            "label": "Northwest workshop board",
+            "x": -226,
+            "y": 6,
+            "z": -193,
+            "panel": "workshop-construction"
+          }
+        },
+        {
+          "id": "restoration",
+          "title": "Restore a habitat",
+          "status": "blocked",
+          "summary": "Habitat restoration is not initialized in this saved world. Open the existing restoration controls when available.",
+          "progress": "Not initialized",
+          "requirements": [
+            "This guidance does not initialize or reset campaign systems."
+          ],
+          "target": null
+        },
+        {
+          "id": "care",
+          "title": "Bring restoration home",
+          "status": "blocked",
+          "summary": "Town life and habitat restoration must both be initialized before care deliveries.",
+          "progress": "Not initialized",
+          "requirements": [
+            "This guidance does not initialize or reset campaign systems."
+          ],
+          "target": null
+        },
+        {
+          "id": "regional",
+          "title": "Regional projects",
+          "status": "blocked",
+          "summary": "No regional objective is currently selected. Existing waterworks and town tasks remain available.",
+          "progress": "Not initialized",
+          "requirements": [
+            "This guidance does not initialize or reset campaign systems."
+          ],
+          "target": null
+        },
+        {
+          "id": "town",
+          "title": "Hearthmere · everyday lives unfolding",
+          "status": "available",
+          "summary": "Residents balance needs, work, company and personal ambitions. Ask about their day, inspect Town life or lend a hand at a service.",
+          "progress": "100 residents · 151.5 shared materials",
+          "requirements": [
+            "Needs, routines, requests and their costs remain owned by the living-town model."
+          ],
+          "target": {
+            "id": "square",
+            "label": "Hearthmere meeting square",
+            "x": -176,
+            "y": 6,
+            "z": -134,
+            "panel": "town-life"
+          }
+        }
+      ],
+      "canonicalSaveChecked": true
+    },
+    {
+      "seed": 73129,
+      "scenario": "opening",
+      "initialSha256": "00d1aa4215b9324d96745ccc184b3a8db446d21a0dd59ad59632b22a94ce0c20",
+      "finalSha256": "00d1aa4215b9324d96745ccc184b3a8db446d21a0dd59ad59632b22a94ce0c20",
+      "preparationSeconds": 0,
+      "manualSeconds": 0,
+      "preparedCommands": 0,
+      "ordinaryInventory": {
+        "scrap": 0,
+        "core": 0,
+        "water": 0
+      },
+      "hp": 75,
+      "materials": 0,
+      "guidance": [
+        {
+          "id": "supply",
+          "title": "Load finite valley scrap",
+          "status": "actionable",
+          "summary": "Choose a remaining cache. Loading reserves one real scrap as cargo; ordinary pickup remains a separate choice.",
+          "progress": "0/4 cargo · 7/7 caches remain · 0 deliveries · 0.0/600 materials",
+          "requirements": [
+            "Four-piece cargo capacity. Deliver two cargo for twelve shared materials; unload one at the same workshop into ordinary inventory."
+          ],
+          "target": {
+            "id": "town-supply/valley:2:73129:scrap-1",
+            "label": "Salvage cache",
+            "x": -52,
+            "y": 1.5307999849319458,
+            "z": -6,
+            "panel": "town-supply",
+            "selectionId": "valley:2:73129:scrap-1"
+          }
+        },
+        {
+          "id": "construction",
+          "title": "Commission the west workshop",
+          "status": "blocked",
+          "summary": "The default plan needs 31.0 more shared materials. Supply deliveries, ordinary donations and resident salvage feed the same store.",
+          "progress": "Default quote 31 materials · 0.0 available",
+          "requirements": [
+            "The construction panel owns the exact applied recipe and quote. No demolition or refunds. Materials remain shared until paid."
+          ],
+          "target": {
+            "id": "workshop-board",
+            "label": "Northwest workshop board",
+            "x": -226,
+            "y": 6,
+            "z": -193,
+            "panel": "workshop-construction"
+          }
+        },
+        {
+          "id": "restoration",
+          "title": "Restore a habitat",
+          "status": "blocked",
+          "summary": "Habitat restoration is not initialized in this saved world. Open the existing restoration controls when available.",
+          "progress": "Not initialized",
+          "requirements": [
+            "This guidance does not initialize or reset campaign systems."
+          ],
+          "target": null
+        },
+        {
+          "id": "care",
+          "title": "Bring restoration home",
+          "status": "blocked",
+          "summary": "Town life and habitat restoration must both be initialized before care deliveries.",
+          "progress": "Not initialized",
+          "requirements": [
+            "This guidance does not initialize or reset campaign systems."
+          ],
+          "target": null
+        },
+        {
+          "id": "regional",
+          "title": "Regional projects",
+          "status": "blocked",
+          "summary": "No regional objective is currently selected. Existing waterworks and town tasks remain available.",
+          "progress": "Not initialized",
+          "requirements": [
+            "This guidance does not initialize or reset campaign systems."
+          ],
+          "target": null
+        },
+        {
+          "id": "town",
+          "title": "Hearthmere · repair supplies are scarce",
+          "status": "available",
+          "summary": "Care and maintenance compete for materials. Contribute scrap at the workshop, or watch residents reclaim the available salvage.",
+          "progress": "100 residents · 0.0 shared materials",
+          "requirements": [
+            "Needs, routines, requests and their costs remain owned by the living-town model."
+          ],
+          "target": {
+            "id": "square",
+            "label": "Hearthmere meeting square",
+            "x": -176,
+            "y": 6,
+            "z": -134,
+            "panel": "town-life"
+          }
+        }
+      ],
+      "canonicalSaveChecked": true
+    },
+    {
+      "seed": 73129,
+      "scenario": "supply-to-workshop",
+      "initialSha256": "32f5bc8a9e491ac2bab8decfc42b3b26a1f3aa4554c7b7efbfe73665b83684de",
+      "finalSha256": "3b236682ad1a656af6ebc3fdc13dce72565ff203e430cbe910623b3d7f0255f1",
+      "preparationSeconds": 20,
+      "manualSeconds": 180,
+      "preparedCommands": 14,
+      "finiteSupply": {
+        "version": 1,
+        "revision": 9,
+        "sources": [
+          "valley:2:73129:build-scrap-0",
+          "valley:2:73129:build-scrap-1",
+          "valley:2:73129:build-scrap-2",
+          "valley:2:73129:build-scrap-3",
+          "valley:2:73129:scrap-1",
+          "valley:2:73129:scrap-2"
+        ],
+        "carried": 0,
+        "unloaded": 0,
+        "deliveries": 3
+      },
+      "construction": {
+        "version": 1,
+        "revision": 2,
+        "parcelId": "hearthmere-west",
+        "parameters": {
+          "seed": 73129,
+          "rearRooms": 2,
+          "width": 9,
+          "depth": 7.6,
+          "hallDepth": 3.4,
+          "doorwayWidth": 1.6
+        },
+        "workerId": "town-resident:73129:001",
+        "materialsPaid": 35,
+        "work": 72,
+        "workRequired": 72,
+        "status": "complete",
+        "repairs": 1
+      },
+      "ordinaryInventory": {
+        "scrap": 0,
+        "core": 0,
+        "water": 0
+      },
+      "hp": 100,
+      "materials": 122.5,
+      "guidance": [
+        {
+          "id": "supply",
+          "title": "Load finite valley scrap",
+          "status": "actionable",
+          "summary": "Choose a remaining cache. Loading reserves one real scrap as cargo; ordinary pickup remains a separate choice.",
+          "progress": "0/4 cargo · 1/7 caches remain · 3 deliveries · 122.5/600 materials",
+          "requirements": [
+            "Four-piece cargo capacity. Deliver two cargo for twelve shared materials; unload one at the same workshop into ordinary inventory."
+          ],
+          "target": {
+            "id": "town-supply/valley:2:73129:scrap-3",
+            "label": "Alloy fragments",
+            "x": 36,
+            "y": 2.7634999752044678,
+            "z": -8,
+            "panel": "town-supply",
+            "selectionId": "valley:2:73129:scrap-3"
+          }
+        },
+        {
+          "id": "construction",
+          "title": "Workshop complete · repair service ready",
+          "status": "complete",
+          "summary": "The permanent workshop is complete. Your suit is undamaged; its paid repair service remains available when needed.",
+          "progress": "1 repairs · 100/100 suit HP · 122.5 materials",
+          "requirements": [
+            "The completed building and its collision remain part of this saved world."
+          ],
+          "target": {
+            "id": "workshop-board",
+            "label": "Northwest workshop board",
+            "x": -226,
+            "y": 6,
+            "z": -193,
+            "panel": "workshop-construction"
+          }
+        },
+        {
+          "id": "restoration",
+          "title": "Restore a habitat",
+          "status": "blocked",
+          "summary": "Habitat restoration is not initialized in this saved world. Open the existing restoration controls when available.",
+          "progress": "Not initialized",
+          "requirements": [
+            "This guidance does not initialize or reset campaign systems."
+          ],
+          "target": null
+        },
+        {
+          "id": "care",
+          "title": "Bring restoration home",
+          "status": "blocked",
+          "summary": "Town life and habitat restoration must both be initialized before care deliveries.",
+          "progress": "Not initialized",
+          "requirements": [
+            "This guidance does not initialize or reset campaign systems."
+          ],
+          "target": null
+        },
+        {
+          "id": "regional",
+          "title": "Regional projects",
+          "status": "blocked",
+          "summary": "No regional objective is currently selected. Existing waterworks and town tasks remain available.",
+          "progress": "Not initialized",
+          "requirements": [
+            "This guidance does not initialize or reset campaign systems."
+          ],
+          "target": null
+        },
+        {
+          "id": "town",
+          "title": "Hearthmere · everyday lives unfolding",
+          "status": "available",
+          "summary": "Residents balance needs, work, company and personal ambitions. Ask about their day, inspect Town life or lend a hand at a service.",
+          "progress": "100 residents · 122.5 shared materials",
+          "requirements": [
+            "Needs, routines, requests and their costs remain owned by the living-town model."
+          ],
+          "target": {
+            "id": "square",
+            "label": "Hearthmere meeting square",
+            "x": -176,
+            "y": 6,
+            "z": -134,
+            "panel": "town-life"
+          }
+        }
+      ],
+      "canonicalSaveChecked": true
+    },
+    {
+      "seed": 73129,
+      "scenario": "care-delivered",
+      "initialSha256": "8f076b2d2deafb435eb88759f893c4e798920925bc1e58253ca3971c0875a2bf",
+      "finalSha256": "8e87da12095390cbea8639a3b3a92da9fe5222787bfb2da728dbc8b32db98bb6",
+      "preparationSeconds": 148,
+      "manualSeconds": 60,
+      "preparedCommands": 1,
+      "care": {
+        "version": 1,
+        "revision": 2,
+        "carried": 0,
+        "delivered": 5,
+        "deliveries": 1
+      },
+      "clinic": {
+        "received": 5,
+        "stock": 5,
+        "used": 0
+      },
+      "ordinaryInventory": {
+        "scrap": 11,
+        "core": 0,
+        "water": 2
+      },
+      "hp": 70,
+      "materials": 120,
+      "guidance": [
+        {
+          "id": "supply",
+          "title": "Load finite valley scrap",
+          "status": "actionable",
+          "summary": "Choose a remaining cache. Loading reserves one real scrap as cargo; ordinary pickup remains a separate choice.",
+          "progress": "0/4 cargo · 7/7 caches remain · 0 deliveries · 120.0/600 materials",
+          "requirements": [
+            "Four-piece cargo capacity. Deliver two cargo for twelve shared materials; unload one at the same workshop into ordinary inventory."
+          ],
+          "target": {
+            "id": "town-supply/valley:2:73129:scrap-1",
+            "label": "Salvage cache",
+            "x": -52,
+            "y": 1.5307999849319458,
+            "z": -6,
+            "panel": "town-supply",
+            "selectionId": "valley:2:73129:scrap-1"
+          }
+        },
+        {
+          "id": "construction",
+          "title": "Commission the west workshop",
+          "status": "available",
+          "summary": "The default plan is funded. Review the bounded recipe and an available resident at the northwest board before committing.",
+          "progress": "Default quote 31 materials · 120.0 available",
+          "requirements": [
+            "The construction panel owns the exact applied recipe and quote. No demolition or refunds. Materials remain shared until paid."
+          ],
+          "target": {
+            "id": "workshop-board",
+            "label": "Northwest workshop board",
+            "x": -226,
+            "y": 6,
+            "z": -193,
+            "panel": "workshop-construction"
+          }
+        },
+        {
+          "id": "restoration",
+          "title": "Fern Hollow restoration · restoration recorded",
+          "status": "complete",
+          "summary": "This restored habitat currently has a collectible surplus for Greenlight care.",
+          "progress": "6/6 viable cells · 6/6 cells at 70 health · 175 collectible biomass",
+          "requirements": [
+            "Refits and servicing use existing finite inventory and dock reserves. Inspect exact current machine and cell blockers in restoration."
+          ],
+          "target": {
+            "id": "habitat-v1-73129-site-0",
+            "label": "Fern Hollow restoration",
+            "x": -665.3081,
+            "y": 4.4353790283203125,
+            "z": -625.4256,
+            "panel": "restoration",
+            "selectionId": "habitat-v1-73129-site-0"
+          }
+        },
+        {
+          "id": "care",
+          "title": "Care delivered · awaiting resident use",
+          "status": "waiting",
+          "summary": "5 portions remain at Greenlight. Residents must choose care and physically arrive before a portion is committed. Stock does not guarantee a visit or a completed treatment.",
+          "progress": "0/10 carried · 5 delivered · 5/20 stocked · 0 portions committed on actual care arrival",
+          "requirements": [
+            "One portion supports 1.5× energy, hygiene and comfort recovery only during achieved care work. Waiting and travel receive no bonus."
+          ],
+          "target": {
+            "id": "habitat-care/apothecary",
+            "label": "Greenlight care station",
+            "x": -152,
+            "y": 6,
+            "z": -141.8,
+            "panel": "restoration-care",
+            "selectionId": "apothecary"
+          }
+        },
+        {
+          "id": "regional",
+          "title": "Regional projects",
+          "status": "blocked",
+          "summary": "No regional objective is currently selected. Existing waterworks and town tasks remain available.",
+          "progress": "Not initialized",
+          "requirements": [
+            "This guidance does not initialize or reset campaign systems."
+          ],
+          "target": null
+        },
+        {
+          "id": "town",
+          "title": "Hearthmere · someone needs a break",
+          "status": "available",
+          "summary": "Kiran Ellis has a low essential need. Inspect their actual choice, destination and available services.",
+          "progress": "100 residents · 120.0 shared materials",
+          "requirements": [
+            "Needs, routines, requests and their costs remain owned by the living-town model."
+          ],
+          "target": {
+            "id": "town-resident:73129:050",
+            "label": "Kiran Ellis",
+            "x": -146.076601,
+            "y": 6,
+            "z": -144.29387964,
+            "panel": "town-life",
+            "selectionId": "town-resident:73129:050"
+          }
+        }
+      ],
+      "canonicalSaveChecked": false
+    },
+    {
+      "seed": 73129,
+      "scenario": "workshop-complete",
+      "initialSha256": "d50cb036cd01be21bba94e197618c19a561f70741cb8883ca6b0e25122ec41d1",
+      "finalSha256": "d50cb036cd01be21bba94e197618c19a561f70741cb8883ca6b0e25122ec41d1",
+      "preparationSeconds": 195,
+      "manualSeconds": 0,
+      "preparedCommands": 18,
+      "finiteSupply": {
+        "version": 1,
+        "revision": 11,
+        "sources": [
+          "valley:2:73129:build-scrap-0",
+          "valley:2:73129:build-scrap-1",
+          "valley:2:73129:build-scrap-2",
+          "valley:2:73129:build-scrap-3",
+          "valley:2:73129:scrap-1",
+          "valley:2:73129:scrap-2",
+          "valley:2:73129:scrap-3"
+        ],
+        "carried": 0,
+        "unloaded": 1,
+        "deliveries": 3
+      },
+      "construction": {
+        "version": 1,
+        "revision": 2,
+        "parcelId": "hearthmere-west",
+        "parameters": {
+          "seed": 73129,
+          "rearRooms": 2,
+          "width": 9,
+          "depth": 7.6,
+          "hallDepth": 3.4,
+          "doorwayWidth": 1.6
+        },
+        "workerId": "town-resident:73129:001",
+        "materialsPaid": 35,
+        "work": 72,
+        "workRequired": 72,
+        "status": "complete",
+        "repairs": 1
+      },
+      "ordinaryInventory": {
+        "scrap": 1,
+        "core": 0,
+        "water": 0
+      },
+      "hp": 100,
+      "materials": 122.5,
+      "guidance": [
+        {
+          "id": "supply",
+          "title": "Finite supply route exhausted",
+          "status": "complete",
+          "summary": "All seven canonical valley caches are collected. Ordinary inventory donations and residents’ existing salvage work remain available; caches do not respawn.",
+          "progress": "0/4 cargo · 0/7 caches remain · 3 deliveries · 122.5/600 materials",
+          "requirements": [
+            "Four-piece cargo capacity. Deliver two cargo for twelve shared materials; unload one at the same workshop into ordinary inventory."
+          ],
+          "target": {
+            "id": "town-supply/workshop",
+            "label": "Second Life Salvage delivery station",
+            "x": -188,
+            "y": 6,
+            "z": -141.8,
+            "panel": "town-supply",
+            "selectionId": "workshop"
+          }
+        },
+        {
+          "id": "construction",
+          "title": "Workshop complete · repair service ready",
+          "status": "complete",
+          "summary": "The permanent workshop is complete. Your suit is undamaged; its paid repair service remains available when needed.",
+          "progress": "1 repairs · 100/100 suit HP · 122.5 materials",
+          "requirements": [
+            "The completed building and its collision remain part of this saved world."
+          ],
+          "target": {
+            "id": "workshop-board",
+            "label": "Northwest workshop board",
+            "x": -226,
+            "y": 6,
+            "z": -193,
+            "panel": "workshop-construction"
+          }
+        },
+        {
+          "id": "restoration",
+          "title": "Restore a habitat",
+          "status": "blocked",
+          "summary": "Habitat restoration is not initialized in this saved world. Open the existing restoration controls when available.",
+          "progress": "Not initialized",
+          "requirements": [
+            "This guidance does not initialize or reset campaign systems."
+          ],
+          "target": null
+        },
+        {
+          "id": "care",
+          "title": "Bring restoration home",
+          "status": "blocked",
+          "summary": "Town life and habitat restoration must both be initialized before care deliveries.",
+          "progress": "Not initialized",
+          "requirements": [
+            "This guidance does not initialize or reset campaign systems."
+          ],
+          "target": null
+        },
+        {
+          "id": "regional",
+          "title": "Regional projects",
+          "status": "blocked",
+          "summary": "No regional objective is currently selected. Existing waterworks and town tasks remain available.",
+          "progress": "Not initialized",
+          "requirements": [
+            "This guidance does not initialize or reset campaign systems."
+          ],
+          "target": null
+        },
+        {
+          "id": "town",
+          "title": "Hearthmere · everyday lives unfolding",
+          "status": "available",
+          "summary": "Residents balance needs, work, company and personal ambitions. Ask about their day, inspect Town life or lend a hand at a service.",
+          "progress": "100 residents · 122.5 shared materials",
+          "requirements": [
+            "Needs, routines, requests and their costs remain owned by the living-town model."
+          ],
+          "target": {
+            "id": "square",
+            "label": "Hearthmere meeting square",
+            "x": -176,
+            "y": 6,
+            "z": -134,
+            "panel": "town-life"
+          }
+        }
+      ],
+      "canonicalSaveChecked": true
+    },
+    {
+      "seed": 4294967295,
+      "scenario": "opening",
+      "initialSha256": "d07c3530107a1157c2ee78f092d5de73bba7f585f7ddc8553e239584cd3a1c94",
+      "finalSha256": "d07c3530107a1157c2ee78f092d5de73bba7f585f7ddc8553e239584cd3a1c94",
+      "preparationSeconds": 0,
+      "manualSeconds": 0,
+      "preparedCommands": 0,
+      "ordinaryInventory": {
+        "scrap": 0,
+        "core": 0,
+        "water": 0
+      },
+      "hp": 75,
+      "materials": 0,
+      "guidance": [
+        {
+          "id": "supply",
+          "title": "Load finite valley scrap",
+          "status": "actionable",
+          "summary": "Choose a remaining cache. Loading reserves one real scrap as cargo; ordinary pickup remains a separate choice.",
+          "progress": "0/4 cargo · 7/7 caches remain · 0 deliveries · 0.0/600 materials",
+          "requirements": [
+            "Four-piece cargo capacity. Deliver two cargo for twelve shared materials; unload one at the same workshop into ordinary inventory."
+          ],
+          "target": {
+            "id": "town-supply/valley:2:4294967295:scrap-1",
+            "label": "Salvage cache",
+            "x": -51,
+            "y": 1.6485999822616577,
+            "z": -8,
+            "panel": "town-supply",
+            "selectionId": "valley:2:4294967295:scrap-1"
+          }
+        },
+        {
+          "id": "construction",
+          "title": "Commission the west workshop",
+          "status": "blocked",
+          "summary": "The default plan needs 31.0 more shared materials. Supply deliveries, ordinary donations and resident salvage feed the same store.",
+          "progress": "Default quote 31 materials · 0.0 available",
+          "requirements": [
+            "The construction panel owns the exact applied recipe and quote. No demolition or refunds. Materials remain shared until paid."
+          ],
+          "target": {
+            "id": "workshop-board",
+            "label": "Northwest workshop board",
+            "x": -226,
+            "y": 6,
+            "z": -193,
+            "panel": "workshop-construction"
+          }
+        },
+        {
+          "id": "restoration",
+          "title": "Restore a habitat",
+          "status": "blocked",
+          "summary": "Habitat restoration is not initialized in this saved world. Open the existing restoration controls when available.",
+          "progress": "Not initialized",
+          "requirements": [
+            "This guidance does not initialize or reset campaign systems."
+          ],
+          "target": null
+        },
+        {
+          "id": "care",
+          "title": "Bring restoration home",
+          "status": "blocked",
+          "summary": "Town life and habitat restoration must both be initialized before care deliveries.",
+          "progress": "Not initialized",
+          "requirements": [
+            "This guidance does not initialize or reset campaign systems."
+          ],
+          "target": null
+        },
+        {
+          "id": "regional",
+          "title": "Regional projects",
+          "status": "blocked",
+          "summary": "No regional objective is currently selected. Existing waterworks and town tasks remain available.",
+          "progress": "Not initialized",
+          "requirements": [
+            "This guidance does not initialize or reset campaign systems."
+          ],
+          "target": null
+        },
+        {
+          "id": "town",
+          "title": "Hearthmere · repair supplies are scarce",
+          "status": "available",
+          "summary": "Care and maintenance compete for materials. Contribute scrap at the workshop, or watch residents reclaim the available salvage.",
+          "progress": "100 residents · 0.0 shared materials",
+          "requirements": [
+            "Needs, routines, requests and their costs remain owned by the living-town model."
+          ],
+          "target": {
+            "id": "square",
+            "label": "Hearthmere meeting square",
+            "x": -176,
+            "y": 6,
+            "z": -134,
+            "panel": "town-life"
+          }
+        }
+      ],
+      "canonicalSaveChecked": true
+    },
+    {
+      "seed": 4294967295,
+      "scenario": "supply-to-workshop",
+      "initialSha256": "35dd3844a5c7fa71682d114dd5ee91fd6beb7270ff4d78030051a5de8e2af97f",
+      "finalSha256": "2fff6988ce1d15f60e73e4d3be22c8539b5c0c1b7760a80913e06c7d0ae713d9",
+      "preparationSeconds": 20,
+      "manualSeconds": 200,
+      "preparedCommands": 14,
+      "finiteSupply": {
+        "version": 1,
+        "revision": 9,
+        "sources": [
+          "valley:2:4294967295:build-scrap-0",
+          "valley:2:4294967295:build-scrap-1",
+          "valley:2:4294967295:build-scrap-2",
+          "valley:2:4294967295:build-scrap-3",
+          "valley:2:4294967295:scrap-1",
+          "valley:2:4294967295:scrap-2"
+        ],
+        "carried": 0,
+        "unloaded": 0,
+        "deliveries": 3
+      },
+      "construction": {
+        "version": 1,
+        "revision": 2,
+        "parcelId": "hearthmere-west",
+        "parameters": {
+          "seed": 4294967295,
+          "rearRooms": 2,
+          "width": 9,
+          "depth": 7.6,
+          "hallDepth": 3.4,
+          "doorwayWidth": 1.6
+        },
+        "workerId": "town-resident:4294967295:000",
+        "materialsPaid": 35,
+        "work": 72,
+        "workRequired": 72,
+        "status": "complete",
+        "repairs": 1
+      },
+      "ordinaryInventory": {
+        "scrap": 0,
+        "core": 0,
+        "water": 0
+      },
+      "hp": 100,
+      "materials": 160,
+      "guidance": [
+        {
+          "id": "supply",
+          "title": "Load finite valley scrap",
+          "status": "actionable",
+          "summary": "Choose a remaining cache. Loading reserves one real scrap as cargo; ordinary pickup remains a separate choice.",
+          "progress": "0/4 cargo · 1/7 caches remain · 3 deliveries · 160.0/600 materials",
+          "requirements": [
+            "Four-piece cargo capacity. Deliver two cargo for twelve shared materials; unload one at the same workshop into ordinary inventory."
+          ],
+          "target": {
+            "id": "town-supply/valley:2:4294967295:scrap-3",
+            "label": "Alloy fragments",
+            "x": 36,
+            "y": 2.9653000831604004,
+            "z": -11,
+            "panel": "town-supply",
+            "selectionId": "valley:2:4294967295:scrap-3"
+          }
+        },
+        {
+          "id": "construction",
+          "title": "Workshop complete · repair service ready",
+          "status": "complete",
+          "summary": "The permanent workshop is complete. Your suit is undamaged; its paid repair service remains available when needed.",
+          "progress": "1 repairs · 100/100 suit HP · 160.0 materials",
+          "requirements": [
+            "The completed building and its collision remain part of this saved world."
+          ],
+          "target": {
+            "id": "workshop-board",
+            "label": "Northwest workshop board",
+            "x": -226,
+            "y": 6,
+            "z": -193,
+            "panel": "workshop-construction"
+          }
+        },
+        {
+          "id": "restoration",
+          "title": "Restore a habitat",
+          "status": "blocked",
+          "summary": "Habitat restoration is not initialized in this saved world. Open the existing restoration controls when available.",
+          "progress": "Not initialized",
+          "requirements": [
+            "This guidance does not initialize or reset campaign systems."
+          ],
+          "target": null
+        },
+        {
+          "id": "care",
+          "title": "Bring restoration home",
+          "status": "blocked",
+          "summary": "Town life and habitat restoration must both be initialized before care deliveries.",
+          "progress": "Not initialized",
+          "requirements": [
+            "This guidance does not initialize or reset campaign systems."
+          ],
+          "target": null
+        },
+        {
+          "id": "regional",
+          "title": "Regional projects",
+          "status": "blocked",
+          "summary": "No regional objective is currently selected. Existing waterworks and town tasks remain available.",
+          "progress": "Not initialized",
+          "requirements": [
+            "This guidance does not initialize or reset campaign systems."
+          ],
+          "target": null
+        },
+        {
+          "id": "town",
+          "title": "Hearthmere · everyday lives unfolding",
+          "status": "available",
+          "summary": "Residents balance needs, work, company and personal ambitions. Ask about their day, inspect Town life or lend a hand at a service.",
+          "progress": "100 residents · 160.0 shared materials",
+          "requirements": [
+            "Needs, routines, requests and their costs remain owned by the living-town model."
+          ],
+          "target": {
+            "id": "square",
+            "label": "Hearthmere meeting square",
+            "x": -176,
+            "y": 6,
+            "z": -134,
+            "panel": "town-life"
+          }
+        }
+      ],
+      "canonicalSaveChecked": true
+    },
+    {
+      "seed": 4294967295,
+      "scenario": "care-delivered",
+      "initialSha256": "a0324b02e5708d858428110deb43a2b8f890e35b816e82c6d8cf5af4969d9fcc",
+      "finalSha256": "9bf2cb95f228fa81b056006ebdb3d63794e4e1a2d7c7c040ddcb96084e1aac57",
+      "preparationSeconds": 148,
+      "manualSeconds": 60,
+      "preparedCommands": 1,
+      "care": {
+        "version": 1,
+        "revision": 2,
+        "carried": 0,
+        "delivered": 5,
+        "deliveries": 1
+      },
+      "clinic": {
+        "received": 5,
+        "stock": 3,
+        "used": 2
+      },
+      "ordinaryInventory": {
+        "scrap": 11,
+        "core": 0,
+        "water": 2
+      },
+      "hp": 70,
+      "materials": 119,
+      "guidance": [
+        {
+          "id": "supply",
+          "title": "Load finite valley scrap",
+          "status": "actionable",
+          "summary": "Choose a remaining cache. Loading reserves one real scrap as cargo; ordinary pickup remains a separate choice.",
+          "progress": "0/4 cargo · 7/7 caches remain · 0 deliveries · 119.0/600 materials",
+          "requirements": [
+            "Four-piece cargo capacity. Deliver two cargo for twelve shared materials; unload one at the same workshop into ordinary inventory."
+          ],
+          "target": {
+            "id": "town-supply/valley:2:4294967295:scrap-1",
+            "label": "Salvage cache",
+            "x": -51,
+            "y": 1.6485999822616577,
+            "z": -8,
+            "panel": "town-supply",
+            "selectionId": "valley:2:4294967295:scrap-1"
+          }
+        },
+        {
+          "id": "construction",
+          "title": "Commission the west workshop",
+          "status": "available",
+          "summary": "The default plan is funded. Review the bounded recipe and an available resident at the northwest board before committing.",
+          "progress": "Default quote 31 materials · 119.0 available",
+          "requirements": [
+            "The construction panel owns the exact applied recipe and quote. No demolition or refunds. Materials remain shared until paid."
+          ],
+          "target": {
+            "id": "workshop-board",
+            "label": "Northwest workshop board",
+            "x": -226,
+            "y": 6,
+            "z": -193,
+            "panel": "workshop-construction"
+          }
+        },
+        {
+          "id": "restoration",
+          "title": "Fern Hollow restoration · restoration recorded",
+          "status": "complete",
+          "summary": "This restored habitat currently has a collectible surplus for Greenlight care.",
+          "progress": "6/6 viable cells · 6/6 cells at 70 health · 157 collectible biomass",
+          "requirements": [
+            "Refits and servicing use existing finite inventory and dock reserves. Inspect exact current machine and cell blockers in restoration."
+          ],
+          "target": {
+            "id": "habitat-v1-4294967295-site-0",
+            "label": "Fern Hollow restoration",
+            "x": -627.1954,
+            "y": 12.218387603759766,
+            "z": -652.75,
+            "panel": "restoration",
+            "selectionId": "habitat-v1-4294967295-site-0"
+          }
+        },
+        {
+          "id": "care",
+          "title": "Care delivered · awaiting resident use",
+          "status": "waiting",
+          "summary": "3 portions remain at Greenlight. Residents must choose care and physically arrive before a portion is committed. Stock does not guarantee a visit or a completed treatment.",
+          "progress": "0/10 carried · 5 delivered · 3/20 stocked · 2 portions committed on actual care arrival",
+          "requirements": [
+            "One portion supports 1.5× energy, hygiene and comfort recovery only during achieved care work. Waiting and travel receive no bonus."
+          ],
+          "target": {
+            "id": "habitat-care/apothecary",
+            "label": "Greenlight care station",
+            "x": -152,
+            "y": 6,
+            "z": -141.8,
+            "panel": "restoration-care",
+            "selectionId": "apothecary"
+          }
+        },
+        {
+          "id": "regional",
+          "title": "Regional projects",
+          "status": "blocked",
+          "summary": "No regional objective is currently selected. Existing waterworks and town tasks remain available.",
+          "progress": "Not initialized",
+          "requirements": [
+            "This guidance does not initialize or reset campaign systems."
+          ],
+          "target": null
+        },
+        {
+          "id": "town",
+          "title": "Hearthmere · everyday lives unfolding",
+          "status": "available",
+          "summary": "Residents balance needs, work, company and personal ambitions. Ask about their day, inspect Town life or lend a hand at a service.",
+          "progress": "100 residents · 119.0 shared materials",
+          "requirements": [
+            "Needs, routines, requests and their costs remain owned by the living-town model."
+          ],
+          "target": {
+            "id": "square",
+            "label": "Hearthmere meeting square",
+            "x": -176,
+            "y": 6,
+            "z": -134,
+            "panel": "town-life"
+          }
+        }
+      ],
+      "canonicalSaveChecked": false
+    },
+    {
+      "seed": 4294967295,
+      "scenario": "workshop-complete",
+      "initialSha256": "1e669ec2bc63ad771b0a80e41a1ff366c84d4b8017affe827b1278c54b73f64a",
+      "finalSha256": "1e669ec2bc63ad771b0a80e41a1ff366c84d4b8017affe827b1278c54b73f64a",
+      "preparationSeconds": 208.5,
+      "manualSeconds": 0,
+      "preparedCommands": 18,
+      "finiteSupply": {
+        "version": 1,
+        "revision": 11,
+        "sources": [
+          "valley:2:4294967295:build-scrap-0",
+          "valley:2:4294967295:build-scrap-1",
+          "valley:2:4294967295:build-scrap-2",
+          "valley:2:4294967295:build-scrap-3",
+          "valley:2:4294967295:scrap-1",
+          "valley:2:4294967295:scrap-2",
+          "valley:2:4294967295:scrap-3"
+        ],
+        "carried": 0,
+        "unloaded": 1,
+        "deliveries": 3
+      },
+      "construction": {
+        "version": 1,
+        "revision": 2,
+        "parcelId": "hearthmere-west",
+        "parameters": {
+          "seed": 4294967295,
+          "rearRooms": 2,
+          "width": 9,
+          "depth": 7.6,
+          "hallDepth": 3.4,
+          "doorwayWidth": 1.6
+        },
+        "workerId": "town-resident:4294967295:000",
+        "materialsPaid": 35,
+        "work": 72,
+        "workRequired": 72,
+        "status": "complete",
+        "repairs": 1
+      },
+      "ordinaryInventory": {
+        "scrap": 1,
+        "core": 0,
+        "water": 0
+      },
+      "hp": 100,
+      "materials": 152.5,
+      "guidance": [
+        {
+          "id": "supply",
+          "title": "Finite supply route exhausted",
+          "status": "complete",
+          "summary": "All seven canonical valley caches are collected. Ordinary inventory donations and residents’ existing salvage work remain available; caches do not respawn.",
+          "progress": "0/4 cargo · 0/7 caches remain · 3 deliveries · 152.5/600 materials",
+          "requirements": [
+            "Four-piece cargo capacity. Deliver two cargo for twelve shared materials; unload one at the same workshop into ordinary inventory."
+          ],
+          "target": {
+            "id": "town-supply/workshop",
+            "label": "Second Life Salvage delivery station",
+            "x": -188,
+            "y": 6,
+            "z": -141.8,
+            "panel": "town-supply",
+            "selectionId": "workshop"
+          }
+        },
+        {
+          "id": "construction",
+          "title": "Workshop complete · repair service ready",
+          "status": "complete",
+          "summary": "The permanent workshop is complete. Your suit is undamaged; its paid repair service remains available when needed.",
+          "progress": "1 repairs · 100/100 suit HP · 152.5 materials",
+          "requirements": [
+            "The completed building and its collision remain part of this saved world."
+          ],
+          "target": {
+            "id": "workshop-board",
+            "label": "Northwest workshop board",
+            "x": -226,
+            "y": 6,
+            "z": -193,
+            "panel": "workshop-construction"
+          }
+        },
+        {
+          "id": "restoration",
+          "title": "Restore a habitat",
+          "status": "blocked",
+          "summary": "Habitat restoration is not initialized in this saved world. Open the existing restoration controls when available.",
+          "progress": "Not initialized",
+          "requirements": [
+            "This guidance does not initialize or reset campaign systems."
+          ],
+          "target": null
+        },
+        {
+          "id": "care",
+          "title": "Bring restoration home",
+          "status": "blocked",
+          "summary": "Town life and habitat restoration must both be initialized before care deliveries.",
+          "progress": "Not initialized",
+          "requirements": [
+            "This guidance does not initialize or reset campaign systems."
+          ],
+          "target": null
+        },
+        {
+          "id": "regional",
+          "title": "Regional projects",
+          "status": "blocked",
+          "summary": "No regional objective is currently selected. Existing waterworks and town tasks remain available.",
+          "progress": "Not initialized",
+          "requirements": [
+            "This guidance does not initialize or reset campaign systems."
+          ],
+          "target": null
+        },
+        {
+          "id": "town",
+          "title": "Hearthmere · everyday lives unfolding",
+          "status": "available",
+          "summary": "Residents balance needs, work, company and personal ambitions. Ask about their day, inspect Town life or lend a hand at a service.",
+          "progress": "100 residents · 152.5 shared materials",
+          "requirements": [
+            "Needs, routines, requests and their costs remain owned by the living-town model."
+          ],
+          "target": {
+            "id": "square",
+            "label": "Hearthmere meeting square",
+            "x": -176,
+            "y": 6,
+            "z": -134,
+            "panel": "town-life"
+          }
+        }
+      ],
+      "canonicalSaveChecked": true
+    }
+  ]
+}

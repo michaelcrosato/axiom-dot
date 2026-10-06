@@ -1,0 +1,62 @@
+TAP version 13
+# (node:4798) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: manual and automatic pulse target selection share alive, distance, defeated and wall checks
+ok 1 - manual and automatic pulse target selection share alive, distance, defeated and wall checks
+  ---
+  duration_ms: 12.745282
+  type: 'test'
+  ...
+# Subtest: pulse line-of-sight rejects solid walls including endpoints but permits routes around a box
+ok 2 - pulse line-of-sight rejects solid walls including endpoints but permits routes around a box
+  ---
+  duration_ms: 2.608475
+  type: 'test'
+  ...
+# Subtest: automatic pulse requires touch mode, enabled preference, active world, ready cooldown and a valid target
+ok 3 - automatic pulse requires touch mode, enabled preference, active world, ready cooldown and a valid target
+  ---
+  duration_ms: 0.243832
+  type: 'test'
+  ...
+# Subtest: production combo and fixed-step handler share pause gates and exactly-once saved defeat
+ok 4 - production combo and fixed-step handler share pause gates and exactly-once saved defeat
+  ---
+  duration_ms: 283.876317
+  type: 'test'
+  ...
+# Subtest: production auto combo is touch-only, optional and cannot hit through movement geometry
+ok 5 - production auto combo is touch-only, optional and cannot hit through movement geometry
+  ---
+  duration_ms: 131.764502
+  type: 'test'
+  ...
+# Subtest: elevated pulse segments use actual world heights instead of the legacy one-metre plane
+ok 6 - elevated pulse segments use actual world heights instead of the legacy one-metre plane
+  ---
+  duration_ms: 0.211476
+  type: 'test'
+  ...
+# Subtest: integrated jump and crouch cannot bypass committed attack recovery by posing as death
+ok 7 - integrated jump and crouch cannot bypass committed attack recovery by posing as death
+  ---
+  duration_ms: 66.647158
+  type: 'test'
+  ...
+# (node:4799) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: production lab orchestration repeats all 27 case-runs identically with immediate and batched worker delivery
+ok 8 - production lab orchestration repeats all 27 case-runs identically with immediate and batched worker delivery
+  ---
+  duration_ms: 18924.740553
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 19962.261777

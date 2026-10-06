@@ -14,7 +14,7 @@ export interface TownLifeResidentState {id:string;index:number;homeIndex:number;
 export interface TownLifeFacilityState {id:string;condition:number;closedFor:number;queue:number[];reservations:number[];occupants:number[];served:number;canceled:number}
 export type TownLifeResource='pantry'|'water'|'materials'|'harvest';
 export interface TownLifeSources {field:number;aquifer:number;salvage:number}
-export interface TownLifeState {seed:number;version:1;navigation?:TownLifeNavigation;revision:number;tick:number;cycleTick:number;accumulator:number;residents:TownLifeResidentState[];facilities:TownLifeFacilityState[];resources:Record<TownLifeResource,number>;sources:TownLifeSources;sourceLedger:{epochs:number;initial:TownLifeSources;recharged:TownLifeSources;extracted:TownLifeSources;overflow:TownLifeSources};ledger:{epochs:number;donationBaseline:Record<TownLifeResource,number>;initial:Record<TownLifeResource,number>;produced:Record<TownLifeResource,number>;consumed:Record<TownLifeResource,number>;donated:Record<TownLifeResource,number>;overflow:Record<TownLifeResource,number>};cooldowns:{donate:number;repair:number;gather:number};gathering:number;contributions:Record<TownLifeCommand['kind'],number>;playerSpent:{scrap:number;core:number;water:number};events:{tick:number;residentId:string|null;kind:'completed'|'interrupted'|'shortage'|'aid'|'desire';text:string}[]}
+export interface TownLifeState {seed:number;version:1;workshopSpent?:number;navigation?:TownLifeNavigation;revision:number;tick:number;cycleTick:number;accumulator:number;residents:TownLifeResidentState[];facilities:TownLifeFacilityState[];resources:Record<TownLifeResource,number>;sources:TownLifeSources;sourceLedger:{epochs:number;initial:TownLifeSources;recharged:TownLifeSources;extracted:TownLifeSources;overflow:TownLifeSources};ledger:{epochs:number;donationBaseline:Record<TownLifeResource,number>;initial:Record<TownLifeResource,number>;produced:Record<TownLifeResource,number>;consumed:Record<TownLifeResource,number>;donated:Record<TownLifeResource,number>;overflow:Record<TownLifeResource,number>};cooldowns:{donate:number;repair:number;gather:number};gathering:number;contributions:Record<TownLifeCommand['kind'],number>;playerSpent:{scrap:number;core:number;water:number};events:{tick:number;residentId:string|null;kind:'completed'|'interrupted'|'shortage'|'aid'|'desire';text:string}[]}
 export type TownLifeCommand = {kind:'donate-water'|'donate-supplies'|'repair-service'|'host-gathering'|'encourage-resident';targetId:string;expectedRevision:number};
 export interface TownLifeSummary {name:string;activity:string;reason:string;mood:string;needs:{key:TownLifeNeed;value:number;label:string}[];desire:string;relationships:string[];diagnostics:string[];facility:string;progress:number}
 
@@ -293,7 +293,8 @@ function finish(s:TownLifeState,r:TownLifeResidentState,t:TownLifeTuning){
 function sourceRoom(s:TownLifeState){if(SOURCE_KEYS.some(k=>['recharged','extracted','overflow'].some(c=>s.sourceLedger[c as 'recharged'][k]>TOWN_LIFE_COUNTER_LIMIT-100)))s.sourceLedger={epochs:count(s.sourceLedger.epochs),initial:{...s.sources},recharged:zeroSources(),extracted:zeroSources(),overflow:zeroSources()};}
 function rechargeSource(s:TownLifeState,k:keyof TownLifeSources,n:number){sourceRoom(s);const add=Math.min(n,SOURCE_CAPS[k]-s.sources[k]);s.sources[k]=quant(s.sources[k]+add);s.sourceLedger.recharged[k]=quant(s.sourceLedger.recharged[k]+n);s.sourceLedger.overflow[k]=quant(s.sourceLedger.overflow[k]+n-add);}
 function extractSource(s:TownLifeState,k:keyof TownLifeSources,n:number){sourceRoom(s);s.sources[k]=quant(s.sources[k]-n);s.sourceLedger.extracted[k]=quant(s.sourceLedger.extracted[k]+n);}
-function step(s:TownLifeState,fs:readonly TownLifeFacility[],plan:TownPlan,t:TownLifeTuning,actors:readonly TownNavigationActor[]=[]){
+interface WorkshopWorkReceipt {residentId:string;seconds:number}
+function step(s:TownLifeState,fs:readonly TownLifeFacility[],plan:TownPlan,t:TownLifeTuning,actors:readonly TownNavigationActor[]=[],work?:WorkshopWorkReceipt){
  initializeNavigation(s,fs,plan,t);
  s.tick=count(s.tick);s.cycleTick=(s.cycleTick+1)%960; // bounded phase continues after the lifetime tick counter saturates
  rechargeSource(s,'field',.4*TOWN_LIFE_STEP);rechargeSource(s,'aquifer',.8*TOWN_LIFE_STEP);rechargeSource(s,'salvage',.045*TOWN_LIFE_STEP);
@@ -315,7 +316,7 @@ function step(s:TownLifeState,fs:readonly TownLifeFacility[],plan:TownPlan,t:Tow
    // physically present at its actual subtask, never while queued or blocked.
    if(!workClear[r.index]||Math.hypot(r.x-target.x,r.z-target.z)>1e-6)continue;
 
-   const elapsed=Math.min(r.remaining,TOWN_LIFE_STEP*t.actionSpeed),a=r.action!;r.remaining=Math.max(0,r.remaining-elapsed);r.committed=Math.max(0,r.committed-elapsed);
+   const elapsed=Math.min(r.remaining,TOWN_LIFE_STEP*t.actionSpeed),a=r.action!;if(work&&r.id===work.residentId&&r.facilityId==='workshop'&&a==='craft')work.seconds+=elapsed;r.remaining=Math.max(0,r.remaining-elapsed);r.committed=Math.max(0,r.committed-elapsed);
    const company=a!=='socialize'||s.facilities.find(f=>f.id===r.facilityId)!.occupants.length>1;
    for(const k of TOWN_LIFE_NEEDS){let gain=RECOVERY[a][k]??0;if(a==='socialize'&&k==='connection'&&!company)gain*=.25;r.needs[k]=quant(clamp(r.needs[k]+gain*elapsed/DURATION[a]));}
    if(['rest','leisure','socialize','recover'].includes(a))r.stress=clamp(r.stress-elapsed*.35);
@@ -375,12 +376,48 @@ function step(s:TownLifeState,fs:readonly TownLifeFacility[],plan:TownPlan,t:Tow
  }
 }
 export function validTownLifeTuning(v:unknown):v is TownLifeTuning{return keys(v,TOWN_LIFE_TUNING_REGISTRY.map(f=>f.key))&&TOWN_LIFE_TUNING_REGISTRY.every(f=>finite(v[f.key],f.min,f.max));}
-export function advanceTownLife(state:TownLifeState,dt:number,tuning:TownLifeTuning=TOWN_LIFE_DEFAULTS,actors:readonly TownNavigationActor[]=[]):TownLifeState{
+export function advanceTownLife(state:TownLifeState,dt:number,tuning:TownLifeTuning=TOWN_LIFE_DEFAULTS,actors:readonly TownNavigationActor[]=[]):TownLifeState{return advanceTownLifeInternal(state,dt,tuning,actors);}
+function advanceTownLifeInternal(state:TownLifeState,dt:number,tuning:TownLifeTuning,actors:readonly TownNavigationActor[],work?:WorkshopWorkReceipt):TownLifeState{
  if(!Number.isFinite(dt)||dt<0||dt>60)throw RangeError('Town life delta must be finite and between 0 and 60 seconds.');if(!Array.isArray(actors)||actors.length>8||actors.some(a=>!a||!Number.isFinite(a.x)||Math.abs(a.x)>1e6||!Number.isFinite(a.z)||Math.abs(a.z)>1e6||a.feetY!==undefined&&(!Number.isFinite(a.feetY)||Math.abs(a.feetY)>1e6)||a.id!==undefined&&(typeof a.id!=='string'||a.id.length>128)))throw RangeError('Town actors require finite authenticated positions.');if(!validTownLifeTuning(tuning))throw RangeError('Unsupported town life tuning.');
  if(!trustedStates.has(state))state=immutableTownLife(state,state.seed);if(dt===0)return state;
  actors=actors.slice().sort((a,b)=>(a.id??'').localeCompare(b.id??'')||a.x-b.x||a.z-b.z);
  const total=state.accumulator+dt,steps=Math.floor((total+1e-8)/TOWN_LIFE_STEP),raw=total-steps*TOWN_LIFE_STEP,accumulator=Math.abs(raw)<1e-8?0:Math.max(0,Math.round(raw*1e12)/1e12);if(!steps){const next=Object.freeze({...state,accumulator});trustedStates.add(next);return next;}const s=structuredClone(state);s.accumulator=accumulator;
- if(steps){const fs=townLifeFacilities(s.seed),plan=startingTown(s.seed);for(let i=0;i<steps;i++)step(s,fs,plan,tuning,actors);}return sealState(s);
+ if(steps){const fs=townLifeFacilities(s.seed),plan=startingTown(s.seed);for(let i=0;i<steps;i++){if(work)assignWorkshopWorker(s,work.residentId);step(s,fs,plan,tuning,actors,work);}}return sealState(s);
+}
+
+/** Campaign prefabrication uses a real resident and the existing workshop's
+ * reserved work places. Never interrupt paid activity or an urgent need. */
+export function assignTownWorkshopWorker(state:TownLifeState,residentId:string):TownLifeState|null{
+ if(!trustedStates.has(state))state=immutableTownLife(state,state.seed);
+ const s=structuredClone(state);return assignWorkshopWorker(s,residentId)?sealState(s):null;
+}
+function assignWorkshopWorker(s:TownLifeState,residentId:string):boolean{
+ const r=s.residents.find(r=>r.id===residentId),facility=s.facilities.find(f=>f.id==='workshop')!;
+ if(!r||urgentAction(r)||!available(facility))return false;
+ if(r.facilityId==='workshop'&&r.action==='craft')return true;
+ if(r.status==='acting'||!inputsReady(s,'craft',TOWN_LIFE_DEFAULTS))return false;
+ initializeNavigation(s,townLifeFacilities(s.seed),startingTown(s.seed),TOWN_LIFE_DEFAULTS);
+ if(r.status!=='idle')cancel(s,r,'Helping prepare the commissioned workshop frame.');
+ r.action='craft';r.facilityId='workshop';r.status='queued';r.waited=0;r.reason='Prefabricating the commissioned workshop frame at the town workbench.';
+ s.facilities.find(f=>f.id==='workshop')!.queue.push(r.index);
+ return true;
+}
+/** A receipt generated inside achieved work, never inferred from position,
+ * path exhaustion, wall time or a completed-action counter. Campaign authority
+ * owns the job and must apply each advance and its receipt exactly once. Each
+ * fixed step resumes the commission when the worker is free of urgent needs
+ * and paid activity; normal need recovery and navigation remain authoritative. */
+export function advanceTownLifeWithWorkshopWork(state:TownLifeState,dt:number,residentId:string,tuning:TownLifeTuning=TOWN_LIFE_DEFAULTS,actors:readonly TownNavigationActor[]=[]):{life:TownLifeState;workSeconds:number}{
+ const work:WorkshopWorkReceipt={residentId,seconds:0};
+ const life=advanceTownLifeInternal(state,dt,tuning,actors,work);
+ return {life,workSeconds:quant(work.seconds)};
+}
+/** Construction payments use the existing finite town material store. The
+ * campaign command owns authority, idempotency and any cancellation policy. */
+export function debitTownWorkshopMaterials(state:TownLifeState,amount:number):TownLifeState|null{
+ if(!trustedStates.has(state))state=immutableTownLife(state,state.seed);
+ if(!Number.isSafeInteger(amount)||amount<=0||amount>100||state.resources.materials<amount||(state.workshopSpent??0)+amount>10000)return null;
+ const s=structuredClone(state);debit(s,'materials',amount);s.workshopSpent=quant((s.workshopSpent??0)+amount);return sealState(s);
 }
 
 const finite=(v:unknown,min:number,max:number):v is number=>typeof v==='number'&&Number.isFinite(v)&&v>=min&&v<=max;
@@ -391,7 +428,8 @@ function array(v:unknown,max:number):v is unknown[]{if(!Array.isArray(v)||Object
 const point=(v:unknown):v is {x:number;z:number}=>keys(v,['x','z'])&&finite(v.x,TOWN_CENTER.x-55,TOWN_CENTER.x+55)&&finite(v.z,TOWN_CENTER.z-48,TOWN_CENTER.z+48);
 const resourceRecord=(v:unknown,max:number)=>keys(v,RESOURCES)&&RESOURCES.every(k=>finite(v[k],0,max));
 export function validTownLife(v:unknown,seed:number):v is TownLifeState{
- if(!integer(seed,0,0xffffffff)||!keys(v,['seed','version','revision','tick','cycleTick','accumulator','residents','facilities','resources','sources','sourceLedger','ledger','cooldowns','gathering','contributions','playerSpent','events',...(v&&typeof v==='object'&&Object.hasOwn(v,'navigation')?['navigation']:[])])||v.seed!==seed||v.version!==1||!integer(v.revision)||!integer(v.tick)||!integer(v.cycleTick,0,959)||v.tick<TOWN_LIFE_COUNTER_LIMIT&&v.cycleTick!==v.tick%960||!finite(v.accumulator,0,TOWN_LIFE_STEP-1e-8))return false;
+ if(!integer(seed,0,0xffffffff)||!keys(v,['seed','version','revision','tick','cycleTick','accumulator','residents','facilities','resources','sources','sourceLedger','ledger','cooldowns','gathering','contributions','playerSpent','events',...(v&&typeof v==='object'&&Object.hasOwn(v,'workshopSpent')?['workshopSpent']:[]),...(v&&typeof v==='object'&&Object.hasOwn(v,'navigation')?['navigation']:[])])||v.seed!==seed||v.version!==1||!integer(v.revision)||!integer(v.tick)||!integer(v.cycleTick,0,959)||v.tick<TOWN_LIFE_COUNTER_LIMIT&&v.cycleTick!==v.tick%960||!finite(v.accumulator,0,TOWN_LIFE_STEP-1e-8))return false;
+ if(Object.hasOwn(v,'workshopSpent')&&!integer(v.workshopSpent,0,10000))return false;
  if(!array(v.residents,100)||v.residents.length!==100||!array(v.facilities,48)||v.facilities.length!==48)return false;
  const fs=townLifeFacilities(seed),roster=townResidents(seed),plan=startingTown(seed),navigation=v.navigation as TownLifeNavigation|undefined;
  if(Object.hasOwn(v,'navigation')&&(!keys(v.navigation,['version','resolved','residents'])||v.navigation.version!==1||typeof v.navigation.resolved!=='boolean'||!array(v.navigation.residents,100)||v.navigation.residents.length!==100))return false;
@@ -406,6 +444,7 @@ export function validTownLife(v:unknown,seed:number):v is TownLifeState{
  if(!keys(v.sourceLedger,['epochs','initial','recharged','extracted','overflow'])||!integer(v.sourceLedger.epochs)||!['initial','recharged','extracted','overflow'].every(c=>{const r=(v.sourceLedger as Record<string,unknown>)[c];return keys(r,SOURCE_KEYS)&&SOURCE_KEYS.every(k=>finite(r[k],0,TOWN_LIFE_COUNTER_LIMIT));}))return false;const sl=v.sourceLedger as unknown as TownLifeState['sourceLedger'];if(SOURCE_KEYS.some(k=>Math.abs(sl.initial[k]+sl.recharged[k]-sl.extracted[k]-sl.overflow[k]-(v.sources as unknown as TownLifeSources)[k])>1e-4))return false;
  if(!keys(v.ledger,['epochs','donationBaseline','initial','produced','consumed','donated','overflow'])||!integer(v.ledger.epochs)||!resourceRecord(v.ledger.donationBaseline,12*TOWN_LIFE_COUNTER_LIMIT)||!['initial','produced','consumed','donated','overflow'].every(k=>resourceRecord((v.ledger as Record<string,unknown>)[k],TOWN_LIFE_COUNTER_LIMIT)))return false;
  const ledger=v.ledger as unknown as TownLifeState['ledger'],resources=v.resources as Record<TownLifeResource,number>;
+ if(ledger.epochs===0&&(v.workshopSpent as number|undefined??0)>ledger.consumed.materials+1e-8)return false;
  if(RESOURCES.some(k=>Math.abs(ledger.initial[k]+ledger.produced[k]+ledger.donated[k]-ledger.consumed[k]-ledger.overflow[k]-resources[k])>1e-4))return false;
  if(!keys(v.cooldowns,['donate','repair','gather'])||!finite(v.cooldowns.donate,0,10)||!finite(v.cooldowns.repair,0,20)||!finite(v.cooldowns.gather,0,90)||!finite(v.gathering,0,60)||!keys(v.playerSpent,['scrap','core','water'])||!['scrap','core','water'].every(k=>integer((v.playerSpent as Record<string,unknown>)[k])))return false;
  if(!keys(v.contributions,COMMANDS)||!COMMANDS.every(k=>integer((v.contributions as Record<string,unknown>)[k])))return false;const contributions=v.contributions as Record<TownLifeCommand['kind'],number>,spent=v.playerSpent as {scrap:number;core:number;water:number};if(COMMANDS.reduce((n,k)=>n+contributions[k],0)!==v.revision||spent.core!==0||spent.scrap!==2*(contributions['donate-supplies']+contributions['repair-service']+contributions['host-gathering'])||spent.water!==contributions['donate-water']+contributions['host-gathering'])return false;const donationTotals=contributed(v as unknown as TownLifeState);if(RESOURCES.some(k=>Math.abs(donationTotals[k]-ledger.donationBaseline[k]-ledger.donated[k])>1e-4||ledger.epochs===0&&ledger.donationBaseline[k]!==0))return false;
@@ -475,4 +514,4 @@ export function createTownLifeScenario(seed:number,scenario:string,starting?:{re
  for(const r of s.residents)updateMood(r);event(s,'completed',`Disposable scenario: ${TOWN_LIFE_SCENARIOS.find(v=>v.id===scenario)!.label}.`);return sealState(s);
 }
 
-export const TOWN_LIFE_ENGINE=Object.freeze({kind:"axiom-town-life",create:createTownLifeOpening,advance:advanceTownLife,validate:validTownLife,pose:townLifePose,command:applyTownLifeCommand,facilities:townLifeFacilities,summary:townLifeSummary,scenario:createTownLifeScenario});
+export const TOWN_LIFE_ENGINE=Object.freeze({kind:"axiom-town-life",create:createTownLifeOpening,advance:advanceTownLife,advanceWorkshop:advanceTownLifeWithWorkshopWork,validate:validTownLife,pose:townLifePose,command:applyTownLifeCommand,facilities:townLifeFacilities,summary:townLifeSummary,scenario:createTownLifeScenario});

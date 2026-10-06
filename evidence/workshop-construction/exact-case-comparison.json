@@ -1,0 +1,47 @@
+{
+  "kind": "axiom-independent-exact-case-comparison",
+  "sourceCommit": "1b16eec2a68477698e2810a3f2975b6899868a76",
+  "tap": "/tmp/workshop-verified-safe.tap",
+  "tapSHA256": "7c18ce2158b8f1ce855bd31d4c62cc2f477d598becdc496bb95087dbcf6cd359",
+  "independentCatalog": "/tmp/workshop-independent-final-inventory.json",
+  "rootCatalog": "/tmp/workshop-final-inventory.json",
+  "catalogsExactlyIdentical": true,
+  "registeredCases": 1743,
+  "executedCases": 1743,
+  "exactNameMultisetsEqual": true,
+  "sequentialIds": {
+    "first": 1,
+    "last": 1743,
+    "contiguousUnique": true
+  },
+  "subtestHeadersMatchResultNamesInOrder": true,
+  "terminalPlanMatches": true,
+  "statistics": {
+    "tests": 1743,
+    "suites": 0,
+    "pass": 1743,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "duration_ms": 1038077.149979
+  },
+  "disabledOrFailureDirectives": false,
+  "permittedFiles": 239,
+  "heldFiles": {
+    "exactCount": 13,
+    "excludedFromRegistration": true,
+    "unchangedFromBaseline": true,
+    "baselineCommit": "e418ff3c140d943415f2491ccdf244ea7f79652b"
+  },
+  "frozenSources": {
+    "count": 648,
+    "allSHA256Unchanged": true,
+    "trackedSourceUnchanged": true,
+    "worktreeStatusAtCertification": "?? evidence/workshop-construction/",
+    "additiveUntrackedEvidenceOnly": true
+  },
+  "missingNames": [],
+  "extraNames": [],
+  "result": "pass"
+}

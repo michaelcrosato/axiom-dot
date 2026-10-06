@@ -1,0 +1,71 @@
+{
+  "kind": "axiom-workshop-construction-validation",
+  "verifiedAt": "2026-10-06T06:08:00.730561+00:00",
+  "baselineCommit": "e418ff3c140d943415f2491ccdf244ea7f79652b",
+  "testedSourceCommit": "1b16eec2a68477698e2810a3f2975b6899868a76",
+  "runtime": "Node v22.23.0",
+  "gates": {
+    "typecheck": "both projects pass",
+    "productionBuild": "client and Worker pass",
+    "permittedSuite": {
+      "files": 239,
+      "cases": 1743,
+      "pass": 1743,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "durationMs": 1038077.149979,
+      "heldFilesExcluded": 13,
+      "newCases": 33
+    },
+    "frozenSourceFilesUnchanged": 648,
+    "emittedConstruction": "pass",
+    "emittedMainBoundary": "pass",
+    "emittedTownLife": "pass"
+  },
+  "supersededCandidate": {
+    "status": "failed before final fixes; not final validation",
+    "pass": 1740,
+    "fail": 3,
+    "failures": [
+      "production combo and fixed-step handler share pause gates and exactly-once saved defeat",
+      "production auto combo is touch-only, optional and cannot hit through movement geometry",
+      "integrated jump and crouch cannot bypass committed attack recovery by posing as death"
+    ],
+    "cause": "Existing combat VM harness needed actual new construction projection dependencies; assertions unchanged. Fixed and focused harness recheck passed before source freeze.",
+    "rawLogSha256": "dcf9e44e4680c58bdcc638593fbacf3a642c80400343c1ecd6ff6b47e6c0b089"
+  },
+  "reproduction": [
+    "export PATH=/workspace/.cloud-tools/node-v22.23.0-linux-x64/bin:$PATH",
+    "npm run typecheck",
+    "npm run build",
+    "node --experimental-strip-types scripts/verify-workshop-construction-build.mts /tmp/construction.json",
+    "node --experimental-strip-types scripts/verify-town-main-integration-build.mts /tmp/main-boundary.json",
+    "node --experimental-strip-types scripts/verify-town-life-build.mts /tmp/town-life.json",
+    "node scripts/discover-safe-tests.mjs /tmp/registered-cases.json",
+    "node scripts/cloud/test-safe.mjs"
+  ],
+  "limits": [
+    "Exactly 13 documented held food/clock files excluded and unchanged; not an unrestricted aggregate pass.",
+    "No browser, GPU, touch or device visual acceptance.",
+    "Emitted-main boundary uses complete production source main handler with actual emitted workers and view; does not execute entire browser startup.",
+    "Only disposable in-memory SQLite and synthetic saves; no live player data or original Site/hosting/sharing changes.",
+    "One approved parcel; prefabrication at existing workshop; no cancellation, demolition or refunds.",
+    "Existing gateway-crate and fatigue-replay caveats remain."
+  ],
+  "artifactSha256": {
+    "README.md": "65b4ca727ee5eded41edc9373e0955013105203b5ac37045f0f02c67e581410c",
+    "build.txt": "1b36e2f3ab54b6b69a1d1eb28279c3540369c6dd1640f3eb46ba31bbe325608c",
+    "corrected-harnesses.tap": "4084f965e9670f567ea74d7fcb1fa76dbab54daa04c5f1a70a547fa4cc8f80a8",
+    "emitted-construction.json": "ee42d0fb293cb29bc73993349e18ed49fedbaa2b7ae1e2ddc0b551d039db6adf",
+    "emitted-main-boundary.json": "dccd570682a061de06d0a7c85541aa64c4b52bed05fcb11bc4fcc2db68a73d45",
+    "emitted-town-life.json": "a12dda7227c1fc9cc2dbce6dda96ca630a0449d9eae3c007f2ed2d6c8d25dc9b",
+    "exact-case-comparison.json": "a5232d2fb36197fb4068091d25139e5a7318ccbf3df5c207bc5215a34db9bcfb",
+    "frozen-source-hashes.json": "af46b61bd2261c26247705a8967e9cfcfde933269964d8a828994956a785c4d9",
+    "independent-review.json": "8a0515a36ae179a087a9da76e751c55394680d429b62c4f77db60f1191b89d0a",
+    "permitted-suite.tap": "7c18ce2158b8f1ce855bd31d4c62cc2f477d598becdc496bb95087dbcf6cd359",
+    "registered-cases.json": "3ce82e0ad6aabf339082fa0a87ca2fd1758366b05d29171ccbf0b9b8ab3c0e78",
+    "typecheck.txt": "24141bbac6341d820b6108865ae5f286fa0b2da1bb868c14e47e81556cd2b0d9"
+  }
+}

@@ -9,7 +9,7 @@ Audited against the original 17-domain framework brief and the actual preview so
 | Vegetation | Seeded plants/trees, finite gardens; new water/contamination/heat/smoke-dependent plant recovery and scent-guided pollination | ecology, regional-world, restoration |
 | Settlements | Connected valley, regional projects, 100-resident Hearthmere with real needs and capacity | settlement, starting-town, town-life |
 | Roads | Shared regional trails/crossings, traversable routes and actual freight obstruction/repair | regional-routes, regional-trade |
-| Buildings | Connected workshops, 40 town homes/seven businesses, actual doorway geometry; new editable constrained recipe authoring | building, starting-town, workshop-authoring |
+| Buildings | Connected workshops, 40 town homes/seven businesses, actual doorway geometry; editable constrained recipe authoring and one paid campaign workshop commission | building, starting-town, workshop-authoring, workshop-construction |
 | Caves | Separate natural cave, conservative flood routes, finite paid controls | natural-cave, cave-water, cave-supply |
 | Dungeons | Seeded connected objective graphs, encounters, persistent caches and exits | dungeon-plan, encounters |
 | Bodies | Humanoid and quadruped families; new editable neutral body/support/shell/organ graph with genuine behavior and shared collision | avatar, body, restoration-body/view/collision |
@@ -51,3 +51,7 @@ Unbounded construction, imported executable packs, arbitrary body families/evolu
 - The original V32 Site, canonical source checkout, Library source, live saves and existing online rooms are not modified. This is the same owner-private experimental preview with preview-only storage and AXIOM_PREVIEW_DB.
 
 The exact final frozen-source case inventory, exclusions, test results, emitted parity, source commit and successful private deployment accompany the publication receipt. Earlier focused or working-tree results are not a substitute for that final gate.
+
+## Campaign construction milestone
+
+The bounded recipe editor now drives one paid, persistent Hearthmere commission with actual resident prefabrication, protected access, shared render/collision geometry and a finite material-funded suit-repair service. See WORKSHOP-CONSTRUCTION.md. Construction is intentionally confined to an approved level parcel; arbitrary terrain/placement/interiors and held regional-food ledger integration remain outside this milestone.

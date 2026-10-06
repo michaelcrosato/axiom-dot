@@ -1,13 +1,14 @@
+import {applyWorkshopConstruction,advanceWorkshopConstruction,validWorkshopConstruction,immutableWorkshopConstruction,workshopConstructionBoxes,workshopConstructionPosition,type WorkshopConstructionState,type WorkshopConstructionCommand} from './workshop-construction.ts';
 import {RESTORATION_ENGINE,createRestoration,advanceRestoration,applyRestorationCommand,validRestoration,immutableRestoration,restorationPlayerCost,restorationPlan,type RestorationState,type RestorationCommand,type HabitatActor} from './restoration.ts';
 import {habitatSiteDescriptors} from './habitat-sites.ts';
 import {TOWN_DIRECTOR_ENGINE,createTownDirector,advanceTownDirector,applyTownDirectorCommand,noteTownDirectorContribution,validTownDirector,immutableTownDirector,TOWN_DIRECTOR_DEFAULTS,type TownDirectorState,type TownDirectorCommand} from './town-director.ts';
 import {townLifeInteractionTarget} from './town-life-runtime.ts';
 import type {TownActor} from './town-crowd.ts';
-import {createTownLifeOpening,advanceTownLife,validTownLife,immutableTownLife,applyTownLifeCommand,townLifePlayerCost,type TownLifeState,type TownLifeCommand} from './town-life.ts';
+import {createTownLifeOpening,advanceTownLife,advanceTownLifeWithWorkshopWork,validTownLife,immutableTownLife,applyTownLifeCommand,townLifePlayerCost,type TownLifeState,type TownLifeCommand} from './town-life.ts';
 import {createTownState,validTownState,townBalance,purchaseTown,TOWN_SPAWN,type TownState,type TownCommand} from './starting-town.ts';
 import {REGIONAL_FOOD_MAX_TICKS,regionalFoodCost,createRegionalFood,advanceRegionalFood,applyRegionalFoodCommand,observeRegionalFoodTrade,validRegionalFood,immutableRegionalFood,type RegionalFoodState,type RegionalFoodCommand} from './regional-food.ts';
 import {createRegionalTrade,advanceRegionalTrade,applyRegionalTradeCommand,validRegionalTrade,immutableRegionalTrade,regionalTradeObstacles,type RegionalTradeState,type RegionalTradeCommand} from './regional-trade.ts';
-import {validTraversal,type TraversalState} from './traversal-world.ts';
+import {validTraversal,traversalBodies,type TraversalState} from './traversal-world.ts';
 import {createRegionalSupply,advanceRegionalSupply,applyRegionalSupplyCommand,validRegionalSupply,immutableRegionalSupply,regionalSupplyObstacles,type RegionalSupplyState,type RegionalSupplyCommand} from './regional-supply.ts';
 import {gatherWilderness,immutableWildernessState,validWildernessState,validWildernessGatherAction,type WildernessState,type WildernessGatherContext,type WildernessQueryObstacle} from './wilderness-state.ts';
 import {wildernessFeatureById} from './wilderness.ts';
@@ -41,6 +42,7 @@ export interface State {
   /** Bounded factual town opportunities; never a source of items or currency. */
   townDirector?:TownDirectorState;
   restoration?:RestorationState;
+  workshopConstruction?:WorkshopConstructionState;
   frontierSupply?:RegionalSupplyState;
   frontierTrade?:RegionalTradeState;
   frontierFood?:RegionalFoodState;
@@ -59,6 +61,7 @@ export interface State {
   waterRestored: boolean; jobAccepted: boolean; revision: number; events: string[];
 }
 export type Action =
+  | {type:'workshop-construction';command:WorkshopConstructionCommand}
   | {type:'restoration';command:RestorationCommand}
   | {type:'town-director';command:TownDirectorCommand}
   | {type:'town-life';command:TownLifeCommand}
@@ -136,7 +139,7 @@ export function worldObjects(s:Pick<State,'generation'|'seed'>):readonly WorldOb
 export function worldBound(s:Pick<State,'generation'|'seed'|'regional'>&{zone?:State['zone']}){return s.zone==='cave'?naturalCave(s.seed).bound:s.generation===2?(s.zone==='dungeon'?worldDungeon(s).bound:s.regional?.version===1?REGION_BOUND:worldValley(s.seed).terrain.bound):WORLD_BOUND;}
 export function dungeonSpawn(s:Pick<State,'generation'|'seed'>){return s.generation===2?worldDungeon(s).spawn:DUNGEON_SPAWN;}
 export function machineWorldObstacles(s:Pick<State,'generation'|'seed'|'waterworks'>){const origin=buildOrigin(s);return machineObstacles(s.waterworks).map(o=>({...o,x:o.x+origin.x,z:o.z+origin.z,y:o.hy+origin.y}));}
-function safeWorldSpawn(s:State,point:{x:number;z:number}){const origin=buildOrigin(s),local=safeMachineSpawn(s.waterworks,{x:point.x-origin.x,z:point.z-origin.z});let safe={x:local.x+origin.x,z:local.z+origin.z};if(s.generation===1)return safeWorkshopSpawn(worldWorkshop(s.seed),safe);for(const building of worldValley(s.seed).buildings){const blocked=!restoreClear(building.plan.shapes,safe,building.elevation);if(blocked)safe={...building.spawn};}return safe;}
+function safeWorldSpawn(s:State,point:{x:number;z:number}){const origin=buildOrigin(s),local=safeMachineSpawn(s.waterworks,{x:point.x-origin.x,z:point.z-origin.z});let safe={x:local.x+origin.x,z:local.z+origin.z};if(s.generation===1)return safeWorkshopSpawn(worldWorkshop(s.seed),safe);for(const building of worldValley(s.seed).buildings){const blocked=!restoreClear(building.plan.shapes,safe,building.elevation);if(blocked)safe={...building.spawn};}if(s.workshopConstruction&&!restoreClear(workshopConstructionBoxes(s.workshopConstruction),safe,6))safe={...workshopConstructionPosition()};return safe;}
 
 function record(state: State, message: string, patch: Partial<State> = {}): State {
   return { ...state, ...patch, revision: state.revision + 1, events: [...state.events, message].slice(-20) };
@@ -167,6 +170,7 @@ function applyWorldAction(state: State, action: Action,restorationActors:readonl
       return townDirector?record(state,action.command.kind==='accept'?'Accepted a real town request. Help through the existing local actions.':'Declined the town request. The underlying need remains.',{townDirector}):state;
     }
     case 'town-life': return commitTownLife(state,action.command);
+    case 'workshop-construction': return commitWorkshopConstruction(state,action.command,restorationActors);
     case 'town-purchase': {
       if(!state.regional||!state.town)return state;const result=purchaseTown(state.town,state,action.command);if(!result)return state;
       return record(state,result.message,{town:result.town,inventory:result.inventory,player:{...state.player,hp:result.hp}});
@@ -321,13 +325,18 @@ export function applyAction(state:State,action:Action,restorationActors:readonly
  if(action.type==='tick'&&next.restoration){const restoration=advanceRestoration(next.restoration,worldRestorationPlan(next.seed),action.dt,{actors:restorationActors,player:next.zone==='valley'?restorationOperator:{...restorationOperator,hp:0}});if(restoration!==next.restoration)next={...next,restoration,revision:next.revision+1};}
  // Active-play town time is independent of legacy/regional production clocks. No offline catch-up.
  if(action.type==='tick'&&next.townLife){
-  let townLife=next.townLife,townDirector=next.townDirector;
+  let townLife=next.townLife,townDirector=next.townDirector,workshopConstruction=next.workshopConstruction;
   const townActors=restorationActors.map((a,index)=>({id:`world-actor-${index}`,x:a.x,z:a.z,feetY:a.y??6}));
   // Observe every actual half-second town boundary, including coarse room polls.
   // Splitting at both bounded accumulators avoids missed recovery/re-offer facts.
-  if(townDirector&&action.dt<=60){let remaining=action.dt;for(let n=0;remaining>1e-10&&n<242;n++){const dt=Math.min(remaining,.5-townLife.accumulator,.5-townDirector.accumulator);townLife=advanceTownLife(townLife,dt,undefined,townActors);townDirector=advanceTownDirector(townDirector,townLife,dt);remaining=Math.max(0,remaining-dt);}}
+  if((townDirector||workshopConstruction)&&action.dt<=60){let remaining=action.dt;for(let n=0;remaining>1e-10&&n<242;n++){
+   const dt=Math.min(remaining,.5-townLife.accumulator,townDirector?.accumulator===undefined ? .5 : .5-townDirector.accumulator);
+   if(workshopConstruction?.status==='building'){const receipt=advanceTownLifeWithWorkshopWork(townLife,dt,workshopConstruction.workerId,undefined,townActors);townLife=receipt.life;workshopConstruction=advanceWorkshopConstruction(workshopConstruction,receipt.workSeconds);}
+   else townLife=advanceTownLife(townLife,dt,undefined,townActors);
+   if(townDirector)townDirector=advanceTownDirector(townDirector,townLife,dt);remaining=Math.max(0,remaining-dt);
+  }}
   else townLife=advanceTownLife(townLife,action.dt,undefined,townActors);
-  if(townLife!==next.townLife||townDirector!==next.townDirector)next={...next,townLife,...(townDirector?{townDirector}:{}),revision:next.revision+1};
+  if(townLife!==next.townLife||townDirector!==next.townDirector||workshopConstruction!==next.workshopConstruction)next={...next,townLife,...(townDirector?{townDirector}:{}),...(workshopConstruction?{workshopConstruction}:{}),revision:next.revision+1};
  }
  if(action.type==='tick'&&next.frontierTrade){const frontierTrade=advanceRegionalTrade(next.frontierTrade,action.dt);if(frontierTrade!==next.frontierTrade)next={...next,frontierTrade,revision:next.revision+1};}
  if(action.type==='tick'&&next.frontierSupply){const frontierSupply=advanceRegionalSupply(next.frontierSupply,action.dt);if(frontierSupply!==next.frontierSupply)next={...next,frontierSupply,revision:next.revision+1};}
@@ -365,6 +374,8 @@ export function validateSave(value: unknown): value is State {
   if(Object.hasOwn(value,'regional')&&(!object(value.regional)||value.generation!==2||value.regional.version!==1||Reflect.ownKeys(value.regional).length!==1||!Object.hasOwn(value.regional,'version')||![Object.prototype,null].includes(Object.getPrototypeOf(value.regional))))return false;
   const regional=value.regional as State['regional'];
   if(Object.hasOwn(value,'townLife')&&(!regional||value.generation!==2||!validTownLife(value.townLife,value.seed)))return false;
+  if(Object.hasOwn(value,'workshopConstruction')&&(!regional||!value.townLife||!validWorkshopConstruction(value.workshopConstruction,value.seed)||(value.workshopConstruction as WorkshopConstructionState).materialsPaid!==(value.townLife as TownLifeState).workshopSpent))return false;
+  if(!Object.hasOwn(value,'workshopConstruction')&&((value.townLife as TownLifeState|undefined)?.workshopSpent??0)!==0)return false;
   if(Object.hasOwn(value,'restoration')&&(!regional||!validRestoration(value.restoration,worldRestorationPlan(value.seed))))return false;
   if(Object.hasOwn(value,'townDirector')&&(!regional||!value.townLife||!validTownDirector(value.townDirector,value.townLife as TownLifeState)||Object.entries(TOWN_DIRECTOR_DEFAULTS).some(([k,v])=>(value.townDirector as TownDirectorState).tuning[k as keyof typeof TOWN_DIRECTOR_DEFAULTS]!==v)))return false;
   if(Object.hasOwn(value,'town')&&(!regional||value.generation!==2||!validTownState(value.town)))return false;
@@ -431,6 +442,7 @@ export function parseSave(text: string): State | null {
     if(object(parsed)&&Object.hasOwn(parsed,'frontierTrade'))parsed={...parsed,frontierTrade:immutableRegionalTrade(parsed.frontierTrade,parsed as unknown as State)};
     if(object(parsed)&&Object.hasOwn(parsed,'frontierSupply'))parsed={...parsed,frontierSupply:immutableRegionalSupply(parsed.frontierSupply,parsed as unknown as State)};
     if(object(parsed)&&Object.hasOwn(parsed,'frontierFood'))parsed={...parsed,frontierFood:immutableRegionalFood(parsed.frontierFood,parsed as unknown as State)};
+    if(object(parsed)&&Object.hasOwn(parsed,'workshopConstruction'))parsed={...parsed,workshopConstruction:immutableWorkshopConstruction(parsed.workshopConstruction,parsed.seed as number)};
     if(object(parsed)&&Object.hasOwn(parsed,'townLife'))parsed={...parsed,townLife:immutableTownLife(parsed.townLife,parsed.seed as number)};
     if(object(parsed)&&Object.hasOwn(parsed,'restoration'))parsed={...parsed,restoration:immutableRestoration(parsed.restoration,worldRestorationPlan(parsed.seed as number))};
     if(object(parsed)&&Object.hasOwn(parsed,'townDirector'))parsed={...parsed,townDirector:immutableTownDirector(parsed.townDirector,parsed.townLife as TownLifeState)};
@@ -551,3 +563,13 @@ export function commitTownLife(state:State,command:TownLifeCommand,actors:readon
 export function worldRestorationPlan(seed:number){return restorationPlan(seed,habitatSiteDescriptors(seed));}
 /** Only absence opts in; current invalid data is rejected by the save validator. */
 export function enableRestoration(s:State):State{return !s.regional||Object.hasOwn(s,'restoration')?s:{...s,restoration:RESTORATION_ENGINE.create(worldRestorationPlan(s.seed))};}
+
+/** Reserve all final solids at payment, including durable saved movable bodies. */
+export function commitWorkshopConstruction(state:State,command:WorkshopConstructionCommand,actors:readonly HabitatActor[]=[]):State {
+ if(!state.regional||!state.townLife)return state;
+ const result=applyWorkshopConstruction(state.workshopConstruction,state.townLife,{...state,actors},command);if(!result)return state;
+ if(command.kind==='build')for(const body of traversalBodies(state))for(const solid of workshopConstructionBoxes(result.construction).filter(b=>b.solid)){
+  if(Math.abs(body.x-solid.center.x)<body.hx+solid.half.x&&Math.abs(body.y-solid.center.y)<body.hy+solid.half.y&&Math.abs(body.z-solid.center.z)<body.hz+solid.half.z)return state;
+ }
+ return record(state,result.message,{workshopConstruction:result.construction,townLife:result.life,player:{...state.player,hp:result.hp}});
+}

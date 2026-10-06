@@ -1,0 +1,22 @@
+(node:24875) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: exactly one actual emitted axiom-town-director surface
+
+0 !== 1
+
+    at surface (file:///workspace/axiom-dot/scripts/verify-restoration-build.mts:19:491)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async file:///workspace/axiom-dot/scripts/verify-restoration-build.mts:64:21 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 0,
+  expected: 1,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v22.23.0

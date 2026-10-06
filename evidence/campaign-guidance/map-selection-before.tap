@@ -1,0 +1,256 @@
+TAP version 13
+# Subtest: guidance atlas adds exact finite source and habitat dock destinations without changing existing map state
+ok 1 - guidance atlas adds exact finite source and habitat dock destinations without changing existing map state
+  ---
+  duration_ms: 871.937449
+  type: 'test'
+  ...
+# Subtest: guidance source markers disappear after real pickup and stale target resolution refuses them
+ok 2 - guidance source markers disappear after real pickup and stale target resolution refuses them
+  ---
+  duration_ms: 174.790174
+  type: 'test'
+  ...
+# Subtest: map initial guidance selection focuses its exact marker and survives reopening without side effects
+not ok 3 - map initial guidance selection focuses its exact marker and survives reopening without side effects
+  ---
+  duration_ms: 55.42669
+  type: 'test'
+  location: '/tmp/axiom-guidance-selection-red-qwpk8pdj/tests/campaign-guidance-map.test.ts:61:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + ''
+    - 'guidance/supply/town-supply%2Fvalley%3A2%3A73129%3Ascrap-1'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'guidance/supply/town-supply%2Fvalley%3A2%3A73129%3Ascrap-1'
+  actual: ''
+  operator: 'strictEqual'
+  stack: |-
+    file:///tmp/axiom-guidance-selection-red-qwpk8pdj/tests/campaign-guidance-map.test.ts:64:91
+    harness (file:///tmp/axiom-guidance-selection-red-qwpk8pdj/tests/campaign-guidance-map.test.ts:41:6)
+    TestContext.<anonymous> (file:///tmp/axiom-guidance-selection-red-qwpk8pdj/tests/campaign-guidance-map.test.ts:61:112)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: live map refresh replaces an exhausted source with the current goal and never keeps a stale inspector
+not ok 4 - live map refresh replaces an exhausted source with the current goal and never keeps a stale inspector
+  ---
+  duration_ms: 65.463267
+  type: 'test'
+  location: '/tmp/axiom-guidance-selection-red-qwpk8pdj/tests/campaign-guidance-map.test.ts:68:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + ''
+    - 'guidance/supply/town-supply%2Fvalley%3A2%3A73129%3Abuild-scrap-1'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'guidance/supply/town-supply%2Fvalley%3A2%3A73129%3Abuild-scrap-1'
+  actual: ''
+  operator: 'strictEqual'
+  stack: |-
+    file:///tmp/axiom-guidance-selection-red-qwpk8pdj/tests/campaign-guidance-map.test.ts:71:256
+    harness (file:///tmp/axiom-guidance-selection-red-qwpk8pdj/tests/campaign-guidance-map.test.ts:41:6)
+    TestContext.<anonymous> (file:///tmp/axiom-guidance-selection-red-qwpk8pdj/tests/campaign-guidance-map.test.ts:68:114)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: map reopening with a consumed source selects its current supply goal instead of stale coordinates
+not ok 5 - map reopening with a consumed source selects its current supply goal instead of stale coordinates
+  ---
+  duration_ms: 25.246548
+  type: 'test'
+  location: '/tmp/axiom-guidance-selection-red-qwpk8pdj/tests/campaign-guidance-map.test.ts:75:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + ''
+    - 'guidance/supply/town-supply%2Fvalley%3A2%3A73129%3Abuild-scrap-1'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'guidance/supply/town-supply%2Fvalley%3A2%3A73129%3Abuild-scrap-1'
+  actual: ''
+  operator: 'strictEqual'
+  stack: |-
+    file:///tmp/axiom-guidance-selection-red-qwpk8pdj/tests/campaign-guidance-map.test.ts:77:193
+    harness (file:///tmp/axiom-guidance-selection-red-qwpk8pdj/tests/campaign-guidance-map.test.ts:41:6)
+    TestContext.<anonymous> (file:///tmp/axiom-guidance-selection-red-qwpk8pdj/tests/campaign-guidance-map.test.ts:75:110)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: removed map destinations without a fallback clear their caption and stale inspection action
+not ok 6 - removed map destinations without a fallback clear their caption and stale inspection action
+  ---
+  duration_ms: 21.704159
+  type: 'test'
+  location: '/tmp/axiom-guidance-selection-red-qwpk8pdj/tests/campaign-guidance-map.test.ts:80:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    true !== false
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    file:///tmp/axiom-guidance-selection-red-qwpk8pdj/tests/campaign-guidance-map.test.ts:82:49
+    harness (file:///tmp/axiom-guidance-selection-red-qwpk8pdj/tests/campaign-guidance-map.test.ts:41:6)
+    TestContext.<anonymous> (file:///tmp/axiom-guidance-selection-red-qwpk8pdj/tests/campaign-guidance-map.test.ts:80:104)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: supply inspector restores an exact valid source and replaces it only when collected or invalid
+not ok 7 - supply inspector restores an exact valid source and replaces it only when collected or invalid
+  ---
+  duration_ms: 686.276611
+  type: 'test'
+  location: '/tmp/axiom-guidance-selection-red-qwpk8pdj/tests/campaign-guidance-selection.test.ts:20:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'valley:2:73129:build-scrap-0'
+    - 'valley:2:73129:scrap-1'
+                      ^
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'valley:2:73129:scrap-1'
+  actual: 'valley:2:73129:build-scrap-0'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///tmp/axiom-guidance-selection-red-qwpk8pdj/tests/campaign-guidance-selection.test.ts:23:9)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: supply inspector validates requested identity and chooses the nearest remaining fallback
+not ok 8 - supply inspector validates requested identity and chooses the nearest remaining fallback
+  ---
+  duration_ms: 96.595715
+  type: 'test'
+  location: '/tmp/axiom-guidance-selection-red-qwpk8pdj/tests/campaign-guidance-selection.test.ts:27:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'valley:2:73129:build-scrap-0'
+    - 'valley:2:73129:scrap-2'
+                      ^
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'valley:2:73129:scrap-2'
+  actual: 'valley:2:73129:build-scrap-0'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///tmp/axiom-guidance-selection-red-qwpk8pdj/tests/campaign-guidance-selection.test.ts:29:221)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: care inspector retains a requested habitat across refresh and refuses invalid or disposed selector handlers
+not ok 9 - care inspector retains a requested habitat across refresh and refuses invalid or disposed selector handlers
+  ---
+  duration_ms: 109.809933
+  type: 'test'
+  location: '/tmp/axiom-guidance-selection-red-qwpk8pdj/tests/campaign-guidance-selection.test.ts:32:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'habitat-v1-73129-site-0'
+    - 'habitat-v1-73129-site-2'
+                             ^
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'habitat-v1-73129-site-2'
+  actual: 'habitat-v1-73129-site-0'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///tmp/axiom-guidance-selection-red-qwpk8pdj/tests/campaign-guidance-selection.test.ts:35:9)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: restoration controls open the requested habitat and preserve exact source selectors without issuing work
+not ok 10 - restoration controls open the requested habitat and preserve exact source selectors without issuing work
+  ---
+  duration_ms: 60.582303
+  type: 'test'
+  location: '/tmp/axiom-guidance-selection-red-qwpk8pdj/tests/campaign-guidance-selection.test.ts:38:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'habitat-v1-73129-site-0'
+    - 'habitat-v1-73129-site-2'
+                             ^
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'habitat-v1-73129-site-2'
+  actual: 'habitat-v1-73129-site-0'
+  operator: 'strictEqual'
+  stack: |-
+    file:///tmp/axiom-guidance-selection-red-qwpk8pdj/tests/campaign-guidance-selection.test.ts:41:64
+    withTimers (file:///tmp/axiom-guidance-selection-red-qwpk8pdj/tests/campaign-guidance-selection.test.ts:16:379)
+    TestContext.<anonymous> (file:///tmp/axiom-guidance-selection-red-qwpk8pdj/tests/campaign-guidance-selection.test.ts:38:117)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 2
+# fail 8
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1842.631754

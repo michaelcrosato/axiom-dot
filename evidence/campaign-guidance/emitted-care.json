@@ -1,0 +1,189 @@
+{
+  "kind": "axiom-restoration-care-emitted-verification",
+  "version": 1,
+  "verifiedAt": "2026-10-06T08:07:00.087Z",
+  "scope": "Actual emitted restoration, care bridge and town engines, earned habitat preparation replay, conserved delivery and achieved care, source/emitted HTTP with disposable SQLite. No browser/GPU/device or live-player claim.",
+  "sourceHashes": {
+    "src/restoration.ts": "32606f590162a2d8cee250e9d75378a374ee444f2012d762d6a0a92e344a45de",
+    "src/restoration-care.ts": "756252a99bdde9e858f7ab97a258c36b6a45de446f1207c7e92349a6af8b9b14",
+    "src/restoration-care-scenarios.ts": "43f16918ca260a87ecd850b1aba6f4c545ad6a54c05469e87f9ba24ca6ef7b6c",
+    "src/restoration-care-lab.ts": "f0f751c3bed0bde9ec9da728a761f379fdea07fdb1e3db91d6d3b87b4e2764f0",
+    "src/restoration-care-ui.ts": "763bdac148ead00203221a6da34e3d6a7a8d4bea035810a32c3af8d38394066d",
+    "src/town-life.ts": "a248d1c9c95c6873971c280e3f5613815cee30be108729eaaa3499815b839fa7",
+    "src/world.ts": "7b191b8468524fc7c41d5aa9142c5e6edb4ef441d0e621748f0a6ff9aba5eaad",
+    "src/main.ts": "402e986d4d62d7841e2202814eefde92f4c2dc2db77f50349f5a027b4b3d719b",
+    "tests/helpers/restoration-care.ts": "268bb37d0ace9a3794363645ff3f55cf74f79713ccfc3b5a6ce96149cd7839f5",
+    "server/coop-api.ts": "69eb77b13f2ccd8a641b88719bff58d37719f334ed2a41be3ba780e1c2b1a14f",
+    "server/coop-authority.ts": "9ab49727e779e99b743e3457933c8fa9bddeb7a93f481ee33064344aee98be24",
+    "server/coop-validation.ts": "eaacc17f2b9e7efc6d1eb9a501f39fe631de76cedc8766433e48e0054af35787",
+    "server/index.ts": "e3429e3133096623374314eab15bafbdf9d0abff8105e0fbf4e8b14913def2e5"
+  },
+  "engines": [
+    {
+      "kind": "axiom-restoration",
+      "file": "campaign-guidance-engine-CO6A4fBX.js",
+      "sha256": "840b7389a3743d6d5dd03678e4da9fb0cc58a5ecef8eea407723489b49740d17"
+    },
+    {
+      "kind": "axiom-restoration-care",
+      "file": "campaign-guidance-engine-CO6A4fBX.js",
+      "sha256": "840b7389a3743d6d5dd03678e4da9fb0cc58a5ecef8eea407723489b49740d17"
+    },
+    {
+      "kind": "axiom-town-life",
+      "file": "campaign-guidance-engine-CO6A4fBX.js",
+      "sha256": "840b7389a3743d6d5dd03678e4da9fb0cc58a5ecef8eea407723489b49740d17"
+    }
+  ],
+  "modelCases": [
+    {
+      "seed": 0,
+      "preparationTicks": 604,
+      "preparationActions": 45,
+      "completedAtTick": 603,
+      "care": {
+        "version": 1,
+        "revision": 2,
+        "carried": 0,
+        "delivered": 5,
+        "deliveries": 1
+      },
+      "clinic": {
+        "received": 5,
+        "stock": 4,
+        "used": 1
+      },
+      "townSteps": 33,
+      "witnessed": {
+        "residentId": "town-resident:0:023",
+        "elapsed": 0.5,
+        "needs": {
+          "nourishment": 64.67538,
+          "energy": 21.20043,
+          "hygiene": 61.05986,
+          "comfort": 23.384375,
+          "connection": 86.274,
+          "fulfillment": 19.33076
+        },
+        "untreatedNeeds": {
+          "nourishment": 64.67538,
+          "energy": 20.73168,
+          "hygiene": 60.69527667,
+          "comfort": 22.61354167,
+          "connection": 86.274,
+          "fulfillment": 19.33076
+        }
+      },
+      "sha256": "843161235a05db5951fecfc9187354e1bd534b571c9ac7430e9daf420dfcdd9a"
+    },
+    {
+      "seed": 73129,
+      "preparationTicks": 592,
+      "preparationActions": 45,
+      "completedAtTick": 591,
+      "care": {
+        "version": 1,
+        "revision": 2,
+        "carried": 0,
+        "delivered": 5,
+        "deliveries": 1
+      },
+      "clinic": {
+        "received": 5,
+        "stock": 4,
+        "used": 1
+      },
+      "townSteps": 127,
+      "witnessed": {
+        "residentId": "town-resident:73129:082",
+        "elapsed": 0.5,
+        "needs": {
+          "nourishment": 71.10796,
+          "energy": 16.9456925,
+          "hygiene": 68.26343,
+          "comfort": 20.8692125,
+          "connection": 61.634375,
+          "fulfillment": 17.5616
+        },
+        "untreatedNeeds": {
+          "nourishment": 71.10796,
+          "energy": 16.4769425,
+          "hygiene": 67.89884667,
+          "comfort": 20.09837917,
+          "connection": 61.634375,
+          "fulfillment": 17.5616
+        }
+      },
+      "sha256": "1d4bd6fc70cc9d926817c6fcf35f3935f0f45675e7c26b41fb1610bd877fcf65"
+    },
+    {
+      "seed": 4294967295,
+      "preparationTicks": 592,
+      "preparationActions": 45,
+      "completedAtTick": 591,
+      "care": {
+        "version": 1,
+        "revision": 2,
+        "carried": 0,
+        "delivered": 5,
+        "deliveries": 1
+      },
+      "clinic": {
+        "received": 5,
+        "stock": 4,
+        "used": 1
+      },
+      "townSteps": 47,
+      "witnessed": {
+        "residentId": "town-resident:4294967295:020",
+        "elapsed": 0.5,
+        "needs": {
+          "nourishment": 74.11342,
+          "energy": 17.68887,
+          "hygiene": 70.62124,
+          "comfort": 22.990625,
+          "connection": 64.966,
+          "fulfillment": 19.04684
+        },
+        "untreatedNeeds": {
+          "nourishment": 74.11342,
+          "energy": 17.22012,
+          "hygiene": 70.25665667,
+          "comfort": 22.21979167,
+          "connection": 64.966,
+          "fulfillment": 19.04684
+        }
+      },
+      "sha256": "378557a95112d5012fb41676e3732e105ab3aa74b503cbc74a80ad29f0759254"
+    }
+  ],
+  "server": {
+    "assetSha256": "7f01a95a7e93b1a169c58caa9727dab276ba5a9137ed2564547ee0f56c77db1e",
+    "sha256": "8c7e35da9999b5abde1f2610cea397237c14d729692819f931589f6f29dd1ffb",
+    "care": {
+      "version": 1,
+      "revision": 2,
+      "carried": 0,
+      "delivered": 5,
+      "deliveries": 1
+    },
+    "clinic": {
+      "received": 5,
+      "stock": 4,
+      "used": 1
+    },
+    "exported": 5,
+    "inventory": {
+      "scrap": 0,
+      "core": 0,
+      "water": 1
+    },
+    "restorationSha256": "fcf4d761bc3de70560b13e229478fe44edc43e4b4b455c74683805b8b39ec936",
+    "lifeSha256": "92aba2b05d053fb42fbd1388c688df69da59162d1054562808e719aeefdd56e8",
+    "forgedImportsRejected": 4,
+    "guestRejected": true,
+    "exactRetries": true,
+    "paidImport": true,
+    "previewOnlyBinding": true
+  }
+}

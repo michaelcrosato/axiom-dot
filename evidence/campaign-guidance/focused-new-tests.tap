@@ -1,0 +1,228 @@
+TAP version 13
+# Subtest: guidance pipeline earns materials construction achieved labor and paid repair without fabricated completion
+ok 1 - guidance pipeline earns materials construction achieved labor and paid repair without fabricated completion
+  ---
+  duration_ms: 10605.480429
+  type: 'test'
+  ...
+# Subtest: guidance preset rejects extra fields and lab tracking reset and stale imports stay disposable
+ok 2 - guidance preset rejects extra fields and lab tracking reset and stale imports stay disposable
+  ---
+  duration_ms: 279.147485
+  type: 'test'
+  ...
+# (node:23299) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: town guidance re-enables real legacy buttons after a blocked regional objective
+ok 3 - town guidance re-enables real legacy buttons after a blocked regional objective
+  ---
+  duration_ms: 9.399475
+  type: 'test'
+  ...
+# Subtest: explicit guidance owns the final HUD across competing legacy writers and untracking restores automatic guidance
+ok 4 - explicit guidance owns the final HUD across competing legacy writers and untracking restores automatic guidance
+  ---
+  duration_ms: 1029.002174
+  type: 'test'
+  ...
+# Subtest: main tracking isolates world and online-room preferences, keeps untracked cursors memory-only, and survives storage denial
+ok 5 - main tracking isolates world and online-room preferences, keeps untracked cursors memory-only, and survives storage denial
+  ---
+  duration_ms: 205.028169
+  type: 'test'
+  ...
+# Subtest: tracked map and inspector retain exact source selection without collecting or teleporting
+ok 6 - tracked map and inspector retain exact source selection without collecting or teleporting
+  ---
+  duration_ms: 495.54654
+  type: 'test'
+  ...
+# Subtest: untracked nondefault source and habitat map drafts select their exact canonical markers without pinning a goal
+ok 7 - untracked nondefault source and habitat map drafts select their exact canonical markers without pinning a goal
+  ---
+  duration_ms: 407.678432
+  type: 'test'
+  ...
+# Subtest: stale collected-source guidance callbacks cannot reopen or map a spent cache
+ok 8 - stale collected-source guidance callbacks cannot reopen or map a spent cache
+  ---
+  duration_ms: 248.29801
+  type: 'test'
+  ...
+# Subtest: actual atlas inspector discards expired guidance markers while preserving ordinary regional routes
+ok 9 - actual atlas inspector discards expired guidance markers while preserving ordinary regional routes
+  ---
+  duration_ms: 6.356344
+  type: 'test'
+  ...
+# Subtest: guidance atlas adds exact finite source and habitat dock destinations without changing existing map state
+ok 10 - guidance atlas adds exact finite source and habitat dock destinations without changing existing map state
+  ---
+  duration_ms: 2188.749189
+  type: 'test'
+  ...
+# Subtest: guidance source markers disappear after real pickup and stale target resolution refuses them
+ok 11 - guidance source markers disappear after real pickup and stale target resolution refuses them
+  ---
+  duration_ms: 309.537413
+  type: 'test'
+  ...
+# Subtest: map initial guidance selection focuses its exact marker and survives reopening without side effects
+ok 12 - map initial guidance selection focuses its exact marker and survives reopening without side effects
+  ---
+  duration_ms: 163.513724
+  type: 'test'
+  ...
+# Subtest: live map refresh replaces an exhausted source with the current goal and never keeps a stale inspector
+ok 13 - live map refresh replaces an exhausted source with the current goal and never keeps a stale inspector
+  ---
+  duration_ms: 219.206418
+  type: 'test'
+  ...
+# Subtest: map reopening with a consumed source selects its current supply goal instead of stale coordinates
+ok 14 - map reopening with a consumed source selects its current supply goal instead of stale coordinates
+  ---
+  duration_ms: 60.543125
+  type: 'test'
+  ...
+# Subtest: removed map destinations without a fallback clear their caption and stale inspection action
+ok 15 - removed map destinations without a fallback clear their caption and stale inspection action
+  ---
+  duration_ms: 138.673462
+  type: 'test'
+  ...
+# Subtest: independent guidance review recognizes pre-existing ordinary pickup progress after reload without inventing haul receipts
+ok 16 - independent guidance review recognizes pre-existing ordinary pickup progress after reload without inventing haul receipts
+  ---
+  duration_ms: 899.832644
+  type: 'test'
+  ...
+# Subtest: independent guidance review projects frozen canonical progress across transient roles and inaccessible states without completing intent
+ok 17 - independent guidance review projects frozen canonical progress across transient roles and inaccessible states without completing intent
+  ---
+  duration_ms: 483.215015
+  type: 'test'
+  ...
+# Subtest: independent guidance review rejects detached journal callbacks and recomputes targets when campaign state changes before a click
+ok 18 - independent guidance review rejects detached journal callbacks and recomputes targets when campaign state changes before a click
+  ---
+  duration_ms: 600.893079
+  type: 'test'
+  ...
+# Subtest: supply inspector restores an exact valid source and replaces it only when collected or invalid
+ok 19 - supply inspector restores an exact valid source and replaces it only when collected or invalid
+  ---
+  duration_ms: 732.508315
+  type: 'test'
+  ...
+# Subtest: supply inspector validates requested identity and chooses the nearest remaining fallback
+ok 20 - supply inspector validates requested identity and chooses the nearest remaining fallback
+  ---
+  duration_ms: 83.973782
+  type: 'test'
+  ...
+# Subtest: care inspector retains a requested habitat across refresh and refuses invalid or disposed selector handlers
+ok 21 - care inspector retains a requested habitat across refresh and refuses invalid or disposed selector handlers
+  ---
+  duration_ms: 45.126124
+  type: 'test'
+  ...
+# Subtest: restoration controls open the requested habitat and preserve exact source selectors without issuing work
+ok 22 - restoration controls open the requested habitat and preserve exact source selectors without issuing work
+  ---
+  duration_ms: 51.467449
+  type: 'test'
+  ...
+# Subtest: guidance selection reloads and explicit untracking persists without campaign save writes
+ok 23 - guidance selection reloads and explicit untracking persists without campaign save writes
+  ---
+  duration_ms: 2.927906
+  type: 'test'
+  ...
+# Subtest: guidance tracking is independent for seed generation region solo and each room
+ok 24 - guidance tracking is independent for seed generation region solo and each room
+  ---
+  duration_ms: 1.057476
+  type: 'test'
+  ...
+# Subtest: malformed oversized unknown-field and foreign-version preferences are ignored without rewriting them
+ok 25 - malformed oversized unknown-field and foreign-version preferences are ignored without rewriting them
+  ---
+  duration_ms: 0.885045
+  type: 'test'
+  ...
+# Subtest: invalid identity or selection cannot target save slots or cause storage reads and writes
+ok 26 - invalid identity or selection cannot target save slots or cause storage reads and writes
+  ---
+  duration_ms: 0.608146
+  type: 'test'
+  ...
+# Subtest: storage read and write failures preserve safe defaults and report an unsaved selection
+ok 27 - storage read and write failures preserve safe defaults and report an unsaved selection
+  ---
+  duration_ms: 0.547756
+  type: 'test'
+  ...
+# Subtest: stored guidance contains only a bounded goal pointer with no world progress or room credentials
+ok 28 - stored guidance contains only a bounded goal pointer with no world progress or room credentials
+  ---
+  duration_ms: 0.356251
+  type: 'test'
+  ...
+# Subtest: guidance journal inspects read-only projections and tracks only an explicit choice
+ok 29 - guidance journal inspects read-only projections and tracks only an explicit choice
+  ---
+  duration_ms: 1031.106575
+  type: 'test'
+  ...
+# Subtest: guidance selects nearest finite supply source or an explicit available source without changing its inventory
+ok 30 - guidance selects nearest finite supply source or an explicit available source without changing its inventory
+  ---
+  duration_ms: 456.948311
+  type: 'test'
+  ...
+# Subtest: guidance resolves the finite one-cargo terminal case to unloading and recognizes exhausted empty routes
+ok 31 - guidance resolves the finite one-cargo terminal case to unloading and recognizes exhausted empty routes
+  ---
+  duration_ms: 186.345874
+  type: 'test'
+  ...
+# Subtest: guidance directs two cargo to the true donation station and exposes real cooldown and stock blockers
+ok 32 - guidance directs two cargo to the true donation station and exposes real cooldown and stock blockers
+  ---
+  duration_ms: 55.235662
+  type: 'test'
+  ...
+# Subtest: guidance distinguishes default recipe shortage, paid achieved construction, and completed repair availability
+ok 33 - guidance distinguishes default recipe shortage, paid achieved construction, and completed repair availability
+  ---
+  duration_ms: 209.461338
+  type: 'test'
+  ...
+# Subtest: restoration guidance keeps selected habitat and current harvestability distinct from historical completion
+ok 34 - restoration guidance keeps selected habitat and current harvestability distinct from historical completion
+  ---
+  duration_ms: 788.711384
+  type: 'test'
+  ...
+# Subtest: care guidance distinguishes carried biomass, delivered stock, actual committed doses and optional refill
+ok 35 - care guidance distinguishes carried biomass, delivered stock, actual committed doses and optional refill
+  ---
+  duration_ms: 43.383157
+  type: 'test'
+  ...
+# Subtest: guidance compass follows world north plus Z and does not invent a traversable route
+ok 36 - guidance compass follows world north plus Z and does not invent a traversable route
+  ---
+  duration_ms: 0.740388
+  type: 'test'
+  ...
+1..36
+# tests 36
+# suites 0
+# pass 36
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 11961.086553

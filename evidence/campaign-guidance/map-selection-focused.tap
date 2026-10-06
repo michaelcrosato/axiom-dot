@@ -1,0 +1,166 @@
+TAP version 13
+# Subtest: guidance atlas adds exact finite source and habitat dock destinations without changing existing map state
+ok 1 - guidance atlas adds exact finite source and habitat dock destinations without changing existing map state
+  ---
+  duration_ms: 797.073086
+  type: 'test'
+  ...
+# Subtest: guidance source markers disappear after real pickup and stale target resolution refuses them
+ok 2 - guidance source markers disappear after real pickup and stale target resolution refuses them
+  ---
+  duration_ms: 74.954419
+  type: 'test'
+  ...
+# Subtest: map initial guidance selection focuses its exact marker and survives reopening without side effects
+ok 3 - map initial guidance selection focuses its exact marker and survives reopening without side effects
+  ---
+  duration_ms: 65.009501
+  type: 'test'
+  ...
+# Subtest: live map refresh replaces an exhausted source with the current goal and never keeps a stale inspector
+ok 4 - live map refresh replaces an exhausted source with the current goal and never keeps a stale inspector
+  ---
+  duration_ms: 159.630352
+  type: 'test'
+  ...
+# Subtest: map reopening with a consumed source selects its current supply goal instead of stale coordinates
+ok 5 - map reopening with a consumed source selects its current supply goal instead of stale coordinates
+  ---
+  duration_ms: 48.967405
+  type: 'test'
+  ...
+# Subtest: removed map destinations without a fallback clear their caption and stale inspection action
+ok 6 - removed map destinations without a fallback clear their caption and stale inspection action
+  ---
+  duration_ms: 39.501519
+  type: 'test'
+  ...
+# Subtest: supply inspector restores an exact valid source and replaces it only when collected or invalid
+ok 7 - supply inspector restores an exact valid source and replaces it only when collected or invalid
+  ---
+  duration_ms: 1102.446595
+  type: 'test'
+  ...
+# Subtest: supply inspector validates requested identity and chooses the nearest remaining fallback
+ok 8 - supply inspector validates requested identity and chooses the nearest remaining fallback
+  ---
+  duration_ms: 107.428895
+  type: 'test'
+  ...
+# Subtest: care inspector retains a requested habitat across refresh and refuses invalid or disposed selector handlers
+ok 9 - care inspector retains a requested habitat across refresh and refuses invalid or disposed selector handlers
+  ---
+  duration_ms: 54.289526
+  type: 'test'
+  ...
+# Subtest: restoration controls open the requested habitat and preserve exact source selectors without issuing work
+ok 10 - restoration controls open the requested habitat and preserve exact source selectors without issuing work
+  ---
+  duration_ms: 84.746216
+  type: 'test'
+  ...
+# Subtest: restoration care board starts read-only, shows distant habitat gates and sends no blocked or disposed intent
+ok 11 - restoration care board starts read-only, shows distant habitat gates and sends no blocked or disposed intent
+  ---
+  duration_ms: 767.967805
+  type: 'test'
+  ...
+# Subtest: care board issues paid transfer revisions only on explicit clicks and preserves the carry cap
+ok 12 - care board issues paid transfer revisions only on explicit clicks and preserves the carry cap
+  ---
+  duration_ms: 393.257776
+  type: 'test'
+  ...
+# Subtest: panel displays all field cells and exact compiled costs with pure kernel eligibility
+ok 13 - panel displays all field cells and exact compiled costs with pure kernel eligibility
+  ---
+  duration_ms: 29.563164
+  type: 'test'
+  ...
+# Subtest: pending authority locks repeat clicks and stale handlers; revision changes unlock on live polling
+ok 14 - pending authority locks repeat clicks and stale handlers; revision changes unlock on live polling
+  ---
+  duration_ms: 12.733402
+  type: 'test'
+  ...
+# Subtest: source and target selection node identities and drafts survive live polling and simulation updates
+ok 15 - source and target selection node identities and drafts survive live polling and simulation updates
+  ---
+  duration_ms: 16.636359
+  type: 'test'
+  ...
+# Subtest: actual range, incapacity, readiness and changed-world gates block intents
+ok 16 - actual range, incapacity, readiness and changed-world gates block intents
+  ---
+  duration_ms: 2.96737
+  type: 'test'
+  ...
+# Subtest: defaults and cancel only stage, refit exchanges real stock and finite service is truthful
+ok 17 - defaults and cancel only stage, refit exchanges real stock and finite service is truthful
+  ---
+  duration_ms: 26.323589
+  type: 'test'
+  ...
+# Subtest: close and old timer callbacks cannot mutate or invoke later navigation; text is escaped
+ok 18 - close and old timer callbacks cannot mutate or invoke later navigation; text is escaped
+  ---
+  duration_ms: 6.517083
+  type: 'test'
+  ...
+# Subtest: sources contain only explicit buttons and no persistence or campaign mutation dependencies
+ok 19 - sources contain only explicit buttons and no persistence or campaign mutation dependencies
+  ---
+  duration_ms: 2.168012
+  type: 'test'
+  ...
+# Subtest: town supply board opening, blocked actions and disposal never reserve or send cargo
+ok 20 - town supply board opening, blocked actions and disposal never reserve or send cargo
+  ---
+  duration_ms: 25.943256
+  type: 'test'
+  ...
+# Subtest: map panel mounts precise metadata, renders asynchronously and releases all resources on close
+ok 21 - map panel mounts precise metadata, renders asynchronously and releases all resources on close
+  ---
+  duration_ms: 645.711656
+  type: 'test'
+  ...
+# Subtest: map toolbar, keyboard, wheel and pinch share working bounded navigation and selectable landmarks
+ok 22 - map toolbar, keyboard, wheel and pinch share working bounded navigation and selectable landmarks
+  ---
+  duration_ms: 9.877564
+  type: 'test'
+  ...
+# Subtest: live player status handles cave coordinates, changed worlds and panel replacement
+ok 23 - live player status handles cave coordinates, changed worlds and panel replacement
+  ---
+  duration_ms: 18.899427
+  type: 'test'
+  ...
+# Subtest: 2D canvas failure is visible and leaves the close action available
+ok 24 - 2D canvas failure is visible and leaves the close action available
+  ---
+  duration_ms: 0.435678
+  type: 'test'
+  ...
+# Subtest: outpost detail and inspection stay live and selection reset hides the action
+ok 25 - outpost detail and inspection stay live and selection reset hides the action
+  ---
+  duration_ms: 2.077557
+  type: 'test'
+  ...
+# Subtest: freight atlas overlays expose live cargo and read-only route inspection without changing world geometry
+ok 26 - freight atlas overlays expose live cargo and read-only route inspection without changing world geometry
+  ---
+  duration_ms: 3.771876
+  type: 'test'
+  ...
+1..26
+# tests 26
+# suites 0
+# pass 26
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3454.110357

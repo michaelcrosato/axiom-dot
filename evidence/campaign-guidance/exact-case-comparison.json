@@ -1,0 +1,61 @@
+{
+  "kind": "independent-exact-case-comparison",
+  "result": "pass",
+  "verifiedAt": "2026-10-06T08:46:04.783137+00:00",
+  "sourceCommit": "bac287e231bdcd2c20de19e2cdd8cd4c29100e33",
+  "log": "/tmp/guidance-final-safe.tap",
+  "logSha256": "6910aafe6bab7df0ebce2b8bbd662dd02b05325a5dab0c0dd2c6ffd7aa26dafc",
+  "registrationCatalogs": [
+    "/tmp/guidance-independent-inventory.json",
+    "/tmp/guidance-final-inventory.json"
+  ],
+  "catalogsExactlyEqual": true,
+  "registeredFiles": 263,
+  "registeredCases": 1843,
+  "executedCases": 1843,
+  "exactNameMultisetMatchBothCatalogs": true,
+  "subtestNamesMatchResultsInOrder": true,
+  "contiguousIds": true,
+  "terminalPlan": 1843,
+  "stats": {
+    "tests": 1843,
+    "suites": 0,
+    "pass": 1843,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "duration_ms": 2057840.58112
+  },
+  "missingCases": [],
+  "extraCases": [],
+  "noSkipTodoDirectivesOrBailouts": true,
+  "frozenSource": {
+    "manifest": "/tmp/guidance-frozen-source.json",
+    "trackedFiles": 749,
+    "allHashesUnchanged": true,
+    "gitStatusClean": true
+  },
+  "heldFiles": {
+    "baseline": "b30992d2d53d4b0718dda4e315d7c97557c6b7b8",
+    "count": 13,
+    "exactExclusions": true,
+    "allBytesUnchanged": true,
+    "files": [
+      "tests/ecology.test.ts",
+      "tests/regional-clock-precision.test.ts",
+      "tests/regional-food-trade-witness.test.ts",
+      "tests/regional-food-world-authority.test.ts",
+      "tests/regional-food.test.ts",
+      "tests/regional-supply.test.ts",
+      "tests/regional-trade-integration.test.ts",
+      "tests/regional-trade-timeline.test.ts",
+      "tests/regional-trade.test.ts",
+      "tests/regional-weather-cold.test.ts",
+      "tests/regional-weather-trade-authority.test.ts",
+      "tests/regional-weather-trade.test.ts",
+      "tests/regional-weather.test.ts"
+    ]
+  },
+  "scope": "Completed permitted safe selection only; 13 held files excluded. No browser/device claim."
+}

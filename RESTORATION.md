@@ -1,6 +1,6 @@
 # Habitat restoration · bounded pack 1
 
-This additive pack connects modular neutral bodies, compiled utility actions, conservative fields and plant recovery. It does not alter the old sentries, gardens, regional food/weather clocks, town resources, generation foundations or original Site.
+This additive pack connects modular neutral bodies, compiled utility actions, conservative fields and plant recovery. It does not alter the old sentries, gardens, regional food/weather clocks, the historical town stores, generation foundations or original Site. The additive care connection described in RESTORATION-CARE.md transports finite surplus biomass to a separate apothecary stock.
 
 ## Find and play
 

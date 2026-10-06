@@ -1,0 +1,151 @@
+{
+  "kind": "axiom-workshop-independent-review",
+  "sourceCommit": "1b16eec2a68477698e2810a3f2975b6899868a76",
+  "reviewStatus": "source review complete; final permitted aggregate independently certified",
+  "scope": [
+    "bounded recipe geometry and terrain foundation",
+    "all 100 NPC navigation envelopes",
+    "actual Rapier player approach and authored room reachability",
+    "achieved resident work and finite material conservation",
+    "campaign save and import validation",
+    "host command authorization, duplicate packets and SQLite CAS retries",
+    "campaign UI refresh and disposable lab isolation"
+  ],
+  "findings": [
+    {
+      "issue": "Original parcel crossed the existing west NPC navigation trunk",
+      "resolution": "Moved approved parcel northwest beyond entire accepted resident navigation z band; independent extrema and Rapier tests pass"
+    },
+    {
+      "issue": "Command range accepted non-finite coordinates",
+      "resolution": "Finite coordinates and optional feet-height validation added"
+    },
+    {
+      "issue": "Campaign construction panel would retain stale work, worker and completion state",
+      "resolution": "Main retains panel refresh callback and calls it at existing cadence; disposer clears it"
+    },
+    {
+      "issue": "Construction lab evidence source unavailable",
+      "resolution": "Main supplies live source revision"
+    },
+    {
+      "issue": "Shortage reset exceeded material debit maximum and later represented phantom workshop payment",
+      "resolution": "Disposable scenario initializes zero materials and matching initial ledger, certifies via immutableTownLife, then tests real source recovery and exact workshopSpent linkage"
+    },
+    {
+      "issue": "Save construction payment provenance needed an exact permanent link",
+      "resolution": "Optional permanent townLife.workshopSpent equals construction.materialsPaid; positive orphan receipt rejected; old absent-field worlds remain compatible"
+    }
+  ],
+  "independentRegression": {
+    "file": "tests/workshop-construction-review.test.ts",
+    "passed": 2,
+    "parameterSeedExtrema": 96,
+    "rapierTraversalScenarios": 6,
+    "counterfactual": "Old z\u22127 parcel rejected by regression; corrected z\u221256 passes",
+    "limitations": "Numerical and Rapier model checks only; no browser/device/GPU visual acceptance"
+  },
+  "heldFiles": {
+    "baselineCommit": "e418ff3c140d943415f2491ccdf244ea7f79652b",
+    "exactCount": 13,
+    "excludedAndUnchanged": [
+      {
+        "file": "tests/ecology.test.ts",
+        "sha256": "8dba88aa7fa9c7b5805fad5f617d728cb2b8181736b2c0f105a74a083b1c205d",
+        "unchangedFromBaseline": true
+      },
+      {
+        "file": "tests/regional-clock-precision.test.ts",
+        "sha256": "dab4d56ada5eea5cf93d0e77cd4d7ea8f2e7313646508299343cc2c2463e47ab",
+        "unchangedFromBaseline": true
+      },
+      {
+        "file": "tests/regional-food-trade-witness.test.ts",
+        "sha256": "d5c527b428cb0c4b8123353b3b16ef3559e3ca5f03ca42020e26ecfdbc3fd115",
+        "unchangedFromBaseline": true
+      },
+      {
+        "file": "tests/regional-food-world-authority.test.ts",
+        "sha256": "d93b967fb0b8f923dc96ae7f45c6ae29c39c01a4bd70933ae1aee7ef8f94f18c",
+        "unchangedFromBaseline": true
+      },
+      {
+        "file": "tests/regional-food.test.ts",
+        "sha256": "4421c33cad47d49db85ae7be0e256de9b710a449733b2800dc885c4ad3c8bf04",
+        "unchangedFromBaseline": true
+      },
+      {
+        "file": "tests/regional-supply.test.ts",
+        "sha256": "576861b39029f3f0f353fc741e23267acf7ee49ef3f4c3ccec8666050c428db7",
+        "unchangedFromBaseline": true
+      },
+      {
+        "file": "tests/regional-trade-integration.test.ts",
+        "sha256": "73822a613c5e4755694ea740f685c2131c9ee59461f8222263cb510c5d97e78c",
+        "unchangedFromBaseline": true
+      },
+      {
+        "file": "tests/regional-trade-timeline.test.ts",
+        "sha256": "b33ea23ead2a4bab6965f1b313226a9a067eb91c3d1aece64f0206e0957b57b7",
+        "unchangedFromBaseline": true
+      },
+      {
+        "file": "tests/regional-trade.test.ts",
+        "sha256": "c5596901e8ef929e869d332c86f87447f0c3f45c48836311366496ed57ab82b1",
+        "unchangedFromBaseline": true
+      },
+      {
+        "file": "tests/regional-weather-cold.test.ts",
+        "sha256": "15d9223233a03043b1b0d63219eb41cb6b366b72f8022b3c3f15eb491c312c91",
+        "unchangedFromBaseline": true
+      },
+      {
+        "file": "tests/regional-weather-trade-authority.test.ts",
+        "sha256": "580ef43e6f69bb9b9fad85776a3023be77a1fa59ce639913e0a0071f68b9c6c9",
+        "unchangedFromBaseline": true
+      },
+      {
+        "file": "tests/regional-weather-trade.test.ts",
+        "sha256": "05ecd2db4577c626123f5546580b7b74bc4e2df2ea3220a2894ffe13843be0de",
+        "unchangedFromBaseline": true
+      },
+      {
+        "file": "tests/regional-weather.test.ts",
+        "sha256": "fa8c437f8ae0e5b02fccf179e8c639474d0ce79b9953548e99909b0ca3c8a1d5",
+        "unchangedFromBaseline": true
+      }
+    ]
+  },
+  "frozenSources": {
+    "manifest": "/tmp/workshop-next-frozen-source.json",
+    "trackedFileCount": 648,
+    "allHashesUnchanged": true
+  },
+  "registration": {
+    "independent": "/tmp/workshop-independent-final-inventory.json",
+    "root": "/tmp/workshop-final-inventory.json",
+    "catalogsExactlyIdentical": true,
+    "permittedFiles": 239,
+    "registeredCases": 1743,
+    "heldFiles": 13
+  },
+  "finalAggregate": {
+    "path": "/tmp/workshop-verified-safe.tap",
+    "status": "passed; exact case-name multiset and sequential IDs independently certified",
+    "comparison": "/tmp/workshop-exact-case-comparison.json",
+    "sourceCommit": "1b16eec2a68477698e2810a3f2975b6899868a76",
+    "statistics": {
+      "tests": 1743,
+      "suites": 0,
+      "pass": 1743,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "duration_ms": 1038077.149979
+    },
+    "tapSHA256": "7c18ce2158b8f1ce855bd31d4c62cc2f477d598becdc496bb95087dbcf6cd359",
+    "limitations": "13 held files remain excluded; no browser, device or GPU visual acceptance"
+  },
+  "restrictions": "No held tests, browser QA, registry route, live player data or external publication actions performed by reviewer"
+}

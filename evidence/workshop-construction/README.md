@@ -7,7 +7,7 @@ Gameplay, tests, build scripts and configuration were frozen at `1b16eec2a684776
 - `exact-case-comparison.json` and `independent-review.json`: independent case-name, exclusion, source-hash and source-review checks.
 - `frozen-source-hashes.json`: all 648 tracked files at the tested commit.
 - `emitted-*.json`: actual built engine, Three matrix, Rapier worker, save and HTTP/SQLite evidence.
-- `typecheck.log`, `build.log`, `corrected-harnesses.tap`: build and targeted harness results.
+- `typecheck.txt`, `build.txt`, `corrected-harnesses.tap`: build and targeted harness results.
 
 All 1,743 permitted tests passed. The exact 13 held food/clock files remain excluded, unchanged and outside this claim. Numerical and transport evidence does not establish browser/GPU/device visual acceptance. The main boundary probe runs the complete production source handler with real emitted worker/view artifacts; it does not run the entire emitted browser startup.
 

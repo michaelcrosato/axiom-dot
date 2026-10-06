@@ -55,8 +55,8 @@
     "Existing gateway-crate and fatigue-replay caveats remain."
   ],
   "artifactSha256": {
-    "README.md": "52a94e042164dc459dec5a7422172570608a85b924e533ba6ee741c52e938fda",
-    "build.log": "1b36e2f3ab54b6b69a1d1eb28279c3540369c6dd1640f3eb46ba31bbe325608c",
+    "README.md": "65b4ca727ee5eded41edc9373e0955013105203b5ac37045f0f02c67e581410c",
+    "build.txt": "1b36e2f3ab54b6b69a1d1eb28279c3540369c6dd1640f3eb46ba31bbe325608c",
     "corrected-harnesses.tap": "4084f965e9670f567ea74d7fcb1fa76dbab54daa04c5f1a70a547fa4cc8f80a8",
     "emitted-construction.json": "ee42d0fb293cb29bc73993349e18ed49fedbaa2b7ae1e2ddc0b551d039db6adf",
     "emitted-main-boundary.json": "dccd570682a061de06d0a7c85541aa64c4b52bed05fcb11bc4fcc2db68a73d45",
@@ -66,6 +66,6 @@
     "independent-review.json": "8a0515a36ae179a087a9da76e751c55394680d429b62c4f77db60f1191b89d0a",
     "permitted-suite.tap": "7c18ce2158b8f1ce855bd31d4c62cc2f477d598becdc496bb95087dbcf6cd359",
     "registered-cases.json": "3ce82e0ad6aabf339082fa0a87ca2fd1758366b05d29171ccbf0b9b8ab3c0e78",
-    "typecheck.log": "24141bbac6341d820b6108865ae5f286fa0b2da1bb868c14e47e81556cd2b0d9"
+    "typecheck.txt": "24141bbac6341d820b6108865ae5f286fa0b2da1bb868c14e47e81556cd2b0d9"
   }
 }

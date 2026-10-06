@@ -89,3 +89,7 @@ RESTORATION-CARE.md documents the explicit finite collection/delivery loop and i
 ## Valley salvage delivery
 
 TOWN-SUPPLY.md documents the finite canonical scrap pickup → bounded delivery pack → Second Life Salvage route. The campaign board exposes source locations, actual shortage, cargo, destination, capacity/cooldown and useful material consumers. Systems → Salvage delivery rehearsal provides disposable production-model scenarios, bounded setup, reset, strict staged presets and text evidence. Conversion and capacity are fixed conserved contracts, not stock/reward sliders. Ordinary town donations and resident material recovery remain available when caches are exhausted. No campaign writes, regional-ledger coupling or device acceptance is implied by this model.
+
+## Personal Field Plan
+
+CAMPAIGN-GUIDANCE.md describes read-only six-goal guidance, personal per-world/per-room tracking and selected map/inspector targets. The separate rehearsal exposes bounded setup, explicit steps, reset, strict presets and evidence from actual finite supply, paid construction, achieved work and service commands. Guidance changes no world, resource, reward, resident or room state. Existing completed progress is projected from current receipts, never inferred from selection. Browser/device review remains separate.

@@ -1,0 +1,257 @@
+{
+  "kind": "independent-campaign-guidance-review",
+  "verifiedAt": "2026-10-06T08:46:04.783137+00:00",
+  "sourceCommit": "bac287e231bdcd2c20de19e2cdd8cd4c29100e33",
+  "sourceReview": {
+    "kind": "independent-campaign-guidance-review",
+    "baseline": "b30992d2d53d4b0718dda4e315d7c97557c6b7b8",
+    "scope": [
+      "read-only canonical projection and completed old-save pickup history",
+      "strict pointer-only local preferences and room/solo isolation",
+      "detached journal handlers and click-time target recalculation",
+      "transient host role and null-goal cursor persistence integration",
+      "disposable source-to-workshop scenario uses canonical finite sources and paid production kernels"
+    ],
+    "findings": [
+      {
+        "issue": "untracked source/site cursor was rejected by strict storage and reported misleading storage failure",
+        "resolution": "main integration keeps untracked cursors in memory; explicit untracking writes strict null goal"
+      },
+      {
+        "issue": "connecting/pending co-op was displayed as host before authoritative identity",
+        "resolution": "main integration now reports nonhost until connection role resolves"
+      }
+    ],
+    "regressions": {
+      "file": "tests/campaign-guidance-review.test.ts",
+      "sourceLog": "/tmp/campaign-guidance-independent-source.tap",
+      "sourcePassed": 3,
+      "counterfactualLog": "/tmp/campaign-guidance-independent-counterfactual.tap",
+      "counterfactualFailed": 2,
+      "counterfactualPassed": 1,
+      "method": "Temporary copies only: remove consumed-source filter and journal DOM identity guard. This is mutation sensitivity, not a pre-feature implementation run."
+    },
+    "heldFiles": {
+      "count": 13,
+      "unchanged": true,
+      "changed": []
+    },
+    "limits": [
+      "No browser, touch, GPU or device verification.",
+      "Source is not frozen yet; final catalog/hash/TAP certification pending."
+    ],
+    "finalSourceReview": {
+      "focusedLog": "/tmp/campaign-guidance-independent-final-focused.tap",
+      "focusedTests": 9,
+      "focusedPassed": 9,
+      "verifierReview": "Actual emitted engine objects selected by unique kind; new verifier runs source/emitted equality for 12 scenarios across 3 seeds, canonical supply/construction save checks, actual achieved work and four-material repair. Care fixture explicitly excludes canonical save certification. Existing verifier diffs only expand legitimate chunk lookup and retain all behavioral checks.",
+      "mapHandoff": "Re-resolves latest canonical target for map and inspect, supporting untracked nondefault draft selections and rejecting consumed targets.",
+      "pendingMinor": "Root notified of stale atlas guidance ID falling through into unrelated trade inspector; early return recommended."
+    }
+  },
+  "finalFixes": {
+    "staleAtlasGuidanceReturnsWithoutTradeFallback": true,
+    "genuineScenarioEngineValidation": true,
+    "sourceEditsByReviewerPending": false
+  },
+  "registration": {
+    "independent": "/tmp/guidance-independent-inventory.json",
+    "root": "/tmp/guidance-final-inventory.json",
+    "exactCatalogEquality": true,
+    "files": 263,
+    "cases": 1843,
+    "excluded": 13
+  },
+  "frozenSource": {
+    "manifest": "/tmp/guidance-frozen-source.json",
+    "trackedFiles": 749,
+    "allHashesUnchanged": true,
+    "gitStatusClean": true
+  },
+  "heldFiles": {
+    "baseline": "b30992d2d53d4b0718dda4e315d7c97557c6b7b8",
+    "exactExclusions": true,
+    "allUnchanged": true,
+    "files": [
+      {
+        "path": "tests/ecology.test.ts",
+        "sha256": "8dba88aa7fa9c7b5805fad5f617d728cb2b8181736b2c0f105a74a083b1c205d",
+        "baselineUnchanged": true
+      },
+      {
+        "path": "tests/regional-clock-precision.test.ts",
+        "sha256": "dab4d56ada5eea5cf93d0e77cd4d7ea8f2e7313646508299343cc2c2463e47ab",
+        "baselineUnchanged": true
+      },
+      {
+        "path": "tests/regional-food-trade-witness.test.ts",
+        "sha256": "d5c527b428cb0c4b8123353b3b16ef3559e3ca5f03ca42020e26ecfdbc3fd115",
+        "baselineUnchanged": true
+      },
+      {
+        "path": "tests/regional-food-world-authority.test.ts",
+        "sha256": "d93b967fb0b8f923dc96ae7f45c6ae29c39c01a4bd70933ae1aee7ef8f94f18c",
+        "baselineUnchanged": true
+      },
+      {
+        "path": "tests/regional-food.test.ts",
+        "sha256": "4421c33cad47d49db85ae7be0e256de9b710a449733b2800dc885c4ad3c8bf04",
+        "baselineUnchanged": true
+      },
+      {
+        "path": "tests/regional-supply.test.ts",
+        "sha256": "576861b39029f3f0f353fc741e23267acf7ee49ef3f4c3ccec8666050c428db7",
+        "baselineUnchanged": true
+      },
+      {
+        "path": "tests/regional-trade-integration.test.ts",
+        "sha256": "73822a613c5e4755694ea740f685c2131c9ee59461f8222263cb510c5d97e78c",
+        "baselineUnchanged": true
+      },
+      {
+        "path": "tests/regional-trade-timeline.test.ts",
+        "sha256": "b33ea23ead2a4bab6965f1b313226a9a067eb91c3d1aece64f0206e0957b57b7",
+        "baselineUnchanged": true
+      },
+      {
+        "path": "tests/regional-trade.test.ts",
+        "sha256": "c5596901e8ef929e869d332c86f87447f0c3f45c48836311366496ed57ab82b1",
+        "baselineUnchanged": true
+      },
+      {
+        "path": "tests/regional-weather-cold.test.ts",
+        "sha256": "15d9223233a03043b1b0d63219eb41cb6b366b72f8022b3c3f15eb491c312c91",
+        "baselineUnchanged": true
+      },
+      {
+        "path": "tests/regional-weather-trade-authority.test.ts",
+        "sha256": "580ef43e6f69bb9b9fad85776a3023be77a1fa59ce639913e0a0071f68b9c6c9",
+        "baselineUnchanged": true
+      },
+      {
+        "path": "tests/regional-weather-trade.test.ts",
+        "sha256": "05ecd2db4577c626123f5546580b7b74bc4e2df2ea3220a2894ffe13843be0de",
+        "baselineUnchanged": true
+      },
+      {
+        "path": "tests/regional-weather.test.ts",
+        "sha256": "fa8c437f8ae0e5b02fccf179e8c639474d0ce79b9953548e99909b0ca3c8a1d5",
+        "baselineUnchanged": true
+      }
+    ]
+  },
+  "finalAggregate": {
+    "status": "passed",
+    "certification": "/tmp/guidance-exact-case-comparison.json",
+    "sourceCommit": "bac287e231bdcd2c20de19e2cdd8cd4c29100e33",
+    "log": "/tmp/guidance-final-safe.tap",
+    "logSha256": "6910aafe6bab7df0ebce2b8bbd662dd02b05325a5dab0c0dd2c6ffd7aa26dafc",
+    "registeredFiles": 263,
+    "registeredCases": 1843,
+    "executedCases": 1843,
+    "exactNameMultisetMatchBothCatalogs": true,
+    "contiguousIds": true,
+    "terminalPlan": 1843,
+    "stats": {
+      "tests": 1843,
+      "suites": 0,
+      "pass": 1843,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "duration_ms": 2057840.58112
+    }
+  },
+  "limits": [
+    "No browser, GPU, touch or device visual verification.",
+    "Safe permitted test selection excludes the documented 13 held cases/files; not an unrestricted full-suite claim."
+  ],
+  "correctedFreezeReview": {
+    "supersededSource": "b8441a810eb09eae65add9d03119626b1be7787f",
+    "filesChanged": 3,
+    "testsChanged": false,
+    "assessment": "Director lab uses same production advance function through engine surface; emitted startup locator includes coalesced engine without weakening assertions; main preserves existing freight/food declaration order. No gameplay contract changed.",
+    "priorAggregate": "Not certified: reported 1840 passed and 3 failures; superseded by pending isolated rerun."
+  },
+  "emittedReportAudit": {
+    "sourceCommit": "bac287e231bdcd2c20de19e2cdd8cd4c29100e33",
+    "allReportedSourceHashesMatchFrozenManifest": true,
+    "allInspectedAssetFileHashesMatchDisk": true,
+    "reports": [
+      {
+        "report": "/tmp/guidance-final-emitted.json",
+        "sha256": "6f2788955a1fc596fbea698b44119c5c818ef1212e7132c7b941a197c68aef58",
+        "sourceHashesChecked": 8,
+        "assetHashEntriesChecked": 2,
+        "sourceHashMapPresent": true,
+        "scope": "Actual emitted read-only guidance and earned scenario engines, source parity, canonical finite supply/construction save roundtrips, achieved worker progress and paid repairs. Care preparation uses its declared finite disposable fixture, not an importable campaign save. No browser/GPU/device or full main startup claim.",
+        "caseCount": 12
+      },
+      {
+        "report": "/tmp/guidance-supply-emitted.json",
+        "sha256": "8c4116e49c22a3bfce5ea0b0f09780eb4a818346f9cb8ed27f5f926e96e2b184",
+        "sourceHashesChecked": 9,
+        "assetHashEntriesChecked": 3,
+        "sourceHashMapPresent": true,
+        "scope": "Actual emitted supply, town and construction model engines; seven finite canonical sources, cargo accounting, unchanged normal donations, construction material payment, source/emitted HTTP and disposable SQLite. No browser/GPU/device or live-save claim.",
+        "caseCount": 3
+      },
+      {
+        "report": "/tmp/guidance-care-emitted.json",
+        "sha256": "62598cf481e604fd55d4220311cb188686d3fe085e05069af4c8ff8e281a2219",
+        "sourceHashesChecked": 13,
+        "assetHashEntriesChecked": 3,
+        "sourceHashMapPresent": true,
+        "scope": "Actual emitted restoration, care bridge and town engines, earned habitat preparation replay, conserved delivery and achieved care, source/emitted HTTP with disposable SQLite. No browser/GPU/device or live-player claim.",
+        "caseCount": 3
+      },
+      {
+        "report": "/tmp/guidance-restoration-emitted.json",
+        "sha256": "315913e817dac563b4d061332ffd68b767516e24045703b1be5471b5f3203e3e",
+        "sourceHashesChecked": 14,
+        "assetHashEntriesChecked": 4,
+        "sourceHashMapPresent": true,
+        "scope": "Actual built production restoration engine and view chunks; actual source/emitted Three object matrices and Rapier WASM workers; actual source/emitted HTTP authority with in-memory SQLite and preview-only binding. Numerical/Node evidence; no browser/GPU/device or live-state claim.",
+        "caseCount": 0
+      },
+      {
+        "report": "/tmp/guidance-town-life-emitted.json",
+        "sha256": "ebab268bb8d44bf97a7a00c119777f20be8dd56395b1a37f54ffc761e06f68c6",
+        "sourceHashesChecked": 0,
+        "assetHashEntriesChecked": 0,
+        "sourceHashMapPresent": false,
+        "scope": "Local actual production engine, pose matrices, Rapier WASM worker and in-memory SQLite server. No browser/GPU/device/production-state probe.",
+        "caseCount": 9
+      },
+      {
+        "report": "/tmp/guidance-workshop-emitted.json",
+        "sha256": "c24a29c04ba8555d58312a82ec6bea4c0470bd777a109e03e12cfc8fd9ff5480",
+        "sourceHashesChecked": 12,
+        "assetHashEntriesChecked": 3,
+        "sourceHashMapPresent": true,
+        "scope": "Actual production engine/view chunks, Three object matrices, source/emitted Rapier WASM workers and HTTP with disposable in-memory SQLite. No browser/GPU/device/live-save claim.",
+        "caseCount": 0
+      },
+      {
+        "report": "/tmp/guidance-main-emitted.json",
+        "sha256": "0d00b876d46d77e039be52377f206b0946f662a39c80528c5f2407ef403a2b35",
+        "sourceHashesChecked": 0,
+        "assetHashEntriesChecked": 3,
+        "sourceHashMapPresent": false,
+        "scope": "Node 22 manual-clock production Rapier worker and real generated initial terrain; complete production main message handler, actual collision confirmations, world actions, contact packets and Three instance matrices. Intact town frame statements are executed in source order. Unrelated DOM/audio/combat effects are stubbed. No browser, GPU pixels, real worker timer, device FPS or regional food/terminal-clock review.",
+        "caseCount": 2
+      },
+      {
+        "report": "/tmp/guidance-startup-emitted.json",
+        "sha256": "d2e788fd47317de6cff110544d006f72f4e631b1d6941b12753ec88c60dc27ea",
+        "sourceHashesChecked": 0,
+        "assetHashEntriesChecked": 0,
+        "sourceHashMapPresent": false,
+        "scope": "Source and actual emitted opening authority, resident matrices, portrait/landscape/wide camera frustum candidates, retained-save recovery and watchdog fault-injection parity. Node22 CPU only; no browser/GPU, occlusion or device approval.",
+        "caseCount": 5
+      }
+    ],
+    "limitations": "Three legacy reports lack sourceHash maps; only fields actually present are audited. Physics trace sha256 values are output evidence, not asset hashes. Report scopes distinguish Node/model/worker/matrix evidence from browser/device verification. Full aggregate still pending."
+  }
+}

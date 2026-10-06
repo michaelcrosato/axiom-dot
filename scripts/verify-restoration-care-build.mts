@@ -13,7 +13,7 @@ import {handleCoop} from '../server/coop-api.ts';
 import {earnedCareWorld,careCommand,atCare} from '../tests/helpers/restoration-care.ts';
 const root=resolve(import.meta.dirname,'..'),assets=resolve(root,'dist/client/assets'),files=readdirSync(assets),digest=(v:unknown)=>createHash('sha256').update(typeof v==='string'?v:JSON.stringify(v)).digest('hex');
 // Only known model chunks are imported: no DOM main module or synthetic bundle.
-const modules=await Promise.all(files.filter(f=>/^(restoration(?:-engine|-care|-care-engine)?|town-life|town-director|workshop-construction-engine)-.*\.js$/.test(f)).map(async file=>({file,module:await import(pathToFileURL(resolve(assets,file)).href),sha256:digest(readFileSync(resolve(assets,file),'utf8'))})));
+const modules=await Promise.all(files.filter(f=>/^(restoration(?:-engine|-care|-care-engine)?|town-life|town-director|workshop-construction-engine|campaign-guidance-engine)-.*\.js$/.test(f)).map(async file=>({file,module:await import(pathToFileURL(resolve(assets,file)).href),sha256:digest(readFileSync(resolve(assets,file),'utf8'))})));
 function surface<T>(kind:string):{file:string;value:T;sha256:string}{const found=modules.flatMap(m=>Object.values(m.module).filter((v:any)=>v?.kind===kind).map(value=>({file:m.file,value:value as T,sha256:m.sha256})));assert.equal(found.length,1,`exactly one actual emitted ${kind} engine`);return found[0]!;}
 const restorationAsset=surface<typeof RESTORATION_ENGINE>('axiom-restoration'),careAsset=surface<typeof RESTORATION_CARE_ENGINE>('axiom-restoration-care'),townAsset=surface<typeof TOWN_LIFE_ENGINE>('axiom-town-life');
 const restorationEngine=restorationAsset.value,careEngine=careAsset.value,townEngine=townAsset.value,modelCases:any[]=[];

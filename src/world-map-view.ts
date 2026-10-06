@@ -5,9 +5,9 @@ import {
  type WorldMapModel,type MapViewport,type MapMarker,type MapMarkerKind,type MapBounds,type MapRaster,type MapPoint,
 } from './world-map.ts';
 
-export interface WorldMapOverlayMarker {id:string;name:string;x:number;z:number;detail:string;kind:'resource'|'carrier'|'repair'|'project'|'farm'|'pantry'|'habitat';targetId:string;local?:boolean;inspectLabel?:string}
+export interface WorldMapOverlayMarker {id:string;name:string;x:number;z:number;detail:string;kind:'resource'|'carrier'|'repair'|'project'|'farm'|'pantry'|'habitat';targetId:string;local?:boolean;inspectLabel?:string;selectionGroup?:string}
 export interface WorldMapOverlay {markers:WorldMapOverlayMarker[];routes:{id:string;points:readonly MapPoint[];blocked:boolean}[]}
-export interface WorldMapPanelOptions {getState:()=>State;close:()=>void;back?:()=>void;continuesInMenus?:boolean;markerDetail?:(marker:MapMarker,state:State)=>string|undefined;inspectOutpost?:(id:string)=>void;getOverlay?:(state:State)=>WorldMapOverlay;inspectOverlay?:(targetId:string)=>void}
+export interface WorldMapPanelOptions {getState:()=>State;close:()=>void;back?:()=>void;continuesInMenus?:boolean;markerDetail?:(marker:MapMarker,state:State)=>string|undefined;inspectOutpost?:(id:string)=>void;getOverlay?:(state:State)=>WorldMapOverlay;inspectOverlay?:(targetId:string)=>void;initialSelectedMarkerId?:string;focusTarget?:{id?:string;x:number;z:number};onSelection?:(markerId:string|null)=>void}
 type AtlasMarker=MapMarker|WorldMapOverlayMarker;
 const OVERLAY_COLORS={resource:'#9ed8b0',carrier:'#83d9e9',repair:'#f3a779',project:'#dbbded',farm:'#b9dc83',pantry:'#efc781',habitat:'#88c7ab'};
 const isOverlay=(marker:AtlasMarker):marker is WorldMapOverlayMarker=>'targetId'in marker;
@@ -69,14 +69,15 @@ export function mountWorldMapPanel(panel:HTMLElement,options:WorldMapPanelOption
   if(canvas.width!==Math.round(width*ratio)||canvas.height!==Math.round(height*ratio)){canvas.width=Math.round(width*ratio);canvas.height=Math.round(height*ratio);setView(constrainMapViewport(model,{...view,width,height}));}
  }
  const observer=typeof ResizeObserver==='undefined'?null:new ResizeObserver(resize);observer?.observe(viewport);window.addEventListener('resize',resize,events);
- function locate(){const player=worldMapPlayer(model,options.getState());selected=null;select.value='';if(inspect)inspect.hidden=true;caption.textContent=player.description;setView(focusWorldMap(model,view,player,model.regional?20:2));}
+ function locate(){const player=worldMapPlayer(model,options.getState());if(selected!==null)options.onSelection?.(null);selected=null;select.value='';if(inspect)inspect.hidden=true;caption.textContent=player.description;setView(focusWorldMap(model,view,player,model.regional?20:2));}
  function describeSelection(){const marker=markers().find(m=>m.id===selected);if(!marker)return;caption.textContent=`${marker.name} · ${isOverlay(marker)?marker.detail:options.markerDetail?.(marker,state)??marker.detail} · ${Math.round(marker.x)} m east, ${Math.round(marker.z)} m north`;if(inspect){inspect.hidden=isOverlay(marker)?!options.inspectOverlay:marker.kind!=='outpost'||!options.inspectOutpost;inspect.textContent=isOverlay(marker)?marker.inspectLabel??'Resource route & freight':'Settlement supplies & project';}}
  const inspect=options.inspectOutpost||options.inspectOverlay?document.createElement('button'):null;
  if(inspect){inspect.type='button';inspect.textContent='Settlement supplies & project';inspect.hidden=true;caption.after(inspect);inspect.addEventListener('click',()=>{const marker=markers().find(m=>m.id===selected);if(marker&&isOverlay(marker))options.inspectOverlay?.(marker.targetId);else if(marker?.kind==='outpost')options.inspectOutpost?.(marker.id);},events);}
- function choose(marker:AtlasMarker){selected=marker.id;select.value=marker.id;describeSelection();setView(focusWorldMap(model,view,marker,Math.max(view.zoom,model.regional?marker.local?24:5:2)));}
+ function resolveSelection(id:string|null){return id?markers().find(m=>m.id===id)??overlay.markers.find(m=>m.selectionGroup&&id.startsWith(m.selectionGroup+'/')):undefined;}
+ function choose(marker:AtlasMarker){if(selected!==marker.id)options.onSelection?.(marker.id);selected=marker.id;select.value=marker.id;describeSelection();setView(focusWorldMap(model,view,marker,Math.max(view.zoom,model.regional?marker.local?24:5:2)));}
  panel.querySelector<HTMLButtonElement>('.close')!.addEventListener('click',options.close,events);
  panel.querySelectorAll<HTMLButtonElement>('[data-map-action]').forEach(button=>button.addEventListener('click',()=>{
-  switch(button.dataset.mapAction){case 'in':setView(zoomWorldMap(model,view,1.5));break;case 'out':setView(zoomWorldMap(model,view,1/1.5));break;case 'fit':selected=null;select.value='';if(inspect)inspect.hidden=true;caption.textContent='Whole world fitted to view';setView(fitWorldMap(view.width,view.height));break;case 'player':locate();break;case 'back':options.back?.();break;}
+  switch(button.dataset.mapAction){case 'in':setView(zoomWorldMap(model,view,1.5));break;case 'out':setView(zoomWorldMap(model,view,1/1.5));break;case 'fit':if(selected!==null)options.onSelection?.(null);selected=null;select.value='';if(inspect)inspect.hidden=true;caption.textContent='Whole world fitted to view';setView(fitWorldMap(view.width,view.height));break;case 'player':locate();break;case 'back':options.back?.();break;}
  },events));
  select.addEventListener('change',()=>{const marker=markers().find(m=>m.id===select.value);if(marker)choose(marker);},events);
  function eventPoint(event:{clientX:number;clientY:number}){const rect=canvas.getBoundingClientRect();return {x:(event.clientX-rect.left)*view.width/Math.max(1,rect.width),y:(event.clientY-rect.top)*view.height/Math.max(1,rect.height)};}
@@ -150,7 +151,7 @@ export function mountWorldMapPanel(panel:HTMLElement,options:WorldMapPanelOption
  function updatePlayer(){
   const previous=state;state=options.getState();
   if(options.getOverlay&&previous!==state){const next=options.getOverlay(state);const oldIds=overlay.markers.map(m=>m.id).join('|');overlay=next;dirty=true;if(oldIds!==overlay.markers.map(m=>m.id).join('|')){populate();select.value=selected??'';}}
-  if(selected)describeSelection();else if(inspect)inspect.hidden=true;
+  if(selected){const resolved=resolveSelection(selected);if(resolved){if(resolved.id!==selected)choose(resolved);else describeSelection();}else{selected=null;select.value='';caption.textContent='That destination is no longer available. Choose a current landmark.';if(inspect)inspect.hidden=true;options.onSelection?.(null);}}else if(inspect)inspect.hidden=true;
   if(worldMapIdentity(state)!==model.identity){model=createWorldMapModel(state);overlay=options.getOverlay?.(state)??{markers:[],routes:[]};releaseLayer(base);releaseLayer(detail);base=null;detail=null;selected=null;setView(fitWorldMap(view.width,view.height));populate();prepareBase();}
   const player=worldMapPlayer(model,state),key=`${state.zone}:${player.x}:${player.z}`;
   if(key!==lastPlayer){lastPlayer=key;status.textContent=player.underground?player.description:`Surface survey · ${player.description} · All roads and landmarks shown`;
@@ -159,6 +160,6 @@ export function mountWorldMapPanel(panel:HTMLElement,options:WorldMapPanelOption
  }
  function tick(now:number){if(disposed)return;if(!panel.contains(canvas)){dispose();return;}if(now-lastPoll>120){lastPoll=now;updatePlayer();}if(dirty){dirty=false;draw();}raf=requestAnimationFrame(tick);}
  function dispose(){if(disposed)return;disposed=true;abort.abort();observer?.disconnect();cancelAnimationFrame(raf);window.clearTimeout(baseTimer);window.clearTimeout(detailTimer);detailEpoch++;for(const id of pointers.keys())if(canvas.hasPointerCapture(id))canvas.releasePointerCapture(id);pointers.clear();releaseLayer(base);releaseLayer(detail);base=null;detail=null;canvas.width=1;canvas.height=1;if(panel.contains(canvas))panel.classList.remove('world-map-panel');}
- resize();updatePlayer();prepareBase();canvas.style.cursor='grab';raf=requestAnimationFrame(tick);
+ resize();updatePlayer();const initialSelection=resolveSelection(options.initialSelectedMarkerId??options.focusTarget?.id??null);if(initialSelection)choose(initialSelection);else if(options.focusTarget&&Number.isFinite(options.focusTarget.x)&&Number.isFinite(options.focusTarget.z)){setView(focusWorldMap(model,view,options.focusTarget,model.regional?24:2));caption.textContent='Selected destination · '+Math.round(options.focusTarget.x)+' m east, '+Math.round(options.focusTarget.z)+' m north';}prepareBase();canvas.style.cursor='grab';raf=requestAnimationFrame(tick);
  return dispose;
 }

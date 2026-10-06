@@ -1,0 +1,54 @@
+TAP version 13
+# (node:23166) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: town guidance re-enables real legacy buttons after a blocked regional objective
+ok 1 - town guidance re-enables real legacy buttons after a blocked regional objective
+  ---
+  duration_ms: 27.257135
+  type: 'test'
+  ...
+# Subtest: explicit guidance owns the final HUD across competing legacy writers and untracking restores automatic guidance
+ok 2 - explicit guidance owns the final HUD across competing legacy writers and untracking restores automatic guidance
+  ---
+  duration_ms: 583.239264
+  type: 'test'
+  ...
+# Subtest: main tracking isolates world and online-room preferences, keeps untracked cursors memory-only, and survives storage denial
+ok 3 - main tracking isolates world and online-room preferences, keeps untracked cursors memory-only, and survives storage denial
+  ---
+  duration_ms: 143.286987
+  type: 'test'
+  ...
+# Subtest: tracked map and inspector retain exact source selection without collecting or teleporting
+ok 4 - tracked map and inspector retain exact source selection without collecting or teleporting
+  ---
+  duration_ms: 98.847884
+  type: 'test'
+  ...
+# Subtest: untracked nondefault source and habitat map drafts select their exact canonical markers without pinning a goal
+ok 5 - untracked nondefault source and habitat map drafts select their exact canonical markers without pinning a goal
+  ---
+  duration_ms: 51.252821
+  type: 'test'
+  ...
+# Subtest: stale collected-source guidance callbacks cannot reopen or map a spent cache
+ok 6 - stale collected-source guidance callbacks cannot reopen or map a spent cache
+  ---
+  duration_ms: 60.790294
+  type: 'test'
+  ...
+# Subtest: actual atlas inspector discards expired guidance markers while preserving ordinary regional routes
+ok 7 - actual atlas inspector discards expired guidance markers while preserving ordinary regional routes
+  ---
+  duration_ms: 1.846401
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1456.031894

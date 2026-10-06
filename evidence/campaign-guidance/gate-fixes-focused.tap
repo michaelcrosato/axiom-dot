@@ -1,0 +1,80 @@
+TAP version 13
+# (node:27049) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: town guidance re-enables real legacy buttons after a blocked regional objective
+ok 1 - town guidance re-enables real legacy buttons after a blocked regional objective
+  ---
+  duration_ms: 6.232606
+  type: 'test'
+  ...
+# Subtest: explicit guidance owns the final HUD across competing legacy writers and untracking restores automatic guidance
+ok 2 - explicit guidance owns the final HUD across competing legacy writers and untracking restores automatic guidance
+  ---
+  duration_ms: 769.883818
+  type: 'test'
+  ...
+# Subtest: main tracking isolates world and online-room preferences, keeps untracked cursors memory-only, and survives storage denial
+ok 3 - main tracking isolates world and online-room preferences, keeps untracked cursors memory-only, and survives storage denial
+  ---
+  duration_ms: 143.386728
+  type: 'test'
+  ...
+# Subtest: tracked map and inspector retain exact source selection without collecting or teleporting
+ok 4 - tracked map and inspector retain exact source selection without collecting or teleporting
+  ---
+  duration_ms: 90.615108
+  type: 'test'
+  ...
+# Subtest: untracked nondefault source and habitat map drafts select their exact canonical markers without pinning a goal
+ok 5 - untracked nondefault source and habitat map drafts select their exact canonical markers without pinning a goal
+  ---
+  duration_ms: 36.991785
+  type: 'test'
+  ...
+# Subtest: stale collected-source guidance callbacks cannot reopen or map a spent cache
+ok 6 - stale collected-source guidance callbacks cannot reopen or map a spent cache
+  ---
+  duration_ms: 44.07823
+  type: 'test'
+  ...
+# Subtest: actual atlas inspector discards expired guidance markers while preserving ordinary regional routes
+ok 7 - actual atlas inspector discards expired guidance markers while preserving ordinary regional routes
+  ---
+  duration_ms: 3.233726
+  type: 'test'
+  ...
+# (node:27050) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: executed food main makes journal/map inspection read-only and switches farm without closing panel
+ok 8 - executed food main makes journal/map inspection read-only and switches farm without closing panel
+  ---
+  duration_ms: 40.657612
+  type: 'test'
+  ...
+# Subtest: executed food main requires acknowledged visible ground, reach, upright grounded live control and clear line before command
+ok 9 - executed food main requires acknowledged visible ground, reach, upright grounded live control and clear line before command
+  ---
+  duration_ms: 13.460386
+  type: 'test'
+  ...
+# Subtest: executed food presentation pauses in solo menu and background but follows accepted online room while menu is open
+ok 10 - executed food presentation pauses in solo menu and background but follows accepted online room while menu is open
+  ---
+  duration_ms: 12.40141
+  type: 'test'
+  ...
+# Subtest: food main uses existing E/X interaction and protected recovery, clears/disposes projection with world lifecycle
+ok 11 - food main uses existing E/X interaction and protected recovery, clears/disposes projection with world lifecycle
+  ---
+  duration_ms: 0.476145
+  type: 'test'
+  ...
+1..11
+# tests 11
+# suites 0
+# pass 11
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1620.988068

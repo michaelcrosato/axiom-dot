@@ -1,3 +1,4 @@
+import {applyRestorationCare,validRestorationCare,immutableRestorationCare,type RestorationCareState,type RestorationCareCommand} from './restoration-care.ts';
 import {applyWorkshopConstruction,advanceWorkshopConstruction,validWorkshopConstruction,immutableWorkshopConstruction,workshopConstructionBoxes,workshopConstructionPosition,type WorkshopConstructionState,type WorkshopConstructionCommand} from './workshop-construction.ts';
 import {RESTORATION_ENGINE,createRestoration,advanceRestoration,applyRestorationCommand,validRestoration,immutableRestoration,restorationPlayerCost,restorationPlan,type RestorationState,type RestorationCommand,type HabitatActor} from './restoration.ts';
 import {habitatSiteDescriptors} from './habitat-sites.ts';
@@ -42,6 +43,7 @@ export interface State {
   /** Bounded factual town opportunities; never a source of items or currency. */
   townDirector?:TownDirectorState;
   restoration?:RestorationState;
+  restorationCare?:RestorationCareState;
   workshopConstruction?:WorkshopConstructionState;
   frontierSupply?:RegionalSupplyState;
   frontierTrade?:RegionalTradeState;
@@ -61,6 +63,7 @@ export interface State {
   waterRestored: boolean; jobAccepted: boolean; revision: number; events: string[];
 }
 export type Action =
+  | {type:'restoration-care';command:RestorationCareCommand}
   | {type:'workshop-construction';command:WorkshopConstructionCommand}
   | {type:'restoration';command:RestorationCommand}
   | {type:'town-director';command:TownDirectorCommand}
@@ -170,6 +173,7 @@ function applyWorldAction(state: State, action: Action,restorationActors:readonl
       return townDirector?record(state,action.command.kind==='accept'?'Accepted a real town request. Help through the existing local actions.':'Declined the town request. The underlying need remains.',{townDirector}):state;
     }
     case 'town-life': return commitTownLife(state,action.command);
+    case 'restoration-care': return commitRestorationCare(state,action.command);
     case 'workshop-construction': return commitWorkshopConstruction(state,action.command,restorationActors);
     case 'town-purchase': {
       if(!state.regional||!state.town)return state;const result=purchaseTown(state.town,state,action.command);if(!result)return state;
@@ -377,6 +381,8 @@ export function validateSave(value: unknown): value is State {
   if(Object.hasOwn(value,'workshopConstruction')&&(!regional||!value.townLife||!validWorkshopConstruction(value.workshopConstruction,value.seed)||(value.workshopConstruction as WorkshopConstructionState).materialsPaid!==(value.townLife as TownLifeState).workshopSpent))return false;
   if(!Object.hasOwn(value,'workshopConstruction')&&((value.townLife as TownLifeState|undefined)?.workshopSpent??0)!==0)return false;
   if(Object.hasOwn(value,'restoration')&&(!regional||!validRestoration(value.restoration,worldRestorationPlan(value.seed))))return false;
+  if(Object.hasOwn(value,'restorationCare')&&(!regional||!value.restoration||!value.townLife||!validRestorationCare(value.restorationCare,value.restoration as RestorationState,value.townLife as TownLifeState)))return false;
+  if(!Object.hasOwn(value,'restorationCare')&&(((value.restoration as RestorationState|undefined)?.sites.some(site=>(site.careExported??0)>0)??false)||((value.townLife as TownLifeState|undefined)?.habitatCare?.received??0)>0))return false;
   if(Object.hasOwn(value,'townDirector')&&(!regional||!value.townLife||!validTownDirector(value.townDirector,value.townLife as TownLifeState)||Object.entries(TOWN_DIRECTOR_DEFAULTS).some(([k,v])=>(value.townDirector as TownDirectorState).tuning[k as keyof typeof TOWN_DIRECTOR_DEFAULTS]!==v)))return false;
   if(Object.hasOwn(value,'town')&&(!regional||value.generation!==2||!validTownState(value.town)))return false;
   if(Object.hasOwn(value,'wilderness')&&!validWildernessState(value.wilderness,{generation:value.generation,seed:value.seed,...(regional?{regional}:{})}))return false;
@@ -445,6 +451,7 @@ export function parseSave(text: string): State | null {
     if(object(parsed)&&Object.hasOwn(parsed,'workshopConstruction'))parsed={...parsed,workshopConstruction:immutableWorkshopConstruction(parsed.workshopConstruction,parsed.seed as number)};
     if(object(parsed)&&Object.hasOwn(parsed,'townLife'))parsed={...parsed,townLife:immutableTownLife(parsed.townLife,parsed.seed as number)};
     if(object(parsed)&&Object.hasOwn(parsed,'restoration'))parsed={...parsed,restoration:immutableRestoration(parsed.restoration,worldRestorationPlan(parsed.seed as number))};
+    if(object(parsed)&&Object.hasOwn(parsed,'restorationCare'))parsed={...parsed,restorationCare:immutableRestorationCare(parsed.restorationCare,parsed.restoration as RestorationState,parsed.townLife as TownLifeState)};
     if(object(parsed)&&Object.hasOwn(parsed,'townDirector'))parsed={...parsed,townDirector:immutableTownDirector(parsed.townDirector,parsed.townLife as TownLifeState)};
     if(!validateSave(parsed))return null;
     if(parsed.generation===2&&!parsed.causal){
@@ -572,4 +579,11 @@ export function commitWorkshopConstruction(state:State,command:WorkshopConstruct
   if(Math.abs(body.x-solid.center.x)<body.hx+solid.half.x&&Math.abs(body.y-solid.center.y)<body.hy+solid.half.y&&Math.abs(body.z-solid.center.z)<body.hz+solid.half.z)return state;
  }
  return record(state,result.message,{workshopConstruction:result.construction,townLife:result.life,player:{...state.player,hp:result.hp}});
+}
+
+/** Host/local motion owns elevation; cargo and conservation remain model-owned. */
+export function commitRestorationCare(state:State,command:RestorationCareCommand,feetY=worldHeight(state,state.player.x,state.player.z)):State {
+ if(!state.regional||!state.restoration||!state.townLife)return state;
+ const result=applyRestorationCare(state.restorationCare,state.restoration,worldRestorationPlan(state.seed),state.townLife,{seed:state.seed,zone:state.zone,player:{...state.player,feetY}},command);
+ return result?record(state,result.message,{restorationCare:result.care,restoration:result.restoration,townLife:result.life}):state;
 }

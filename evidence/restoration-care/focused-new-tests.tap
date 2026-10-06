@@ -1,0 +1,194 @@
+TAP version 13
+# (node:12618) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: restoration care accepts bounded transport intents and rejects client supplied cargo authority
+ok 1 - restoration care accepts bounded transport intents and rejects client supplied cargo authority
+  ---
+  duration_ms: 2.467185
+  type: 'test'
+  ...
+# Subtest: care cargo is host-authoritative, duplicate-safe, range-checked and usable at both real endpoints
+ok 2 - care cargo is host-authoritative, duplicate-safe, range-checked and usable at both real endpoints
+  ---
+  duration_ms: 4186.266694
+  type: 'test'
+  ...
+# Subtest: care authority rejects airborne, crouched, dead, remote and wall-occluded transfers
+ok 3 - care authority rejects airborne, crouched, dead, remote and wall-occluded transfers
+  ---
+  duration_ms: 833.180071
+  type: 'test'
+  ...
+# Subtest: HTTP care collection and delivery survive real SQLite CAS conflicts and duplicate retries exactly once
+ok 4 - HTTP care collection and delivery survive real SQLite CAS conflicts and duplicate retries exactly once
+  ---
+  duration_ms: 1973.529844
+  type: 'test'
+  ...
+# Subtest: care preset is exact, finite and independent of existing restoration settings
+ok 5 - care preset is exact, finite and independent of existing restoration settings
+  ---
+  duration_ms: 26.066253
+  type: 'test'
+  ...
+# Subtest: care lab starts unopened, stages tuning, bounds steps and prevents stale asynchronous preset replacement
+ok 6 - care lab starts unopened, stages tuning, bounds steps and prevents stale asynchronous preset replacement
+  ---
+  duration_ms: 1558.151543
+  type: 'test'
+  ...
+# Subtest: care lab earns delivered stock, preserves ledgers through resident arrival and repeats the same preparation
+ok 7 - care lab earns delivered stock, preserves ledgers through resident arrival and repeats the same preparation
+  ---
+  duration_ms: 10363.836265
+  type: 'test'
+  ...
+# Subtest: care low default and high settings produce distinct earned restoration timings with conserved preparation
+ok 8 - care low default and high settings produce distinct earned restoration timings with conserved preparation
+  ---
+  duration_ms: 528.071006
+  type: 'test'
+  ...
+# (node:12620) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: actual main habitat care controls require achieved ground pose, nearby confirmed terrain, clear path and shared host
+ok 9 - actual main habitat care controls require achieved ground pose, nearby confirmed terrain, clear path and shared host
+  ---
+  duration_ms: 834.073695
+  type: 'test'
+  ...
+# Subtest: main care transfer dispatch rejects blocked input before reducers and routes accepted requests through authority
+ok 10 - main care transfer dispatch rejects blocked input before reducers and routes accepted requests through authority
+  ---
+  duration_ms: 6.644288
+  type: 'test'
+  ...
+# Subtest: care entry points, progress refresh, disposal and save dirtiness are wired into production main
+ok 11 - care entry points, progress refresh, disposal and save dirtiness are wired into production main
+  ---
+  duration_ms: 2.437464
+  type: 'test'
+  ...
+# Subtest: independent care review rejects duplicating paid active doses while keeping the aggregate stock balance plausible
+ok 12 - independent care review rejects duplicating paid active doses while keeping the aggregate stock balance plausible
+  ---
+  duration_ms: 964.435043
+  type: 'test'
+  ...
+# Subtest: independent care review preserves paid treatment across displacement and reload without remote recovery or a second debit
+ok 13 - independent care review preserves paid treatment across displacement and reload without remote recovery or a second debit
+  ---
+  duration_ms: 1075.50571
+  type: 'test'
+  ...
+# Subtest: restoration care board starts read-only, shows distant habitat gates and sends no blocked or disposed intent
+ok 14 - restoration care board starts read-only, shows distant habitat gates and sends no blocked or disposed intent
+  ---
+  duration_ms: 709.478657
+  type: 'test'
+  ...
+# Subtest: care board issues paid transfer revisions only on explicit clicks and preserves the carry cap
+ok 15 - care board issues paid transfer revisions only on explicit clicks and preserves the carry cap
+  ---
+  duration_ms: 363.806897
+  type: 'test'
+  ...
+# Subtest: old campaign saves remain byte-identical and unfinished habitats cannot supply care
+ok 16 - old campaign saves remain byte-identical and unfinished habitats cannot supply care
+  ---
+  duration_ms: 841.56452
+  type: 'test'
+  ...
+# Subtest: world validation refuses orphan care receipts or exports and malformed bridge state
+ok 17 - world validation refuses orphan care receipts or exports and malformed bridge state
+  ---
+  duration_ms: 189.195707
+  type: 'test'
+  ...
+# Subtest: earned habitat biomass becomes conserved carried cargo then finite care stock across save reload
+ok 18 - earned habitat biomass becomes conserved carried cargo then finite care stock across save reload
+  ---
+  duration_ms: 1198.536195
+  type: 'test'
+  ...
+# Subtest: care transfer rejects remote, dead, wrong-zone, wrong-elevation and cross-ledger forged imports
+ok 19 - care transfer rejects remote, dead, wrong-zone, wrong-elevation and cross-ledger forged imports
+  ---
+  duration_ms: 594.42246
+  type: 'test'
+  ...
+# Subtest: habitat care cannot collect unearned restoration, invent targets or supply command-side cargo
+ok 20 - habitat care cannot collect unearned restoration, invent targets or supply command-side cargo
+  ---
+  duration_ms: 32.045202
+  type: 'test'
+  ...
+# Subtest: habitat care strictly links exported source, cargo, deliveries and consumed care history
+ok 21 - habitat care strictly links exported source, cargo, deliveries and consumed care history
+  ---
+  duration_ms: 32.110847
+  type: 'test'
+  ...
+# Subtest: restoration rejects forged biomass exports, fake organic sinks and invalid export records
+ok 22 - restoration rejects forged biomass exports, fake organic sinks and invalid export records
+  ---
+  duration_ms: 2.351869
+  type: 'test'
+  ...
+# Subtest: habitat care gates nonfinite, remote, dead and wrong-height player contexts
+ok 23 - habitat care gates nonfinite, remote, dead and wrong-height player contexts
+  ---
+  duration_ms: 5.295766
+  type: 'test'
+  ...
+# Subtest: earned restoration exports actual biomass with retained reserves and delivers conserved resident care once
+ok 24 - earned restoration exports actual biomass with retained reserves and delivers conserved resident care once
+  ---
+  duration_ms: 356.82184
+  type: 'test'
+  ...
+# Subtest: restored care collection remains blocked by current unhealthy cells and cannot breach resident stock capacity
+ok 25 - restored care collection remains blocked by current unhealthy cells and cannot breach resident stock capacity
+  ---
+  duration_ms: 277.543015
+  type: 'test'
+  ...
+# Subtest: habitat care deliveries are finite conserved optional receipts and leave old towns unchanged
+ok 26 - habitat care deliveries are finite conserved optional receipts and leave old towns unchanged
+  ---
+  duration_ms: 170.208188
+  type: 'test'
+  ...
+# Subtest: botanical stock is reserved only after achieved apothecary arrival and keeps ordinary costs
+ok 27 - botanical stock is reserved only after achieved apothecary arrival and keeps ordinary costs
+  ---
+  duration_ms: 647.683823
+  type: 'test'
+  ...
+# Subtest: botanical recovery adds half the normal energy hygiene and comfort gain only during clear achieved work
+ok 28 - botanical recovery adds half the normal energy hygiene and comfort gain only during clear achieved work
+  ---
+  duration_ms: 459.26202
+  type: 'test'
+  ...
+# Subtest: interrupted botanical care is spent without refund and active treatment saves resume exactly
+ok 29 - interrupted botanical care is spent without refund and active treatment saves resume exactly
+  ---
+  duration_ms: 1169.13159
+  type: 'test'
+  ...
+# Subtest: habitat care imports reject forged balances extras and treatment without a paid active recover action
+ok 30 - habitat care imports reject forged balances extras and treatment without a paid active recover action
+  ---
+  duration_ms: 258.74098
+  type: 'test'
+  ...
+1..30
+# tests 30
+# suites 0
+# pass 30
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 13598.255395

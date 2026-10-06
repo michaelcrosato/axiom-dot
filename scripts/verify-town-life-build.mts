@@ -16,7 +16,7 @@ const root=resolve(import.meta.dirname,'..'),assets=resolve(root,'dist/client/as
 // Rolldown may place the life authority in the shared director dependency chunk.
 // Inspect the actual emitted surface, never a test-only substitute or a filename claim.
 let file:string|undefined,engine:typeof TOWN_LIFE_ENGINE|undefined;
-for(const candidate of files.filter(f=>/^town-(?:life|director)-.*\.js$/.test(f))){const module=await import(pathToFileURL(resolve(assets,candidate)).href),surface=Object.values(module).find((v:any)=>v?.kind==='axiom-town-life') as typeof TOWN_LIFE_ENGINE|undefined;if(surface){assert(!engine,'one emitted town-life authority');file=candidate;engine=surface;}}
+for(const candidate of files.filter(f=>/^(?:town-life|town-director|restoration-care-engine)-.*\.js$/.test(f))){const module=await import(pathToFileURL(resolve(assets,candidate)).href),surface=Object.values(module).find((v:any)=>v?.kind==='axiom-town-life') as typeof TOWN_LIFE_ENGINE|undefined;if(surface){assert(!engine,'one emitted town-life authority');file=candidate;engine=surface;}}
 assert(file&&engine?.create&&engine?.advance&&engine?.command,'the actual game ships the shared life authority');
 const modelCases=[];for(const seed of [0,73129,0xffffffff])for(const scenario of ['balanced','lean-stores','urgent-needs']){
  let source=TOWN_LIFE_ENGINE.scenario(seed,scenario),built=engine.scenario(seed,scenario);assert.deepEqual(built,source);const hash=createHash('sha256');

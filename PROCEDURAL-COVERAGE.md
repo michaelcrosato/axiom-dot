@@ -17,7 +17,7 @@ Audited against the original 17-domain framework brief and the actual preview so
 | Abilities | Committed staff/guard timelines; new data-only pump/filter/vent/beacon abilities with real costs, timing and counterconditions | combat, guard, utility-ability |
 | Agents | Needs, goals, jobs, local relationships; bounded reactive enemies and routed neutral utility behavior | causal, town-life, encounters, restoration |
 | Crowds | 100 persistent residents, movement/contact budgets, measured trajectories and repeatable capture | town-crowd, town-life-runtime, town-motion-diagnostics |
-| Economy | Finite shops, barter, production, freight, farming; new conserved restoration parts/consumables/biomass service | economy, commons-trade, regional-trade/food, restoration |
+| Economy | Finite shops, barter, production, freight, farming; conserved restoration parts/consumables; transported surplus biomass supports achieved apothecary care | economy, commons-trade, regional-trade/food, restoration, restoration-care |
 | Jobs/events | Existing founding and recurring water/work requests; new feasible town director with permanent bounded causal outcomes | causal, water-requests, town-director |
 | Culture/history | Stable names/households/backstories/relations, contextual branching dialogue; factual request/contribution histories | town-residents, npc-conversation, town-director |
 | Graphics/audio | Procedural shared geometry, bounded instancing, synthesis; new field/body/scent/utility projections | audio, regional-view, restoration-view |

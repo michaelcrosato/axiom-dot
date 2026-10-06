@@ -1,3 +1,4 @@
+import {restorationCarePosition} from '../src/restoration-care.ts';
 import {workshopConstructionBoxes,workshopConstructionPosition} from '../src/workshop-construction.ts';
 import {restorationBodyObstacle} from '../src/restoration-collision.ts';
 import {restorationCommandPosition,restorationMachinePosition} from '../src/restoration.ts';
@@ -7,7 +8,7 @@ import {townLifePoses,townLifeInteractionTarget} from '../src/town-life-runtime.
 import {TownCrowd,slideTownCrowd,townClock} from '../src/town-crowd.ts';
 import {regionalTownCleared,legacyRegionalHeight} from '../src/regional-world.ts';
 import {TOWN_OFFERS,TOWN_LAYOUT_VERSION,TOWN_CENTER,TOWN_BOUNDS,startingTown,safeTownPosition} from '../src/starting-town.ts';
-import {enableStartingTown,commitTownLife} from '../src/world.ts';
+import {enableStartingTown,commitTownLife,commitRestorationCare} from '../src/world.ts';
 import {regionalFoodCommandPosition} from '../src/regional-food.ts';
 import {regionalTradeObstacles,regionalTradeConstructionBoxes,regionalTradeCommandPosition} from '../src/regional-trade.ts';
 import {regionalSupplyObstacles,regionalSupplyConstructionBoxes,regionalSupplyPlan} from '../src/regional-supply.ts';
@@ -305,6 +306,11 @@ export function syncRoom(room:CoopRoom,userId:string,input:CoopSync,now:number):
       // Absent actors were retired before actions: no old-geometry hit or buffered chain can resume.
       if(room.players.some(q=>q.active&&now-q.lastSeen<=PLAYER_TIMEOUT_MS&&(!canSwapEquipment(q.combo)||guardBusy(playerGuard(q))))){notices.push('Wait for every expedition staff / guard commitment to finish before refitting');continue;}
     }
+    if(command.type==='restoration-care'){
+      const m=playerMotion(room,p),target=restorationCarePosition(worldRestorationPlan(s.seed),command.command);
+      if(p.id!==room.hostId){notices.push('The host transports the shared habitat care satchel');continue;}
+      if(!m.grounded||m.crouched||p.combo.phase!=='idle'||guardBusy(playerGuard(p))||!target||Math.abs(m.feetY-worldHeight(s,p.player.x,p.player.z))>.45||!clearPulsePath({...p.player,y:m.feetY},target,roomObstacles(s).filter(o=>(o as {featureId?:string}).featureId!=='restoration-automaton'))){notices.push('Reach the habitat dock or apothecary on clear ground with your staff lowered');continue;}
+    }
     if(command.type==='workshop-construction'){
       const m=playerMotion(room,p),target=workshopConstructionPosition();
       if(p.id!==room.hostId){notices.push('The host manages the shared workshop and its materials');continue;}
@@ -340,7 +346,7 @@ export function syncRoom(room:CoopRoom,userId:string,input:CoopSync,now:number):
       const outpost=s.regional?regionalSupplyPlan(s.seed).outposts.find(o=>o.id===command.command.outpostId):undefined;
       if(!outpost||!clearPulsePath({...p.player,y:m.feetY},outpost.deliveryPosition,roomObstacles(s))){notices.push('Reach the outpost supply board by a clear path');continue;}
     }
-    const next=command.type==='town-life'?commitTownLife(s,command.command,room.players.filter(a=>a.active&&a.zone==='valley'&&now-a.lastSeen<=PLAYER_TIMEOUT_MS).map(a=>({id:a.id,x:a.player.x,z:a.player.z,feetY:playerMotion(room,a).feetY}))):command.type==='regional-food'?commitRegionalFood(s,command.command,{feetY:playerMotion(room,p).feetY,grounded:playerMotion(room,p).grounded}):command.type==='gather-wilderness'?commitWildernessGather(s,command.id,{feetY:playerMotion(room,p).feetY,grounded:playerMotion(room,p).grounded,obstacles:roomObstacles(s)}):applyAction(s,command,room.players.filter(a=>a.active&&a.zone==='valley'&&now-a.lastSeen<=PLAYER_TIMEOUT_MS).map(a=>({x:a.player.x,y:playerMotion(room,a).feetY,z:a.player.z})));if(next===s){notices.push('That action is no longer available at your position');continue;}
+    const next=command.type==='restoration-care'?commitRestorationCare(s,command.command,playerMotion(room,p).feetY):command.type==='town-life'?commitTownLife(s,command.command,room.players.filter(a=>a.active&&a.zone==='valley'&&now-a.lastSeen<=PLAYER_TIMEOUT_MS).map(a=>({id:a.id,x:a.player.x,z:a.player.z,feetY:playerMotion(room,a).feetY}))):command.type==='regional-food'?commitRegionalFood(s,command.command,{feetY:playerMotion(room,p).feetY,grounded:playerMotion(room,p).grounded}):command.type==='gather-wilderness'?commitWildernessGather(s,command.id,{feetY:playerMotion(room,p).feetY,grounded:playerMotion(room,p).grounded,obstacles:roomObstacles(s)}):applyAction(s,command,room.players.filter(a=>a.active&&a.zone==='valley'&&now-a.lastSeen<=PLAYER_TIMEOUT_MS).map(a=>({x:a.player.x,y:playerMotion(room,a).feetY,z:a.player.z})));if(next===s){notices.push('That action is no longer available at your position');continue;}
     if(command.type==='regional-trade'&&(command.command.type==='start-source'||command.command.type==='build-store')&&!regionalConstructionClear(room,command.command.targetId,true)){notices.push('Move every explorer and the survey crate clear of the construction footprint');continue;}
     if(command.type==='regional-supply'&&command.command.type==='build'&&!regionalConstructionClear(room,command.command.outpostId)){notices.push('Move every explorer and the survey crate clear of the construction footprint');continue;}
     room.world=next;p.player={...next.player};p.zone=next.zone;

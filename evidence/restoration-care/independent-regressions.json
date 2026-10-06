@@ -1,0 +1,20 @@
+{
+  "results": [
+    {
+      "mode": "source",
+      "test": "tests/restoration-care-review.test.ts",
+      "exitCode": 0,
+      "log": "/tmp/restoration-care-independent-source.tap",
+      "logSHA256": "951de4a2314e1266c83ab9762d56c4f1f46ea28d0fb4437e66ce037834c60e4c"
+    },
+    {
+      "mode": "counterfactual",
+      "test": "/tmp/restoration-care-review-mutant.test.ts",
+      "exitCode": 1,
+      "log": "/tmp/restoration-care-independent-counterfactual.tap",
+      "logSHA256": "fced686e9ca3b106171a12713627eef5e186ee7cc01e85b6708c4bf27c3ba5ac"
+    }
+  ],
+  "interpretation": "Real source passes two tests. Temporary counterfactual removing paid-active-count and achieved-task-point safeguards fails both; this is mutation sensitivity, not pre-feature execution.",
+  "sourceFilesEdited": false
+}

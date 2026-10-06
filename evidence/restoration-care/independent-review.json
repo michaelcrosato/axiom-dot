@@ -1,0 +1,149 @@
+{
+  "kind": "axiom-restoration-care-independent-review",
+  "sourceCommit": "52d2dedcdbb7155efe54b4e1255596eadda55458",
+  "baselineCommit": "7484d1166086613179e8e6e5c1905bf2d1a76854",
+  "status": "source review passed; final permitted aggregate independently certified",
+  "scope": [
+    "geographic truth of all existing restoration sites versus Hearthmere",
+    "finite biomass exports, reserve floors and organic conservation",
+    "optional bridge and clinic stock cross-owner save/import provenance",
+    "achieved apothecary arrival and work, paid dose flags, interruption and reload",
+    "host-only shared satchel, motion/LOS gates, revisions and CAS duplicate protection",
+    "campaign panel entry, refresh, factual numeric readouts",
+    "disposable earned scenarios, bounded controls, exact presets and stale import protection"
+  ],
+  "findings": [
+    {
+      "finding": "Habitat sites are distant landmarks, not nearby Hearthmere gardens",
+      "resolution": "Explicit collected/transported/delivered biomass; no passive geographic bonus",
+      "evidence": "/tmp/restoration-service-geography-review.json"
+    },
+    {
+      "finding": "Optional treatment flag must not duplicate a dose or grant recovery away from the task point",
+      "resolution": "Active flags limited to used receipts; true-only active apothecary recovery; all gains remain inside achieved clear-work guard",
+      "evidence": "tests/restoration-care-review.test.ts"
+    },
+    {
+      "finding": "Doc claimed exported totals and patient needs before panel exposed them",
+      "resolution": "Read-only exported total and energy/hygiene/comfort numeric readouts added before freeze"
+    }
+  ],
+  "sourceReview": "No outstanding blocker found. Per-site exports preserve two biomass per cell and join organic balance; orphan owners rejected; clinic source equals delivered stock plus consumed doses. No player inventory reward or regional food ledger coupling. All100 NPC identities and navigation owner preserved.",
+  "independentRegressions": {
+    "results": [
+      {
+        "mode": "source",
+        "test": "tests/restoration-care-review.test.ts",
+        "exitCode": 0,
+        "log": "/tmp/restoration-care-independent-source.tap",
+        "logSHA256": "951de4a2314e1266c83ab9762d56c4f1f46ea28d0fb4437e66ce037834c60e4c"
+      },
+      {
+        "mode": "counterfactual",
+        "test": "/tmp/restoration-care-review-mutant.test.ts",
+        "exitCode": 1,
+        "log": "/tmp/restoration-care-independent-counterfactual.tap",
+        "logSHA256": "fced686e9ca3b106171a12713627eef5e186ee7cc01e85b6708c4bf27c3ba5ac"
+      }
+    ],
+    "interpretation": "Real source passes two tests. Temporary counterfactual removing paid-active-count and achieved-task-point safeguards fails both; this is mutation sensitivity, not pre-feature execution.",
+    "sourceFilesEdited": false
+  },
+  "restrictions": {
+    "baseline": "7484d1166086613179e8e6e5c1905bf2d1a76854",
+    "heldCount": 13,
+    "heldUnchanged": [
+      {
+        "file": "tests/ecology.test.ts",
+        "sha256": "8dba88aa7fa9c7b5805fad5f617d728cb2b8181736b2c0f105a74a083b1c205d"
+      },
+      {
+        "file": "tests/regional-clock-precision.test.ts",
+        "sha256": "dab4d56ada5eea5cf93d0e77cd4d7ea8f2e7313646508299343cc2c2463e47ab"
+      },
+      {
+        "file": "tests/regional-food-trade-witness.test.ts",
+        "sha256": "d5c527b428cb0c4b8123353b3b16ef3559e3ca5f03ca42020e26ecfdbc3fd115"
+      },
+      {
+        "file": "tests/regional-food-world-authority.test.ts",
+        "sha256": "d93b967fb0b8f923dc96ae7f45c6ae29c39c01a4bd70933ae1aee7ef8f94f18c"
+      },
+      {
+        "file": "tests/regional-food.test.ts",
+        "sha256": "4421c33cad47d49db85ae7be0e256de9b710a449733b2800dc885c4ad3c8bf04"
+      },
+      {
+        "file": "tests/regional-supply.test.ts",
+        "sha256": "576861b39029f3f0f353fc741e23267acf7ee49ef3f4c3ccec8666050c428db7"
+      },
+      {
+        "file": "tests/regional-trade-integration.test.ts",
+        "sha256": "73822a613c5e4755694ea740f685c2131c9ee59461f8222263cb510c5d97e78c"
+      },
+      {
+        "file": "tests/regional-trade-timeline.test.ts",
+        "sha256": "b33ea23ead2a4bab6965f1b313226a9a067eb91c3d1aece64f0206e0957b57b7"
+      },
+      {
+        "file": "tests/regional-trade.test.ts",
+        "sha256": "c5596901e8ef929e869d332c86f87447f0c3f45c48836311366496ed57ab82b1"
+      },
+      {
+        "file": "tests/regional-weather-cold.test.ts",
+        "sha256": "15d9223233a03043b1b0d63219eb41cb6b366b72f8022b3c3f15eb491c312c91"
+      },
+      {
+        "file": "tests/regional-weather-trade-authority.test.ts",
+        "sha256": "580ef43e6f69bb9b9fad85776a3023be77a1fa59ce639913e0a0071f68b9c6c9"
+      },
+      {
+        "file": "tests/regional-weather-trade.test.ts",
+        "sha256": "05ecd2db4577c626123f5546580b7b74bc4e2df2ea3220a2894ffe13843be0de"
+      },
+      {
+        "file": "tests/regional-weather.test.ts",
+        "sha256": "fa8c437f8ae0e5b02fccf179e8c639474d0ce79b9953548e99909b0ca3c8a1d5"
+      }
+    ],
+    "foodLedgerFilesChanged": [],
+    "scopeNote": "world and coop edits are additive care imports/commands/validation, not regional ledger semantics"
+  },
+  "registration": {
+    "independent": "/tmp/care-independent-inventory.json",
+    "root": "/tmp/care-final-inventory.json",
+    "catalogsExactlyIdentical": true,
+    "permittedFiles": 247,
+    "registeredCases": 1773,
+    "heldFiles": 13
+  },
+  "frozenSources": {
+    "manifest": "/tmp/care-frozen-source.json",
+    "trackedCount": 676,
+    "allHashesUnchanged": true,
+    "cleanWorktree": true
+  },
+  "finalAggregate": {
+    "path": "/tmp/care-final-safe.tap",
+    "status": "passed; exact case-name multiset and contiguous IDs independently certified",
+    "comparison": "/tmp/care-exact-case-comparison.json",
+    "sourceCommit": "52d2dedcdbb7155efe54b4e1255596eadda55458",
+    "statistics": {
+      "tests": 1773,
+      "suites": 0,
+      "pass": 1773,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "duration_ms": 1086937.366141
+    },
+    "tapSHA256": "bb8a4948ff699e10ac6850fec719377ce124b82fe17c6c64d56a036d6fbd6dbb",
+    "limitations": "13 held files excluded; no browser/device/GPU visual acceptance"
+  },
+  "limits": [
+    "13 held files remain excluded and byte-identical",
+    "No browser/device/GPU visual acceptance",
+    "No live saves or registry route accessed"
+  ]
+}

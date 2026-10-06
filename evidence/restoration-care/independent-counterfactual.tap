@@ -1,0 +1,60 @@
+TAP version 13
+# Subtest: independent care review rejects duplicating paid active doses while keeping the aggregate stock balance plausible
+not ok 1 - independent care review rejects duplicating paid active doses while keeping the aggregate stock balance plausible
+  ---
+  duration_ms: 140.283789
+  type: 'test'
+  location: '/tmp/restoration-care-review-mutant.test.ts:15:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    true !== false
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///tmp/restoration-care-review-mutant.test.ts:18:9)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: independent care review preserves paid treatment across displacement and reload without remote recovery or a second debit
+not ok 2 - independent care review preserves paid treatment across displacement and reload without remote recovery or a second debit
+  ---
+  duration_ms: 146.670498
+  type: 'test'
+  location: '/tmp/restoration-care-review-mutant.test.ts:21:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    no work away from the actual recovery point
+    
+    23.5 !== 24
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 24
+  actual: 23.5
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///tmp/restoration-care-review-mutant.test.ts:26:9)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 0
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 491.958547

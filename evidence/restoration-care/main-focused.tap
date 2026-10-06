@@ -1,0 +1,128 @@
+TAP version 13
+# (node:11535) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: actual main habitat care controls require achieved ground pose, nearby confirmed terrain, clear path and shared host
+ok 1 - actual main habitat care controls require achieved ground pose, nearby confirmed terrain, clear path and shared host
+  ---
+  duration_ms: 347.561788
+  type: 'test'
+  ...
+# Subtest: main care transfer dispatch rejects blocked input before reducers and routes accepted requests through authority
+ok 2 - main care transfer dispatch rejects blocked input before reducers and routes accepted requests through authority
+  ---
+  duration_ms: 1.860571
+  type: 'test'
+  ...
+# Subtest: care entry points, progress refresh, disposal and save dirtiness are wired into production main
+ok 3 - care entry points, progress refresh, disposal and save dirtiness are wired into production main
+  ---
+  duration_ms: 1.573077
+  type: 'test'
+  ...
+# (node:11536) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: actual main restoration practice advances attack commitment to completion without changing campaign
+ok 4 - actual main restoration practice advances attack commitment to completion without changing campaign
+  ---
+  duration_ms: 195.231365
+  type: 'test'
+  ...
+# Subtest: actual main restoration practice advances guard commitment to completion without changing campaign
+ok 5 - actual main restoration practice advances guard commitment to completion without changing campaign
+  ---
+  duration_ms: 12.723651
+  type: 'test'
+  ...
+# Subtest: panel displays all field cells and exact compiled costs with pure kernel eligibility
+ok 6 - panel displays all field cells and exact compiled costs with pure kernel eligibility
+  ---
+  duration_ms: 49.065838
+  type: 'test'
+  ...
+# Subtest: pending authority locks repeat clicks and stale handlers; revision changes unlock on live polling
+ok 7 - pending authority locks repeat clicks and stale handlers; revision changes unlock on live polling
+  ---
+  duration_ms: 11.359219
+  type: 'test'
+  ...
+# Subtest: source and target selection node identities and drafts survive live polling and simulation updates
+ok 8 - source and target selection node identities and drafts survive live polling and simulation updates
+  ---
+  duration_ms: 13.299028
+  type: 'test'
+  ...
+# Subtest: actual range, incapacity, readiness and changed-world gates block intents
+ok 9 - actual range, incapacity, readiness and changed-world gates block intents
+  ---
+  duration_ms: 4.186459
+  type: 'test'
+  ...
+# Subtest: defaults and cancel only stage, refit exchanges real stock and finite service is truthful
+ok 10 - defaults and cancel only stage, refit exchanges real stock and finite service is truthful
+  ---
+  duration_ms: 13.423606
+  type: 'test'
+  ...
+# Subtest: close and old timer callbacks cannot mutate or invoke later navigation; text is escaped
+ok 11 - close and old timer callbacks cannot mutate or invoke later navigation; text is escaped
+  ---
+  duration_ms: 2.820305
+  type: 'test'
+  ...
+# Subtest: sources contain only explicit buttons and no persistence or campaign mutation dependencies
+ok 12 - sources contain only explicit buttons and no persistence or campaign mutation dependencies
+  ---
+  duration_ms: 1.559152
+  type: 'test'
+  ...
+# Subtest: town directory dispatches exact expected revision, recovers pending rejection and disposes polling
+ok 13 - town directory dispatches exact expected revision, recovers pending rejection and disposes polling
+  ---
+  duration_ms: 165.712028
+  type: 'test'
+  ...
+# Subtest: disposable town model applies actual knobs, stages strict import, resets and never mutates campaign
+ok 14 - disposable town model applies actual knobs, stages strict import, resets and never mutates campaign
+  ---
+  duration_ms: 24.914318
+  type: 'test'
+  ...
+# Subtest: town startup, normal visit and developer access retain existing readiness and lifecycle gates
+ok 15 - town startup, normal visit and developer access retain existing readiness and lifecycle gates
+  ---
+  duration_ms: 2.544048
+  type: 'test'
+  ...
+# Subtest: town v2 appearance gait spacing controls and repeatable crossing expose actual applied results
+ok 16 - town v2 appearance gait spacing controls and repeatable crossing expose actual applied results
+  ---
+  duration_ms: 80.548025
+  type: 'test'
+  ...
+# Subtest: town directory shows each household relationship backstory and actual daily timetable
+ok 17 - town directory shows each household relationship backstory and actual daily timetable
+  ---
+  duration_ms: 15.916887
+  type: 'test'
+  ...
+# Subtest: household lab clock seeks are bounded and phase seeks reach the real routine without campaign writes
+ok 18 - household lab clock seeks are bounded and phase seeks reach the real routine without campaign writes
+  ---
+  duration_ms: 79.998927
+  type: 'test'
+  ...
+# Subtest: household selection and seed reset rebuild the resident and phase inspector without stale identity
+ok 19 - household selection and seed reset rebuild the resident and phase inspector without stale identity
+  ---
+  duration_ms: 18.950675
+  type: 'test'
+  ...
+1..19
+# tests 19
+# suites 0
+# pass 19
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1330.44739

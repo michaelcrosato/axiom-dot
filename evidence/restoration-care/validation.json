@@ -1,0 +1,76 @@
+{
+  "kind": "axiom-restoration-care-validation",
+  "verifiedAt": "2026-10-06T06:44:20.525849+00:00",
+  "baselineCommit": "7484d1166086613179e8e6e5c1905bf2d1a76854",
+  "testedSourceCommit": "52d2dedcdbb7155efe54b4e1255596eadda55458",
+  "runtime": "Node v22.23.0",
+  "gates": {
+    "typecheck": "both projects pass",
+    "productionBuild": "client and Worker pass",
+    "permittedSuite": {
+      "files": 247,
+      "cases": 1773,
+      "pass": 1773,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "durationMs": 1086937.366141,
+      "heldFilesExcluded": 13,
+      "newCases": 30
+    },
+    "frozenSourceFilesUnchanged": 676,
+    "emittedCare": "pass",
+    "emittedRestoration": "pass",
+    "emittedTownLife": "pass",
+    "emittedWorkshopConstruction": "pass",
+    "emittedMainBoundary": "pass"
+  },
+  "testDevelopment": {
+    "newMainTests": "Three new source-main regression tests fail against baseline and pass after implementation.",
+    "independentMutationSensitivity": "Two new review regressions pass on actual source and both fail when only the relevant safeguards are removed in a temporary counterfactual copy. This is sensitivity evidence, not a pre-feature baseline run.",
+    "focused": "Thirty new cases passed during development before final aggregate; final full permitted run is authoritative."
+  },
+  "reproduction": [
+    "export PATH=/workspace/.cloud-tools/node-v22.23.0-linux-x64/bin:$PATH",
+    "npm run typecheck",
+    "npm run build",
+    "node --experimental-strip-types scripts/verify-restoration-care-build.mts /tmp/care.json",
+    "node --experimental-strip-types scripts/verify-restoration-build.mts /tmp/restoration.json",
+    "node --experimental-strip-types scripts/verify-town-life-build.mts /tmp/town-life.json",
+    "node --experimental-strip-types scripts/verify-workshop-construction-build.mts /tmp/workshop.json",
+    "node --experimental-strip-types scripts/verify-town-main-integration-build.mts /tmp/main-boundary.json",
+    "node scripts/discover-safe-tests.mjs /tmp/registered-cases.json",
+    "node scripts/cloud/test-safe.mjs"
+  ],
+  "limits": [
+    "Exactly13 documented held food/clock files excluded and unchanged; not an unrestricted aggregate pass.",
+    "No browser, GPU, touch or device visual acceptance.",
+    "Main boundary uses complete production source handler with actual emitted worker/view; not entire emitted browser startup.",
+    "Only synthetic saves and disposable in-memory SQLite; no live player data or private Site/hosting/sharing changes.",
+    "Explicit host satchel transport; no passive geographic bonus, new currency or regional food coupling.",
+    "Existing gateway-crate and fatigue-replay caveats remain."
+  ],
+  "artifactSha256": {
+    "README.md": "bbef1e170669a545bdbddd9226350109725aed5a54c6c093d41c402dbf49b4a0",
+    "build.txt": "399578fa692e6de19e713f006c9f8672329578ffc91106ed4de3739e6ba6f07e",
+    "emitted-care.json": "d7ce64d30e14047c686295b6341d0ff135005d7927bd4807615c1286bafb0a8f",
+    "emitted-main-boundary.json": "1b3666e611cef7bfd8f49b910c7dad252f3b7f7f568e23fe3caa0b7c26b9a214",
+    "emitted-restoration.json": "e6711984ff8f5d09c7541252184b375e91a91a1ed76926ba0fda0d5fa82da9de",
+    "emitted-town-life.json": "5ad38cc5bc7a84637c101e631bbcd0f9d7cdba1a2e19d4f7769c3c9446ac66a8",
+    "emitted-workshop.json": "569d5c536d4e027104b698584c6ac581b30b20c21828ed2b850db8e5c631c28e",
+    "exact-case-comparison.json": "bd985a7fc221fc2d9cf490b0671ab42479c160f526d4fda10bf2aac7b587790b",
+    "focused-new-tests.tap": "9b5e1dfc7f34cbbe1269649c5b3d61d70bebcf1e00503c830c161232257ada2c",
+    "frozen-source-hashes.json": "fe240966fb1fc8a142d225e2481df5dfb001957153a65f43ddeda8e5d252c4b4",
+    "independent-counterfactual.tap": "fced686e9ca3b106171a12713627eef5e186ee7cc01e85b6708c4bf27c3ba5ac",
+    "independent-regressions.json": "fe3a78f8339098abf357d1a3c135213e34f2cfb83bb5aebf78485cb5b9d93c08",
+    "independent-review.json": "b96c2aa029d6b9523b8511a13a80a01096ef994d3ae593b3e32a600cf59908ac",
+    "independent-scope.json": "c5cb654d765ec3e68082bd39a4ff0495651076ddaae0dc1bc45b0555f146ec1d",
+    "independent-source.tap": "951de4a2314e1266c83ab9762d56c4f1f46ea28d0fb4437e66ce037834c60e4c",
+    "main-before.tap": "72736b63ae9e066341968822099cff2a00764a4a39b7864086a8dcf7ca9be3cc",
+    "main-focused.tap": "1f6d6d82060889fc455d8cf55f44533c8ef6fad8ce2507649d4dad5a0f40db6e",
+    "permitted-suite.tap": "bb8a4948ff699e10ac6850fec719377ce124b82fe17c6c64d56a036d6fbd6dbb",
+    "registered-cases.json": "c68aaa4a596d8a60eec20fcea484b63f17f7e693e05db522eaefd72d6abbccee",
+    "typecheck.txt": "24141bbac6341d820b6108865ae5f286fa0b2da1bb868c14e47e81556cd2b0d9"
+  }
+}

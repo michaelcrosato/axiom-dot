@@ -1,0 +1,58 @@
+TAP version 13
+# Subtest: construction lab repeats finite payments and resets only its isolated model
+ok 1 - construction lab repeats finite payments and resets only its isolated model
+  ---
+  duration_ms: 880.250513
+  type: 'test'
+  ...
+# Subtest: construction lab stages setup, shortage rejects payment, report records source and closure freezes model
+ok 2 - construction lab stages setup, shortage rejects payment, report records source and closure freezes model
+  ---
+  duration_ms: 6726.188739
+  type: 'test'
+  ...
+# Subtest: construction lab validates exact step and seed bounds without changing applied setup
+ok 3 - construction lab validates exact step and seed bounds without changing applied setup
+  ---
+  duration_ms: 20.799692
+  type: 'test'
+  ...
+# Subtest: workshop board shows honest funded stage, achieved labor, remaining work and precise unavailable repair reason
+ok 4 - workshop board shows honest funded stage, achieved labor, remaining work and precise unavailable repair reason
+  ---
+  duration_ms: 245.656878
+  type: 'test'
+  ...
+# Subtest: rejected visit keeps workshop board controls and Close alive until navigation actually leaves
+ok 5 - rejected visit keeps workshop board controls and Close alive until navigation actually leaves
+  ---
+  duration_ms: 30.74508
+  type: 'test'
+  ...
+# Subtest: construction lab records only earned stage transitions and repeats finite paid progress after reset
+ok 6 - construction lab records only earned stage transitions and repeats finite paid progress after reset
+  ---
+  duration_ms: 9714.029792
+  type: 'test'
+  ...
+# Subtest: construction UI stages dimensions and sends only explicit paid build from applied plan
+ok 7 - construction UI stages dimensions and sends only explicit paid build from applied plan
+  ---
+  duration_ms: 252.67831
+  type: 'test'
+  ...
+# Subtest: construction imports exact bounded recipes and ignores stale file reads after edit/close
+ok 8 - construction imports exact bounded recipes and ignores stale file reads after edit/close
+  ---
+  duration_ms: 92.93016
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 11403.802812

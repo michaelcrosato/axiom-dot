@@ -63,3 +63,7 @@ Existing finite valley scrap caches now feed a bounded explicit delivery route t
 ## Connected campaign guidance
 
 The personal Field Plan projects current requirements, locations, progress and completed receipts across supply, construction, restoration, care, regional projects and town needs. Tracking is separate local preference data, not a new campaign ledger or authority owner. Map/inspector selections preserve actual target identity, and disposable production scenarios exercise a finite end-to-end route. See CAMPAIGN-GUIDANCE.md. Held regional semantics and device acceptance remain outside this milestone.
+
+## Earned workshop staging and connected controls
+
+The approved workshop now changes its temporary sheathing, frame details, panel finishes and wrapped fixtures through five phases of actual achieved prefabrication. The original collision envelope remains fixed from payment; every unfinished solid remains visibly represented, and no second resident or movement authority is introduced. Stage-boundary checks cover all bounded dimensional extremes and emitted Three matrices. Selected-source and delivery-station map actions, nearby habitat selection and rejected navigation remain usable. See WORKSHOP-CONSTRUCTION.md and CAMPAIGN-LOOP.md.

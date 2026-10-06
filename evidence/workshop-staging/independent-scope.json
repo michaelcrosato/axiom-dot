@@ -1,0 +1,48 @@
+{
+  "kind": "independent-workshop-staging-review",
+  "baseline": "bcacadbc96a693ee981dd48d60d43b93baf9ddbe",
+  "assessment": "No remaining blocker found in reviewed source. Pure saved-work staging; unchanged full compiled solid envelopes and ACK signatures; decorations bounded inside each parent; no second resident movement owner or payment/progress ledger. Navigation owner now disposes only after accepted transition. Explicit selected source and delivery targets are revalidated by main.",
+  "findings": [
+    {
+      "issue": "Finishing copy claimed bracing still present though braces intentionally exist only in frame stage",
+      "resolution": "Root changed wording to temporary finish covers; confirmed intent matches actual geometry."
+    }
+  ],
+  "independentRegressionFile": "tests/workshop-staging-review.test.ts",
+  "sourceLog": "/tmp/staging-independent-source.tap",
+  "sourcePassed": 2,
+  "counterfactualLog": "/tmp/staging-independent-counterfactual.tap",
+  "counterfactualFailed": 2,
+  "counterfactualMethod": "Temporary module copies only. Expand fixture wrap beyond parent envelope; retain confirmed collision on reset. Both independent tests fail. Mutation sensitivity, not pre-feature red run.",
+  "coverage": [
+    "6 narrow/wide layouts across all room counts, seed extremes,5phase corner containment",
+    "fixed collision geometry across every stage",
+    "complete view replaced by earlier JSON-restored progress",
+    "stale ACK after reset cannot reveal geometry",
+    "120 repeated render/camera changes cannot earn progress",
+    "fresh and reused views reconstruct identical matrices/materials"
+  ],
+  "heldFiles": {
+    "count": 13,
+    "baselineUnchanged": true,
+    "files": [
+      "tests/ecology.test.ts",
+      "tests/regional-clock-precision.test.ts",
+      "tests/regional-food-trade-witness.test.ts",
+      "tests/regional-food-world-authority.test.ts",
+      "tests/regional-food.test.ts",
+      "tests/regional-supply.test.ts",
+      "tests/regional-trade-integration.test.ts",
+      "tests/regional-trade-timeline.test.ts",
+      "tests/regional-trade.test.ts",
+      "tests/regional-weather-cold.test.ts",
+      "tests/regional-weather-trade-authority.test.ts",
+      "tests/regional-weather-trade.test.ts",
+      "tests/regional-weather.test.ts"
+    ]
+  },
+  "limitations": [
+    "No browser/GPU/device visual acceptance.",
+    "Full frozen aggregate and emitted stage verification owned by root and pending."
+  ]
+}

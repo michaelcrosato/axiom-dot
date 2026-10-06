@@ -1,0 +1,100 @@
+TAP version 13
+# (node:31342) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: town guidance re-enables real legacy buttons after a blocked regional objective
+ok 1 - town guidance re-enables real legacy buttons after a blocked regional objective
+  ---
+  duration_ms: 11.742636
+  type: 'test'
+  ...
+# Subtest: explicit guidance owns the final HUD across competing legacy writers and untracking restores automatic guidance
+ok 2 - explicit guidance owns the final HUD across competing legacy writers and untracking restores automatic guidance
+  ---
+  duration_ms: 843.099628
+  type: 'test'
+  ...
+# Subtest: main tracking isolates world and online-room preferences, keeps untracked cursors memory-only, and survives storage denial
+ok 3 - main tracking isolates world and online-room preferences, keeps untracked cursors memory-only, and survives storage denial
+  ---
+  duration_ms: 235.00448
+  type: 'test'
+  ...
+# Subtest: tracked map and inspector retain exact source selection without collecting or teleporting
+ok 4 - tracked map and inspector retain exact source selection without collecting or teleporting
+  ---
+  duration_ms: 86.675579
+  type: 'test'
+  ...
+# Subtest: untracked nondefault source and habitat map drafts select their exact canonical markers without pinning a goal
+ok 5 - untracked nondefault source and habitat map drafts select their exact canonical markers without pinning a goal
+  ---
+  duration_ms: 62.735527
+  type: 'test'
+  ...
+# Subtest: stale collected-source guidance callbacks cannot reopen or map a spent cache
+ok 6 - stale collected-source guidance callbacks cannot reopen or map a spent cache
+  ---
+  duration_ms: 39.416924
+  type: 'test'
+  ...
+# Subtest: actual atlas inspector discards expired guidance markers while preserving ordinary regional routes
+ok 7 - actual atlas inspector discards expired guidance markers while preserving ordinary regional routes
+  ---
+  duration_ms: 5.850091
+  type: 'test'
+  ...
+# (node:31343) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: nearby restoration interaction selects the actual dock or deployed machine site while retaining the personal goal
+ok 8 - nearby restoration interaction selects the actual dock or deployed machine site while retaining the personal goal
+  ---
+  duration_ms: 490.76609
+  type: 'test'
+  ...
+# Subtest: actual board map dispatch resolves selected sources and both delivery stations without tracking, payment or travel
+ok 9 - actual board map dispatch resolves selected sources and both delivery stations without tracking, payment or travel
+  ---
+  duration_ms: 409.504698
+  type: 'test'
+  ...
+# Subtest: existing nearby town service keeps its normal inspector and reachable supply entry
+ok 10 - existing nearby town service keeps its normal inspector and reachable supply entry
+  ---
+  duration_ms: 6.475329
+  type: 'test'
+  ...
+# (node:31344) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: actual main town supply gates load and delivery on actual ground, range, terrain acknowledgement, host and clear path
+ok 11 - actual main town supply gates load and delivery on actual ground, range, terrain acknowledgement, host and clear path
+  ---
+  duration_ms: 369.574843
+  type: 'test'
+  ...
+# Subtest: actual town supply dispatch gates before reducers and preserves solo versus online authority
+ok 12 - actual town supply dispatch gates before reducers and preserves solo versus online authority
+  ---
+  duration_ms: 5.282331
+  type: 'test'
+  ...
+# Subtest: actual cargo HUD reports the conserved load and real workshop distance and hides empty or isolated lab stock
+ok 13 - actual cargo HUD reports the conserved load and real workshop distance and hides empty or isolated lab stock
+  ---
+  duration_ms: 3.564733
+  type: 'test'
+  ...
+# Subtest: town supply retains normal town service and scrap interaction while wiring refresh, save dirtiness and developer access
+ok 14 - town supply retains normal town service and scrap interaction while wiring refresh, save dirtiness and developer access
+  ---
+  duration_ms: 1.560874
+  type: 'test'
+  ...
+1..14
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2175.449656

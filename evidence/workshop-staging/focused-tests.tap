@@ -1,0 +1,192 @@
+TAP version 13
+# (node:31719) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: nearby restoration interaction selects the actual dock or deployed machine site while retaining the personal goal
+ok 1 - nearby restoration interaction selects the actual dock or deployed machine site while retaining the personal goal
+  ---
+  duration_ms: 1258.584003
+  type: 'test'
+  ...
+# Subtest: actual board map dispatch resolves selected sources and both delivery stations without tracking, payment or travel
+ok 2 - actual board map dispatch resolves selected sources and both delivery stations without tracking, payment or travel
+  ---
+  duration_ms: 675.138474
+  type: 'test'
+  ...
+# Subtest: existing nearby town service keeps its normal inspector and reachable supply entry
+ok 3 - existing nearby town service keeps its normal inspector and reachable supply entry
+  ---
+  duration_ms: 10.305522
+  type: 'test'
+  ...
+# Subtest: supply board remains interactive after rejected Visit and closes normally
+ok 4 - supply board remains interactive after rejected Visit and closes normally
+  ---
+  duration_ms: 1976.781019
+  type: 'test'
+  ...
+# Subtest: supply board ignores retained controls after navigation owner disposes it
+ok 5 - supply board ignores retained controls after navigation owner disposes it
+  ---
+  duration_ms: 289.973785
+  type: 'test'
+  ...
+# Subtest: care board remains interactive after rejected Visit and closes normally
+ok 6 - care board remains interactive after rejected Visit and closes normally
+  ---
+  duration_ms: 131.741077
+  type: 'test'
+  ...
+# Subtest: care board ignores retained controls after navigation owner disposes it
+ok 7 - care board ignores retained controls after navigation owner disposes it
+  ---
+  duration_ms: 125.275253
+  type: 'test'
+  ...
+# Subtest: supply maps the selected source and delivery station without disabling rejected navigation
+ok 8 - supply maps the selected source and delivery station without disabling rejected navigation
+  ---
+  duration_ms: 228.956937
+  type: 'test'
+  ...
+# Subtest: care maps the selected source and delivery station without disabling rejected navigation
+ok 9 - care maps the selected source and delivery station without disabling rejected navigation
+  ---
+  duration_ms: 298.522398
+  type: 'test'
+  ...
+# Subtest: construction stage distinguishes an absent old-world commission from funded zero achieved work
+ok 10 - construction stage distinguishes an absent old-world commission from funded zero achieved work
+  ---
+  duration_ms: 16.902685
+  type: 'test'
+  ...
+# Subtest: construction stages follow exact achieved-work boundaries without rounding early completion
+ok 11 - construction stages follow exact achieved-work boundaries without rounding early completion
+  ---
+  duration_ms: 0.716334
+  type: 'test'
+  ...
+# Subtest: pauses, revisions, repair receipts and reload cannot manufacture a later construction stage
+ok 12 - pauses, revisions, repair receipts and reload cannot manufacture a later construction stage
+  ---
+  duration_ms: 4.675637
+  type: 'test'
+  ...
+# Subtest: stage projection rejects invalid numerical work instead of showing fabricated completion
+ok 13 - stage projection rejects invalid numerical work instead of showing fabricated completion
+  ---
+  duration_ms: 1.286225
+  type: 'test'
+  ...
+# Subtest: workshop board shows honest funded stage, achieved labor, remaining work and precise unavailable repair reason
+ok 14 - workshop board shows honest funded stage, achieved labor, remaining work and precise unavailable repair reason
+  ---
+  duration_ms: 382.450871
+  type: 'test'
+  ...
+# Subtest: rejected visit keeps workshop board controls and Close alive until navigation actually leaves
+ok 15 - rejected visit keeps workshop board controls and Close alive until navigation actually leaves
+  ---
+  duration_ms: 82.93334
+  type: 'test'
+  ...
+# Subtest: construction lab records only earned stage transitions and repeats finite paid progress after reset
+ok 16 - construction lab records only earned stage transitions and repeats finite paid progress after reset
+  ---
+  duration_ms: 7380.281122
+  type: 'test'
+  ...
+# Subtest: earned workshop stages change structural presentation at exact work boundaries without extra collision packets
+ok 17 - earned workshop stages change structural presentation at exact work boundaries without extra collision packets
+  ---
+  duration_ms: 85.677662
+  type: 'test'
+  ...
+# Subtest: every unfinished solid keeps its exact occupied envelope and all decorative geometry stays within it
+ok 18 - every unfinished solid keeps its exact occupied envelope and all decorative geometry stays within it
+  ---
+  duration_ms: 207.59359
+  type: 'test'
+  ...
+# Subtest: staging keeps ACK cutaway and save boundaries while reusing and disposing bounded graphics resources
+ok 19 - staging keeps ACK cutaway and save boundaries while reusing and disposing bounded graphics resources
+  ---
+  duration_ms: 115.513222
+  type: 'test'
+  ...
+# Subtest: construction UI stages dimensions and sends only explicit paid build from applied plan
+ok 20 - construction UI stages dimensions and sends only explicit paid build from applied plan
+  ---
+  duration_ms: 393.203852
+  type: 'test'
+  ...
+# Subtest: construction imports exact bounded recipes and ignores stale file reads after edit/close
+ok 21 - construction imports exact bounded recipes and ignores stale file reads after edit/close
+  ---
+  duration_ms: 120.672612
+  type: 'test'
+  ...
+# Subtest: workshop projection withholds new solids until exact acknowledgement and retries rejected revisions
+ok 22 - workshop projection withholds new solids until exact acknowledgement and retries rejected revisions
+  ---
+  duration_ms: 56.852475
+  type: 'test'
+  ...
+# Subtest: workshop render matrices match paid compiled solids and show actual progress only after collision confirmation
+ok 23 - workshop render matrices match paid compiled solids and show actual progress only after collision confirmation
+  ---
+  duration_ms: 186.316859
+  type: 'test'
+  ...
+# Subtest: campaign construction debits finite conserved town materials once, preserves 100 residents and old saves
+ok 24 - campaign construction debits finite conserved town materials once, preserves 100 residents and old saves
+  ---
+  duration_ms: 899.330159
+  type: 'test'
+  ...
+# Subtest: construction credits achieved work across bounded ticks and deterministic save continuation
+ok 25 - construction credits achieved work across bounded ticks and deterministic save continuation
+  ---
+  duration_ms: 8038.952654
+  type: 'test'
+  ...
+# Subtest: campaign import rejects malformed construction and construction cannot be paid from a remote position
+ok 26 - campaign import rejects malformed construction and construction cannot be paid from a remote position
+  ---
+  duration_ms: 239.557592
+  type: 'test'
+  ...
+# Subtest: workshop payment provenance survives town ledger rebase and prevents unpaid geometry or ledger removal
+ok 27 - workshop payment provenance survives town ledger rebase and prevents unpaid geometry or ledger removal
+  ---
+  duration_ms: 261.547098
+  type: 'test'
+  ...
+# Subtest: loading a player embedded in a reserved workshop wall recovers to its clear board
+ok 28 - loading a player embedded in a reserved workshop wall recovers to its clear board
+  ---
+  duration_ms: 150.727666
+  type: 'test'
+  ...
+# Subtest: independent staging review keeps decorative corners inside every narrow and wide room envelope through completion
+ok 29 - independent staging review keeps decorative corners inside every narrow and wide room envelope through completion
+  ---
+  duration_ms: 389.78104
+  type: 'test'
+  ...
+# Subtest: independent staging review reconstructs earlier saved progress after a completed view without accepting stale physics acknowledgements
+ok 30 - independent staging review reconstructs earlier saved progress after a completed view without accepting stale physics acknowledgements
+  ---
+  duration_ms: 33.691079
+  type: 'test'
+  ...
+1..30
+# tests 30
+# suites 0
+# pass 30
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 17203.115485

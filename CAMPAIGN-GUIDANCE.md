@@ -28,3 +28,5 @@ These routes may be pursued in any order. Existing regional systems, dialogue, t
 All 100 residents retain their normal identities and motion owner. The rehearsal cannot write campaign saves or shared rooms. Unsupported stock/reward multipliers and live room tuning are not exposed. Presets contain bounded setup only; evidence identifies source/build, intended and applied inputs, actual actions, guidance and model progress.
 
 The exact thirteen held food/clock files remain excluded. Regional ledgers and their outstanding review are unchanged. Numerical source/emitted, map and worker checks do not establish browser/GPU/touch/device visual acceptance. Existing gateway-crate and fatigue-replay caveats remain; no private Site, live save or hosting/sharing settings are changed.
+
+The workshop now displays five earned construction phases. Supply and care boards map the selected source/habitat or their explicitly chosen delivery station; interacting with a dock or deployed automaton selects its actual habitat. Rejected navigation keeps the open board usable. See CAMPAIGN-LOOP.md for the combined player and developer walkthrough.

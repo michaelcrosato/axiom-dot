@@ -59,3 +59,7 @@ The bounded recipe editor now drives one paid, persistent Hearthmere commission 
 ## Non-food town supply milestone
 
 Existing finite valley scrap caches now feed a bounded explicit delivery route to Second Life Salvage. Actual source claims, four-piece cargo, achieved player arrival, ordinary two-scrap donation accounting and persistent receipts connect this route to the workshop's real town-material demand. Source stock is never regenerated; odd cargo can return to ordinary inventory at the workshop. See TOWN-SUPPLY.md. Town residents retain their existing material recovery and navigation; wilderness wood/stone and held regional ledgers remain separate.
+
+## Connected campaign guidance
+
+The personal Field Plan projects current requirements, locations, progress and completed receipts across supply, construction, restoration, care, regional projects and town needs. Tracking is separate local preference data, not a new campaign ledger or authority owner. Map/inspector selections preserve actual target identity, and disposable production scenarios exercise a finite end-to-end route. See CAMPAIGN-GUIDANCE.md. Held regional semantics and device acceptance remain outside this milestone.

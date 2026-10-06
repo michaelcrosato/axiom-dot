@@ -1,0 +1,140 @@
+{
+  "kind": "axiom-workshop-construction-emitted-verification",
+  "version": 1,
+  "verifiedAt": "2026-10-06T07:03:50.791Z",
+  "sourceHashes": {
+    "src/workshop-construction.ts": "020da8a1fef97f5655944576724a2bdb63b21be11690bf6d08a125b379be5a46",
+    "src/workshop-construction-view.ts": "dbaeec1ea6d77dfc50209f87375ed0ee1fa798e3346ece10779f92707bdafb93",
+    "src/workshop-construction-ui.ts": "2dd2c42482a457cd270d2089bb50e0c9a91c5c9644866f4ea1eccb6469166110",
+    "src/main.ts": "6fd2e8e6cc35367d42d16d6bf8bdbda5a809c290e13bd0062f13c616d90bfa48",
+    "src/workshop-authoring.ts": "f437dee7d3ad5448ccdff107ea91652cf9705797cfa5b012aac52423f6f703f1",
+    "src/town-life.ts": "a248d1c9c95c6873971c280e3f5613815cee30be108729eaaa3499815b839fa7",
+    "src/world.ts": "7b191b8468524fc7c41d5aa9142c5e6edb4ef441d0e621748f0a6ff9aba5eaad",
+    "src/physics.worker.ts": "455bd2273d9c58ed6b72ab0391b706c7c754a64a7441f765ad32b8de0a1ff1af",
+    "server/coop-api.ts": "69eb77b13f2ccd8a641b88719bff58d37719f334ed2a41be3ba780e1c2b1a14f",
+    "server/coop-authority.ts": "9ab49727e779e99b743e3457933c8fa9bddeb7a93f481ee33064344aee98be24",
+    "server/coop-validation.ts": "eaacc17f2b9e7efc6d1eb9a501f39fe631de76cedc8766433e48e0054af35787",
+    "server/index.ts": "e3429e3133096623374314eab15bafbdf9d0abff8105e0fbf4e8b14913def2e5"
+  },
+  "scope": "Actual production engine/view chunks, Three object matrices, source/emitted Rapier WASM workers and HTTP with disposable in-memory SQLite. No browser/GPU/device/live-save claim.",
+  "engine": {
+    "file": "workshop-construction-engine-gna2syWw.js",
+    "sha256": "cf7468e7f51eedd4737cd8afbcedf05338c04fc6dbbb69d24fcaef09b835d2f6",
+    "townFile": "restoration-care-engine-CZmT0EEZ.js",
+    "townSha256": "f406ed9f16ebef77929fee17f870ec1a0448c52ffe025d19541b7570e313a288",
+    "cases": [
+      {
+        "seed": 0,
+        "ticks": 261,
+        "achievedSeconds": 72,
+        "paid": 35,
+        "sha256": "68ae34da168ba15b2122e99e1dae1db65309fe215f5040d970646da2601f3f23"
+      },
+      {
+        "seed": 73129,
+        "ticks": 245,
+        "achievedSeconds": 72,
+        "paid": 35,
+        "sha256": "65d903b2f3913edaf3d135f8145378cd0e612360248feb097a221c4dca5efa56"
+      },
+      {
+        "seed": 4294967295,
+        "ticks": 246,
+        "achievedSeconds": 72,
+        "paid": 35,
+        "sha256": "b62964d0f042eaf490579719b6247cfa30003ca608d6d34a205aa5856bfe359f"
+      }
+    ]
+  },
+  "view": {
+    "file": "workshop-construction-view-D00w9D7B.js",
+    "sha256": "149e3a4b3fe84b32810d047be93387e3394862dbc9c6678aff01fbf85d2e03fb",
+    "frames": 80,
+    "sha256Frames": "bd9c06c72561ddd3e3af4418b3e4077c56b0b809c5ba78f19cfc731f02aeb8a5"
+  },
+  "physics": {
+    "file": "physics.worker-C5OttQdd.js",
+    "assetSha256": "5d77a04737b9fdf85434f52859f086efd20790d1bc7f3aefb61fa66a8729ea22",
+    "sha256": "56bd929953913ac7edda8f1f500dd09993afd39268fc1db9c8f9b41640ddbc45",
+    "frames": 2153,
+    "routes": [
+      "2/entry-to-hall",
+      "2/hall-to-rear-0",
+      "2/hall-to-rear-1",
+      "2/hall-to-workplace",
+      "3/entry-to-hall",
+      "3/hall-to-rear-0",
+      "3/hall-to-rear-1",
+      "3/hall-to-rear-2",
+      "3/hall-to-workplace"
+    ],
+    "collisionRetry": true
+  },
+  "server": {
+    "assetSha256": "cee6e65380c8ecde7fd2554f96cba45f7a791a91a14f3dea0560a18b8caefd3c",
+    "sha256": "732b9197c97747fc79fd4c7e3084ac697d1f6b9d8e6264a1aeff9bf0d4738893",
+    "construction": {
+      "version": 1,
+      "revision": 1,
+      "parcelId": "hearthmere-west",
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 2,
+        "width": 9,
+        "depth": 7.6,
+        "hallDepth": 3.4,
+        "doorwayWidth": 1.6
+      },
+      "workerId": "town-resident:73129:001",
+      "materialsPaid": 31,
+      "work": 0.5,
+      "workRequired": 72,
+      "status": "building",
+      "repairs": 0
+    },
+    "paidImport": {
+      "version": 1,
+      "revision": 1,
+      "parcelId": "hearthmere-west",
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 2,
+        "width": 9,
+        "depth": 7.6,
+        "hallDepth": 3.4,
+        "doorwayWidth": 1.6
+      },
+      "workerId": "town-resident:73129:001",
+      "materialsPaid": 31,
+      "work": 72,
+      "workRequired": 72,
+      "status": "complete",
+      "repairs": 0
+    },
+    "repaired": {
+      "version": 1,
+      "revision": 2,
+      "parcelId": "hearthmere-west",
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 2,
+        "width": 9,
+        "depth": 7.6,
+        "hallDepth": 3.4,
+        "doorwayWidth": 1.6
+      },
+      "workerId": "town-resident:73129:001",
+      "materialsPaid": 35,
+      "work": 72,
+      "workRequired": 72,
+      "status": "complete",
+      "repairs": 1
+    },
+    "materials": 165.5,
+    "hp": 70,
+    "exactRetries": true,
+    "forgedImportsRejected": 3,
+    "previewOnlyBinding": true
+  },
+  "saveReplaySha256": "660dd6700d082cc9cecc1bb58f64588b76f602e77edd497b9ad215aacb3592cb"
+}

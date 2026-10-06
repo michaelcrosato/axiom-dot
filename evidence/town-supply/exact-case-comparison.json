@@ -1,0 +1,45 @@
+{
+  "kind": "axiom-town-supply-independent-exact-case-comparison",
+  "sourceCommit": "c491fd95f6adc9c7f34a33679f56cc748dc479ce",
+  "tap": "/tmp/supply-final-safe.tap",
+  "tapSHA256": "537e7e64c93cde1e3ab9dfdae866ffba6a330b164d9c8e4dd5e60223700655d7",
+  "independentCatalog": "/tmp/supply-independent-inventory.json",
+  "rootCatalog": "/tmp/supply-final-inventory.json",
+  "catalogsExactlyIdentical": true,
+  "registeredCases": 1807,
+  "executedCases": 1807,
+  "exactNameMultisetsEqual": true,
+  "sequentialIds": {
+    "first": 1,
+    "last": 1807,
+    "contiguousUnique": true
+  },
+  "subtestHeadersMatchResultNamesInOrder": true,
+  "terminalPlanMatches": true,
+  "statistics": {
+    "tests": 1807,
+    "suites": 0,
+    "pass": 1807,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "duration_ms": 1097016.466087
+  },
+  "disabledOrFailureDirectives": false,
+  "permittedFiles": 255,
+  "heldFiles": {
+    "exactCount": 13,
+    "excludedFromRegistration": true,
+    "unchangedFromBaseline": true,
+    "baselineCommit": "a121dcedbfa1c77aa0c4bcfe922513984ee78690"
+  },
+  "frozenSources": {
+    "count": 711,
+    "allSHA256Unchanged": true,
+    "cleanWorktree": true
+  },
+  "missingNames": [],
+  "extraNames": [],
+  "result": "pass"
+}

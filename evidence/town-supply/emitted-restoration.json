@@ -1,0 +1,279 @@
+{
+  "kind": "axiom-restoration-emitted-verification",
+  "version": 1,
+  "verifiedAt": "2026-10-06T07:01:47.702Z",
+  "sourceHashes": {
+    "src/restoration.ts": "32606f590162a2d8cee250e9d75378a374ee444f2012d762d6a0a92e344a45de",
+    "src/restoration-plan.ts": "a228d92765d52d1176ac7531c888e9b13885c3f31dc29f684e88616e265456c7",
+    "src/restoration-body.ts": "c5e5149646508c18e8eb0236a339e47e8c9fdaeb13e50024cfbae93b919f04d3",
+    "src/restoration-view.ts": "e291a8e7d410f59f12f05eabf3c5d1fb4a86e2f22c6423a5d536034374058ce2",
+    "src/restoration-practice.ts": "185c923ab51033a5b5653730e564202f58ca0ef8c742c1c955a41f0505fb36e8",
+    "src/restoration-collision.ts": "6d09828cc82685344a1a834a516e7a79575deebbd52e63acefa92d3badf5ce0c",
+    "src/habitat-motion.ts": "afc6c38d5b3b5bc2fabfd6f7c3222235a23b8a2f26acd4c04bf6d44f4a6f418c",
+    "src/physics.worker.ts": "455bd2273d9c58ed6b72ab0391b706c7c754a64a7441f765ad32b8de0a1ff1af",
+    "src/world.ts": "7b191b8468524fc7c41d5aa9142c5e6edb4ef441d0e621748f0a6ff9aba5eaad",
+    "src/town-director.ts": "11ca7cb7dc9e5d551d6d32f83a03a72ae60465aeb1e4d039230fc5505dbf14d3",
+    "server/coop-api.ts": "69eb77b13f2ccd8a641b88719bff58d37719f334ed2a41be3ba780e1c2b1a14f",
+    "server/coop-authority.ts": "9ab49727e779e99b743e3457933c8fa9bddeb7a93f481ee33064344aee98be24",
+    "server/coop-validation.ts": "eaacc17f2b9e7efc6d1eb9a501f39fe631de76cedc8766433e48e0054af35787",
+    "server/index.ts": "e3429e3133096623374314eab15bafbdf9d0abff8105e0fbf4e8b14913def2e5"
+  },
+  "scope": "Actual built production restoration engine and view chunks; actual source/emitted Three object matrices and Rapier WASM workers; actual source/emitted HTTP authority with in-memory SQLite and preview-only binding. Numerical/Node evidence; no browser/GPU/device or live-state claim.",
+  "engine": {
+    "file": "restoration-care-engine-CZmT0EEZ.js",
+    "sha256": "f406ed9f16ebef77929fee17f870ec1a0448c52ffe025d19541b7570e313a288",
+    "cases": [
+      {
+        "seed": 0,
+        "organ": "pump",
+        "ticks": 80,
+        "revision": 5,
+        "cost": {
+          "scrap": 2,
+          "core": 0,
+          "water": 0
+        },
+        "sha256": "5f6d238df3a558dc3280bbb245acc7b1198262817369e9060ba9b785eced5853"
+      },
+      {
+        "seed": 0,
+        "organ": "filter",
+        "ticks": 80,
+        "revision": 5,
+        "cost": {
+          "scrap": 3,
+          "core": 0,
+          "water": 0
+        },
+        "sha256": "e4211bf8af994a21f75be686d042d10115850df94ddc8af1d71315e83d77917e"
+      },
+      {
+        "seed": 0,
+        "organ": "vent",
+        "ticks": 80,
+        "revision": 5,
+        "cost": {
+          "scrap": 2,
+          "core": 0,
+          "water": 0
+        },
+        "sha256": "d62cc174be5a016e4b8f23f2ed4d8fc0be02ecdd4e658d8f7ea2195ffa7d41e8"
+      },
+      {
+        "seed": 0,
+        "organ": "beacon",
+        "ticks": 80,
+        "revision": 5,
+        "cost": {
+          "scrap": 2,
+          "core": 0,
+          "water": 0
+        },
+        "sha256": "746f023cd3c395daf1f6d2c97ccd7d515d5413eca0787c4be0327e11d2afb763"
+      },
+      {
+        "seed": 73129,
+        "organ": "pump",
+        "ticks": 80,
+        "revision": 5,
+        "cost": {
+          "scrap": 2,
+          "core": 0,
+          "water": 0
+        },
+        "sha256": "81eceefceca0577489bcac95d20efaf75cde4b9136cd29fcfdb90446dd14262e"
+      },
+      {
+        "seed": 73129,
+        "organ": "filter",
+        "ticks": 80,
+        "revision": 5,
+        "cost": {
+          "scrap": 3,
+          "core": 0,
+          "water": 0
+        },
+        "sha256": "581e8cb16b54347d92ab20a8359f83a485ae850d7ce37d2e7d6cbf1d78631aa2"
+      },
+      {
+        "seed": 73129,
+        "organ": "vent",
+        "ticks": 80,
+        "revision": 5,
+        "cost": {
+          "scrap": 2,
+          "core": 0,
+          "water": 0
+        },
+        "sha256": "b714a7b7f9370d4dfb5a2deadaccd77ddc087958b694276138da7849ec865b2a"
+      },
+      {
+        "seed": 73129,
+        "organ": "beacon",
+        "ticks": 80,
+        "revision": 5,
+        "cost": {
+          "scrap": 2,
+          "core": 0,
+          "water": 0
+        },
+        "sha256": "f5b55d817be59cd19c227ae318edfb4a6c82a6371361336729e555caf8dbf2e5"
+      },
+      {
+        "seed": 4294967295,
+        "organ": "pump",
+        "ticks": 80,
+        "revision": 5,
+        "cost": {
+          "scrap": 2,
+          "core": 0,
+          "water": 0
+        },
+        "sha256": "81efedece20b80b085a1d56ef3f0e4e95c70952b2171055182483ec2e6b193f6"
+      },
+      {
+        "seed": 4294967295,
+        "organ": "filter",
+        "ticks": 80,
+        "revision": 5,
+        "cost": {
+          "scrap": 3,
+          "core": 0,
+          "water": 0
+        },
+        "sha256": "c4f9174c35033aaad80bbed43eb5712bdc6a7e8bdc76cf7fd8c203fabbf50ac0"
+      },
+      {
+        "seed": 4294967295,
+        "organ": "vent",
+        "ticks": 80,
+        "revision": 5,
+        "cost": {
+          "scrap": 2,
+          "core": 0,
+          "water": 0
+        },
+        "sha256": "b07db86457194871ca486f1ead8c27b60117047410f4326c7b901307cd2cb8a1"
+      },
+      {
+        "seed": 4294967295,
+        "organ": "beacon",
+        "ticks": 80,
+        "revision": 5,
+        "cost": {
+          "scrap": 2,
+          "core": 0,
+          "water": 0
+        },
+        "sha256": "d031d351099337c31b765e23044bd2dddb8ee4d9fd59176cdce2d035390e2a6f"
+      }
+    ]
+  },
+  "view": {
+    "file": "restoration-view-Bt0U-eRf.js",
+    "sha256": "689257f7f3ace6d436cb4ec9257c1beb6a0fbfd63793ec400d825b2815bb2ce0",
+    "fieldFrames": 2880,
+    "bodyFrames": 2880,
+    "fieldHashes": [
+      "9217e93466afbf5d94c56642ab5dcbd7fac27a89bd25a11e5c215ce3996ae7ec",
+      "7cf330284926c54e4b7c6a7031c45fb6a9edf1c33569f4f2d85dc8d5c91d041d",
+      "c4e1eaa971d80fb7a795a4a2381419472b922e4ecd0eac8ef823325c028284dd",
+      "622e61e449b6d492623df45c0633298214a31f01a3be3b58baa341ad0f00d4c5",
+      "7dedc8d5d5213a0c80e4c2253fdb197d58b06d16a155d9c0d4f6c068787aef0d",
+      "dba7169abb1816e8d2b37db57570e7ccd44335eb69a2da36884271e9e6cd36df",
+      "bc3e8015c479ee085a4d5c933f68fc09cec1f510b0b90770029cbca51117c8f6",
+      "d562a49b7e8093960f0ab5bece36782a2c45d7ac0fee5d525b5f4b25d4d7e32e",
+      "f69361f06792f87f3a6a287ff9dd43ce7288a7cdf4f023750f8afadfffc287f1",
+      "37dcbe0b1e8857a6921714347a3a9cd0361c8595d7c018dcd1a778e986b0da01",
+      "7ccc87918a5199699dc2037d0bc5f67ac4cfd186311d5d71a6ef1ccc11d41ad3",
+      "481e4aec44944e65a27eac43e05390b34a46f5a8b36b016661d93a1285407648"
+    ]
+  },
+  "physics": {
+    "file": "physics.worker-C5OttQdd.js",
+    "assetSha256": "5d77a04737b9fdf85434f52859f086efd20790d1bc7f3aefb61fa66a8729ea22",
+    "sha256": "ccbefc60d4d6b3b99a6af683c144335970e9b5bdc8d63c2dbc13ca17203010fd",
+    "frames": 491,
+    "movingCollisionRevisions": 4,
+    "overlapRejectedAndRetried": true
+  },
+  "server": {
+    "assetSha256": "cee6e65380c8ecde7fd2554f96cba45f7a791a91a14f3dea0560a18b8caefd3c",
+    "sha256": "900d3a4297a5023544b1af8c5a4ad4c75b3543ba9aa84284285cf8ab17c1a429",
+    "inventory": {
+      "scrap": 0,
+      "core": 0,
+      "water": 1
+    },
+    "revision": 4,
+    "filterWaste": 56,
+    "previewOnlyBinding": true,
+    "forgedStateStatus": 400
+  },
+  "director": {
+    "file": "town-director-Dyml5G54.js",
+    "sha256": "cd76a10fdea1c384882aa9037786aca2a3493d9252bc892baebcbd28443ad3ef",
+    "cases": [
+      {
+        "seed": 0,
+        "scenario": "balanced",
+        "sha256": "93292ed82d1597f8f1971e9253bbc1479697172d8ea1a762e83b76da11809606"
+      },
+      {
+        "seed": 0,
+        "scenario": "lean-stores",
+        "sha256": "6ea7b8cda69bff299c2532d2746466e03de3aa187bbc0c6a3291eab949609f09"
+      },
+      {
+        "seed": 0,
+        "scenario": "service-outage",
+        "sha256": "0fa76391010ff087324f3fb95de8db52459a3f751dc1f73b0687354f10dfd40e"
+      },
+      {
+        "seed": 0,
+        "scenario": "social-strain",
+        "sha256": "984164d90f84d548144e0bb6ff9ca4f76c49390f6880a448043aec7530e76b56"
+      },
+      {
+        "seed": 73129,
+        "scenario": "balanced",
+        "sha256": "e1a3b4fdef6f61642c5ecac3d2b9f577c5b5b2e795c24d85d88ad0523636be0d"
+      },
+      {
+        "seed": 73129,
+        "scenario": "lean-stores",
+        "sha256": "2d54632e05b8540ba31c4fae8a0a70443ed5f7221f816f2f6aae8bbb407ec3c9"
+      },
+      {
+        "seed": 73129,
+        "scenario": "service-outage",
+        "sha256": "dad4e5223dd23ed6412548632df9265e5cbe95b5ff2775d89beee9638aa49dd8"
+      },
+      {
+        "seed": 73129,
+        "scenario": "social-strain",
+        "sha256": "4ea5ac18137e94af933a797b525d32b4c0e3b555b3a2adff11746217f4375ad5"
+      },
+      {
+        "seed": 4294967295,
+        "scenario": "balanced",
+        "sha256": "2af83fce86dd667383c1eb1060fd084bcb638975715f70e9ec64b036697840ec"
+      },
+      {
+        "seed": 4294967295,
+        "scenario": "lean-stores",
+        "sha256": "69849cfa6b159d145d739a28fa683beaae8ab798e17e4c623878a3630493aa88"
+      },
+      {
+        "seed": 4294967295,
+        "scenario": "service-outage",
+        "sha256": "13ad5098e5733546c557ab0488ae3e6401c5801b2b239e830c3c46b23d905436"
+      },
+      {
+        "seed": 4294967295,
+        "scenario": "social-strain",
+        "sha256": "62317b1d38f5ca5ac8411801d0f4246041c064f313cce9e6576e981cb8bbf1ac"
+      }
+    ]
+  }
+}

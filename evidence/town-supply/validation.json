@@ -1,0 +1,81 @@
+{
+  "kind": "axiom-town-supply-validation",
+  "verifiedAt": "2026-10-06T07:18:56.183409+00:00",
+  "baselineCommit": "a121dcedbfa1c77aa0c4bcfe922513984ee78690",
+  "testedSourceCommit": "c491fd95f6adc9c7f34a33679f56cc748dc479ce",
+  "runtime": "Node v22.23.0",
+  "gates": {
+    "typecheck": "both projects pass",
+    "productionBuild": "client and Worker pass",
+    "permittedSuite": {
+      "files": 255,
+      "cases": 1807,
+      "pass": 1807,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "durationMs": 1097016.466087,
+      "heldFilesExcluded": 13,
+      "newCases": 34
+    },
+    "frozenSourceFilesUnchanged": 711,
+    "emittedSupply": "pass",
+    "emittedCare": "pass",
+    "emittedRestoration": "pass",
+    "emittedTownLife": "pass",
+    "emittedWorkshop": "pass",
+    "emittedMainBoundary": "pass"
+  },
+  "meaningfulConsequence": "Across seeds 0, 73129 and 4294967295, zero initial town materials blocked construction; seven finite canonical caches yielded three deliveries (36 materials) plus one unloaded scrap. The actual construction kernel spent 31 materials, leaving five.",
+  "authorityEvidence": "All seven source positions across three seeds loaded through real HTTP; competing normal collection/load and unload/delivery raced in disposable SQLite in both winner orders, with exact retries and one conserved resource owner. Source/emitted Worker parity includes host/guest authority, imported cargo, paid construction and forged save rejection.",
+  "testDevelopment": {
+    "newCases": "34 new focused cases passed before final aggregate; no existing case removed or renamed.",
+    "mainBeforeAfter": "Four source-main cases fail against baseline and pass with the feature.",
+    "independentSensitivity": "Independent pump-accounting regressions fail when the cargo deduction guard is removed in a temporary counterfactual; they pass on actual source."
+  },
+  "reproduction": [
+    "export PATH=/workspace/.cloud-tools/node-v22.23.0-linux-x64/bin:$PATH",
+    "npm run typecheck",
+    "npm run build",
+    "node --experimental-strip-types scripts/verify-town-supply-build.mts /tmp/supply.json",
+    "node --experimental-strip-types scripts/verify-restoration-care-build.mts /tmp/care.json",
+    "node --experimental-strip-types scripts/verify-restoration-build.mts /tmp/restoration.json",
+    "node --experimental-strip-types scripts/verify-town-life-build.mts /tmp/town-life.json",
+    "node --experimental-strip-types scripts/verify-workshop-construction-build.mts /tmp/workshop.json",
+    "node --experimental-strip-types scripts/verify-town-main-integration-build.mts /tmp/main-boundary.json",
+    "node scripts/discover-safe-tests.mjs /tmp/registered-cases.json",
+    "node scripts/cloud/test-safe.mjs"
+  ],
+  "limits": [
+    "Exactly thirteen held files excluded and unchanged; not an unrestricted aggregate pass.",
+    "No browser/GPU/touch/device visual acceptance.",
+    "Main boundary executes production source handler with actual emitted worker/view, not entire emitted browser startup.",
+    "Only synthetic worlds and disposable SQLite; no live data or private Site/hosting/sharing changes.",
+    "Finite canonical scrap only; wilderness wood/stone and held regional food/weather/trade accounting remain separate.",
+    "Existing gateway-crate and fatigue-replay caveats remain."
+  ],
+  "artifactSha256": {
+    "README.md": "52957986371003d822acf69787c1d72c74f60e7bb17d4972482f9c6f4523626f",
+    "build.txt": "7d1530975add473a77f1c3369e9b18d8886a236a976b4f3e8321f1c02f88dce2",
+    "emitted-care.json": "bf16792d71b6f77dd4e75969f30e1f0334d565df867c68c8d098d3e29526f037",
+    "emitted-main-boundary.json": "20618e47e5471e8d37d6b014502542b58f69b58019dff6a063d55310c0638fe6",
+    "emitted-restoration.json": "ad32842bf1f6dc4657645fbbf686d6187f7d0f48518587e8374aabfb1f150a7e",
+    "emitted-supply.json": "3932f27df2d390c6fd3cea8242dc48303c5ee479f9f4ce07bd842e2aa98b2473",
+    "emitted-town-life.json": "9455fca8980eb27cdc39b296c4cbd110ced34cc46821924fd378061c9473607c",
+    "emitted-workshop.json": "acb67d2a705240adad9b7e5feb815a9aeaf1c02e16d0baca67f24200baedfcf6",
+    "exact-case-comparison.json": "80127adae9fde19e47fbff3aedefcab3eb36124c27b6647abae67d4f48d9cd94",
+    "focused-new-tests.tap": "6e3c0993de3040d0b37fc1e107ab6297d6d8118eb1d1483f4e0fbff472ead123",
+    "frozen-source-hashes.json": "fe5b2e5782e0514ae8650fbe7e149ac28fb94d074c232ac6e3a17dfb41ae687c",
+    "independent-counterfactual.tap": "27fd4228fd6d0848ae77d7d4e3f82630046e0b35f0ab553caf5ee98d1c820f56",
+    "independent-regressions.json": "dbb0fbce894160031ae3c2f1f405dba65633ef882e1be8bbff4aa2578587ad59",
+    "independent-review.json": "72b61fc482bd9a30aadc23d53d7c9cb3e104d788bd4417d48faeb526db5ae360",
+    "independent-scope.json": "4d82b93595be5cabe769a4106e54365d56707801f0b8a82f417a6c4f05377d96",
+    "independent-source.tap": "4c3bf983874ead8b799853625bbfc5a2ea4853bef8531ad4a92a8c2b27362e33",
+    "main-before.tap": "3ac0aaffd6e070694bf63745f0e2a8dcc7ae8a7cb832b355e311fe85def227a8",
+    "main-focused.tap": "21b3aca902de3e64c1263e444bcfc6cafa34cf1a2620597f6efacfebd0a588e0",
+    "permitted-suite.tap": "537e7e64c93cde1e3ab9dfdae866ffba6a330b164d9c8e4dd5e60223700655d7",
+    "registered-cases.json": "eddd6842c36968d36f0e876f78db1c6f011aa02f0b79cf185a9c289b5df390ca",
+    "typecheck.txt": "24141bbac6341d820b6108865ae5f286fa0b2da1bb868c14e47e81556cd2b0d9"
+  }
+}

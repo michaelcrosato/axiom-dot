@@ -1,7 +1,8 @@
+import {immutableTownSupply} from '../src/town-supply.ts';
 import {immutableRestorationCare} from '../src/restoration-care.ts';
 import {immutableWorkshopConstruction} from '../src/workshop-construction.ts';
 import {immutableRestoration} from '../src/restoration.ts';
-import {worldRestorationPlan} from '../src/world.ts';
+import {worldRestorationPlan,worldTownSupplySources} from '../src/world.ts';
 import {immutableTownDirector} from '../src/town-director.ts';
 import {immutableTownLife} from '../src/town-life.ts';
 import {immutableRegionalFood} from '../src/regional-food.ts';
@@ -57,11 +58,12 @@ function decode(row:RoomRecord):CoopRoom{
   // Certify in dependency order. Present malformed data is never laundered by
   // an absent-pack upgrade, resume or CAS retry. Food cannot trust a standalone
   // valid-looking ledger while its external collector/store owners are forged.
-  if(['frontierTrade','frontierSupply','frontierFood','town','townLife','townDirector','restoration','workshopConstruction','restorationCare'].some(key=>Object.hasOwn(room.world,key))){
+  if(['frontierTrade','frontierSupply','frontierFood','town','townLife','townDirector','restoration','workshopConstruction','restorationCare','townSupply'].some(key=>Object.hasOwn(room.world,key))){
     let world=room.world;
     if(Object.hasOwn(world,'workshopConstruction'))world={...world,workshopConstruction:immutableWorkshopConstruction(world.workshopConstruction,world.seed)};
             if(Object.hasOwn(world,'restoration'))world={...world,restoration:immutableRestoration(world.restoration,worldRestorationPlan(world.seed))};
         if(Object.hasOwn(world,'townLife'))world={...world,townLife:immutableTownLife(world.townLife,world.seed)};
+    if(Object.hasOwn(world,'townSupply'))world={...world,townSupply:immutableTownSupply(world.townSupply,worldTownSupplySources(world),world.collected,world.townLife!)};
     if(Object.hasOwn(world,'restorationCare'))world={...world,restorationCare:immutableRestorationCare(world.restorationCare,world.restoration!,world.townLife!)};
         if(Object.hasOwn(world,'townDirector'))world={...world,townDirector:immutableTownDirector(world.townDirector,world.townLife!)};
     if(Object.hasOwn(world,'frontierTrade'))world={...world,frontierTrade:immutableRegionalTrade(world.frontierTrade,world)};

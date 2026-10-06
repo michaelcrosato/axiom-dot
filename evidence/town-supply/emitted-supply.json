@@ -1,0 +1,182 @@
+{
+  "kind": "axiom-town-supply-emitted-verification",
+  "version": 1,
+  "verifiedAt": "2026-10-06T07:00:25.022Z",
+  "scope": "Actual emitted supply, town and construction model engines; seven finite canonical sources, cargo accounting, unchanged normal donations, construction material payment, source/emitted HTTP and disposable SQLite. No browser/GPU/device or live-save claim.",
+  "sourceHashes": {
+    "src/town-supply.ts": "9154d83be3ffd8e59482e88de5c60faa13f47c33011dfca21b1db7069d8cad2b",
+    "src/town-life.ts": "a248d1c9c95c6873971c280e3f5613815cee30be108729eaaa3499815b839fa7",
+    "src/workshop-construction.ts": "020da8a1fef97f5655944576724a2bdb63b21be11690bf6d08a125b379be5a46",
+    "src/world.ts": "7b191b8468524fc7c41d5aa9142c5e6edb4ef441d0e621748f0a6ff9aba5eaad",
+    "src/main.ts": "6fd2e8e6cc35367d42d16d6bf8bdbda5a809c290e13bd0062f13c616d90bfa48",
+    "server/coop-api.ts": "69eb77b13f2ccd8a641b88719bff58d37719f334ed2a41be3ba780e1c2b1a14f",
+    "server/coop-authority.ts": "9ab49727e779e99b743e3457933c8fa9bddeb7a93f481ee33064344aee98be24",
+    "server/coop-validation.ts": "eaacc17f2b9e7efc6d1eb9a501f39fe631de76cedc8766433e48e0054af35787",
+    "server/index.ts": "e3429e3133096623374314eab15bafbdf9d0abff8105e0fbf4e8b14913def2e5"
+  },
+  "engines": [
+    {
+      "kind": "axiom-town-supply",
+      "file": "town-supply-engine-DmfHPF2P.js",
+      "sha256": "789ca4654c80ef301c12f48af7ec462b4ee4e7ae3821eb3f65abe9430f65b60a"
+    },
+    {
+      "kind": "axiom-town-life",
+      "file": "restoration-care-engine-CZmT0EEZ.js",
+      "sha256": "f406ed9f16ebef77929fee17f870ec1a0448c52ffe025d19541b7570e313a288"
+    },
+    {
+      "kind": "axiom-workshop-construction",
+      "file": "workshop-construction-engine-gna2syWw.js",
+      "sha256": "cf7468e7f51eedd4737cd8afbcedf05338c04fc6dbbb69d24fcaef09b835d2f6"
+    }
+  ],
+  "modelCases": [
+    {
+      "seed": 0,
+      "initialMaterials": 0,
+      "constructionBlockedBeforeDelivery": true,
+      "actions": 11,
+      "caches": 7,
+      "supply": {
+        "version": 1,
+        "revision": 11,
+        "sources": [
+          "valley:2:0:build-scrap-0",
+          "valley:2:0:build-scrap-1",
+          "valley:2:0:build-scrap-2",
+          "valley:2:0:build-scrap-3",
+          "valley:2:0:scrap-1",
+          "valley:2:0:scrap-2",
+          "valley:2:0:scrap-3"
+        ],
+        "carried": 0,
+        "unloaded": 1,
+        "deliveries": 3
+      },
+      "ordinaryInventory": {
+        "scrap": 1,
+        "core": 0,
+        "water": 0
+      },
+      "donatedMaterials": 36,
+      "constructionPaid": 31,
+      "materialsAfterConstruction": 5,
+      "sha256": "fbfd73105a0d29d989bef2cf902a340d3aebd04fc92a7ca2439f7577cac61bc5"
+    },
+    {
+      "seed": 73129,
+      "initialMaterials": 0,
+      "constructionBlockedBeforeDelivery": true,
+      "actions": 11,
+      "caches": 7,
+      "supply": {
+        "version": 1,
+        "revision": 11,
+        "sources": [
+          "valley:2:73129:build-scrap-0",
+          "valley:2:73129:build-scrap-1",
+          "valley:2:73129:build-scrap-2",
+          "valley:2:73129:build-scrap-3",
+          "valley:2:73129:scrap-1",
+          "valley:2:73129:scrap-2",
+          "valley:2:73129:scrap-3"
+        ],
+        "carried": 0,
+        "unloaded": 1,
+        "deliveries": 3
+      },
+      "ordinaryInventory": {
+        "scrap": 1,
+        "core": 0,
+        "water": 0
+      },
+      "donatedMaterials": 36,
+      "constructionPaid": 31,
+      "materialsAfterConstruction": 5,
+      "sha256": "b04c8e9a432e29b8f0ad071b45f611ceae77c47a0539de40495c5b2491d609d7"
+    },
+    {
+      "seed": 4294967295,
+      "initialMaterials": 0,
+      "constructionBlockedBeforeDelivery": true,
+      "actions": 11,
+      "caches": 7,
+      "supply": {
+        "version": 1,
+        "revision": 11,
+        "sources": [
+          "valley:2:4294967295:build-scrap-0",
+          "valley:2:4294967295:build-scrap-1",
+          "valley:2:4294967295:build-scrap-2",
+          "valley:2:4294967295:build-scrap-3",
+          "valley:2:4294967295:scrap-1",
+          "valley:2:4294967295:scrap-2",
+          "valley:2:4294967295:scrap-3"
+        ],
+        "carried": 0,
+        "unloaded": 1,
+        "deliveries": 3
+      },
+      "ordinaryInventory": {
+        "scrap": 1,
+        "core": 0,
+        "water": 0
+      },
+      "donatedMaterials": 36,
+      "constructionPaid": 31,
+      "materialsAfterConstruction": 5,
+      "sha256": "61084ba632c987a555f8a5bf4b36a13a455c3e42f89cc821bee0d9d6ad43dee3"
+    }
+  ],
+  "server": {
+    "assetSha256": "cee6e65380c8ecde7fd2554f96cba45f7a791a91a14f3dea0560a18b8caefd3c",
+    "sha256": "f4ca732ee24e8d32cf8530363b94cc780cc09afd14b675efd92f4dabb09902c0",
+    "supply": {
+      "version": 1,
+      "revision": 3,
+      "sources": [
+        "valley:2:73129:build-scrap-0",
+        "valley:2:73129:build-scrap-1"
+      ],
+      "carried": 0,
+      "unloaded": 0,
+      "deliveries": 1
+    },
+    "construction": {
+      "version": 1,
+      "revision": 1,
+      "parcelId": "hearthmere-west",
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 2,
+        "width": 9,
+        "depth": 7.6,
+        "hallDepth": 3.4,
+        "doorwayWidth": 1.6
+      },
+      "workerId": "town-resident:73129:001",
+      "materialsPaid": 31,
+      "work": 0,
+      "workRequired": 72,
+      "status": "building",
+      "repairs": 0
+    },
+    "materials": 101,
+    "supplyDeliveries": 1,
+    "inventory": {
+      "scrap": 0,
+      "core": 0,
+      "water": 0
+    },
+    "collected": [
+      "valley:2:73129:build-scrap-0",
+      "valley:2:73129:build-scrap-1"
+    ],
+    "guestRejected": true,
+    "exactRetries": true,
+    "forgedImportsRejected": 4,
+    "paidImport": true,
+    "previewOnlyBinding": true
+  }
+}

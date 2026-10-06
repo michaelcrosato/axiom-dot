@@ -55,3 +55,7 @@ The exact final frozen-source case inventory, exclusions, test results, emitted 
 ## Campaign construction milestone
 
 The bounded recipe editor now drives one paid, persistent Hearthmere commission with actual resident prefabrication, protected access, shared render/collision geometry and a finite material-funded suit-repair service. See WORKSHOP-CONSTRUCTION.md. Construction is intentionally confined to an approved level parcel; arbitrary terrain/placement/interiors and held regional-food ledger integration remain outside this milestone.
+
+## Non-food town supply milestone
+
+Existing finite valley scrap caches now feed a bounded explicit delivery route to Second Life Salvage. Actual source claims, four-piece cargo, achieved player arrival, ordinary two-scrap donation accounting and persistent receipts connect this route to the workshop's real town-material demand. Source stock is never regenerated; odd cargo can return to ordinary inventory at the workshop. See TOWN-SUPPLY.md. Town residents retain their existing material recovery and navigation; wilderness wood/stone and held regional ledgers remain separate.

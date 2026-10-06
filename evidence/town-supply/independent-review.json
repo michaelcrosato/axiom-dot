@@ -1,0 +1,163 @@
+{
+  "kind": "axiom-town-supply-independent-review",
+  "sourceCommit": "c491fd95f6adc9c7f34a33679f56cc748dc479ce",
+  "baselineCommit": "a121dcedbfa1c77aa0c4bcfe922513984ee78690",
+  "status": "source review passed; final permitted aggregate independently certified",
+  "scope": [
+    "finite canonical valley scrap geography and grounded interaction clearance",
+    "ordinary pickup versus cargo tombstone exclusivity",
+    "load, unload, delivery and odd-cargo conservation",
+    "all three canonical scrap accounting and migration expressions",
+    "recoverable cargo and historical pump payment recognition",
+    "ordinary donation conversion, cooldown and permanent receipt link",
+    "narrow director donation proof projection retaining authoritative receipt",
+    "host command position, duplicate/retry/CAS validation",
+    "campaign shortage guidance, exhausted source fallback and disposable lab isolation"
+  ],
+  "findings": [
+    {
+      "finding": "Seven one-scrap sources can strand odd cargo with two-scrap delivery",
+      "resolution": "Conserved one-piece unload at Second Life Salvage returns ordinary inventory without reopening source tombstone"
+    },
+    {
+      "finding": "Carried escrow can distort historical pump payment and legacy migration",
+      "resolution": "Only current cargo subtracted in all three scrap equations; recoverable includes unloadable cargo; independent pumped-world/reload/migration regression passes"
+    },
+    {
+      "finding": "Ordinary donation replay proof differs by extra delivery receipt",
+      "resolution": "Only supplyDeliveries projected to prior optional value for exact director proof; actual post-command receipt persists"
+    },
+    {
+      "finding": "Meaningful connection must show actual material use rather than duplicate donation wording",
+      "resolution": "Panel shows finite source status, cargo, normal conversion, default workshop31-material shortage and exhausted-source alternatives; ordinary donations unchanged"
+    }
+  ],
+  "sourceReview": "No outstanding blocker found. Canonical valley scraps are finite; raw wilderness and held regional ledgers are not reused. Delivery uses normal two-scrap/twelve-material donation and records its ordinary cost. All 100 resident identities and motion owners remain unchanged.",
+  "independentRegressions": {
+    "results": [
+      {
+        "mode": "source",
+        "exitCode": 0,
+        "log": "/tmp/town-supply-independent-source.tap",
+        "sha256": "4c3bf983874ead8b799853625bbfc5a2ea4853bef8531ad4a92a8c2b27362e33"
+      },
+      {
+        "mode": "counterfactual",
+        "exitCode": 1,
+        "log": "/tmp/town-supply-independent-counterfactual.tap",
+        "sha256": "27fd4228fd6d0848ae77d7d4e3f82630046e0b35f0ab553caf5ee98d1c820f56"
+      }
+    ],
+    "interpretation": "Source three cases pass; removing only current cargo deduction from historicalPumpRepaired in temporary copy fails both pump/cargo scenarios. Mutation sensitivity, not pre-feature execution.",
+    "sourceFilesEdited": false
+  },
+  "geometryEvidence": {
+    "test": "tests/town-supply-review.test.ts",
+    "seedSamples": [
+      0,
+      42,
+      73129,
+      4294967295
+    ],
+    "sourcesPerSeed": 7,
+    "standingVolumeAndLineOfSightCases": 28,
+    "mode": "authoritative model collision and ground checks, not browser travel acceptance"
+  },
+  "restrictions": {
+    "baseline": "a121dcedbfa1c77aa0c4bcfe922513984ee78690",
+    "heldCount": 13,
+    "heldUnchanged": [
+      {
+        "file": "tests/ecology.test.ts",
+        "sha256": "8dba88aa7fa9c7b5805fad5f617d728cb2b8181736b2c0f105a74a083b1c205d"
+      },
+      {
+        "file": "tests/regional-clock-precision.test.ts",
+        "sha256": "dab4d56ada5eea5cf93d0e77cd4d7ea8f2e7313646508299343cc2c2463e47ab"
+      },
+      {
+        "file": "tests/regional-food-trade-witness.test.ts",
+        "sha256": "d5c527b428cb0c4b8123353b3b16ef3559e3ca5f03ca42020e26ecfdbc3fd115"
+      },
+      {
+        "file": "tests/regional-food-world-authority.test.ts",
+        "sha256": "d93b967fb0b8f923dc96ae7f45c6ae29c39c01a4bd70933ae1aee7ef8f94f18c"
+      },
+      {
+        "file": "tests/regional-food.test.ts",
+        "sha256": "4421c33cad47d49db85ae7be0e256de9b710a449733b2800dc885c4ad3c8bf04"
+      },
+      {
+        "file": "tests/regional-supply.test.ts",
+        "sha256": "576861b39029f3f0f353fc741e23267acf7ee49ef3f4c3ccec8666050c428db7"
+      },
+      {
+        "file": "tests/regional-trade-integration.test.ts",
+        "sha256": "73822a613c5e4755694ea740f685c2131c9ee59461f8222263cb510c5d97e78c"
+      },
+      {
+        "file": "tests/regional-trade-timeline.test.ts",
+        "sha256": "b33ea23ead2a4bab6965f1b313226a9a067eb91c3d1aece64f0206e0957b57b7"
+      },
+      {
+        "file": "tests/regional-trade.test.ts",
+        "sha256": "c5596901e8ef929e869d332c86f87447f0c3f45c48836311366496ed57ab82b1"
+      },
+      {
+        "file": "tests/regional-weather-cold.test.ts",
+        "sha256": "15d9223233a03043b1b0d63219eb41cb6b366b72f8022b3c3f15eb491c312c91"
+      },
+      {
+        "file": "tests/regional-weather-trade-authority.test.ts",
+        "sha256": "580ef43e6f69bb9b9fad85776a3023be77a1fa59ce639913e0a0071f68b9c6c9"
+      },
+      {
+        "file": "tests/regional-weather-trade.test.ts",
+        "sha256": "05ecd2db4577c626123f5546580b7b74bc4e2df2ea3220a2894ffe13843be0de"
+      },
+      {
+        "file": "tests/regional-weather.test.ts",
+        "sha256": "fa8c437f8ae0e5b02fccf179e8c639474d0ce79b9953548e99909b0ca3c8a1d5"
+      }
+    ],
+    "foodLedgerFilesChanged": [],
+    "sourceReview": "Finite canonical scrap only; escrow charged in all three scrap budget equations, unload keeps cargo recoverable, exact supply delivery receipt joins ordinary donation costs; no raw wilderness source reuse."
+  },
+  "registration": {
+    "independent": "/tmp/supply-independent-inventory.json",
+    "root": "/tmp/supply-final-inventory.json",
+    "catalogsExactlyIdentical": true,
+    "permittedFiles": 255,
+    "registeredCases": 1807,
+    "heldFiles": 13
+  },
+  "frozenSources": {
+    "manifest": "/tmp/supply-frozen-source.json",
+    "trackedCount": 711,
+    "allHashesUnchanged": true,
+    "cleanWorktree": true
+  },
+  "finalAggregate": {
+    "path": "/tmp/supply-final-safe.tap",
+    "status": "passed; exact case-name multiset and contiguous IDs independently certified",
+    "comparison": "/tmp/supply-exact-case-comparison.json",
+    "sourceCommit": "c491fd95f6adc9c7f34a33679f56cc748dc479ce",
+    "statistics": {
+      "tests": 1807,
+      "suites": 0,
+      "pass": 1807,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "duration_ms": 1097016.466087
+    },
+    "tapSHA256": "537e7e64c93cde1e3ab9dfdae866ffba6a330b164d9c8e4dd5e60223700655d7",
+    "limitations": "13 held files excluded; no browser/device/GPU visual acceptance"
+  },
+  "limits": [
+    "13 held files excluded and byte-identical",
+    "No browser/device/GPU visual acceptance",
+    "No live saves or registry route accessed"
+  ]
+}

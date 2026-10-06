@@ -1,3 +1,4 @@
+import {applyTownSupply,validTownSupply,immutableTownSupply,type TownSupplyState,type TownSupplyCommand,type TownSupplySource} from './town-supply.ts';
 import {applyRestorationCare,validRestorationCare,immutableRestorationCare,type RestorationCareState,type RestorationCareCommand} from './restoration-care.ts';
 import {applyWorkshopConstruction,advanceWorkshopConstruction,validWorkshopConstruction,immutableWorkshopConstruction,workshopConstructionBoxes,workshopConstructionPosition,type WorkshopConstructionState,type WorkshopConstructionCommand} from './workshop-construction.ts';
 import {RESTORATION_ENGINE,createRestoration,advanceRestoration,applyRestorationCommand,validRestoration,immutableRestoration,restorationPlayerCost,restorationPlan,type RestorationState,type RestorationCommand,type HabitatActor} from './restoration.ts';
@@ -44,6 +45,7 @@ export interface State {
   townDirector?:TownDirectorState;
   restoration?:RestorationState;
   restorationCare?:RestorationCareState;
+  townSupply?:TownSupplyState;
   workshopConstruction?:WorkshopConstructionState;
   frontierSupply?:RegionalSupplyState;
   frontierTrade?:RegionalTradeState;
@@ -63,6 +65,7 @@ export interface State {
   waterRestored: boolean; jobAccepted: boolean; revision: number; events: string[];
 }
 export type Action =
+  | {type:'town-supply';command:TownSupplyCommand}
   | {type:'restoration-care';command:RestorationCareCommand}
   | {type:'workshop-construction';command:WorkshopConstructionCommand}
   | {type:'restoration';command:RestorationCommand}
@@ -173,6 +176,7 @@ function applyWorldAction(state: State, action: Action,restorationActors:readonl
       return townDirector?record(state,action.command.kind==='accept'?'Accepted a real town request. Help through the existing local actions.':'Declined the town request. The underlying need remains.',{townDirector}):state;
     }
     case 'town-life': return commitTownLife(state,action.command);
+    case 'town-supply': return commitTownSupply(state,action.command);
     case 'restoration-care': return commitRestorationCare(state,action.command);
     case 'workshop-construction': return commitWorkshopConstruction(state,action.command,restorationActors);
     case 'town-purchase': {
@@ -318,8 +322,8 @@ function applyWorldAction(state: State, action: Action,restorationActors:readonl
 export function causalContext(state:State):CausalContext {
  const all=allWorldObjects(state),recoverable={...state.inventory},cost=machineCosts(state.waterworks),gear=equipmentCost(state.equipment),caveCost=caveWaterCost(state.caveWater),craftCost=economyCost(state.economy),supplyCost=caveSupplyCost(state.caveSupply);
  const collected={scrap:0,core:0};for(const o of all)if((o.kind==='scrap'||o.kind==='core')&&state.collected.includes(o.id))collected[o.kind]++;
- const restorationCost=restorationPlayerCost(state.restoration),lifeCost=townLifePlayerCost(state.townLife),townNet=townBalance(state.town).net;const historicalPumpRepaired=state.waterRestored&&collected.scrap+commonsTradeExports(state.causal,state.seed)-state.inventory.scrap-cost.scrap-gear.scrap-caveCost.scrap-craftCost.scrap-supplyCost.scrap-(state.causal?.playerSpent.scrap??0)-townNet.scrap-lifeCost.scrap-restorationCost.scrap===3&&collected.core-state.inventory.core-cost.core-gear.core-caveCost.core-(state.causal?.playerSpent.core??0)-townNet.core-lifeCost.core-restorationCost.core===1;
- recoverable.scrap+=cost.scrap+gear.scrap+economyRecoverableScrap(state.economy)+(state.restoration?.machine?Math.max(0,restorationCost.scrap-(state.restoration.spent.scrap??0)-2):0);recoverable.core+=cost.core+gear.core+(state.restoration?.machine?Math.max(0,restorationCost.core-(state.restoration.spent.core??0)):0);
+ const restorationCost=restorationPlayerCost(state.restoration),lifeCost=townLifePlayerCost(state.townLife),townNet=townBalance(state.town).net;const historicalPumpRepaired=state.waterRestored&&collected.scrap+commonsTradeExports(state.causal,state.seed)-state.inventory.scrap-cost.scrap-gear.scrap-caveCost.scrap-craftCost.scrap-supplyCost.scrap-(state.causal?.playerSpent.scrap??0)-townNet.scrap-lifeCost.scrap-restorationCost.scrap-(state.townSupply?.carried??0)===3&&collected.core-state.inventory.core-cost.core-gear.core-caveCost.core-(state.causal?.playerSpent.core??0)-townNet.core-lifeCost.core-restorationCost.core===1;
+ recoverable.scrap+=(state.townSupply?.carried??0)+cost.scrap+gear.scrap+economyRecoverableScrap(state.economy)+(state.restoration?.machine?Math.max(0,restorationCost.scrap-(state.restoration.spent.scrap??0)-2):0);recoverable.core+=cost.core+gear.core+(state.restoration?.machine?Math.max(0,restorationCost.core-(state.restoration.spent.core??0)):0);
  for(const o of all)if((o.kind==='scrap'||o.kind==='core'||o.kind==='water')&&!state.collected.includes(o.id))recoverable[o.kind]++;
  return {...(state.caveSupply&&state.caveWater?{caveSupply:caveSupplyContext(state.caveSupply,state.caveWater)}:{}),historicalPumpRepaired,seed:state.seed,defeated:state.defeated,inventory:state.inventory,player:state.player,zone:state.zone,networkOverflow:state.settlement.spilled,networkWorking:supplyWorking(state.waterworks),recoverableScrap:recoverable.scrap,recoverableCore:recoverable.core,recoverableWater:recoverable.water};
 }
@@ -381,6 +385,8 @@ export function validateSave(value: unknown): value is State {
   if(Object.hasOwn(value,'workshopConstruction')&&(!regional||!value.townLife||!validWorkshopConstruction(value.workshopConstruction,value.seed)||(value.workshopConstruction as WorkshopConstructionState).materialsPaid!==(value.townLife as TownLifeState).workshopSpent))return false;
   if(!Object.hasOwn(value,'workshopConstruction')&&((value.townLife as TownLifeState|undefined)?.workshopSpent??0)!==0)return false;
   if(Object.hasOwn(value,'restoration')&&(!regional||!validRestoration(value.restoration,worldRestorationPlan(value.seed))))return false;
+  if(Object.hasOwn(value,'townSupply')&&(!regional||!value.townLife||!Array.isArray(value.collected)||!validTownSupply(value.townSupply,worldTownSupplySources(value as unknown as State),value.collected as string[],value.townLife as TownLifeState)))return false;
+  if(!Object.hasOwn(value,'townSupply')&&((value.townLife as TownLifeState|undefined)?.supplyDeliveries??0)!==0)return false;
   if(Object.hasOwn(value,'restorationCare')&&(!regional||!value.restoration||!value.townLife||!validRestorationCare(value.restorationCare,value.restoration as RestorationState,value.townLife as TownLifeState)))return false;
   if(!Object.hasOwn(value,'restorationCare')&&(((value.restoration as RestorationState|undefined)?.sites.some(site=>(site.careExported??0)>0)??false)||((value.townLife as TownLifeState|undefined)?.habitatCare?.received??0)>0))return false;
   if(Object.hasOwn(value,'townDirector')&&(!regional||!value.townLife||!validTownDirector(value.townDirector,value.townLife as TownLifeState)||Object.entries(TOWN_DIRECTOR_DEFAULTS).some(([k,v])=>(value.townDirector as TownDirectorState).tuning[k as keyof typeof TOWN_DIRECTOR_DEFAULTS]!==v)))return false;
@@ -419,7 +425,7 @@ export function validateSave(value: unknown): value is State {
   const causalCost=value.causal?(value.causal as CausalState).playerSpent:{scrap:0,core:0,water:0};
   const cost=machineCosts(value.waterworks),gear=equipmentCost(value.equipment as EquipmentState|undefined),caveCost=caveWaterCost(value.caveWater as CaveWaterState|undefined),craftCost=economyCost(value.economy as EconomyState|undefined),gardenCost=ecologyCost(value.ecology as EcologyState|undefined),supplyCost=caveSupplyCost(value.caveSupply as CaveSupplyState|undefined);
   const restorationCost=restorationPlayerCost(value.restoration as RestorationState|undefined),lifeCost=townLifePlayerCost(value.townLife as TownLifeState|undefined);
-  const spent = { scrap: totals.scrap + exports - (i.scrap as number)-cost.scrap-gear.scrap-caveCost.scrap-craftCost.scrap-supplyCost.scrap-causalCost.scrap-townTotals.net.scrap-lifeCost.scrap-restorationCost.scrap, core: totals.core - (i.core as number)-cost.core-gear.core-caveCost.core-causalCost.core-townTotals.net.core-lifeCost.core-restorationCost.core, water: totals.water - (i.water as number)-causalCost.water-gardenCost.water-regionalFoodCost(value.frontierFood as RegionalFoodState|undefined).water-townTotals.net.water-lifeCost.water-restorationCost.water };
+  const spent = { scrap: totals.scrap + exports - (i.scrap as number)-cost.scrap-gear.scrap-caveCost.scrap-craftCost.scrap-supplyCost.scrap-causalCost.scrap-townTotals.net.scrap-lifeCost.scrap-restorationCost.scrap-((value.townSupply as TownSupplyState|undefined)?.carried??0), core: totals.core - (i.core as number)-cost.core-gear.core-caveCost.core-causalCost.core-townTotals.net.core-lifeCost.core-restorationCost.core, water: totals.water - (i.water as number)-causalCost.water-gardenCost.water-regionalFoodCost(value.frontierFood as RegionalFoodState|undefined).water-townTotals.net.water-lifeCost.water-restorationCost.water };
   return value.waterRestored
     ? (spent.scrap === 3 && spent.core === 1 && spent.water === 0) || (spent.scrap === 0 && spent.core === 0 && spent.water === 3)
     : spent.scrap === 0 && spent.core === 0 && spent.water === 0;
@@ -451,12 +457,13 @@ export function parseSave(text: string): State | null {
     if(object(parsed)&&Object.hasOwn(parsed,'workshopConstruction'))parsed={...parsed,workshopConstruction:immutableWorkshopConstruction(parsed.workshopConstruction,parsed.seed as number)};
     if(object(parsed)&&Object.hasOwn(parsed,'townLife'))parsed={...parsed,townLife:immutableTownLife(parsed.townLife,parsed.seed as number)};
     if(object(parsed)&&Object.hasOwn(parsed,'restoration'))parsed={...parsed,restoration:immutableRestoration(parsed.restoration,worldRestorationPlan(parsed.seed as number))};
+    if(object(parsed)&&Object.hasOwn(parsed,'townSupply'))parsed={...parsed,townSupply:immutableTownSupply(parsed.townSupply,worldTownSupplySources(parsed as unknown as State),parsed.collected as string[],parsed.townLife as TownLifeState)};
     if(object(parsed)&&Object.hasOwn(parsed,'restorationCare'))parsed={...parsed,restorationCare:immutableRestorationCare(parsed.restorationCare,parsed.restoration as RestorationState,parsed.townLife as TownLifeState)};
     if(object(parsed)&&Object.hasOwn(parsed,'townDirector'))parsed={...parsed,townDirector:immutableTownDirector(parsed.townDirector,parsed.townLife as TownLifeState)};
     if(!validateSave(parsed))return null;
     if(parsed.generation===2&&!parsed.causal){
       const totals={scrap:0,core:0};for(const o of allWorldObjects(parsed))if((o.kind==='scrap'||o.kind==='core')&&parsed.collected.includes(o.id))totals[o.kind]++;
-      const restorationCost=restorationPlayerCost(parsed.restoration),cost=machineCosts(parsed.waterworks),gear=equipmentCost(parsed.equipment),caveCost=caveWaterCost(parsed.caveWater),craftCost=economyCost(parsed.economy),lifeCost=townLifePlayerCost(parsed.townLife),townNet=townBalance(parsed.town).net,repaired=parsed.waterRestored&&totals.scrap-parsed.inventory.scrap-cost.scrap-gear.scrap-caveCost.scrap-craftCost.scrap-townNet.scrap-lifeCost.scrap-restorationCost.scrap===3&&totals.core-parsed.inventory.core-cost.core-gear.core-caveCost.core-townNet.core-lifeCost.core-restorationCost.core===1;
+      const restorationCost=restorationPlayerCost(parsed.restoration),cost=machineCosts(parsed.waterworks),gear=equipmentCost(parsed.equipment),caveCost=caveWaterCost(parsed.caveWater),craftCost=economyCost(parsed.economy),lifeCost=townLifePlayerCost(parsed.townLife),townNet=townBalance(parsed.town).net,repaired=parsed.waterRestored&&totals.scrap-parsed.inventory.scrap-cost.scrap-gear.scrap-caveCost.scrap-craftCost.scrap-townNet.scrap-lifeCost.scrap-restorationCost.scrap-(parsed.townSupply?.carried??0)===3&&totals.core-parsed.inventory.core-cost.core-gear.core-caveCost.core-townNet.core-lifeCost.core-restorationCost.core===1;
       const causal=createCausalState(parsed.seed,repaired,parsed.settlement.spilled);causal.networkEverWorking=supplyWorking(parsed.waterworks);
       parsed={...parsed,causal:reconcileCausal(causal,causalContext(parsed))};
     }
@@ -586,4 +593,20 @@ export function commitRestorationCare(state:State,command:RestorationCareCommand
  if(!state.regional||!state.restoration||!state.townLife)return state;
  const result=applyRestorationCare(state.restorationCare,state.restoration,worldRestorationPlan(state.seed),state.townLife,{seed:state.seed,zone:state.zone,player:{...state.player,feetY}},command);
  return result?record(state,result.message,{restorationCare:result.care,restoration:result.restoration,townLife:result.life}):state;
+}
+
+/** Finite authored valley salvage only; display elevation never becomes interaction authority. */
+export function worldTownSupplySources(state:Pick<State,'generation'|'seed'|'regional'>):readonly TownSupplySource[] {
+ if(state.generation!==2||!state.regional)return [];
+ return worldObjects(state).filter(o=>o.kind==='scrap').map(o=>({...o,y:worldHeight({...state,zone:'valley'},o.x,o.z)}));
+}
+export function commitTownSupply(state:State,command:TownSupplyCommand,feetY=worldHeight(state,state.player.x,state.player.z)):State {
+ if(!state.regional||!state.townLife)return state;
+ const result=applyTownSupply(state.townSupply,worldTownSupplySources(state),state.townLife,{seed:state.seed,zone:state.zone,player:{...state.player,feetY},inventory:state.inventory,collected:state.collected},command);
+ if(!result)return state;
+ // Prove the ordinary donation; only the transport receipt is omitted from
+ // the director's exact replay proof. Saved town life retains that receipt.
+ const donationLife={...result.life};if(Object.hasOwn(state.townLife,'supplyDeliveries'))donationLife.supplyDeliveries=state.townLife.supplyDeliveries!;else delete donationLife.supplyDeliveries;
+ const townDirector=state.townDirector&&command.kind==='deliver'?noteTownDirectorContribution(state.townDirector,state.townLife,donationLife,{kind:'donate-supplies',targetId:'workshop',expectedRevision:state.townLife.revision}):state.townDirector;
+ return record(state,result.message,{townSupply:result.supply,townLife:result.life,inventory:result.inventory,collected:result.collected,...(townDirector?{townDirector}:{})});
 }

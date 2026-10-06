@@ -1,0 +1,36 @@
+TAP version 13
+# (node:17317) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: actual main town supply gates load and delivery on actual ground, range, terrain acknowledgement, host and clear path
+ok 1 - actual main town supply gates load and delivery on actual ground, range, terrain acknowledgement, host and clear path
+  ---
+  duration_ms: 167.537894
+  type: 'test'
+  ...
+# Subtest: actual town supply dispatch gates before reducers and preserves solo versus online authority
+ok 2 - actual town supply dispatch gates before reducers and preserves solo versus online authority
+  ---
+  duration_ms: 4.718388
+  type: 'test'
+  ...
+# Subtest: actual cargo HUD reports the conserved load and real workshop distance and hides empty or isolated lab stock
+ok 3 - actual cargo HUD reports the conserved load and real workshop distance and hides empty or isolated lab stock
+  ---
+  duration_ms: 6.483544
+  type: 'test'
+  ...
+# Subtest: town supply retains normal town service and scrap interaction while wiring refresh, save dirtiness and developer access
+ok 4 - town supply retains normal town service and scrap interaction while wiring refresh, save dirtiness and developer access
+  ---
+  duration_ms: 1.196226
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 485.59619

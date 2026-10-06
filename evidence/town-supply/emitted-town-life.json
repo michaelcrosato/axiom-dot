@@ -1,0 +1,80 @@
+{
+  "kind": "axiom-town-life-emitted-verification",
+  "scope": "Local actual production engine, pose matrices, Rapier WASM worker and in-memory SQLite server. No browser/GPU/device/production-state probe.",
+  "file": "restoration-care-engine-CZmT0EEZ.js",
+  "modelCases": [
+    {
+      "seed": 0,
+      "scenario": "balanced",
+      "seconds": 120,
+      "sha256": "90b9d64a382965f3c82a8414d8e1be992deca62dd0bb2bb7035d09cf1bd82acd"
+    },
+    {
+      "seed": 0,
+      "scenario": "lean-stores",
+      "seconds": 120,
+      "sha256": "1fd31c784cf815bb3eca0ae814d8d123c69a4dbe907a46f5de9d1ed204976f0f"
+    },
+    {
+      "seed": 0,
+      "scenario": "urgent-needs",
+      "seconds": 120,
+      "sha256": "ab4fb47cfef7dd28d09d5d0e877ce85fca2ad742639502fb21b500ab51e0b846"
+    },
+    {
+      "seed": 73129,
+      "scenario": "balanced",
+      "seconds": 120,
+      "sha256": "d4d106f805eb023c1579f5a2c56abb24f0dd1effe38aba3225ae1080acb5e6f3"
+    },
+    {
+      "seed": 73129,
+      "scenario": "lean-stores",
+      "seconds": 120,
+      "sha256": "0b553d1b734033da540a4fd30a7057f54f0342ac2b2e2361d5852545921acf04"
+    },
+    {
+      "seed": 73129,
+      "scenario": "urgent-needs",
+      "seconds": 120,
+      "sha256": "82ef891bbe25dd72f7e6cc82c23db5efc92d0f404865437ee275a21071de084b"
+    },
+    {
+      "seed": 4294967295,
+      "scenario": "balanced",
+      "seconds": 120,
+      "sha256": "e7ba10b29056c5ca0e61ce2dacc4b9cec687078efb25e5a3f1db333ded680288"
+    },
+    {
+      "seed": 4294967295,
+      "scenario": "lean-stores",
+      "seconds": 120,
+      "sha256": "ba33e7c1af0ad23094d1126f513fa18f5567857534724e8769f07f61095265e7"
+    },
+    {
+      "seed": 4294967295,
+      "scenario": "urgent-needs",
+      "seconds": 120,
+      "sha256": "9b5e6f5f4596028eb551962b2ff8cb832807b2add5a441e1230cecc2ee197069"
+    }
+  ],
+  "poseComparisons": 60,
+  "physics": {
+    "file": "physics.worker-C5OttQdd.js",
+    "matchingFrames": 131,
+    "sha256": "2ad999504f6c025d5c5c996c39d3cd7c6ffd408c8cc0f716cc997d74625e22fb"
+  },
+  "server": {
+    "inventory": {
+      "scrap": 3,
+      "core": 0,
+      "water": 0
+    },
+    "spent": {
+      "scrap": 0,
+      "core": 0,
+      "water": 1
+    },
+    "revision": 1
+  }
+}

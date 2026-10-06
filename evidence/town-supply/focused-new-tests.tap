@@ -1,0 +1,218 @@
+TAP version 13
+# (node:17835) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: town supply boundary accepts bounded escrow commands and rejects client inventory or cargo authority
+ok 1 - town supply boundary accepts bounded escrow commands and rejects client inventory or cargo authority
+  ---
+  duration_ms: 2.178884
+  type: 'test'
+  ...
+# Subtest: supply authority rejects guests and invalid posture while duplicate host requests cannot duplicate cargo
+ok 2 - supply authority rejects guests and invalid posture while duplicate host requests cannot duplicate cargo
+  ---
+  duration_ms: 1392.739005
+  type: 'test'
+  ...
+# Subtest: all finite supply sources have a clear standing HTTP load approach across zero typical and uint32-max seeds
+ok 3 - all finite supply sources have a clear standing HTTP load approach across zero typical and uint32-max seeds
+  ---
+  duration_ms: 6769.557381
+  type: 'test'
+  ...
+# Subtest: HTTP ordinary collect versus supply load races share one canonical tombstone in either CAS order
+ok 4 - HTTP ordinary collect versus supply load races share one canonical tombstone in either CAS order
+  ---
+  duration_ms: 663.743362
+  type: 'test'
+  ...
+# Subtest: HTTP unload versus deliver conflicts and response retries cannot refund or spend the same escrow twice
+ok 5 - HTTP unload versus deliver conflicts and response retries cannot refund or spend the same escrow twice
+  ---
+  duration_ms: 820.601451
+  type: 'test'
+  ...
+# Subtest: supply presets reject nonfinite bounds unknown fields and unsupported scenarios
+ok 6 - supply presets reject nonfinite bounds unknown fields and unsupported scenarios
+  ---
+  duration_ms: 7.646365
+  type: 'test'
+  ...
+# Subtest: supply lab stages scenarios and earns finite delivery and exhaustion through real commands
+ok 7 - supply lab stages scenarios and earns finite delivery and exhaustion through real commands
+  ---
+  duration_ms: 635.931137
+  type: 'test'
+  ...
+# Subtest: supply lab shortage has no invented spend and staged file reads cannot overwrite newer edits or closed panels
+ok 8 - supply lab shortage has no invented spend and staged file reads cannot overwrite newer edits or closed panels
+  ---
+  duration_ms: 73.656268
+  type: 'test'
+  ...
+# Subtest: supply reset consumes low and high seed bounds and actual time releases donation cooldown
+ok 9 - supply reset consumes low and high seed bounds and actual time releases donation cooldown
+  ---
+  duration_ms: 5124.736836
+  type: 'test'
+  ...
+# Subtest: finite supply handoff uses the exact ordinary donation cost benefit cooldown and receipt
+ok 10 - finite supply handoff uses the exact ordinary donation cost benefit cooldown and receipt
+  ---
+  duration_ms: 90.08252
+  type: 'test'
+  ...
+# Subtest: finite supply handoff preserves actual workshop position stock capacity and inventory guards
+ok 11 - finite supply handoff preserves actual workshop position stock capacity and inventory guards
+  ---
+  duration_ms: 43.481653
+  type: 'test'
+  ...
+# Subtest: three canonical supply deliveries are the permanent maximum and save continuation is exact
+ok 12 - three canonical supply deliveries are the permanent maximum and save continuation is exact
+  ---
+  duration_ms: 1947.856544
+  type: 'test'
+  ...
+# Subtest: supply delivery imports require an integer bounded subset of actual donation contributions
+ok 13 - supply delivery imports require an integer bounded subset of actual donation contributions
+  ---
+  duration_ms: 24.878355
+  type: 'test'
+  ...
+# (node:17858) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: actual main town supply gates load and delivery on actual ground, range, terrain acknowledgement, host and clear path
+ok 14 - actual main town supply gates load and delivery on actual ground, range, terrain acknowledgement, host and clear path
+  ---
+  duration_ms: 231.79153
+  type: 'test'
+  ...
+# Subtest: actual town supply dispatch gates before reducers and preserves solo versus online authority
+ok 15 - actual town supply dispatch gates before reducers and preserves solo versus online authority
+  ---
+  duration_ms: 2.532652
+  type: 'test'
+  ...
+# Subtest: actual cargo HUD reports the conserved load and real workshop distance and hides empty or isolated lab stock
+ok 16 - actual cargo HUD reports the conserved load and real workshop distance and hides empty or isolated lab stock
+  ---
+  duration_ms: 2.555881
+  type: 'test'
+  ...
+# Subtest: town supply retains normal town service and scrap interaction while wiring refresh, save dirtiness and developer access
+ok 17 - town supply retains normal town service and scrap interaction while wiring refresh, save dirtiness and developer access
+  ---
+  duration_ms: 1.197475
+  type: 'test'
+  ...
+# Subtest: independent supply review preserves historical pump payment and recoverable resources while every remaining scrap is escrowed
+ok 18 - independent supply review preserves historical pump payment and recoverable resources while every remaining scrap is escrowed
+  ---
+  duration_ms: 1563.131573
+  type: 'test'
+  ...
+# Subtest: independent supply review preserves odd cargo through mixed unloading delivery stale retries and ordinary recollection attempts
+ok 19 - independent supply review preserves odd cargo through mixed unloading delivery stale retries and ordinary recollection attempts
+  ---
+  duration_ms: 597.312544
+  type: 'test'
+  ...
+# Subtest: independent supply review finds clear grounded interaction positions for all seven canonical sources across seed extremes
+ok 20 - independent supply review finds clear grounded interaction positions for all seven canonical sources across seed extremes
+  ---
+  duration_ms: 1295.926828
+  type: 'test'
+  ...
+# Subtest: town supply board opening, blocked actions and disposal never reserve or send cargo
+ok 21 - town supply board opening, blocked actions and disposal never reserve or send cargo
+  ---
+  duration_ms: 29.043471
+  type: 'test'
+  ...
+# Subtest: town supply exposes finite canonical valley scrap at terrain feet and preserves absent legacy saves
+ok 22 - town supply exposes finite canonical valley scrap at terrain feet and preserves absent legacy saves
+  ---
+  duration_ms: 141.541697
+  type: 'test'
+  ...
+# Subtest: loading escrow and ordinary collection share the same tombstone and remain save-valid
+ok 23 - loading escrow and ordinary collection share the same tombstone and remain save-valid
+  ---
+  duration_ms: 250.145256
+  type: 'test'
+  ...
+# Subtest: four-slot supply load unloads exactly once or spends two escrow scrap through the real town donation
+ok 24 - four-slot supply load unloads exactly once or spends two escrow scrap through the real town donation
+  ---
+  duration_ms: 438.836123
+  type: 'test'
+  ...
+# Subtest: supply imports reject orphan cargo, forged payments, recycled source ids and missing tombstones
+ok 25 - supply imports reject orphan cargo, forged payments, recycled source ids and missing tombstones
+  ---
+  duration_ms: 585.379534
+  type: 'test'
+  ...
+# Subtest: supply requires a living valley explorer within range and accepted terrain elevation
+ok 26 - supply requires a living valley explorer within range and accepted terrain elevation
+  ---
+  duration_ms: 77.248646
+  type: 'test'
+  ...
+# Subtest: an accepted material shortage credits the exact existing donation once when escrow is delivered
+ok 27 - an accepted material shortage credits the exact existing donation once when escrow is delivered
+  ---
+  duration_ms: 110.142422
+  type: 'test'
+  ...
+# Subtest: town cargo loads canonical finite scrap directly, tombstones its pickup and does not mint ordinary inventory
+ok 28 - town cargo loads canonical finite scrap directly, tombstones its pickup and does not mint ordinary inventory
+  ---
+  duration_ms: 52.704329
+  type: 'test'
+  ...
+# Subtest: town supply delivery consumes exactly two escrow scrap through real conserved donation and cooldown
+ok 29 - town supply delivery consumes exactly two escrow scrap through real conserved donation and cooldown
+  ---
+  duration_ms: 62.12016
+  type: 'test'
+  ...
+# Subtest: unloading a single remaining unit returns ordinary scrap once without removing source tombstone
+ok 30 - unloading a single remaining unit returns ordinary scrap once without removing source tombstone
+  ---
+  duration_ms: 29.861034
+  type: 'test'
+  ...
+# Subtest: all seven valley sources bound the route to three donations plus one ordinary scrap
+ok 31 - all seven valley sources bound the route to three donations plus one ordinary scrap
+  ---
+  duration_ms: 1096.285047
+  type: 'test'
+  ...
+# Subtest: supply save validation rejects duplicate or noncanonical sources and broken cross-ledger arithmetic
+ok 32 - supply save validation rejects duplicate or noncanonical sources and broken cross-ledger arithmetic
+  ---
+  duration_ms: 17.731202
+  type: 'test'
+  ...
+# Subtest: supply action guards reject unsupported targets, range, height, stale intent and command-side grants
+ok 33 - supply action guards reject unsupported targets, range, height, stale intent and command-side grants
+  ---
+  duration_ms: 52.528103
+  type: 'test'
+  ...
+# Subtest: full shared stores block delivery but preserve cargo and allow unloading without refund duplication
+ok 34 - full shared stores block delivery but preserve cargo and allow unloading without refund duplication
+  ---
+  duration_ms: 22.203262
+  type: 'test'
+  ...
+1..34
+# tests 34
+# suites 0
+# pass 34
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 10470.83384

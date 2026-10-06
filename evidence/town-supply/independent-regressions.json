@@ -1,0 +1,18 @@
+{
+  "results": [
+    {
+      "mode": "source",
+      "exitCode": 0,
+      "log": "/tmp/town-supply-independent-source.tap",
+      "sha256": "4c3bf983874ead8b799853625bbfc5a2ea4853bef8531ad4a92a8c2b27362e33"
+    },
+    {
+      "mode": "counterfactual",
+      "exitCode": 1,
+      "log": "/tmp/town-supply-independent-counterfactual.tap",
+      "sha256": "27fd4228fd6d0848ae77d7d4e3f82630046e0b35f0ab553caf5ee98d1c820f56"
+    }
+  ],
+  "interpretation": "Source three cases pass; removing only current cargo deduction from historicalPumpRepaired in temporary copy fails both pump/cargo scenarios. Mutation sensitivity, not pre-feature execution.",
+  "sourceFilesEdited": false
+}

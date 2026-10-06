@@ -1,0 +1,28 @@
+{
+  "kind": "independent-readiness-timeout-assessment",
+  "sourceCommit": "b9e198f8714464d065dc90c38a6de465d8dbbe9d",
+  "case": "all clips replay identical actual worker/Rapier frames, including run, wall, crate push/pull and ledge top-out",
+  "observedDurationMs": 30008.451862,
+  "deadlineMs": 30000,
+  "failureType": "testTimeoutFailure",
+  "assertionFailureObserved": false,
+  "unchangedFiles": [
+    {
+      "file": "tests/animation-review.test.ts",
+      "sha256": "3621700f7865d9862a1a281a9b195d882fbfb88e0a77af82f995881607b9ef0a",
+      "unchangedFromBaseline": true
+    },
+    {
+      "file": "src/animation-review.ts",
+      "sha256": "8113336f9801011e3f1d5aa8c33372b86beb7fe2ce6056959187c2bb9d037a60",
+      "unchangedFromBaseline": true
+    },
+    {
+      "file": "src/physics.worker.ts",
+      "sha256": "455bd2273d9c58ed6b72ab0391b706c7c754a64a7441f765ad32b8de0a1ff1af",
+      "unchangedFromBaseline": true
+    }
+  ],
+  "assessment": "Timing contention is plausible but not proven. The case boots eighteen real workers sequentially and prior staging duration was reported at27.57s. Preserve current natural-completion failure, run unchanged case in isolation, then rerun entire unchanged permitted suite at single-file concurrency. No altered assertions, deadlines, exclusions or source; final certification requires the complete rerun.",
+  "limits": "Read-only assessment; no tests launched or source modified."
+}

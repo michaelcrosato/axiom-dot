@@ -1,0 +1,2821 @@
+{
+  "kind": "axiom-workshop-staging-emitted-verification",
+  "version": 1,
+  "verifiedAt": "2026-10-06T11:12:24.411Z",
+  "scope": "Source and actual emitted Three geometry/material/matrix parity across all dimension extremes and achieved-work boundaries. Boundary snapshots are validated numerical fixtures, not claims that a player earned work or visited a location. Existing workshop emitted gate separately exercises earned work, actual Rapier routes and HTTP/save authority. No browser/GPU/touch/device acceptance.",
+  "asset": {
+    "file": "workshop-construction-view-BuO-zhJu.js",
+    "sha256": "24b3a3796067a07c65ab5d0c76d7b327381cffe9b35133198593ed6f10995757"
+  },
+  "sourceHashes": {
+    "src/workshop-construction-stages.ts": "ec600ec628d727406f1c6262d55870f21481939cb402d716620ac7194852316e",
+    "src/workshop-construction-view.ts": "099b111e3bf5feaac9fda2d81d1ddf9eef11f04bd17c5d473b11527b99cd3226",
+    "src/workshop-construction.ts": "020da8a1fef97f5655944576724a2bdb63b21be11690bf6d08a125b379be5a46",
+    "src/workshop-authoring.ts": "f437dee7d3ad5448ccdff107ea91652cf9705797cfa5b012aac52423f6f703f1",
+    "src/workshop-construction-ui.ts": "2b45e40d2ff1ff7c3aa9f2d6bb1890d8240bc51e36cc1459fdd8883fc2b8fca3",
+    "src/workshop-construction-lab.ts": "b23a63cbe5baaebb52d3ec1fbe98533e46cb2e6435b4f4fb515d45220f96e378",
+    "src/main.ts": "5d7df17ae62d05a84375b34872b1421ada49465db0b29f29eabad80764be1678",
+    "src/town-supply-ui.ts": "7c431df8c00e77f8e22998b350af0c657e88a6db04857461e85e499fa1cd9235",
+    "src/restoration-care-ui.ts": "e703f3fc24d9f7c039aa402b80d65d5cc8d0ae44acd9cd50bd639827437d31b0"
+  },
+  "plans": 147,
+  "frames": 2352,
+  "maxDetails": 272,
+  "colliders": "Exact original solid arrays invariant across every stage; no work-driven collision replacement",
+  "acknowledgements": "Unconfirmed, stale, reset, rejected, retry and reload paths exercised",
+  "cases": [
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 2,
+        "width": 9,
+        "depth": 7.6,
+        "hallDepth": 3.4,
+        "doorwayWidth": 1.6
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "ad1d3b8437639e37683006dc425a3aef802f9be5959841b3316d16be2c4be1eb"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 1,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "264d55963ed14a179399a177de9f22c0039d396065f3dd1b350ec1209107aca7"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 1,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "d79f5b2475a05b504ecc48ea90ecbcb884749d95b9fad60a56e9a63d14163000"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 1,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "dc7538906a68588fbc299f025948bd99af559ef386cf50b02be244ca55f62548"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 1,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "5d89f6775ce398853f1528913db92f47588cd8392753a74ea60d2af51fcda71f"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 1,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "64d57e786bcf49388d1f3062dd1621e83f3ad2d18042a8b53271ed0fbffe960a"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 1,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "c49f084e478dba0598706826719765074cba072d11bf55447bcfedc053210fdc"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 1,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "bec4a37c6bafd234cb21d9883e32a88621cd1b5c2deeb78595aecebfe3c41dc3"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 1,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "6dec581ba8d98f3e85e90eaa6fdca85d90d0a77de63bc4f4b480445f3ffc0029"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 1,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "1b0e8aa1af7c90d847a75a5a71e7762a68481db3412db457fb32cd64fd0b02f9"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 1,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "eb0d29c45bd620017cb81c70489b915658b2a7304c7f6338b718406f1f219f56"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 1,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "6a5b9d82610d099d313b2244d1f38bf862ecc35505c95bc9b8e98313f993f861"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 1,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "e68be44d413fa18f38a9ec04a7d431c22f4920b65ba238cff5f375e2550d516d"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 1,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "9a44b29b0aec5b50cc2177d3d5ad54d58960484382b116ce7e4e0609ec1686c6"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 1,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "441a2830a2141a03ee9058146e9a8c43ab00a19f6d785283618a3e16d3acd148"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 1,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "edc5c647b431f0ff91a669b1f814c2dca53a50683d3fafe7c85be9e0b67a19b3"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 1,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "f2883a306d0474770485048862db17ddfb66a4c23b2188b2289dae6232e1400c"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 2,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "181aed70181d034a1baa4679aecfb1d908f1ed445a62b7b4753e4e478dcb31ff"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 2,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "b426ed489cf4d9f977603e4f259729bf699e210fba454b6ee54958ba859e9488"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 2,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "a6ee7156dfad34d045946b9b2db04374b65c0a080d656829f942b59978a79bb4"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 2,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "35bc241a189d37e9b1ef19c688e0c11a23653ee6375a686e7a4e7afab28e1468"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 2,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "054ce42e45ccbe16d3bc992cb32dee0b2e8282c68a0ea9d3b86569c75936acbd"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 2,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "712df8da415364d232bb14cdd1c52eed9b34a99eec18a5af7648dfefcbe0ba02"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 2,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "e8b3a3b26090d57d8f26cdc51c0de65fd25f1b5b4bb555beadf26ca8bd0fda30"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 2,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "5af8b85f76f610dbb14e0613f4f6af2ea504471dcb331e5c13977e11c8dff28b"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 2,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "a0a95bfc01fe8111ad40bfcd0f436cb965e65c52312059534d9b0260c6c40788"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 2,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "0ee756785c202e4564e04fb0b9a2446f71816f92a43c5e740b697519e07e0ed6"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 2,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "ac011b3000b31c76b0afe3ad556db861ef5f27e8479114e12ed2add078186ba2"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 2,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "c550b1d22371a3ecf9ee7787ec81d349db37c1db687b720c9e4f1603ea64ad55"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 2,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "15d55ca938876799a329e1dd3f4d1bcd5f3d9aa6e8e0858260add5eb21657928"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 2,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "a1087b25a725ee04fee5c6e96e0f4ebe240bb6dcccb988ed441dc4c15b5c93e2"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 2,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "aaa5393d255f03c8fbe54c3ae6a1285baf7f114bdc7af6ead7d594ad70f0a1b8"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 2,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "760e1093556ebb080f504b5170055883885b5bca8c82a5e202c667c7d194e5fc"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 3,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "95f479a2dfffbd37a29a22a831c048cd03672e8c2942e4f0abb3686878cc91dc"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 3,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "db6150c7cda7b37a8ec138bbe05deeb7420dbc18d8954f73ec23500e1c71e393"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 3,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "195917113117aa80f505f41ffe27b9149bb8c4925294cbe5821be43a90ad7ae3"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 3,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "1f163d8d1152779f7929e30a0f92d11b0c320b5d49e171c640e3f12e9b79514b"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 3,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "2e1d834e30794eb01deb34b17f06e75747f8e54cba85fa9ba8b7d5d55739c1fd"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 3,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "687c86f457b59e089ed26f2ae94ac3243cf51b1c60d4bf9fbd2b8bcb3ef849f8"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 3,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "40fb9f99e2a1a7f106ab470473c7aa4994ae90a55d04d65708e06154a51db8eb"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 3,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "a0211b42ace0f75761f5e25aeaad5d632ff1aaa6d2d5e4a6ca3d605d6aaebc06"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 3,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "dd21985219a3cf949e9018f79f180e232764a5cc1a56fda47d4e0bea61561fd0"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 3,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "c4f66dde00dc2b158f4e4744bd0234a2524aeac31a4d34babe9226b5789f7fb0"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 3,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "877bf53796c6a2609ca1f0fa7a5f584784148e15aaf67e269cb81b85e62d8396"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 3,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "69f6381defc6ae422e91e7898599e213b46766b6eafaaf46e132fde3407b7492"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 3,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "d85189a4c81ee1cd48a4abf7dae56dd2b18ed49c6ddd055625a0752ef3cc5598"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 3,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "be949919496e58d1dfb5e2da7a66fd5e85760c294496133231944ee47c5f60d4"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 3,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "8b72c777608f72b585cb7dab6fea02ef001977699023c3675a89f93d9291a41a"
+    },
+    {
+      "parameters": {
+        "seed": 0,
+        "rearRooms": 3,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "c6c7a83ce646c2794a1651a1f67ed71bb5cd78154514d4269e5a5cf568f9f82d"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 2,
+        "width": 9,
+        "depth": 7.6,
+        "hallDepth": 3.4,
+        "doorwayWidth": 1.6
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "898ff785d7fd49ee255e5ee93dbbcf29fb679b7a675801b13bfafb2a8fb72e7c"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 1,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "b3a3a186db9975622ab0bff5cdc222fcaa2328f75238bfcd3bb46a12d9a2bc70"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 1,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "890796682f5cb6d2004d1aefd887a9f01a25876f0e77936a4a77c7bd47aaf0f2"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 1,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "901f7cad7a7b68b1119ecb282b90f2db1d758777092a020a74b966f7a1b89840"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 1,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "5e61331f1c287383d9e9e65ab7446e7530eeb84d258dce4daef2b8052d1c81aa"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 1,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "03c502700dda057cae73566d6808632e18822e730b9da54e4a3ea2cf1efa45ab"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 1,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "1c5662a3ffc89ea00a0a17884976044599473983c567ddb5047688e2c39a66b6"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 1,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "58d7ead4f928895ee3e1fabb8d70afb00386ac9523f6f3b768453cc94719152f"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 1,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "ec0878798feb0d836e491a7cf30a7f63111866d620b844cce1fb1ae8f8c21a8e"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 1,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "1bd8aef48874240a066a1e6703b140dbd913196fc8237d1acc7a7cb86eb653a3"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 1,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "f2b9dcce09af560a79a462ffefc5d4c5a150db10e6fddcf9ccbdb8fb75d033b2"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 1,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "75a3a7a9d57410d76932ce86c8f1b75b5a4b5420711c6f97d0a23e230890d2b9"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 1,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "1b35b463eae11d59a15692a314d97ffd4cd1e26f95ec76434c3e5652016fbf3b"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 1,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "d22d74eeb62afd8a27fba643b997ad7d2e48dde9c07004de0a44d280637f61ca"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 1,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "8433ad6788f7b23faa6c73e1da120bb3cffdfd9b22015ee24e97d776bb0a9460"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 1,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "cfdd640f5ba1f26a7158627356ab8c73636d99ba477bcfdf212ff50275cf3e35"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 1,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "5a21a1837908636d4218da713466a021e2396b1c55d4dde3c38707c30037a6c5"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 2,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "170ffb0b789448a44e6952c11069b7981f140180807df5f5d148c4d247752501"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 2,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "59c787e0aa015aeb615ca37c29a9593ef3131b1a1b7f791f6e751f448754e1f2"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 2,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "bc1e23570f6978f40861289e25d66be0c8f9ef216327ee27774b66886b01e283"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 2,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "55d90388089779dacba46b1781c9e55f4267f51eb534f6218492bdbbe0b61a94"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 2,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "cb3b9311781965e4bcadd5b81d3cb13626c35ee25832c944772de0ea3a3f2773"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 2,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "b7f0aaf8c6f3faf4628e647a9cf55caa357bd389fcd5b9b57c5fa698a46279f6"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 2,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "eb0b3a57973db99a22d732c4621ec9853c7b51fda48c8c42f68cec043daad741"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 2,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "bd6065ead8e4d4cb78f8dd9d2058a51fef775c23c304ded71aff621067fedd8e"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 2,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "f7555910958679eb2a82d54fa12aaeb86bca83d3f86549b40d90b04d97908614"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 2,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "3d428f146ffd2bfe73f96454d3adb0e3a56be43d1f4798cdfe188ae8100602cd"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 2,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "3cd29c128188f85e019fbb89355049980fcdf03f58f0bbfc1799893e72c406ee"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 2,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "2532797238adc97b3c5cdddaa8d12c9e5b3579324596ac6d5f69a384b21fad1d"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 2,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "cc382e263f81d4d3a6040ba99e66cfeace28d647a915fecf2dfa70a62297e9c0"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 2,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "1a1edaf794774098c588a37f52ae4fca3bfa72c1a67aa61f4969b44f8472f17f"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 2,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "a8cff0e5b5004953d37661ddf92d4f3823ae757d0ff190340ee8ee5c43b5e265"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 2,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "9b5e764757838fe1f0aac047b42c44035c5426d867169e5ace26cba050b330d1"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 3,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "f935f19c2c912329211ef2a299056d84f072369c3883050ba0f5663e893f9f92"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 3,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "c0f99bf064b7f41f9ac7d53b26dd3e42fb9b97e5baf5cd354d08d5553152d902"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 3,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "f94b7c1fabae1486bf4e5312a2db23fbc0670aba27dd73f695e7aef5259c76a5"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 3,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "fcf1d962bc9b1b146603c39c923a21b18e1e404211edd3305dea2e7f5c7a3372"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 3,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "af0869cf71e2cf54565b7a4e7a7f7b55bd66908eab9381b5cbda6ee0e7c540e6"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 3,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "ac0c66c79b5369e7f54fc1bf5c3e0f861041ced3f90d078bd1703c9d72be70f8"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 3,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "26b8ea00104b12ed8c94c1f70da14976890d101cce10d7101d385877fa3f7516"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 3,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "1f9e4fc9a33e23283cc29664125aa0d0d5fc821222952c54170bb6d43d7f4229"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 3,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "bf7b9c408ff4488c1e362369bc520bae610ba40b10aaac87383f71371d8dfed2"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 3,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "71326f053b9e772ba5e6468b7a73d26dd571cd73cd0f4792a6994ac003c51496"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 3,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "eb47c83e6dd78e2e4ce4756255bcf77fc476898da99f11bdf52d1b5552608381"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 3,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "263d03c4d109c1c114745a0399bcf44701233766af34835c5d3e4b0f3b127fa8"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 3,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "894e956f72bcd035e5104f09804ca94c24ae82e771a90c0ec932bcda9e01d638"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 3,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "5eac8262619014bd8b902c4ac3e377ee7b02c6298e2a380fd7f940878c029c06"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 3,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "135e9c313151437c6d75e69dc02bbdb620fd592929d352e9b28e25a20d6645f3"
+    },
+    {
+      "parameters": {
+        "seed": 73129,
+        "rearRooms": 3,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "9bddd47357e600c5489f8a25aed86c9b540bad6e9bc7ad533dd3bb0445e1da30"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 2,
+        "width": 9,
+        "depth": 7.6,
+        "hallDepth": 3.4,
+        "doorwayWidth": 1.6
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "c6512d5b12ff667f75782aaed8e346da53df15cbc574bf66a5cbc0f7bed354b0"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 1,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "162ea9bac3a0e9f8b8f6e88e7648bcc62fd49869eee0551e59e87b6751594dbe"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 1,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "2948fd4248406c2bf3afb0913f1cd85be6895adf2fe84a304695739da4f851c4"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 1,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "e964e952d06e00b4959d26cf80aa32d24f219a33c03c4fa071b329cd84fbc194"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 1,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "2e6c9f5149d53458e58e0c50cd86f5581f482aaad9488b51c68210566ba5283d"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 1,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "dae890a2bfc3e812cf19241201e2e50930293791094b4d3859ff5d37cb4847d7"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 1,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "e7f9efe6f272e83e8144f59044ffa85e583fa3ce5dad0ad956026c597b1475aa"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 1,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "84ad0a411ffb2fee0c00854664cb2fb7ac11f0717dbf1b286f9ce6339f06ae90"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 1,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "2435cc60a08969d8f56fd506ec748732fa940f04dc2af4f2e676688ed4eec6fe"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 1,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "b6455196edfb671c62afcb3ea5e7f25a3fb6eacdc53a8f35213ffe4d780eeb0a"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 1,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "c6cb3dff04e99dd8b7dbec607fd4683e5e05b7bab3fc1bf5f05f96679b41e921"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 1,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "b8e703121a332a470f4a2aa55b40dafdbef7ff0ff216c3b9f8e57e9cb5303f7c"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 1,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "316dc3545d82ca25398474f5eccde302a84692d789b3053ad93f4505623d2ff8"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 1,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "b458905705f85fb74020d1784811ea8f65df4468ea7def41b8f3c7a468009c0d"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 1,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "0257863e1a9dbe4965cf6662e74cb7923d5ad3a5818760bbfd8276c28c114821"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 1,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "c16ad011648a29b315e5bd59b67a2e7d101e992d92e229ddc2db44923c1a3c61"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 1,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 13,
+      "sha256": "710c695ba62db2ae37e551ec1b0cf996fa14094aaf4b0449442fcdb14dca3704"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 2,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "fa7843bb1c51593b10b1afac7f87677edc36b19a81c48b05ec74488375768321"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 2,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "8f7c3a5f6f1162f15c0902cb5c8abc1d6d783b27b07ff4323d57c55c6e19e76c"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 2,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "6aafaf8243eec665c4e630680df62c7a4e8a39ed214d665fb3b00127eb43f679"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 2,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "93a6d82925e1d260e53d034013746c880d66e8babd1cc8f1d3151143b0a1ba0a"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 2,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "9efcef99849bf4a3ce25ff768bca2bfd3ec936db20235ab1f971cc7a4e4c6013"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 2,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "02d7b2445820045ffc46055cb6bd2691c735ee90f9f7f065fc34fa3459f5e62f"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 2,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "d7b77c7a6c40824b79c3ff1fad9be38625e127c36b768203124025ff7cbf2aea"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 2,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "df212deb240cd39061e8149eb550e31815743f18b693606700934ad17c83b68a"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 2,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "b7a125dfdae0cb0a8975d69ff061659d146ee6a0c86da145a8a20e8ab25b4640"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 2,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "e6d120d93384c7201f6b1ddc5c82dec59a82939813dcee50d1f068bad4d17e20"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 2,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "8dd2d3410972614a80cae4412f5590fdcc1dceabfbe6b648856a53835bec85f8"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 2,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "eba9859ff31b33793758f61a250ab15487914aeb9811ef4f49e82e79de5cc665"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 2,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "2c802a2464d7865e4757643c23415ace4c5fe417392c64996ac216ad2e1bd8ae"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 2,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "e10dcdd9df0e0317fb09d9a7b4794ad26865864eca3c2d161767bf7a7a25cf61"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 2,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "96527c3683543993fb63b67cc38a71bd41cbfaf3f64b3454e09fe9ec5e69bdb0"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 2,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 18,
+      "sha256": "475ea2226596c58fca764aea2545775fad7635de943b1e8dc485c00bf655e5ea"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 3,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "17ae4a154227dabe6b90890aee3abcbf449cb5ddbc330ee78c24a595a17fd17d"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 3,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "0383b33f616a56b4a84239c3e76a2f9d6033a81bd487d2e65d8763cccebb3fb8"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 3,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "7bc0cfc73486dbda95c87c0bdfda6fb7d842f896afba94ed06c2fc8e9faf7354"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 3,
+        "width": 8.4,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "37fb0b5767f0bc5114e2e78d4ca08bb7766581b98bbad6970d0e54d20c1e3c41"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 3,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "78c677a6ada29be11d4e604c07c8bae7cf5c8fbf9157c2addd9fd211139c5693"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 3,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "5e8a41c9a456c3fe96cf16975c7b191e9d81dd30f7321c2baf39309ae42fa80f"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 3,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "8e039a606d3cc7ed9d0dd63b367400a4704b9e9e0b269d9cddbebacf665d7056"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 3,
+        "width": 8.4,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "7fdc084183d9358572a60498111406246d3eb4a84ff6f1fcce99e278a760e118"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 3,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "54965e0aeacde6582eeaecbe1a296919d520cf37a173f18ca6a1b14d0e03391c"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 3,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "9dc602f75d2cf8a17ee47f733ea58cf796d46561b0d6c550e012cfe6c328c135"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 3,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "f3a0f7275eaae911f37275351741b9e802358b220280f86c953f7edfe40d9164"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 3,
+        "width": 9.6,
+        "depth": 7,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "3ba5f2d55b7d91045e84dabb99c8e4bc3d85cc5785e25f2778e6c4743d99ee46"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 3,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "6fd9d04bf132be73725724fe60c177c8ac2daebb1d9fc25276c50a5c1441ff5c"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 3,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.1,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "815226ff73bb6ddb54ee3f3e994384cfe849e5d1af728b15af6353359a6189e8"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 3,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.4
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "f11922fc7d5172c93448d2612e636f6e42493e93c9d2ed80e386be7060ce15f8"
+    },
+    {
+      "parameters": {
+        "seed": 4294967295,
+        "rearRooms": 3,
+        "width": 9.6,
+        "depth": 8.2,
+        "hallDepth": 3.7,
+        "doorwayWidth": 1.8
+      },
+      "stages": [
+        "funded",
+        "frame",
+        "panels",
+        "finishing",
+        "complete"
+      ],
+      "solids": 23,
+      "sha256": "fd82f991107787d5510b6bfc902ff3397af7f2277fa10e862bc50b402bcb77ef"
+    }
+  ]
+}

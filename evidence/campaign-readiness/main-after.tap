@@ -1,0 +1,48 @@
+TAP version 13
+# (node:37571) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: campaign main reports host, reconnect, terrain acknowledgement and path changes without changing state
+ok 1 - campaign main reports host, reconnect, terrain acknowledgement and path changes without changing state
+  ---
+  duration_ms: 36.223889
+  type: 'test'
+  ...
+# Subtest: restoration main explains refit host ownership without withholding ordinary guest field actions
+ok 2 - restoration main explains refit host ownership without withholding ordinary guest field actions
+  ---
+  duration_ms: 8.838624
+  type: 'test'
+  ...
+# Subtest: campaign dispatch returns recoverable rejection without queuing or spending and does not claim a refused queue entry
+ok 3 - campaign dispatch returns recoverable rejection without queuing or spending and does not claim a refused queue entry
+  ---
+  duration_ms: 8.51264
+  type: 'test'
+  ...
+# Subtest: accepted host snapshots immediately refresh each connected board without reopening or discarding drafts
+ok 4 - accepted host snapshots immediately refresh each connected board without reopening or discarding drafts
+  ---
+  duration_ms: 40.554663
+  type: 'test'
+  ...
+# Subtest: playable restoration practice returns synchronous readiness and kernel rejection to its current panel
+ok 5 - playable restoration practice returns synchronous readiness and kernel rejection to its current panel
+  ---
+  duration_ms: 4.552008
+  type: 'test'
+  ...
+# Subtest: live campaign feedback gate blocks dispatch even when the earlier pose gate still reports ready
+ok 6 - live campaign feedback gate blocks dispatch even when the earlier pose gate still reports ready
+  ---
+  duration_ms: 10.344277
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 747.62923

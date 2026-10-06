@@ -1,0 +1,175 @@
+TAP version 13
+# (node:37592) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: campaign main reports host, reconnect, terrain acknowledgement and path changes without changing state
+not ok 1 - campaign main reports host, reconnect, terrain acknowledgement and path changes without changing state
+  ---
+  duration_ms: 2.571639
+  type: 'test'
+  location: '/tmp/campaign-readiness-main-before.test.ts:16:1'
+  failureType: 'testCodeFailure'
+  error: 'production function campaignControlReason'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    mainFunction (file:///workspace/axiom-dot/tests/helpers/main-source.ts:6:51)
+    file:///tmp/campaign-readiness-main-before.test.ts:13:154
+    Array.map (<anonymous>)
+    readiness (file:///tmp/campaign-readiness-main-before.test.ts:13:147)
+    TestContext.<anonymous> (file:///tmp/campaign-readiness-main-before.test.ts:17:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: restoration main explains refit host ownership without withholding ordinary guest field actions
+not ok 2 - restoration main explains refit host ownership without withholding ordinary guest field actions
+  ---
+  duration_ms: 0.46731
+  type: 'test'
+  location: '/tmp/campaign-readiness-main-before.test.ts:24:1'
+  failureType: 'testCodeFailure'
+  error: 'production function campaignControlReason'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    mainFunction (file:///workspace/axiom-dot/tests/helpers/main-source.ts:6:51)
+    file:///tmp/campaign-readiness-main-before.test.ts:13:154
+    Array.map (<anonymous>)
+    readiness (file:///tmp/campaign-readiness-main-before.test.ts:13:147)
+    TestContext.<anonymous> (file:///tmp/campaign-readiness-main-before.test.ts:25:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+  ...
+# Subtest: campaign dispatch returns recoverable rejection without queuing or spending and does not claim a refused queue entry
+not ok 3 - campaign dispatch returns recoverable rejection without queuing or spending and does not claim a refused queue entry
+  ---
+  duration_ms: 6.179951
+  type: 'test'
+  location: '/tmp/campaign-readiness-main-before.test.ts:27:1'
+  failureType: 'testCodeFailure'
+  error: 'The "string" argument must be of type string. Received type undefined (undefined)'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///tmp/campaign-readiness-main-before.test.ts:32:9)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: accepted host snapshots immediately refresh each connected board without reopening or discarding drafts
+not ok 4 - accepted host snapshots immediately refresh each connected board without reopening or discarding drafts
+  ---
+  duration_ms: 20.772135
+  type: 'test'
+  location: '/tmp/campaign-readiness-main-before.test.ts:34:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+      [
+        'acceptTownLifeSnapshot',
+        'sync',
+        'syncCavePhysics',
+    -   'workshopPanelRefresh',
+    -   'restorationCarePanelRefresh',
+    -   'townSupplyPanelRefresh',
+    -   'campaignGuidancePanelRefresh'
+      ]
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 'acceptTownLifeSnapshot'
+    1: 'sync'
+    2: 'syncCavePhysics'
+    3: 'workshopPanelRefresh'
+    4: 'restorationCarePanelRefresh'
+    5: 'townSupplyPanelRefresh'
+    6: 'campaignGuidancePanelRefresh'
+  actual:
+    0: 'acceptTownLifeSnapshot'
+    1: 'sync'
+    2: 'syncCavePhysics'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///tmp/campaign-readiness-main-before.test.ts:37:110)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: playable restoration practice returns synchronous readiness and kernel rejection to its current panel
+not ok 5 - playable restoration practice returns synchronous readiness and kernel rejection to its current panel
+  ---
+  duration_ms: 1.945094
+  type: 'test'
+  location: '/tmp/campaign-readiness-main-before.test.ts:39:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + undefined
+    - 'Release the crate before using this control.'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'Release the crate before using this control.'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///tmp/campaign-readiness-main-before.test.ts:43:9)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: live campaign feedback gate blocks dispatch even when the earlier pose gate still reports ready
+not ok 6 - live campaign feedback gate blocks dispatch even when the earlier pose gate still reports ready
+  ---
+  duration_ms: 3.530486
+  type: 'test'
+  location: '/tmp/campaign-readiness-main-before.test.ts:45:1'
+  failureType: 'testCodeFailure'
+  error: 'The "string" argument must be of type string. Received type undefined (undefined)'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///tmp/campaign-readiness-main-before.test.ts:50:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 0
+# fail 6
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 335.002142

@@ -1,0 +1,136 @@
+TAP version 13
+# Subtest: supply inspector restores an exact valid source and replaces it only when collected or invalid
+ok 1 - supply inspector restores an exact valid source and replaces it only when collected or invalid
+  ---
+  duration_ms: 1534.056842
+  type: 'test'
+  ...
+# Subtest: supply inspector validates requested identity and chooses the nearest remaining fallback
+ok 2 - supply inspector validates requested identity and chooses the nearest remaining fallback
+  ---
+  duration_ms: 242.944054
+  type: 'test'
+  ...
+# Subtest: care inspector retains a requested habitat across refresh and refuses invalid or disposed selector handlers
+ok 3 - care inspector retains a requested habitat across refresh and refuses invalid or disposed selector handlers
+  ---
+  duration_ms: 100.471428
+  type: 'test'
+  ...
+# Subtest: restoration controls open the requested habitat and preserve exact source selectors without issuing work
+ok 4 - restoration controls open the requested habitat and preserve exact source selectors without issuing work
+  ---
+  duration_ms: 137.527796
+  type: 'test'
+  ...
+# Subtest: supply board remains interactive after rejected Visit and closes normally
+ok 5 - supply board remains interactive after rejected Visit and closes normally
+  ---
+  duration_ms: 1539.84646
+  type: 'test'
+  ...
+# Subtest: supply board ignores retained controls after navigation owner disposes it
+ok 6 - supply board ignores retained controls after navigation owner disposes it
+  ---
+  duration_ms: 152.704694
+  type: 'test'
+  ...
+# Subtest: care board remains interactive after rejected Visit and closes normally
+ok 7 - care board remains interactive after rejected Visit and closes normally
+  ---
+  duration_ms: 68.648474
+  type: 'test'
+  ...
+# Subtest: care board ignores retained controls after navigation owner disposes it
+ok 8 - care board ignores retained controls after navigation owner disposes it
+  ---
+  duration_ms: 71.424418
+  type: 'test'
+  ...
+# Subtest: supply maps the selected source and delivery station without disabling rejected navigation
+ok 9 - supply maps the selected source and delivery station without disabling rejected navigation
+  ---
+  duration_ms: 147.358398
+  type: 'test'
+  ...
+# Subtest: care maps the selected source and delivery station without disabling rejected navigation
+ok 10 - care maps the selected source and delivery station without disabling rejected navigation
+  ---
+  duration_ms: 57.504828
+  type: 'test'
+  ...
+# Subtest: supply transfer reports synchronous transport rejection without claiming it was sent
+ok 11 - supply transfer reports synchronous transport rejection without claiming it was sent
+  ---
+  duration_ms: 763.712472
+  type: 'test'
+  ...
+# Subtest: supply transfer rechecks detailed readiness on click and refreshes restored host access
+ok 12 - supply transfer rechecks detailed readiness on click and refreshes restored host access
+  ---
+  duration_ms: 245.122393
+  type: 'test'
+  ...
+# Subtest: supply transfer retains no reply handler capable of changing a reopened board
+ok 13 - supply transfer retains no reply handler capable of changing a reopened board
+  ---
+  duration_ms: 246.128516
+  type: 'test'
+  ...
+# Subtest: care transfer reports synchronous transport rejection without claiming it was sent
+ok 14 - care transfer reports synchronous transport rejection without claiming it was sent
+  ---
+  duration_ms: 4.605224
+  type: 'test'
+  ...
+# Subtest: care transfer rechecks detailed readiness on click and refreshes restored host access
+ok 15 - care transfer rechecks detailed readiness on click and refreshes restored host access
+  ---
+  duration_ms: 1.051188
+  type: 'test'
+  ...
+# Subtest: care transfer retains no reply handler capable of changing a reopened board
+ok 16 - care transfer retains no reply handler capable of changing a reopened board
+  ---
+  duration_ms: 1.185563
+  type: 'test'
+  ...
+# Subtest: blocked supply click refreshes newly accepted cargo and host gate before returning
+ok 17 - blocked supply click refreshes newly accepted cargo and host gate before returning
+  ---
+  duration_ms: 118.312864
+  type: 'test'
+  ...
+# Subtest: blocked care click refreshes newly accepted biomass and host gate before returning
+ok 18 - blocked care click refreshes newly accepted biomass and host gate before returning
+  ---
+  duration_ms: 7.165037
+  type: 'test'
+  ...
+# Subtest: restoration care board starts read-only, shows distant habitat gates and sends no blocked or disposed intent
+ok 19 - restoration care board starts read-only, shows distant habitat gates and sends no blocked or disposed intent
+  ---
+  duration_ms: 1100.013154
+  type: 'test'
+  ...
+# Subtest: care board issues paid transfer revisions only on explicit clicks and preserves the carry cap
+ok 20 - care board issues paid transfer revisions only on explicit clicks and preserves the carry cap
+  ---
+  duration_ms: 375.058913
+  type: 'test'
+  ...
+# Subtest: town supply board opening, blocked actions and disposal never reserve or send cargo
+ok 21 - town supply board opening, blocked actions and disposal never reserve or send cargo
+  ---
+  duration_ms: 99.086822
+  type: 'test'
+  ...
+1..21
+# tests 21
+# suites 0
+# pass 21
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 5226.866071

@@ -1,0 +1,78 @@
+TAP version 13
+# Subtest: all clips are bounded input fixtures; sample ticks are unique, exact and include endpoints
+ok 1 - all clips are bounded input fixtures; sample ticks are unique, exact and include endpoints
+  ---
+  duration_ms: 21.012554
+  type: 'test'
+  ...
+# Subtest: timeline playback remains fixed-tick, reversible, repeatable and pausable at different speeds
+ok 2 - timeline playback remains fixed-tick, reversible, repeatable and pausable at different speeds
+  ---
+  duration_ms: 0.539707
+  type: 'test'
+  ...
+# Subtest: all clips replay identical actual worker/Rapier frames, including run, wall, crate push/pull and ledge top-out
+ok 3 - all clips replay identical actual worker/Rapier frames, including run, wall, crate push/pull and ledge top-out
+  ---
+  duration_ms: 22931.081652
+  type: 'test'
+  ...
+# Subtest: superseded loads cancel their own worker and cannot race, append snapshots or terminate the new worker
+ok 4 - superseded loads cancel their own worker and cannot race, append snapshots or terminate the new worker
+  ---
+  duration_ms: 2574.640089
+  type: 'test'
+  ...
+# Subtest: worker numeric traces drive production joints identically under arbitrary scrub order without any renderer
+ok 5 - worker numeric traces drive production joints identically under arbitrary scrub order without any renderer
+  ---
+  duration_ms: 1608.193002
+  type: 'test'
+  ...
+# Subtest: review preserves all subjects, exact-tick capture and renderer-independent JSON without game boot
+ok 6 - review preserves all subjects, exact-tick capture and renderer-independent JSON without game boot
+  ---
+  duration_ms: 17.772622
+  type: 'test'
+  ...
+# (node:41549) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: online world intents and save button never commit a local campaign mutation
+ok 7 - online world intents and save button never commit a local campaign mutation
+  ---
+  duration_ms: 269.503612
+  type: 'test'
+  ...
+# Subtest: joining another foundation checkpoints solo and reconstructs exact room seed before accepting authority
+ok 8 - joining another foundation checkpoints solo and reconstructs exact room seed before accepting authority
+  ---
+  duration_ms: 83.532337
+  type: 'test'
+  ...
+# Subtest: matching boot accepts server world only, leaving restores original solo through isolated return route
+ok 9 - matching boot accepts server world only, leaving restores original solo through isolated return route
+  ---
+  duration_ms: 26.645246
+  type: 'test'
+  ...
+# Subtest: real physics snapshot handler has a separate online branch without world ticks or local hits
+ok 10 - real physics snapshot handler has a separate online branch without world ticks or local hits
+  ---
+  duration_ms: 0.890173
+  type: 'test'
+  ...
+# Subtest: incoming pre-jump snapshots cannot cancel a pending request; processed authority is sent to the real worker channel
+ok 11 - incoming pre-jump snapshots cannot cancel a pending request; processed authority is sent to the real worker channel
+  ---
+  duration_ms: 16.226549
+  type: 'test'
+  ...
+1..11
+# tests 11
+# suites 0
+# pass 11
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 29628.720784

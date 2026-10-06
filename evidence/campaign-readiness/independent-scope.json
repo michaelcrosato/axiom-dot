@@ -1,0 +1,62 @@
+{
+  "kind": "independent-campaign-readiness-review",
+  "baseline": "19db5793ca0893220a07f7f09d0c5e659d16591e",
+  "assessment": "No remaining blocker found. Pure explanatory engine; legacy boolean guards remain effective; latest command gates checked on click; synchronous rejection messages distinguish queued transport from model acceptance; restoration pending follows queued/inflight transport even across unrelated revisions, recheck and reopening; accepted snapshot callback ordering is covered by periodic pending recheck; same-panel replacement disposes callbacks/timer.",
+  "scope": [
+    "src/campaign-action-readiness.ts",
+    "src/main.ts",
+    "src/coop.ts",
+    "src/restoration-ui.ts",
+    "src/restoration-care-ui.ts",
+    "src/town-supply-ui.ts",
+    "src/workshop-construction-ui.ts",
+    "scripts/verify-campaign-readiness-build.mts",
+    "new focused regression files",
+    "two existing main harness dependency additions"
+  ],
+  "findingsResolved": [
+    "Practice restoration returns explicit local gate/kernel rejection to panel.",
+    "Transport query rechecked after snapshot acceptance callback and pending packet cleanup.",
+    "Unrelated revision changes cannot unlock while transport is queued/inflight.",
+    "Rejected restoration Map/Care navigation retains usable panel and timer."
+  ],
+  "independentFocused": {
+    "log": "/tmp/readiness-independent-focused.tap",
+    "cases": 41,
+    "passed": 41,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "newIndependentTests": "None added: implementer lifecycle regressions explicitly cover each independently identified edge; avoid duplicate tests.",
+  "legacyTestEdits": "Two existing harness files add the new blockedReason dependency only; old names and assertions retained.",
+  "emittedVerifierScope": "524288 scalar flag combinations and160 target cases test source/emitted pure presentation parity, read-only inputs and independent priority assertions; explicitly no geometry execution or full main/browser claim.",
+  "heldFiles": {
+    "count": 13,
+    "unchanged": true,
+    "baseline": "19db5793ca0893220a07f7f09d0c5e659d16591e",
+    "files": [
+      "tests/ecology.test.ts",
+      "tests/regional-clock-precision.test.ts",
+      "tests/regional-food-trade-witness.test.ts",
+      "tests/regional-food-world-authority.test.ts",
+      "tests/regional-food.test.ts",
+      "tests/regional-supply.test.ts",
+      "tests/regional-trade-integration.test.ts",
+      "tests/regional-trade-timeline.test.ts",
+      "tests/regional-trade.test.ts",
+      "tests/regional-weather-cold.test.ts",
+      "tests/regional-weather-trade-authority.test.ts",
+      "tests/regional-weather-trade.test.ts",
+      "tests/regional-weather.test.ts"
+    ]
+  },
+  "finalAggregate": {
+    "status": "pending"
+  },
+  "limits": [
+    "No browser/GPU/device verification.",
+    "No new server protocol or owner ledger; no held scope changes."
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "kind": "axiom-campaign-client-emitted-verification",
+  "version": 1,
+  "verifiedAt": "2026-10-06T11:04:11.224Z",
+  "scope": "Actual production client export identified by prototype.hasPendingAction; source/emitted deferred mocked HTTP parity with bounded fake timers, queued/sent acknowledgments, stale replies, exact retries, three malformed overlay replies, intentional suspension behavior and late disconnect replies. No actual network, server integration, browser/GPU/device or live-data claim.",
+  "sourceHashes": {
+    "src/coop.ts": "bfed77efb74007e202753edf3ec41edf9553e9726713243625e0e5a3bd3e3d9c",
+    "src/coop-protocol.ts": "c156eeb69544b3f7cf027c56af119555f10fc27ff3d1dba1092abfb68a28df7b",
+    "src/world.ts": "7b191b8468524fc7c41d5aa9142c5e6edb4ef441d0e621748f0a6ff9aba5eaad",
+    "src/workshop-construction.ts": "020da8a1fef97f5655944576724a2bdb63b21be11690bf6d08a125b379be5a46",
+    "src/restoration-care.ts": "756252a99bdde9e858f7ab97a258c36b6a45de446f1207c7e92349a6af8b9b14",
+    "src/town-supply.ts": "9154d83be3ffd8e59482e88de5c60faa13f47c33011dfca21b1db7069d8cad2b",
+    "src/town-life.ts": "a248d1c9c95c6873971c280e3f5613815cee30be108729eaaa3499815b839fa7",
+    "vite.client.config.ts": "c2ab677758c24d05acc64f2dc1dcc92cd986bdbc9f209c5fc539262706aac900",
+    "scripts/verify-campaign-client-build.mts": "db1f1ba1f43ca6989c1e3f1fc3651615421d29df80e9cbe8e8aa05f2cd6733e0"
+  },
+  "asset": {
+    "file": "coop-client-DRZ7UsBy.js",
+    "sha256": "1e5fead8da87eef3b5c8c99a562f577553fbd4df577cc5832ad30ae446a6abe6"
+  },
+  "traceSha256": "a7ee6e8156d39878fa37f8beb90125f5db22cbc78cfc4107eaabf945f5b8fc50",
+  "cases": [
+    {
+      "case": "queued-sent-acknowledged-unchanged-model",
+      "requests": 2,
+      "accepted": 3,
+      "ack": 2,
+      "modelSha256": "314fe59c4e94d5b76fc3d5c8b7f6f6203203083bf41df5bcf05ddc64c3864c05"
+    },
+    {
+      "case": "older-room-reply-retains-exact-retry",
+      "requests": 2,
+      "accepted": 2,
+      "ack": 1
+    },
+    {
+      "case": "lost-response-detached-exact-retry",
+      "requests": 2,
+      "status": "connected",
+      "ack": 1
+    },
+    {
+      "case": "malformed-workshopConstruction-retains-confirmed-and-pending",
+      "requests": 2,
+      "accepted": 2,
+      "ack": 1
+    },
+    {
+      "case": "malformed-restorationCare-retains-confirmed-and-pending",
+      "requests": 2,
+      "accepted": 2,
+      "ack": 1
+    },
+    {
+      "case": "malformed-townSupply-retains-confirmed-and-pending",
+      "requests": 2,
+      "accepted": 2,
+      "ack": 1
+    },
+    {
+      "case": "suspension-drops-unsent-retains-sent",
+      "requests": 3,
+      "accepted": 3,
+      "ack": 2
+    },
+    {
+      "case": "late-departed-reply-cannot-resurrect",
+      "requests": 1,
+      "accepted": 1,
+      "active": false,
+      "status": "offline"
+    }
+  ]
+}

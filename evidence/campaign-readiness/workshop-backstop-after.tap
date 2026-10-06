@@ -1,0 +1,58 @@
+TAP version 13
+# Subtest: workshop exposes exact current host or movement blocker and recovers readiness without sending commands
+ok 1 - workshop exposes exact current host or movement blocker and recovers readiness without sending commands
+  ---
+  duration_ms: 90.016974
+  type: 'test'
+  ...
+# Subtest: synchronous rejected build reports false or the exact rejection reason without claiming dispatch or changing the plan
+ok 2 - synchronous rejected build reports false or the exact rejection reason without claiming dispatch or changing the plan
+  ---
+  duration_ms: 58.26643
+  type: 'test'
+  ...
+# Subtest: paid repair rejection preserves earned workshop and exposes the dispatcher reason
+ok 3 - paid repair rejection preserves earned workshop and exposes the dispatcher reason
+  ---
+  duration_ms: 48.975408
+  type: 'test'
+  ...
+# Subtest: a rejection between polls refreshes finite stock and disabled actions without discarding unapplied recipe fields
+ok 4 - a rejection between polls refreshes finite stock and disabled actions without discarding unapplied recipe fields
+  ---
+  duration_ms: 31.181518
+  type: 'test'
+  ...
+# Subtest: dismiss and reopen retires old controls and reads fresh stock and readiness
+ok 5 - dismiss and reopen retires old controls and reads fresh stock and readiness
+  ---
+  duration_ms: 60.618689
+  type: 'test'
+  ...
+# Subtest: a null explanatory blocker never bypasses the existing readiness safety gate
+ok 6 - a null explanatory blocker never bypasses the existing readiness safety gate
+  ---
+  duration_ms: 32.034314
+  type: 'test'
+  ...
+# Subtest: construction UI stages dimensions and sends only explicit paid build from applied plan
+ok 7 - construction UI stages dimensions and sends only explicit paid build from applied plan
+  ---
+  duration_ms: 179.85955
+  type: 'test'
+  ...
+# Subtest: construction imports exact bounded recipes and ignores stale file reads after edit/close
+ok 8 - construction imports exact bounded recipes and ignores stale file reads after edit/close
+  ---
+  duration_ms: 75.710842
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 847.881063

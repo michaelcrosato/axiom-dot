@@ -1,0 +1,35 @@
+{
+  "sourceCommit": "b9e198f8714464d065dc90c38a6de465d8dbbe9d",
+  "exitCode": 1,
+  "stats": {
+    "tests": 1906,
+    "suites": 0,
+    "pass": 1903,
+    "fail": 2,
+    "cancelled": 1,
+    "skipped": 0,
+    "todo": 0,
+    "duration_ms": 2709361.168737
+  },
+  "notOkCases": [
+    "all clips replay identical actual worker/Rapier frames, including run, wall, crate push/pull and ledge top-out",
+    "matching boot accepts server world only, leaving restores original solo through isolated return route",
+    "incoming pre-jump snapshots cannot cancel a pending request; processed authority is sent to the real worker channel"
+  ],
+  "tapSha256": "14c4da759129425597e2aafc524d943afa58660daa716643a6815a637ea814b3",
+  "freezePreservedThroughNaturalExit": true,
+  "recovery": "Two existing source-extraction cases lacked the four new nullable panel refresh callbacks. Added only their initial declarations; all assertions and case names remain. The unchanged 18-worker animation replay exceeded its 30000ms deadline. It passed in an isolated single-file-concurrency run at22931.081652ms. Contention/timing variability is plausible, not proven. No deadline or assertion changed. Entire final suite must pass after refreeze; isolated passes alone do not certify it.",
+  "isolatedRecovery": {
+    "files": [
+      "tests/animation-review.test.ts",
+      "tests/coop-integration.test.ts"
+    ],
+    "pass": 11,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "animationReplayMs": 22931.081652
+  },
+  "refrozenCommit": "35fa4cc6c0a8b34d99478cc469c207c86cae6586"
+}

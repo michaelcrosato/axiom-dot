@@ -1,3 +1,4 @@
+import {validWorkshopConstructionCommand} from '../src/workshop-construction.ts';
 import {validRestorationCommand} from '../src/restoration.ts';
 import {validTownDirectorCommand} from '../src/town-director.ts';
 import {validTownLifeCommand} from '../src/town-life.ts';
@@ -31,6 +32,7 @@ export function action(value:unknown):CoopAction|null{
   if(t==='refit-equipment')return exact(value,['type','seed'])&&(value.seed===null||seed(value.seed))?value as CoopAction:null;
   if(t==='restoration')return Reflect.ownKeys(value).length===2&&exact(value,['type','command'])&&validRestorationCommand(value.command)?value as CoopAction:null;
   if(t==='town-director')return Reflect.ownKeys(value).length===2&&exact(value,['type','command'])&&validTownDirectorCommand(value.command)?value as CoopAction:null;
+  if(t==='workshop-construction')return Reflect.ownKeys(value).length===2&&exact(value,['type','command'])&&validWorkshopConstructionCommand(value.command)?value as CoopAction:null;
   if(t==='town-life')return Reflect.ownKeys(value).length===2&&exact(value,['type','command'])&&validTownLifeCommand(value.command)?value as CoopAction:null;
   if(t==='town-purchase')return Reflect.ownKeys(value).length===2&&exact(value,['type','command'])&&validTownCommand(value.command)?value as CoopAction:null;
   if(t==='regional-food')return exact(value,['type','command'])&&validRegionalFoodCommand(value.command)&&id(value.command.targetId)?value as CoopAction:null;

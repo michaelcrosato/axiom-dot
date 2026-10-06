@@ -1,6 +1,8 @@
 import {compileRecipe,expr,type Expression,type Recipe} from './procedural.ts';
 import {workshopRegistry,WORKSHOP_WALL_THICKNESS,WORKSHOP_WALL_HEIGHT,WORKSHOP_DOOR_HEIGHT,WORKSHOP_BUDGET,type WorkshopPoint,type WorkshopLayout,type WorkshopRoom,type WorkshopDoor,type CompiledWorkshop} from './building.ts';
-/** Additive preview-only grammar. Never call from world generation or save restoration. */
+/** Bounded local-origin grammar. The isolated editor is preview-only; campaign
+ * placement is owned exclusively by the validated workshop-construction adapter.
+ * Existing generated buildings and their historical recipes are never replaced. */
 export const WORKSHOP_AUTHORING_VERSION=1 as const;
 export const WORKSHOP_AUTHORING_OWNER='preview/workshop-authoring';
 export const WORKSHOP_PRESET_MAX_BYTES=4096;

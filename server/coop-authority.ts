@@ -1,3 +1,4 @@
+import {workshopConstructionBoxes,workshopConstructionPosition} from '../src/workshop-construction.ts';
 import {restorationBodyObstacle} from '../src/restoration-collision.ts';
 import {restorationCommandPosition,restorationMachinePosition} from '../src/restoration.ts';
 import {enableRestoration,worldRestorationPlan} from '../src/world.ts';
@@ -174,7 +175,7 @@ export function roomObstacles(world:State):CombatObstacle[]{
   // Legacy huts are authored structures, separate from the generated wilderness.
   if(!plan)for(const [x,z]of [[-20,-7],[-12,-8],[-23,1],[17,-19],[24,-19],[25,-11]])extras.push({x:x!,z:z!,hx:1.9,hz:1.7,hy:2});
   const pump=worldEndpoints(world).pump;extras.push({x:pump.x,z:pump.z,y:worldHeight(world,pump.x,pump.z)+1.5,hx:1,hz:1,hy:1.5});
-  const obstacles=[...shapes.filter(s=>s.solid).map(s=>({x:s.center.x,y:s.center.y,z:s.center.z,hx:s.half.x,hy:s.half.y,hz:s.half.z})),...extras,...machineWorldObstacles(world),...(world.regional&&world.frontierSupply?regionalSupplyObstacles(world.seed,world.frontierSupply):[]),...(world.regional&&world.frontierTrade?regionalTradeObstacles(world.seed,world.frontierTrade):[])];
+  const obstacles=[...shapes.filter(s=>s.solid).map(s=>({x:s.center.x,y:s.center.y,z:s.center.z,hx:s.half.x,hy:s.half.y,hz:s.half.z})),...extras,...machineWorldObstacles(world),...workshopConstructionBoxes(world.workshopConstruction).filter(b=>b.solid).map(b=>({x:b.center.x,y:b.center.y,z:b.center.z,hx:b.half.x,hy:b.half.y,hz:b.half.z})),...(world.regional&&world.frontierSupply?regionalSupplyObstacles(world.seed,world.frontierSupply):[]),...(world.regional&&world.frontierTrade?regionalTradeObstacles(world.seed,world.frontierTrade):[])];
   // The region never enters the authority as one scene. This neighborhood covers
   // accepted movement (at most 9.6m), local staff sight and spawn recovery rings.
   return world.regional?obstacles.filter(o=>Math.abs(o.x-world.player.x)<=o.hx+128&&Math.abs(o.z-world.player.z)<=o.hz+128):obstacles;
@@ -303,6 +304,15 @@ export function syncRoom(room:CoopRoom,userId:string,input:CoopSync,now:number):
       if(p.id!==room.hostId){notices.push('The host manages the expedition staff assembly');continue;}
       // Absent actors were retired before actions: no old-geometry hit or buffered chain can resume.
       if(room.players.some(q=>q.active&&now-q.lastSeen<=PLAYER_TIMEOUT_MS&&(!canSwapEquipment(q.combo)||guardBusy(playerGuard(q))))){notices.push('Wait for every expedition staff / guard commitment to finish before refitting');continue;}
+    }
+    if(command.type==='workshop-construction'){
+      const m=playerMotion(room,p),target=workshopConstructionPosition();
+      if(p.id!==room.hostId){notices.push('The host manages the shared workshop and its materials');continue;}
+      if(!m.grounded||m.crouched||p.combo.phase!=='idle'||guardBusy(playerGuard(p))||Math.abs(m.feetY-worldHeight(s,p.player.x,p.player.z))>.45||!clearPulsePath({...p.player,y:m.feetY},target,roomObstacles(s))){notices.push('Reach the west workshop board on clear ground with your staff lowered');continue;}
+      if(command.command.kind==='build'){
+        const solids=workshopConstructionBoxes({parameters:command.command.parameters}).filter(b=>b.solid).map(b=>({x:b.center.x,y:b.center.y,z:b.center.z,hx:b.half.x,hy:b.half.y,hz:b.half.z}));
+        if(room.players.some(peer=>peer.zone==='valley'&&!actorPathClear({x:peer.player.x,y:playerMotion(room,peer).feetY,z:peer.player.z},{x:peer.player.x,y:playerMotion(room,peer).feetY,z:peer.player.z},solids,playerMotion(room,peer).crouched))){notices.push('Move every explorer clear of the future workshop solids');continue;}
+      }
     }
     if(command.type==='restoration'){const m=playerMotion(room,p),target=s.restoration?restorationCommandPosition(s.restoration,worldRestorationPlan(s.seed),command.command):null;if(command.command.kind==='refit'&&p.id!==room.hostId){notices.push('The host manages shared automaton structural parts');continue;}if(!m.grounded||m.crouched||p.combo.phase!=='idle'||guardBusy(playerGuard(p))||!target||Math.abs(m.feetY-worldHeight(s,p.player.x,p.player.z))>.45||!clearPulsePath({...p.player,y:m.feetY},target,roomObstacles(s).filter(o=>(o as {featureId?:string}).featureId!=='restoration-automaton'))){notices.push('Reach the restoration control on clear ground with your staff lowered');continue;}}
     if(command.type==='gather-wilderness'){const m=playerMotion(room,p);if(!m.grounded||m.crouched||p.combo.phase!=='idle'||guardBusy(playerGuard(p))){notices.push('Stand still with your staff lowered to gather');continue;}}

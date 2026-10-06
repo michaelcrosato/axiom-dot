@@ -1,0 +1,260 @@
+TAP version 13
+# Subtest: campaign readiness explains each recoverable control block and returns ready after the actual condition clears
+ok 1 - campaign readiness explains each recoverable control block and returns ready after the actual condition clears
+  ---
+  duration_ms: 6.207486
+  type: 'test'
+  ...
+# Subtest: control reason priority favors loading and authority before physical recovery without mutating inputs
+ok 2 - control reason priority favors loading and authority before physical recovery without mutating inputs
+  ---
+  duration_ms: 0.312767
+  type: 'test'
+  ...
+# Subtest: offline and nonhost inspection controls ignore irrelevant room flags but never bypass live authority
+ok 3 - offline and nonhost inspection controls ignore irrelevant room flags but never bypass live authority
+  ---
+  duration_ms: 0.214932
+  type: 'test'
+  ...
+# Subtest: target gates distinguish stale selection distance elevation acknowledgement and occlusion in recoverable order
+ok 4 - target gates distinguish stale selection distance elevation acknowledgement and occlusion in recoverable order
+  ---
+  duration_ms: 0.353533
+  type: 'test'
+  ...
+# (node:37362) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: campaign main reports host, reconnect, terrain acknowledgement and path changes without changing state
+ok 5 - campaign main reports host, reconnect, terrain acknowledgement and path changes without changing state
+  ---
+  duration_ms: 23.737384
+  type: 'test'
+  ...
+# Subtest: restoration main explains refit host ownership without withholding ordinary guest field actions
+ok 6 - restoration main explains refit host ownership without withholding ordinary guest field actions
+  ---
+  duration_ms: 15.227452
+  type: 'test'
+  ...
+# Subtest: campaign dispatch returns recoverable rejection without queuing or spending and does not claim a refused queue entry
+ok 7 - campaign dispatch returns recoverable rejection without queuing or spending and does not claim a refused queue entry
+  ---
+  duration_ms: 23.412651
+  type: 'test'
+  ...
+# Subtest: accepted host snapshots immediately refresh each connected board without reopening or discarding drafts
+ok 8 - accepted host snapshots immediately refresh each connected board without reopening or discarding drafts
+  ---
+  duration_ms: 58.51846
+  type: 'test'
+  ...
+# Subtest: playable restoration practice returns synchronous readiness and kernel rejection to its current panel
+ok 9 - playable restoration practice returns synchronous readiness and kernel rejection to its current panel
+  ---
+  duration_ms: 1.199126
+  type: 'test'
+  ...
+# Subtest: supply transfer reports synchronous transport rejection without claiming it was sent
+ok 10 - supply transfer reports synchronous transport rejection without claiming it was sent
+  ---
+  duration_ms: 1181.316467
+  type: 'test'
+  ...
+# Subtest: supply transfer rechecks detailed readiness on click and refreshes restored host access
+ok 11 - supply transfer rechecks detailed readiness on click and refreshes restored host access
+  ---
+  duration_ms: 484.326029
+  type: 'test'
+  ...
+# Subtest: supply transfer retains no reply handler capable of changing a reopened board
+ok 12 - supply transfer retains no reply handler capable of changing a reopened board
+  ---
+  duration_ms: 196.71632
+  type: 'test'
+  ...
+# Subtest: care transfer reports synchronous transport rejection without claiming it was sent
+ok 13 - care transfer reports synchronous transport rejection without claiming it was sent
+  ---
+  duration_ms: 4.629865
+  type: 'test'
+  ...
+# Subtest: care transfer rechecks detailed readiness on click and refreshes restored host access
+ok 14 - care transfer rechecks detailed readiness on click and refreshes restored host access
+  ---
+  duration_ms: 0.62854
+  type: 'test'
+  ...
+# Subtest: care transfer retains no reply handler capable of changing a reopened board
+ok 15 - care transfer retains no reply handler capable of changing a reopened board
+  ---
+  duration_ms: 1.008604
+  type: 'test'
+  ...
+# Subtest: blocked supply click refreshes newly accepted cargo and host gate before returning
+ok 16 - blocked supply click refreshes newly accepted cargo and host gate before returning
+  ---
+  duration_ms: 122.671168
+  type: 'test'
+  ...
+# Subtest: blocked care click refreshes newly accepted biomass and host gate before returning
+ok 17 - blocked care click refreshes newly accepted biomass and host gate before returning
+  ---
+  duration_ms: 1.399036
+  type: 'test'
+  ...
+# (node:37385) ExperimentalWarning: The MockTimers API is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: co-op exposes whether a campaign action is queued or awaiting its authoritative reply
+ok 18 - co-op exposes whether a campaign action is queued or awaiting its authoritative reply
+  ---
+  duration_ms: 1.643955
+  type: 'test'
+  ...
+# Subtest: pending action follows queued and in-flight work until an acknowledged unchanged model reply
+ok 19 - pending action follows queued and in-flight work until an acknowledged unchanged model reply
+  ---
+  duration_ms: 428.957484
+  type: 'test'
+  ...
+# Subtest: an older room reply cannot clear pending work and the next poll retries the exact action packet
+ok 20 - an older room reply cannot clear pending work and the next poll retries the exact action packet
+  ---
+  duration_ms: 134.075921
+  type: 'test'
+  ...
+# Subtest: lost replies retain pending work through reconnect and retry a detached byte-identical command
+ok 21 - lost replies retain pending work through reconnect and retry a detached byte-identical command
+  ---
+  duration_ms: 221.019594
+  type: 'test'
+  ...
+# Subtest: suspension drops unsent actions but retains sent work and its exact retry
+ok 22 - suspension drops unsent actions but retains sent work and its exact retry
+  ---
+  duration_ms: 278.759602
+  type: 'test'
+  ...
+# Subtest: disconnect clears pending state and a late response cannot resurrect a departed session
+ok 23 - disconnect clears pending state and a late response cannot resurrect a departed session
+  ---
+  duration_ms: 106.147027
+  type: 'test'
+  ...
+# Subtest: malformed workshop construction without town life cannot replace a confirmed co-op snapshot
+ok 24 - malformed workshop construction without town life cannot replace a confirmed co-op snapshot
+  ---
+  duration_ms: 97.9885
+  type: 'test'
+  ...
+# Subtest: malformed restoration care without town life cannot replace a confirmed co-op snapshot
+ok 25 - malformed restoration care without town life cannot replace a confirmed co-op snapshot
+  ---
+  duration_ms: 98.281971
+  type: 'test'
+  ...
+# Subtest: malformed town supply without town life cannot replace a confirmed co-op snapshot
+ok 26 - malformed town supply without town life cannot replace a confirmed co-op snapshot
+  ---
+  duration_ms: 131.421343
+  type: 'test'
+  ...
+# Subtest: snapshot certification retains valid old worlds and each new campaign overlay
+ok 27 - snapshot certification retains valid old worlds and each new campaign overlay
+  ---
+  duration_ms: 872.047235
+  type: 'test'
+  ...
+# Subtest: blocked restoration navigation preserves polling and usable controls
+ok 28 - blocked restoration navigation preserves polling and usable controls
+  ---
+  duration_ms: 67.931712
+  type: 'test'
+  ...
+# Subtest: restoration synchronous rejection and send exception immediately release request lock
+ok 29 - restoration synchronous rejection and send exception immediately release request lock
+  ---
+  duration_ms: 30.317682
+  type: 'test'
+  ...
+# Subtest: restoration per-command path gate is displayed and rechecked before sending
+ok 30 - restoration per-command path gate is displayed and rechecked before sending
+  ---
+  duration_ms: 12.229422
+  type: 'test'
+  ...
+# Subtest: restoration authority request settlement without revision change permits honest retry
+ok 31 - restoration authority request settlement without revision change permits honest retry
+  ---
+  duration_ms: 33.363662
+  type: 'test'
+  ...
+# Subtest: same-panel replacement invalidates restoration callbacks and late polls
+ok 32 - same-panel replacement invalidates restoration callbacks and late polls
+  ---
+  duration_ms: 4.180002
+  type: 'test'
+  ...
+# Subtest: synchronous restoration navigation during dispatch cannot paint the replacement panel
+ok 33 - synchronous restoration navigation during dispatch cannot paint the replacement panel
+  ---
+  duration_ms: 8.830054
+  type: 'test'
+  ...
+# Subtest: restoration recheck, unrelated revision and reopen retain the active transport gate
+ok 34 - restoration recheck, unrelated revision and reopen retain the active transport gate
+  ---
+  duration_ms: 41.567352
+  type: 'test'
+  ...
+# Subtest: restoration detailed ground and reconnect gates survive false readiness and stale clicks
+ok 35 - restoration detailed ground and reconnect gates survive false readiness and stale clicks
+  ---
+  duration_ms: 7.382794
+  type: 'test'
+  ...
+# Subtest: workshop exposes exact current host or movement blocker and recovers readiness without sending commands
+ok 36 - workshop exposes exact current host or movement blocker and recovers readiness without sending commands
+  ---
+  duration_ms: 229.619072
+  type: 'test'
+  ...
+# Subtest: synchronous rejected build reports false or the exact rejection reason without claiming dispatch or changing the plan
+ok 37 - synchronous rejected build reports false or the exact rejection reason without claiming dispatch or changing the plan
+  ---
+  duration_ms: 257.644376
+  type: 'test'
+  ...
+# Subtest: paid repair rejection preserves earned workshop and exposes the dispatcher reason
+ok 38 - paid repair rejection preserves earned workshop and exposes the dispatcher reason
+  ---
+  duration_ms: 209.329873
+  type: 'test'
+  ...
+# Subtest: a rejection between polls refreshes finite stock and disabled actions without discarding unapplied recipe fields
+ok 39 - a rejection between polls refreshes finite stock and disabled actions without discarding unapplied recipe fields
+  ---
+  duration_ms: 125.093799
+  type: 'test'
+  ...
+# Subtest: dismiss and reopen retires old controls and reads fresh stock and readiness
+ok 40 - dismiss and reopen retires old controls and reads fresh stock and readiness
+  ---
+  duration_ms: 141.841122
+  type: 'test'
+  ...
+# Subtest: a null explanatory blocker never bypasses the existing readiness safety gate
+ok 41 - a null explanatory blocker never bypasses the existing readiness safety gate
+  ---
+  duration_ms: 28.493439
+  type: 'test'
+  ...
+1..41
+# tests 41
+# suites 0
+# pass 41
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 6059.345475

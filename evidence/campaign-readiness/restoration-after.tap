@@ -1,0 +1,58 @@
+TAP version 13
+# Subtest: blocked restoration navigation preserves polling and usable controls
+ok 1 - blocked restoration navigation preserves polling and usable controls
+  ---
+  duration_ms: 38.638394
+  type: 'test'
+  ...
+# Subtest: restoration synchronous rejection and send exception immediately release request lock
+ok 2 - restoration synchronous rejection and send exception immediately release request lock
+  ---
+  duration_ms: 20.674856
+  type: 'test'
+  ...
+# Subtest: restoration per-command path gate is displayed and rechecked before sending
+ok 3 - restoration per-command path gate is displayed and rechecked before sending
+  ---
+  duration_ms: 10.160425
+  type: 'test'
+  ...
+# Subtest: restoration authority request settlement without revision change permits honest retry
+ok 4 - restoration authority request settlement without revision change permits honest retry
+  ---
+  duration_ms: 6.105063
+  type: 'test'
+  ...
+# Subtest: same-panel replacement invalidates restoration callbacks and late polls
+ok 5 - same-panel replacement invalidates restoration callbacks and late polls
+  ---
+  duration_ms: 5.737149
+  type: 'test'
+  ...
+# Subtest: synchronous restoration navigation during dispatch cannot paint the replacement panel
+ok 6 - synchronous restoration navigation during dispatch cannot paint the replacement panel
+  ---
+  duration_ms: 4.323399
+  type: 'test'
+  ...
+# Subtest: restoration recheck, unrelated revision and reopen retain the active transport gate
+ok 7 - restoration recheck, unrelated revision and reopen retain the active transport gate
+  ---
+  duration_ms: 10.990343
+  type: 'test'
+  ...
+# Subtest: restoration detailed ground and reconnect gates survive false readiness and stale clicks
+ok 8 - restoration detailed ground and reconnect gates survive false readiness and stale clicks
+  ---
+  duration_ms: 9.428676
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 618.658146

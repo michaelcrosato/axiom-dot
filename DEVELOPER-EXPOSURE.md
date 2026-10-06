@@ -97,3 +97,9 @@ CAMPAIGN-GUIDANCE.md describes read-only six-goal guidance, personal per-world/p
 ## Earned construction phases
 
 The existing Campaign workshop rehearsal now exposes a phase inspector and bounded phase history earned through real paid commands and actual resident work. Reset/repeat clears only its disposable model; 1–60-second steps retain the 1,200-second limit, strict recipe presets and evidence export. Phase thresholds are fixed read-only presentation of saved achieved work, not a progress-grant slider. Temporary construction geometry stays inside the unchanged collider envelopes. CAMPAIGN-LOOP.md consolidates the source-to-service and restoration-to-care rehearsals and their model-only placement limits.
+
+## Campaign control readiness and request feedback
+
+Workshop, town supply, habitat care and restoration show read-only readiness reasons from current authority, terrain and player pose. Their existing disposable scenarios remain bounded and keep campaign stores isolated; playable restoration practice now returns local rejection feedback without waiting for a campaign revision. Recipe drafts, selected targets, reset and evidence export retain their existing owners. Readiness and host ownership are safety gates, not adjustable tuning values.
+
+Reproduce source-only readiness transitions with `scripts/verify-campaign-readiness-build.mts` after the production build: it exports the actual emitted engine's bounded condition matrix, source/asset hashes and reason counts. UI contract tests exercise rejection, current-state refresh, Recheck, navigation dismissal/reopening and stale callbacks. Deferred mock-HTTP client tests distinguish queued, sent, acknowledged, stale, retried and disconnected actions without a real room or campaign save. These are numerical/DOM/transport diagnostics, not browser or device acceptance. See CAMPAIGN-LOOP.md for recovery steps.

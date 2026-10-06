@@ -1,0 +1,168 @@
+TAP version 13
+# Subtest: supply transfer reports synchronous transport rejection without claiming it was sent
+not ok 1 - supply transfer reports synchronous transport rejection without claiming it was sent
+  ---
+  duration_ms: 187.792372
+  type: 'test'
+  location: '/workspace/axiom-dot/tests/campaign-transfer-feedback.test.ts:27:2'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input was expected to not match the regular expression /request sent/i. Input:
+    
+    'Request sent. Authority rechecks source, cargo, location and revision.'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: 'Request sent. Authority rechecks source, cargo, location and revision.'
+  operator: 'doesNotMatch'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/axiom-dot/tests/campaign-transfer-feedback.test.ts:29:50)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: supply transfer rechecks detailed readiness on click and refreshes restored host access
+not ok 2 - supply transfer rechecks detailed readiness on click and refreshes restored host access
+  ---
+  duration_ms: 98.672166
+  type: 'test'
+  location: '/workspace/axiom-dot/tests/campaign-transfer-feedback.test.ts:33:2'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/axiom-dot/tests/campaign-transfer-feedback.test.ts:35:129)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: supply transfer retains no reply handler capable of changing a reopened board
+not ok 3 - supply transfer retains no reply handler capable of changing a reopened board
+  ---
+  duration_ms: 82.175507
+  type: 'test'
+  location: '/workspace/axiom-dot/tests/campaign-transfer-feedback.test.ts:40:2'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'Request sent. Authority rechecks source, cargo, location and revision.'
+    - 'Rejected by the old room.'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'Rejected by the old room.'
+  actual: 'Request sent. Authority rechecks source, cargo, location and revision.'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/axiom-dot/tests/campaign-transfer-feedback.test.ts:43:87)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: care transfer reports synchronous transport rejection without claiming it was sent
+not ok 4 - care transfer reports synchronous transport rejection without claiming it was sent
+  ---
+  duration_ms: 1.804662
+  type: 'test'
+  location: '/workspace/axiom-dot/tests/campaign-transfer-feedback.test.ts:27:2'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input was expected to not match the regular expression /request sent/i. Input:
+    
+    'Request sent. Authority rechecks position, stock and the transfer revision.'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: 'Request sent. Authority rechecks position, stock and the transfer revision.'
+  operator: 'doesNotMatch'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/axiom-dot/tests/campaign-transfer-feedback.test.ts:29:50)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: care transfer rechecks detailed readiness on click and refreshes restored host access
+not ok 5 - care transfer rechecks detailed readiness on click and refreshes restored host access
+  ---
+  duration_ms: 0.557844
+  type: 'test'
+  location: '/workspace/axiom-dot/tests/campaign-transfer-feedback.test.ts:33:2'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/axiom-dot/tests/campaign-transfer-feedback.test.ts:35:129)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: care transfer retains no reply handler capable of changing a reopened board
+not ok 6 - care transfer retains no reply handler capable of changing a reopened board
+  ---
+  duration_ms: 0.674914
+  type: 'test'
+  location: '/workspace/axiom-dot/tests/campaign-transfer-feedback.test.ts:40:2'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'Request sent. Authority rechecks position, stock and the transfer revision.'
+    - 'Rejected by the old room.'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'Rejected by the old room.'
+  actual: 'Request sent. Authority rechecks position, stock and the transfer revision.'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/axiom-dot/tests/campaign-transfer-feedback.test.ts:43:87)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 0
+# fail 6
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1746.252983

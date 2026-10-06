@@ -16,7 +16,7 @@ test('actual main town supply gates load and delivery on actual ground, range, t
 });
 test('actual town supply dispatch gates before reducers and preserves solo versus online authority',()=>{
  const action={type:'town-supply',command:{kind:'deliver',targetId:'workshop',expectedRevision:0}},state={zone:'valley',events:['Delivered']},coop={active:false,send:()=>{sent++;return true;}};let ready=false,sent=0,applied=0,committed=0;
- const deps={state,coop,sessionReloading:false,labActive:false,townSupplyReady:()=>ready,toast:()=>{},applyAction:()=>{applied++;return state;},commit:()=>{committed++;}};
+ const deps={state,coop,sessionReloading:false,labActive:false,townSupplyReady:()=>ready,townSupplyBlockReason:()=>ready?null:'Stand on clear ground.',toast:()=>{},applyAction:()=>{applied++;return state;},commit:()=>{committed++;}};
  const dispatch=new Function(...Object.keys(deps),stripTypeScriptTypes(mainFunction(main,'sendWorldAction'))+';return sendWorldAction;')(...Object.values(deps));dispatch(action);assert.deepEqual([applied,committed,sent],[0,0,0]);ready=true;dispatch(action);assert.deepEqual([applied,committed,sent],[1,1,0]);coop.active=true;dispatch(action);assert.deepEqual([applied,committed,sent],[1,1,1]);
 });
 test('actual cargo HUD reports the conserved load and real workshop distance and hides empty or isolated lab stock',()=>{

@@ -1,0 +1,101 @@
+{
+  "kind": "axiom-campaign-readiness-emitted-verification",
+  "version": 1,
+  "verifiedAt": "2026-10-06T11:04:07.219Z",
+  "scope": "Actual production readiness engine export. Exhaustive source/emitted boolean parity, explicit reason priority and recovery assertions, immutable presentation inputs. No gameplay mutation, browser, GPU, device, collision execution or full main startup claim.",
+  "engine": {
+    "file": "campaign-action-readiness-CkN_8uqe.js",
+    "sha256": "db6339866db39d60b2b9ab1b608dee94cccecb6f752f92ed4dd9519b189fbbb5",
+    "kind": "axiom-campaign-action-readiness"
+  },
+  "sourceHashes": {
+    "src/campaign-action-readiness.ts": "97048a07dc8303a6d6c15a9b25097c16fe0b7a692e7ee8d7c41c3621464133f7",
+    "src/main.ts": "5d7df17ae62d05a84375b34872b1421ada49465db0b29f29eabad80764be1678",
+    "src/town-supply-ui.ts": "7c431df8c00e77f8e22998b350af0c657e88a6db04857461e85e499fa1cd9235",
+    "src/workshop-construction-ui.ts": "2b45e40d2ff1ff7c3aa9f2d6bb1890d8240bc51e36cc1459fdd8883fc2b8fca3",
+    "src/restoration-care-ui.ts": "e703f3fc24d9f7c039aa402b80d65d5cc8d0ae44acd9cd50bd639827437d31b0",
+    "src/restoration-ui.ts": "469aa21e44b775fcd31aeaecf2ccf09d7c100cff395c51ab8d49d7c1d61f16c0",
+    "vite.client.config.ts": "c2ab677758c24d05acc64f2dc1dcc92cd986bdbc9f209c5fc539262706aac900",
+    "tests/campaign-action-readiness.test.ts": "277d222fe40501c15fc08ed5f8995048f9c85ccdbd9133ae5fcce6dc4060a43d",
+    "scripts/verify-campaign-readiness-build.mts": "5b3bba6f1d8b87c0846c2bed8071f257679b77dbe2d90a13ea86d3e295715c82"
+  },
+  "control": {
+    "booleanInputs": [
+      "reloading",
+      "loadFailed",
+      "lab",
+      "connecting",
+      "online",
+      "canAct",
+      "closed",
+      "paused",
+      "hostOnly",
+      "host",
+      "valley",
+      "alive",
+      "physicsReady",
+      "transitioning",
+      "staffBusy",
+      "contactBusy",
+      "crouched",
+      "grounded",
+      "onTerrain"
+    ],
+    "cases": 524288,
+    "sha256": "2188400daef85e6238dcaa58e1abfe5656ac4c61ab6a2e2bdf2e7c5e1d6b5db6",
+    "reasons": {
+      "Return to the valley to use this control.": 11264,
+      "The world is reloading. Wait for the current world to open.": 131072,
+      "The saved world could not be loaded. Reopen the world before using campaign controls.": 262144,
+      "Return to your campaign before using these shared stores.": 65536,
+      "Connecting to the shared world. Wait for its current state.": 32768,
+      "Connection interrupted. Wait for the current shared state before retrying.": 2048,
+      "This room is closed. Return to solo or join an open room.": 4096,
+      "The shared world is paused. Wait for the host to return.": 2048,
+      "Only the host can manage these shared materials. Ask the host to use this control.": 2048,
+      "Recover your suit before using this control.": 5632,
+      "Terrain is still preparing. Wait for the world transition to finish.": 4224,
+      "Stand on the ground beside this control.": 132,
+      "Lower your staff and finish the attack or guard recovery.": 704,
+      "Release the crate or ledge before using this control.": 352,
+      "Stand upright before using this control.": 176,
+      "<ready>": 44
+    }
+  },
+  "target": {
+    "booleanInputs": [
+      "available",
+      "near",
+      "level",
+      "confirmed",
+      "clear"
+    ],
+    "labels": 5,
+    "cases": 160,
+    "sha256": "60b2607017c7de73ed6fdb85b420a2cb978ba325f35332f7b64906eda993df97",
+    "reasons": {
+      "This target is no longer available. Select a current target and try again.": 80,
+      "Walk to Second Life Salvage; the control must be within 3.5 metres.": 8,
+      "Stand on the ground beside Second Life Salvage.": 4,
+      "Terrain at Second Life Salvage is still loading. Wait for collision confirmation.": 2,
+      "A solid obstacle blocks Second Life Salvage. Walk around it to reach the control.": 1,
+      "<ready>": 5,
+      "Walk to North habitat dock; the control must be within 3.5 metres.": 8,
+      "Stand on the ground beside North habitat dock.": 4,
+      "Terrain at North habitat dock is still loading. Wait for collision confirmation.": 2,
+      "A solid obstacle blocks North habitat dock. Walk around it to reach the control.": 1,
+      "Walk to Greenlight care station; the control must be within 3.5 metres.": 8,
+      "Stand on the ground beside Greenlight care station.": 4,
+      "Terrain at Greenlight care station is still loading. Wait for collision confirmation.": 2,
+      "A solid obstacle blocks Greenlight care station. Walk around it to reach the control.": 1,
+      "Walk to Northwest workshop board; the control must be within 3.5 metres.": 8,
+      "Stand on the ground beside Northwest workshop board.": 4,
+      "Terrain at Northwest workshop board is still loading. Wait for collision confirmation.": 2,
+      "A solid obstacle blocks Northwest workshop board. Walk around it to reach the control.": 1,
+      "Walk to 山の生息地; the control must be within 3.5 metres.": 8,
+      "Stand on the ground beside 山の生息地.": 4,
+      "Terrain at 山の生息地 is still loading. Wait for collision confirmation.": 2,
+      "A solid obstacle blocks 山の生息地. Walk around it to reach the control.": 1
+    }
+  }
+}

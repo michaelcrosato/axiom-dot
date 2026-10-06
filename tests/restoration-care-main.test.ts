@@ -17,7 +17,7 @@ test('actual main habitat care controls require achieved ground pose, nearby con
 });
 test('main care transfer dispatch rejects blocked input before reducers and routes accepted requests through authority',()=>{
  const action={type:'restoration-care',command:{kind:'deliver',targetId:'apothecary',expectedRevision:0}},state={zone:'valley',events:['Transferred care']},coop={active:false,send:()=>{sent++;return true;}};let ready=false,sent=0,applied=0,committed=0;
- const deps={state,coop,sessionReloading:false,labActive:false,restorationCareReady:()=>ready,toast:()=>{},applyAction:()=>{applied++;return state;},commit:()=>{committed++;}};
+ const deps={state,coop,sessionReloading:false,labActive:false,restorationCareReady:()=>ready,restorationCareBlockReason:()=>ready?null:'Stand on clear ground.',toast:()=>{},applyAction:()=>{applied++;return state;},commit:()=>{committed++;}};
  const dispatch=new Function(...Object.keys(deps),stripTypeScriptTypes(mainFunction(main,'sendWorldAction'))+';return sendWorldAction;')(...Object.values(deps));
  dispatch(action);assert.equal(applied,0);assert.equal(committed,0);assert.equal(sent,0);ready=true;dispatch(action);assert.equal(applied,1);assert.equal(committed,1);coop.active=true;dispatch(action);assert.equal(sent,1);assert.equal(applied,1);
 });

@@ -1,0 +1,232 @@
+TAP version 13
+# Subtest: blocked restoration navigation preserves polling and usable controls
+not ok 1 - blocked restoration navigation preserves polling and usable controls
+  ---
+  duration_ms: 31.718109
+  type: 'test'
+  location: '/tmp/readiness-restoration-before.test.ts:21:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    0 !== 1
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 0
+  operator: 'strictEqual'
+  stack: |-
+    file:///tmp/readiness-restoration-before.test.ts:25:30
+    withTimers (file:///tmp/readiness-restoration-before.test.ts:17:379)
+    TestContext.<anonymous> (file:///tmp/readiness-restoration-before.test.ts:21:81)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: restoration synchronous rejection and send exception immediately release request lock
+not ok 2 - restoration synchronous rejection and send exception immediately release request lock
+  ---
+  duration_ms: 4.596238
+  type: 'test'
+  location: '/tmp/readiness-restoration-before.test.ts:27:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    true !== false
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    file:///tmp/readiness-restoration-before.test.ts:31:40
+    withTimers (file:///tmp/readiness-restoration-before.test.ts:17:379)
+    TestContext.<anonymous> (file:///tmp/readiness-restoration-before.test.ts:27:98)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: restoration per-command path gate is displayed and rechecked before sending
+not ok 3 - restoration per-command path gate is displayed and rechecked before sending
+  ---
+  duration_ms: 3.44869
+  type: 'test'
+  location: '/tmp/readiness-restoration-before.test.ts:35:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    false !== true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    file:///tmp/readiness-restoration-before.test.ts:38:9
+    withTimers (file:///tmp/readiness-restoration-before.test.ts:17:379)
+    TestContext.<anonymous> (file:///tmp/readiness-restoration-before.test.ts:35:88)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: restoration authority request settlement without revision change permits honest retry
+not ok 4 - restoration authority request settlement without revision change permits honest retry
+  ---
+  duration_ms: 7.772187
+  type: 'test'
+  location: '/tmp/readiness-restoration-before.test.ts:41:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    true !== false
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    file:///tmp/readiness-restoration-before.test.ts:45:30
+    withTimers (file:///tmp/readiness-restoration-before.test.ts:17:379)
+    TestContext.<anonymous> (file:///tmp/readiness-restoration-before.test.ts:41:98)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: same-panel replacement invalidates restoration callbacks and late polls
+not ok 5 - same-panel replacement invalidates restoration callbacks and late polls
+  ---
+  duration_ms: 2.829043
+  type: 'test'
+  location: '/tmp/readiness-restoration-before.test.ts:48:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    file:///tmp/readiness-restoration-before.test.ts:53:118
+    withTimers (file:///tmp/readiness-restoration-before.test.ts:17:379)
+    TestContext.<anonymous> (file:///tmp/readiness-restoration-before.test.ts:48:84)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: synchronous restoration navigation during dispatch cannot paint the replacement panel
+not ok 6 - synchronous restoration navigation during dispatch cannot paint the replacement panel
+  ---
+  duration_ms: 5.864563
+  type: 'test'
+  location: '/tmp/readiness-restoration-before.test.ts:56:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    true !== false
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    file:///tmp/readiness-restoration-before.test.ts:59:112
+    withTimers (file:///tmp/readiness-restoration-before.test.ts:17:379)
+    TestContext.<anonymous> (file:///tmp/readiness-restoration-before.test.ts:56:98)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: restoration recheck, unrelated revision and reopen retain the active transport gate
+not ok 7 - restoration recheck, unrelated revision and reopen retain the active transport gate
+  ---
+  duration_ms: 6.609613
+  type: 'test'
+  location: '/tmp/readiness-restoration-before.test.ts:61:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    false !== true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    file:///tmp/readiness-restoration-before.test.ts:65:65
+    withTimers (file:///tmp/readiness-restoration-before.test.ts:17:379)
+    TestContext.<anonymous> (file:///tmp/readiness-restoration-before.test.ts:61:96)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: restoration detailed ground and reconnect gates survive false readiness and stale clicks
+not ok 8 - restoration detailed ground and reconnect gates survive false readiness and stale clicks
+  ---
+  duration_ms: 2.381926
+  type: 'test'
+  location: '/tmp/readiness-restoration-before.test.ts:70:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /Stand on reachable ground/. Input:
+    
+    '<section class="restoration-action"><button type="button" data-restoration-action="0" disabled>Apply refit</button><p>Structural cost 2 scrap + 0 core; recover 0 scrap + 0 core from the current body. Net inventory change: -2 scrap, 0 core. Requires a packed machine beside this dock. Contents are preserved; no recharge.<br>Control at x 0.0, z 0.0.<br>World controls are not ready.</p></section><section class="restoration-action"><button type="button" data-restoration-action="1" disabled>Service at dock</button><p>Transfer only the finite dock charge, filter and scent reserves that fit. Move captured contaminant into available sealed-waste storage. Requires a packed machine.<br>Control at x 0.0, z 0.0.<br>World controls are not ready.</p></section><section class="restoration-action"><button type="button" data-restoration-action="2" disabled>Deploy</button><p>Stand beside, not on, dock to deploy. Keep all explorers outside the full body footprint while within 3.5 m of the dock. The packed machine then walks the actual habitat route; deploying does not fill storage.<br>Control at x 0.0, z 0.0.<br>World controls are not ready.</p></section><section class="restoration-action"><button type="button" data-restoration-action="3" disabled>Start utility</button><p>Use the installed organ and utility recipe. Walk to the source before preparation; effects consume real stored charge and supplies. Pump requires adjacent cells or the onboard tank; other organs act on one cell.<br>World controls are not ready.</p></section><section class="restoration-action"><button type="button" data-restoration-action="4" disabled>Stop utility</button><p>Interrupt the current order. Committed energy, transferred water and captured waste remain accounted for.<br>World controls are not ready.</p></section><section class="restoration-action"><button type="button" data-restoration-action="5" disabled>Recall to dock</button><p>Walk back along the certified route and pack only on arrival. An empty-charge machine needs the explorer within 3.5 m for manual recovery; blocked paths remain blocked.<br>World controls are not ready.</p></section><section class="restoration-action"><button type="button" data-restoration-action="6" disabled>Repair suit</button><p>Only after habitat restoration: consume recoverable biomass above two units per cell, restoring two HP per unit, at most 20 HP per action.<br>Control at x 0.0, z 0.0.<br>World controls are not ready.</p></section>'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: '<section class="restoration-action"><button type="button" data-restoration-action="0" disabled>Apply refit</button><p>Structural cost 2 scrap + 0 core; recover 0 scrap + 0 core from the current body. Net inventory change: -2 scrap, 0 core. Requires a packed machine beside this dock. Contents are preserved; no recharge.<br>Control at x 0.0, z 0.0.<br>World controls are not ready.</p></section><section class="restoration-action"><button type="button" data-restoration-action="1" disabled>Service at dock</button><p>Transfer only the finite dock charge, filter and scent reserves that fit. Move captured contaminant into available sealed-waste storage. Requires a packed machine.<br>Control at x 0.0, z 0.0.<br>World controls are not ready.</p></section><section class="restoration-action"><button type="button" data-restoration-action="2" disabled>Deploy</button><p>Stand beside, not on, dock to deploy. Keep all explorers outside the full body footprint while within 3.5 m of the dock. The packed machine then walks the actual habitat route; deploying does not fill storage.<br>Control at x 0.0, z 0.0.<br>World controls are not ready.</p></section><section class="restoration-action"><button type="button" data-restoration-action="3" disabled>Start utility</button><p>Use the installed organ and utility recipe. Walk to the source before preparation; effects consume real stored charge and supplies. Pump requires adjacent cells or the onboard tank; other organs act on one cell.<br>World controls are not ready.</p></section><section class="restoration-action"><button type="button" data-restoration-action="4" disabled>Stop utility</button><p>Interrupt the current order. Committed energy, transferred water and captured waste remain accounted for.<br>World controls are not ready.</p></section><section class="restoration-action"><button type="button" data-restoration-action="5" disabled>Recall to dock</button><p>Walk back along the certified route and pack only on arrival. An empty-charge machine needs the explorer within 3.5 m for manual recovery; blocked paths remain blocked.<br>World controls are not ready.</p></section><section class="restoration-action"><button type="button" data-restoration-action="6" disabled>Repair suit</button><p>Only after habitat restoration: consume recoverable biomass above two units per cell, restoring two HP per unit, at most 20 HP per action.<br>Control at x 0.0, z 0.0.<br>World controls are not ready.</p></section>'
+  operator: 'match'
+  stack: |-
+    file:///tmp/readiness-restoration-before.test.ts:73:9
+    withTimers (file:///tmp/readiness-restoration-before.test.ts:17:379)
+    TestContext.<anonymous> (file:///tmp/readiness-restoration-before.test.ts:70:101)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 0
+# fail 8
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 433.725911

@@ -1,0 +1,74 @@
+{
+  "kind": "independent-exact-case-comparison",
+  "result": "pass",
+  "sourceCommit": "35fa4cc6c0a8b34d99478cc469c207c86cae6586",
+  "verifiedAt": "2026-10-06T12:13:54.926217+00:00",
+  "log": "/tmp/readiness-final-safe.tap",
+  "logSha256": "85a338e056fd3413aebdc89f79c9b25d49690f47abdebc1169ec8342e16ffac4",
+  "catalogs": [
+    "/tmp/readiness-independent-inventory.json",
+    "/tmp/readiness-final-inventory.json"
+  ],
+  "catalogsExactlyEqual": true,
+  "registeredFiles": 275,
+  "registeredCases": 1906,
+  "executedCases": 1906,
+  "exactNameMultisetMatchBothCatalogs": true,
+  "subtestNamesMatchResultsInOrder": true,
+  "contiguousIds": true,
+  "terminalPlan": 1906,
+  "stats": {
+    "tests": 1906,
+    "suites": 0,
+    "pass": 1906,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "duration_ms": 3638995.938546
+  },
+  "missingCases": [],
+  "extraCases": [],
+  "noSkipTodoDirectivesOrBailouts": true,
+  "oldCases": {
+    "baselineCatalog": "evidence/workshop-staging/registered-cases.json",
+    "retained": 1864,
+    "added": 42,
+    "fileAndNameMultisetRetention": true
+  },
+  "frozenSource": {
+    "manifest": "/tmp/readiness-frozen-source.json",
+    "trackedFiles": 828,
+    "allHashesUnchanged": true,
+    "gitStatusClean": true
+  },
+  "heldFiles": {
+    "baseline": "19db5793ca0893220a07f7f09d0c5e659d16591e",
+    "count": 13,
+    "exactExclusions": true,
+    "allBytesUnchanged": true,
+    "files": [
+      "tests/ecology.test.ts",
+      "tests/regional-clock-precision.test.ts",
+      "tests/regional-food-trade-witness.test.ts",
+      "tests/regional-food-world-authority.test.ts",
+      "tests/regional-food.test.ts",
+      "tests/regional-supply.test.ts",
+      "tests/regional-trade-integration.test.ts",
+      "tests/regional-trade-timeline.test.ts",
+      "tests/regional-trade.test.ts",
+      "tests/regional-weather-cold.test.ts",
+      "tests/regional-weather-trade-authority.test.ts",
+      "tests/regional-weather-trade.test.ts",
+      "tests/regional-weather.test.ts"
+    ]
+  },
+  "emittedReports": {
+    "count": 11,
+    "allFreshAuditedReportsUnchanged": true,
+    "sourceHashEntries": 83,
+    "assetHashEntries": 21,
+    "audit": "/tmp/readiness-independent-review.json"
+  },
+  "scope": "Completed permitted safe selection only; 13 documented held files excluded. Full rerun at single-file concurrency with unchanged assertions/deadlines. Prior failed run not certified. No browser/GPU/device claim."
+}

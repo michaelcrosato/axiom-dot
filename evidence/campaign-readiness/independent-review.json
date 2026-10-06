@@ -1,0 +1,391 @@
+{
+  "kind": "independent-campaign-readiness-review",
+  "verifiedAt": "2026-10-06T12:13:54.926217+00:00",
+  "sourceCommit": "35fa4cc6c0a8b34d99478cc469c207c86cae6586",
+  "sourceReview": {
+    "kind": "independent-campaign-readiness-review",
+    "baseline": "19db5793ca0893220a07f7f09d0c5e659d16591e",
+    "assessment": "No remaining blocker found. Pure explanatory engine; legacy boolean guards remain effective; latest command gates checked on click; synchronous rejection messages distinguish queued transport from model acceptance; restoration pending follows queued/inflight transport even across unrelated revisions, recheck and reopening; accepted snapshot callback ordering is covered by periodic pending recheck; same-panel replacement disposes callbacks/timer.",
+    "scope": [
+      "src/campaign-action-readiness.ts",
+      "src/main.ts",
+      "src/coop.ts",
+      "src/restoration-ui.ts",
+      "src/restoration-care-ui.ts",
+      "src/town-supply-ui.ts",
+      "src/workshop-construction-ui.ts",
+      "scripts/verify-campaign-readiness-build.mts",
+      "new focused regression files",
+      "two existing main harness dependency additions"
+    ],
+    "findingsResolved": [
+      "Practice restoration returns explicit local gate/kernel rejection to panel.",
+      "Transport query rechecked after snapshot acceptance callback and pending packet cleanup.",
+      "Unrelated revision changes cannot unlock while transport is queued/inflight.",
+      "Rejected restoration Map/Care navigation retains usable panel and timer."
+    ],
+    "independentFocused": {
+      "log": "/tmp/readiness-independent-focused.tap",
+      "cases": 41,
+      "passed": 41,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "newIndependentTests": "None added: implementer lifecycle regressions explicitly cover each independently identified edge; avoid duplicate tests.",
+    "legacyTestEdits": "Two existing harness files add the new blockedReason dependency only; old names and assertions retained.",
+    "emittedVerifierScope": "524288 scalar flag combinations and160 target cases test source/emitted pure presentation parity, read-only inputs and independent priority assertions; explicitly no geometry execution or full main/browser claim.",
+    "heldFiles": {
+      "count": 13,
+      "unchanged": true,
+      "baseline": "19db5793ca0893220a07f7f09d0c5e659d16591e",
+      "files": [
+        "tests/ecology.test.ts",
+        "tests/regional-clock-precision.test.ts",
+        "tests/regional-food-trade-witness.test.ts",
+        "tests/regional-food-world-authority.test.ts",
+        "tests/regional-food.test.ts",
+        "tests/regional-supply.test.ts",
+        "tests/regional-trade-integration.test.ts",
+        "tests/regional-trade-timeline.test.ts",
+        "tests/regional-trade.test.ts",
+        "tests/regional-weather-cold.test.ts",
+        "tests/regional-weather-trade-authority.test.ts",
+        "tests/regional-weather-trade.test.ts",
+        "tests/regional-weather.test.ts"
+      ]
+    },
+    "finalAggregate": {
+      "status": "pending"
+    },
+    "limits": [
+      "No browser/GPU/device verification.",
+      "No new server protocol or owner ledger; no held scope changes."
+    ]
+  },
+  "finalDeltaReview": {
+    "dispatch": "All three connected spending branches now consult detailed reason even when legacyReady is true, while null reason still falls back to false legacy guard. No reducer/transport call occurs on either rejection. Queue-full message distinguishes active queue rejection from connection readiness.",
+    "transport": "Client validates snapshots containing any of the three new campaign overlays even when no older regional overlay triggers validation. Malformed orphan ledger cannot replace confirmed world or acknowledge pending transport. Actual emitted class checked under eight deterministic mocked HTTP traces; no network claim.",
+    "oldTests": "Three existing harness changes: two added reason dependencies; one syntactic wiring expectation adjusted to strengthened guard. Case names and behavioral assertions preserved.",
+    "verifiers": "Exhaustive readiness flag parity is explicitly presentation-only. Client verifier identifies real production exported class and checks deferred acknowledgments, exact retries, malformed overlays, suspension and disconnect without claiming live network coverage.",
+    "docs": "CAMPAIGN-LOOP accurately distinguishes request transport from model acceptance and explains retry/navigation behavior."
+  },
+  "registration": {
+    "independent": "/tmp/readiness-independent-inventory.json",
+    "root": "/tmp/readiness-final-inventory.json",
+    "exactCatalogEquality": true,
+    "files": 275,
+    "cases": 1906,
+    "excluded": 13,
+    "baselineCatalog": "evidence/workshop-staging/registered-cases.json",
+    "oldRegisteredCases": 1864,
+    "allOldFileNamePairsRetained": true,
+    "addedCases": 42
+  },
+  "frozenSource": {
+    "manifest": "/tmp/readiness-frozen-source.json",
+    "trackedFiles": 828,
+    "allHashesUnchanged": true,
+    "gitStatusClean": true
+  },
+  "heldFiles": {
+    "baseline": "19db5793ca0893220a07f7f09d0c5e659d16591e",
+    "count": 13,
+    "exactExclusions": true,
+    "allUnchanged": true,
+    "files": [
+      {
+        "path": "tests/ecology.test.ts",
+        "sha256": "8dba88aa7fa9c7b5805fad5f617d728cb2b8181736b2c0f105a74a083b1c205d"
+      },
+      {
+        "path": "tests/regional-clock-precision.test.ts",
+        "sha256": "dab4d56ada5eea5cf93d0e77cd4d7ea8f2e7313646508299343cc2c2463e47ab"
+      },
+      {
+        "path": "tests/regional-food-trade-witness.test.ts",
+        "sha256": "d5c527b428cb0c4b8123353b3b16ef3559e3ca5f03ca42020e26ecfdbc3fd115"
+      },
+      {
+        "path": "tests/regional-food-world-authority.test.ts",
+        "sha256": "d93b967fb0b8f923dc96ae7f45c6ae29c39c01a4bd70933ae1aee7ef8f94f18c"
+      },
+      {
+        "path": "tests/regional-food.test.ts",
+        "sha256": "4421c33cad47d49db85ae7be0e256de9b710a449733b2800dc885c4ad3c8bf04"
+      },
+      {
+        "path": "tests/regional-supply.test.ts",
+        "sha256": "576861b39029f3f0f353fc741e23267acf7ee49ef3f4c3ccec8666050c428db7"
+      },
+      {
+        "path": "tests/regional-trade-integration.test.ts",
+        "sha256": "73822a613c5e4755694ea740f685c2131c9ee59461f8222263cb510c5d97e78c"
+      },
+      {
+        "path": "tests/regional-trade-timeline.test.ts",
+        "sha256": "b33ea23ead2a4bab6965f1b313226a9a067eb91c3d1aece64f0206e0957b57b7"
+      },
+      {
+        "path": "tests/regional-trade.test.ts",
+        "sha256": "c5596901e8ef929e869d332c86f87447f0c3f45c48836311366496ed57ab82b1"
+      },
+      {
+        "path": "tests/regional-weather-cold.test.ts",
+        "sha256": "15d9223233a03043b1b0d63219eb41cb6b366b72f8022b3c3f15eb491c312c91"
+      },
+      {
+        "path": "tests/regional-weather-trade-authority.test.ts",
+        "sha256": "580ef43e6f69bb9b9fad85776a3023be77a1fa59ce639913e0a0071f68b9c6c9"
+      },
+      {
+        "path": "tests/regional-weather-trade.test.ts",
+        "sha256": "05ecd2db4577c626123f5546580b7b74bc4e2df2ea3220a2894ffe13843be0de"
+      },
+      {
+        "path": "tests/regional-weather.test.ts",
+        "sha256": "fa8c437f8ae0e5b02fccf179e8c639474d0ce79b9953548e99909b0ca3c8a1d5"
+      }
+    ]
+  },
+  "finalAggregate": {
+    "status": "passed",
+    "certification": "/tmp/readiness-exact-case-comparison.json",
+    "sourceCommit": "35fa4cc6c0a8b34d99478cc469c207c86cae6586",
+    "log": "/tmp/readiness-final-safe.tap",
+    "logSha256": "85a338e056fd3413aebdc89f79c9b25d49690f47abdebc1169ec8342e16ffac4",
+    "registeredFiles": 275,
+    "registeredCases": 1906,
+    "executedCases": 1906,
+    "exactNameMultisetMatchBothCatalogs": true,
+    "contiguousIds": true,
+    "terminalPlan": 1906,
+    "stats": {
+      "tests": 1906,
+      "suites": 0,
+      "pass": 1906,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "duration_ms": 3638995.938546
+    }
+  },
+  "limits": [
+    "13 documented held files excluded.",
+    "No browser/GPU/touch/device acceptance."
+  ],
+  "correctedFreezeReview": {
+    "supersededSource": "b9e198f8714464d065dc90c38a6de465d8dbbe9d",
+    "onlyChangedFile": "tests/coop-integration.test.ts",
+    "exactFourNullDeclarationsOnly": true,
+    "caseNamesAssertionsDeadlinesUnchanged": true,
+    "recoveryLog": "/tmp/readiness-isolated-recovery.tap",
+    "recoveryStats": {
+      "tests": 11,
+      "pass": 11,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "firstAttemptNotCertified": true
+  },
+  "supersededEmittedAudit": {
+    "sourceCommit": "b9e198f8714464d065dc90c38a6de465d8dbbe9d",
+    "reportsAvailable": 11,
+    "allElevenFinalReportsAudited": true,
+    "reports": [
+      {
+        "report": "/tmp/readiness-view-emitted.json",
+        "sha256": "480ab91249e1ef0f46a01200ece5b0e8e28015486919a1f7ae210a4d87383dca",
+        "sourceEntriesChecked": 9,
+        "assetEntriesChecked": 1,
+        "scope": "Source and actual emitted Three geometry/material/matrix parity across all dimension extremes and achieved-work boundaries. Boundary snapshots are validated numerical fixtures, not claims that a player earned work or visited a location. Existing workshop emitted gate separately exercises earned work, actual Rapier routes and HTTP/save authority. No browser/GPU/touch/device acceptance."
+      },
+      {
+        "report": "/tmp/readiness-startup-emitted.json",
+        "sha256": "2c2a4a6d3a69bbdb2919784575c0130272567bf92473f19ae651ce0de8b26a8b",
+        "sourceEntriesChecked": 0,
+        "assetEntriesChecked": 0,
+        "scope": "Source and actual emitted opening authority, resident matrices, portrait/landscape/wide camera frustum candidates, retained-save recovery and watchdog fault-injection parity. Node22 CPU only; no browser/GPU, occlusion or device approval."
+      },
+      {
+        "report": "/tmp/readiness-main-emitted.json",
+        "sha256": "3595fef7ad2a569e4bdcca8431a1362054f1945655266687d6582f59f5944449",
+        "sourceEntriesChecked": 0,
+        "assetEntriesChecked": 3,
+        "scope": "Node 22 manual-clock production Rapier worker and real generated initial terrain; complete production main message handler, actual collision confirmations, world actions, contact packets and Three instance matrices. Intact town frame statements are executed in source order. Unrelated DOM/audio/combat effects are stubbed. No browser, GPU pixels, real worker timer, device FPS or regional food/terminal-clock review."
+      },
+      {
+        "report": "/tmp/readiness-workshop-emitted.json",
+        "sha256": "d712106715e4fd3fcf5e7b80c38926de56e0397fdd7d2b79f3413a3ced149971",
+        "sourceEntriesChecked": 12,
+        "assetEntriesChecked": 3,
+        "scope": "Actual production engine/view chunks, Three object matrices, source/emitted Rapier WASM workers and HTTP with disposable in-memory SQLite. No browser/GPU/device/live-save claim."
+      },
+      {
+        "report": "/tmp/readiness-town-life-emitted.json",
+        "sha256": "1cef47f1d3765b12bf3d5df3012ac833cf5584ce218892ea440ae1eb196eb0d3",
+        "sourceEntriesChecked": 0,
+        "assetEntriesChecked": 0,
+        "scope": "Local actual production engine, pose matrices, Rapier WASM worker and in-memory SQLite server. No browser/GPU/device/production-state probe."
+      },
+      {
+        "report": "/tmp/readiness-restoration-emitted.json",
+        "sha256": "f1e5c336a79f8004923dc9c6b78e80c5dd6bf1e8dd7842c5f25d8512a48ec094",
+        "sourceEntriesChecked": 14,
+        "assetEntriesChecked": 4,
+        "scope": "Actual built production restoration engine and view chunks; actual source/emitted Three object matrices and Rapier WASM workers; actual source/emitted HTTP authority with in-memory SQLite and preview-only binding. Numerical/Node evidence; no browser/GPU/device or live-state claim."
+      },
+      {
+        "report": "/tmp/readiness-care-emitted.json",
+        "sha256": "b9965a61120c460a1ecba18fc3cc20b6b9d8021c8ab1de4abdd79357c3ed19a5",
+        "sourceEntriesChecked": 13,
+        "assetEntriesChecked": 3,
+        "scope": "Actual emitted restoration, care bridge and town engines, earned habitat preparation replay, conserved delivery and achieved care, source/emitted HTTP with disposable SQLite. No browser/GPU/device or live-player claim."
+      },
+      {
+        "report": "/tmp/readiness-supply-emitted.json",
+        "sha256": "56287125bba9781df2426730d9eff81d892edb969042d832128b6599f9e2b1f2",
+        "sourceEntriesChecked": 9,
+        "assetEntriesChecked": 3,
+        "scope": "Actual emitted supply, town and construction model engines; seven finite canonical sources, cargo accounting, unchanged normal donations, construction material payment, source/emitted HTTP and disposable SQLite. No browser/GPU/device or live-save claim."
+      },
+      {
+        "report": "/tmp/readiness-guidance-emitted.json",
+        "sha256": "e7fc0634d6c0801f07d7753c14deefa99f4586c45343516f6d4111e4064953f2",
+        "sourceEntriesChecked": 8,
+        "assetEntriesChecked": 2,
+        "scope": "Actual emitted read-only guidance and earned scenario engines, source parity, canonical finite supply/construction save roundtrips, achieved worker progress and paid repairs. Care preparation uses its declared finite disposable fixture, not an importable campaign save. No browser/GPU/device or full main startup claim."
+      },
+      {
+        "report": "/tmp/readiness-client-emitted.json",
+        "sha256": "650fb4d0c4c8cfde601ebf3559371d6fd24ba786a429e6cfb4118b1c1a3824c9",
+        "sourceEntriesChecked": 9,
+        "assetEntriesChecked": 1,
+        "scope": "Actual production client export identified by prototype.hasPendingAction; source/emitted deferred mocked HTTP parity with bounded fake timers, queued/sent acknowledgments, stale replies, exact retries, three malformed overlay replies, intentional suspension behavior and late disconnect replies. No actual network, server integration, browser/GPU/device or live-data claim."
+      },
+      {
+        "report": "/tmp/readiness-feedback-emitted.json",
+        "sha256": "1084b77b875b83c89f4904321385bcb1783277317ca9af6f707faa10ef9464be",
+        "sourceEntriesChecked": 9,
+        "assetEntriesChecked": 1,
+        "scope": "Actual production readiness engine export. Exhaustive source/emitted boolean parity, explicit reason priority and recovery assertions, immutable presentation inputs. No gameplay mutation, browser, GPU, device, collision execution or full main startup claim."
+      }
+    ],
+    "allReportedSourceHashEntriesMatchFrozenManifestAndDisk": true,
+    "allInspectedAssetHashEntriesMatchDisk": true,
+    "clientTraceCount": 8,
+    "clientTraceHashVerified": true,
+    "candidateExcluded": true,
+    "sourceHashEntries": 83,
+    "assetHashEntries": 21,
+    "limits": "Legacy reports without source-hash maps are not claimed to supply them; physics trace hashes are output evidence rather than asset hashes. Client traces use deferred mocked HTTP, no live network. Feedback engine validates presentation flags, not gameplay execution. Aggregate certification pending."
+  },
+  "preAggregateEmittedAudit": {
+    "sourceCommit": "35fa4cc6c0a8b34d99478cc469c207c86cae6586",
+    "status": "complete",
+    "finalBuildLog": "/tmp/readiness-final-build.txt",
+    "finalBuildLogSha256": "fd8928ffd83fc4af8f80af7ee33d84a771d5e5ea0fa351f1637444554c1511af",
+    "reportsAvailable": 11,
+    "allElevenFinalReportsAudited": true,
+    "reports": [
+      {
+        "report": "/tmp/readiness-feedback-emitted.json",
+        "sha256": "03ffc832a1986d6b2856d6f3abf8ddeb9e40b150490c402a65a5e9d16c3f1633",
+        "sourceEntriesChecked": 9,
+        "assetEntriesChecked": 1,
+        "modifiedAfterFinalBuild": true,
+        "scope": "Actual production readiness engine export. Exhaustive source/emitted boolean parity, explicit reason priority and recovery assertions, immutable presentation inputs. No gameplay mutation, browser, GPU, device, collision execution or full main startup claim."
+      },
+      {
+        "report": "/tmp/readiness-client-emitted.json",
+        "sha256": "81e5130a44244de3d4584230c86ea54b8f4cb09292c9859cd2b9c8620203c44f",
+        "sourceEntriesChecked": 9,
+        "assetEntriesChecked": 1,
+        "modifiedAfterFinalBuild": true,
+        "scope": "Actual production client export identified by prototype.hasPendingAction; source/emitted deferred mocked HTTP parity with bounded fake timers, queued/sent acknowledgments, stale replies, exact retries, three malformed overlay replies, intentional suspension behavior and late disconnect replies. No actual network, server integration, browser/GPU/device or live-data claim."
+      },
+      {
+        "report": "/tmp/readiness-guidance-emitted.json",
+        "sha256": "5af197bb7e70ffcca9c1a4481fa74ec39f76e19be23feb5c5280d66fe96d87b2",
+        "sourceEntriesChecked": 8,
+        "assetEntriesChecked": 2,
+        "modifiedAfterFinalBuild": true,
+        "scope": "Actual emitted read-only guidance and earned scenario engines, source parity, canonical finite supply/construction save roundtrips, achieved worker progress and paid repairs. Care preparation uses its declared finite disposable fixture, not an importable campaign save. No browser/GPU/device or full main startup claim."
+      },
+      {
+        "report": "/tmp/readiness-supply-emitted.json",
+        "sha256": "9bd085a457773db4c4f671660aa9db295fad8b0072869af33229ec28ab086a20",
+        "sourceEntriesChecked": 9,
+        "assetEntriesChecked": 3,
+        "modifiedAfterFinalBuild": true,
+        "scope": "Actual emitted supply, town and construction model engines; seven finite canonical sources, cargo accounting, unchanged normal donations, construction material payment, source/emitted HTTP and disposable SQLite. No browser/GPU/device or live-save claim."
+      },
+      {
+        "report": "/tmp/readiness-care-emitted.json",
+        "sha256": "dcb2c61fc3452408cea99cca4de359e54a94619ca6c8dac8d6a02503e9dfea04",
+        "sourceEntriesChecked": 13,
+        "assetEntriesChecked": 3,
+        "modifiedAfterFinalBuild": true,
+        "scope": "Actual emitted restoration, care bridge and town engines, earned habitat preparation replay, conserved delivery and achieved care, source/emitted HTTP with disposable SQLite. No browser/GPU/device or live-player claim."
+      },
+      {
+        "report": "/tmp/readiness-restoration-emitted.json",
+        "sha256": "4601b7414f7e87dcf55b747e48ea5dc7cdbe9f38c1cb9606b1066f928bfccd97",
+        "sourceEntriesChecked": 14,
+        "assetEntriesChecked": 4,
+        "modifiedAfterFinalBuild": true,
+        "scope": "Actual built production restoration engine and view chunks; actual source/emitted Three object matrices and Rapier WASM workers; actual source/emitted HTTP authority with in-memory SQLite and preview-only binding. Numerical/Node evidence; no browser/GPU/device or live-state claim."
+      },
+      {
+        "report": "/tmp/readiness-town-life-emitted.json",
+        "sha256": "fe4f0d677a10c895c2b1c36cbd0b8b3188515d2ab4b39f62d9915829c1845fa8",
+        "sourceEntriesChecked": 0,
+        "assetEntriesChecked": 0,
+        "modifiedAfterFinalBuild": true,
+        "scope": "Local actual production engine, pose matrices, Rapier WASM worker and in-memory SQLite server. No browser/GPU/device/production-state probe."
+      },
+      {
+        "report": "/tmp/readiness-workshop-emitted.json",
+        "sha256": "ac61b77d7d4363a0f591be795e9f3f957aae235c4be6b90058643205b74660ad",
+        "sourceEntriesChecked": 12,
+        "assetEntriesChecked": 3,
+        "modifiedAfterFinalBuild": true,
+        "scope": "Actual production engine/view chunks, Three object matrices, source/emitted Rapier WASM workers and HTTP with disposable in-memory SQLite. No browser/GPU/device/live-save claim."
+      },
+      {
+        "report": "/tmp/readiness-main-emitted.json",
+        "sha256": "98ee23fbd478e82db86a4e430a9b04e81261f22c2bfc618f36a77ae4cae3b8e7",
+        "sourceEntriesChecked": 0,
+        "assetEntriesChecked": 3,
+        "modifiedAfterFinalBuild": true,
+        "scope": "Node 22 manual-clock production Rapier worker and real generated initial terrain; complete production main message handler, actual collision confirmations, world actions, contact packets and Three instance matrices. Intact town frame statements are executed in source order. Unrelated DOM/audio/combat effects are stubbed. No browser, GPU pixels, real worker timer, device FPS or regional food/terminal-clock review."
+      },
+      {
+        "report": "/tmp/readiness-startup-emitted.json",
+        "sha256": "b3a91b9c72fad2d169d9be6b3522826f4f324b5ea2781816507bfce299d182c5",
+        "sourceEntriesChecked": 0,
+        "assetEntriesChecked": 0,
+        "modifiedAfterFinalBuild": true,
+        "scope": "Source and actual emitted opening authority, resident matrices, portrait/landscape/wide camera frustum candidates, retained-save recovery and watchdog fault-injection parity. Node22 CPU only; no browser/GPU, occlusion or device approval."
+      },
+      {
+        "report": "/tmp/readiness-view-emitted.json",
+        "sha256": "ac2af9bc8b49e1bff586d9348980f8207fc6b5dbbb95824b39eaa456ebf66b6e",
+        "sourceEntriesChecked": 9,
+        "assetEntriesChecked": 1,
+        "modifiedAfterFinalBuild": true,
+        "scope": "Source and actual emitted Three geometry/material/matrix parity across all dimension extremes and achieved-work boundaries. Boundary snapshots are validated numerical fixtures, not claims that a player earned work or visited a location. Existing workshop emitted gate separately exercises earned work, actual Rapier routes and HTTP/save authority. No browser/GPU/touch/device acceptance."
+      }
+    ],
+    "pending": [],
+    "sourceHashEntries": 83,
+    "assetHashEntries": 21,
+    "clientTraceCount": 8,
+    "clientTraceHashVerified": true,
+    "limits": "Only fresh reports modified after final build included. Legacy absent source maps not inferred; physics trace hashes distinguished from assets. No live network/browser/device certification."
+  }
+}

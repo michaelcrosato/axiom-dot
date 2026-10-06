@@ -93,3 +93,7 @@ TOWN-SUPPLY.md documents the finite canonical scrap pickup → bounded delivery 
 ## Personal Field Plan
 
 CAMPAIGN-GUIDANCE.md describes read-only six-goal guidance, personal per-world/per-room tracking and selected map/inspector targets. The separate rehearsal exposes bounded setup, explicit steps, reset, strict presets and evidence from actual finite supply, paid construction, achieved work and service commands. Guidance changes no world, resource, reward, resident or room state. Existing completed progress is projected from current receipts, never inferred from selection. Browser/device review remains separate.
+
+## Earned construction phases
+
+The existing Campaign workshop rehearsal now exposes a phase inspector and bounded phase history earned through real paid commands and actual resident work. Reset/repeat clears only its disposable model; 1–60-second steps retain the 1,200-second limit, strict recipe presets and evidence export. Phase thresholds are fixed read-only presentation of saved achieved work, not a progress-grant slider. Temporary construction geometry stays inside the unchanged collider envelopes. CAMPAIGN-LOOP.md consolidates the source-to-service and restoration-to-care rehearsals and their model-only placement limits.

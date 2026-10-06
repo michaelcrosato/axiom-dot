@@ -28,4 +28,4 @@ The five existing restoration settings expose finite units, limits and consumers
 
 Source/emitted engines, real worker and numerical Three checks, save roundtrips, and disposable HTTP/SQLite authority tests support this milestone. They do not establish browser pixels, GPU performance, touch behavior or device acceptance. The exact thirteen held food/clock test files remain untouched and excluded. Existing gateway-crate and fatigue-replay caveats remain. The original private Site, hosting/sharing settings and live saves are unchanged.
 
-Next: connect non-food supply delivery to actual town demand, then unify playable guidance across construction, restoration and services.
+The connected supply, construction, care and personal Field Plan routes are implemented. See CAMPAIGN-LOOP.md for the consolidated walkthrough and current limits.

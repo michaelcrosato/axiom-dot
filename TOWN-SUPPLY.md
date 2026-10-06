@@ -29,4 +29,4 @@ The loop does not alter wilderness wood/stone, regional freight, food or weather
 
 The milestone's evidence covers source and emitted models, save validation, authority transport, existing achieved worker behavior and numerical geometry/physics checks. Browser pixels, touch, GPU performance and device visual acceptance remain for the owner's playtest. The exact thirteen held test files remain excluded, and the existing gateway-crate and fatigue-replay caveats remain. No private Site, live save, hosting or sharing settings are changed.
 
-Next: unify playable guidance across construction, restoration, supplies and services.
+The connected supply, construction, care and personal Field Plan routes are implemented. See CAMPAIGN-LOOP.md for the consolidated walkthrough and current limits.

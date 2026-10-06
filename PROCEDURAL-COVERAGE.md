@@ -67,3 +67,7 @@ The personal Field Plan projects current requirements, locations, progress and c
 ## Earned workshop staging and connected controls
 
 The approved workshop now changes its temporary sheathing, frame details, panel finishes and wrapped fixtures through five phases of actual achieved prefabrication. The original collision envelope remains fixed from payment; every unfinished solid remains visibly represented, and no second resident or movement authority is introduced. Stage-boundary checks cover all bounded dimensional extremes and emitted Three matrices. Selected-source and delivery-station map actions, nearby habitat selection and rejected navigation remain usable. See WORKSHOP-CONSTRUCTION.md and CAMPAIGN-LOOP.md.
+
+## Connected control feedback hardening
+
+The existing workshop/supply/care/restoration controls now expose current host, connection, terrain and achieved-pose gates, propagate local rejection, and refresh authoritative balances without replacing live drafts. Restoration request state follows the client's existing queued/in-flight packet across rechecks and reopening; no new command sequence, motion owner, resource ledger or save field is introduced. New-overlay-only malformed snapshots enter the existing full-world validation path. Exact stale-reply/retry and panel-lifecycle regressions cover these boundaries; held regional accounting remains unchanged.

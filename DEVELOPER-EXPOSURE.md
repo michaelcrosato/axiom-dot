@@ -85,3 +85,7 @@ Campaign construction and the separate disposable rehearsal are documented in WO
 ## Restoration to apothecary care
 
 RESTORATION-CARE.md documents the explicit finite collection/delivery loop and its achieved resident-care consumer. Systems → Restoration to care rehearsal uses production paid restoration commands and ticks to prepare unopened/restored/delivered scenarios, with all 100 resident identities and their normal navigation. Five existing habitat controls have bounded staged Apply/reset semantics; care quantities and benefits remain fixed. Strict 4 KB presets, source/seed/intended/applied setup, preparation actions, manual steps, stocks, patient state and conservation export to text. The operator relocation is explicitly a disposable model action, not player traversal evidence. No campaign writes, room tuning, food coupling or browser/device approval is exposed.
+
+## Valley salvage delivery
+
+TOWN-SUPPLY.md documents the finite canonical scrap pickup → bounded delivery pack → Second Life Salvage route. The campaign board exposes source locations, actual shortage, cargo, destination, capacity/cooldown and useful material consumers. Systems → Salvage delivery rehearsal provides disposable production-model scenarios, bounded setup, reset, strict staged presets and text evidence. Conversion and capacity are fixed conserved contracts, not stock/reward sliders. Ordinary town donations and resident material recovery remain available when caches are exhausted. No campaign writes, regional-ledger coupling or device acceptance is implied by this model.

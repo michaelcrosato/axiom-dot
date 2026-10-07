@@ -37,7 +37,7 @@ export const REJOIN_GRACE_MS=60000;
 export const INVITE_LIFETIME_MS=24*60*60*1000;
 export interface RoomPlayer {
   id:string;userId:string;sessionId:string;name:string;slot:number;active:boolean;lastSeen:number;lastMove:number;
-  seq:number;wildernessCollisionVersion?:1;townCollisionVersion?:1|2;zone:State['zone'];player:State['player'];pose:CoopMove;combo:ComboState;motion?:VerticalState;guard?:GuardState;
+  seq:number;wildernessCollisionVersion?:1;townCollisionVersion?:1|2|3;zone:State['zone'];player:State['player'];pose:CoopMove;combo:ComboState;motion?:VerticalState;guard?:GuardState;
 }
 export interface CoopRoom {
   schema:1;id:string;ownerId:string;hostId:string;code:string;name:string;
@@ -80,10 +80,10 @@ export function playerMotion(room:CoopRoom,p:RoomPlayer):VerticalState{
 }
 /** One-time lazy room upgrade for actors saved inside former decoration. Client poses never choose the recovery. */
 function recoverWildernessOverlap(room:CoopRoom,p:RoomPlayer){
-  if(room.world.regional&&p.zone==='valley'&&p.townCollisionVersion!==TOWN_LAYOUT_VERSION){
-    const old=p.player,safe=safeTownPosition(room.world.seed,old);p.player={...old,...safe};
+  if(room.world.regional&&p.zone==='valley'&&p.townCollisionVersion!==(room.world.townLayout?.version??TOWN_LAYOUT_VERSION)){
+    const old=p.player,safe=safeTownPosition(room.world.seed,old,room.world.townLayout);p.player={...old,...safe};
     if((p.motion!.grounded&&regionalTownCleared(room.world.seed,old.x,old.z)&&Math.abs(p.motion!.feetY-legacyRegionalHeight(room.world.seed,old.x,old.z))<.5)||safe.x!==old.x||safe.z!==old.z)p.motion={...p.motion!,feetY:worldHeight(playerWorld(room,p),safe.x,safe.z),vy:0,grounded:true};
-    delete p.wildernessCollisionVersion;p.townCollisionVersion=TOWN_LAYOUT_VERSION;projectMotion(p,p.motion!);
+    delete p.wildernessCollisionVersion;p.townCollisionVersion=room.world.townLayout?.version??TOWN_LAYOUT_VERSION;projectMotion(p,p.motion!);
   }
   if(p.wildernessCollisionVersion===1)return;
   const s=playerWorld(room,p),m=p.motion!;
@@ -253,8 +253,8 @@ export function advanceRoom(room:CoopRoom,now:number){
   room.enemyHP=Object.fromEntries(room.world.encounters!.enemies.map(e=>[e.id,e.hp]));
   keepHostWorld(room);
 }
-const townCrowds=new Map<number,TownCrowd>();
-function townCrowdFor(seed:number){let crowd=townCrowds.get(seed);if(!crowd){crowd=new TownCrowd(seed);townCrowds.set(seed,crowd);while(townCrowds.size>4)townCrowds.delete(townCrowds.keys().next().value!);}return crowd;}
+const townCrowds=new Map<string,TownCrowd>();
+function townCrowdFor(s:State){const seed=s.seed,key=seed+':'+(s.townLayout?.manifestHash??'legacy');let crowd=townCrowds.get(key);if(!crowd){crowd=new TownCrowd(seed,s.townLayout);townCrowds.set(key,crowd);while(townCrowds.size>4)townCrowds.delete(townCrowds.keys().next().value!);}return crowd;}
 function movePlayer(room:CoopRoom,p:RoomPlayer,move:CoopMove,now:number){
   const m=playerMotion(room,p),s=playerWorld(room,p),bound=playerCenterBound(s),elapsed=Math.max(0,Math.min(.8,(now-p.lastMove)/1000));
   // No per-packet distance allowance: flooding requests must not manufacture movement time.
@@ -262,7 +262,7 @@ function movePlayer(room:CoopRoom,p:RoomPlayer,move:CoopMove,now:number){
   const scale=distance>limit?limit/distance:1;
   let next={x:Math.max(-bound,Math.min(bound,p.player.x+(move.x-p.player.x)*scale)),z:Math.max(-bound,Math.min(bound,p.player.z+(move.z-p.player.z)*scale))};
   const g=motionGeometry(s);setCrouch(m,p.player.x,p.player.z,move.crouched,g);
-  if(s.regional&&s.zone==='valley'&&Math.max(p.player.x,next.x)>TOWN_CENTER.x-TOWN_BOUNDS.halfWidth+2&&Math.min(p.player.x,next.x)<TOWN_CENTER.x+TOWN_BOUNDS.halfWidth-2&&Math.max(p.player.z,next.z)>TOWN_CENTER.z-TOWN_BOUNDS.halfDepth+6&&Math.min(p.player.z,next.z)<TOWN_CENTER.z+TOWN_BOUNDS.halfDepth-6){const actors=room.players.filter(a=>a.active&&a.zone==='valley'&&now-a.lastSeen<=PLAYER_TIMEOUT_MS).map(a=>({id:a.id,x:a.player.x,z:a.player.z,feetY:playerMotion(room,a).feetY}));const crowd=townCrowdFor(s.seed).sample(townClock(s.causal),100,1,actors,townLifePoses(s.townLife));next=slideTownCrowd(p.player,next,crowd,m.feetY,COOP_BODY.radius);}
+  if(s.regional&&s.zone==='valley'&&Math.max(p.player.x,next.x)>TOWN_CENTER.x-TOWN_BOUNDS.halfWidth+2&&Math.min(p.player.x,next.x)<TOWN_CENTER.x+TOWN_BOUNDS.halfWidth-2&&Math.max(p.player.z,next.z)>TOWN_CENTER.z-TOWN_BOUNDS.halfDepth+6&&Math.min(p.player.z,next.z)<TOWN_CENTER.z+TOWN_BOUNDS.halfDepth-6){const actors=room.players.filter(a=>a.active&&a.zone==='valley'&&now-a.lastSeen<=PLAYER_TIMEOUT_MS).map(a=>({id:a.id,x:a.player.x,z:a.player.z,feetY:playerMotion(room,a).feetY}));const crowd=townCrowdFor(s).sample(townClock(s.causal),100,1,actors,townLifePoses(s.townLife));next=slideTownCrowd(p.player,next,crowd,m.feetY,COOP_BODY.radius);}
   if(p.player.hp>0&&moveVertical(m,p.player,next,g))p.player={...p.player,...next};
   setCrouch(m,p.player.x,p.player.z,move.crouched,g);p.pose.facing=move.facing;projectMotion(p,m);p.lastMove=now;
 }
@@ -332,7 +332,7 @@ export function syncRoom(room:CoopRoom,userId:string,input:CoopSync,now:number):
       const m=playerMotion(room,p);if(!m.grounded||m.crouched||p.combo.phase!=='idle'||guardBusy(playerGuard(p))||Math.abs(m.feetY-worldHeight(s,p.player.x,p.player.z))>.45){notices.push('Stand on the ground with your staff lowered to use town services');continue;}
       if(command.type==='town-director'){const target=s.townDirector?townDirectorInteractionPosition(s.townDirector,command.command.episodeId):undefined;if(!target||!clearPulsePath({...p.player,y:m.feetY},{...target,y:6},roomObstacles(s))){notices.push('Reach the request service by a clear path');continue;}}
       if(command.type==='town-life'){const target=s.townLife?townLifeInteractionTarget(s.townLife,command.command,room.players.filter(a=>a.active&&a.zone==='valley'&&now-a.lastSeen<=PLAYER_TIMEOUT_MS).map(a=>({id:a.id,x:a.player.x,z:a.player.z,feetY:playerMotion(room,a).feetY}))):undefined;if(!target||!clearPulsePath({...p.player,y:m.feetY},{...target,y:6},roomObstacles(s))){notices.push('Reach this resident or town service by a clear path');continue;}}
-      if(command.type==='town-purchase'){const offer=TOWN_OFFERS.find(o=>o.id===command.command.offerId),target=offer?startingTown(s.seed).shops[offer.shopIndex]!.entry:undefined;if(!target||!clearPulsePath({...p.player,y:m.feetY},{...target,y:6},roomObstacles(s))){notices.push('Reach the shop counter by a clear path');continue;}}
+      if(command.type==='town-purchase'){const offer=TOWN_OFFERS.find(o=>o.id===command.command.offerId),target=offer?startingTown(s.seed,s.townLayout).shops[offer.shopIndex]!.entry:undefined;if(!target||!clearPulsePath({...p.player,y:m.feetY},{...target,y:6},roomObstacles(s))){notices.push('Reach the shop counter by a clear path');continue;}}
     }
     if(command.type==='regional-food'){
       const m=playerMotion(room,p);

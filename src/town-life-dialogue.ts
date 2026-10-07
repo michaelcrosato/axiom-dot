@@ -8,7 +8,7 @@ export function townLifeDialogue(life:TownLifeState,index:number):ConversationLi
  const strained=lowest.value<25;
  const urgency=lowest.key==='nourishment'?'something to eat':lowest.key==='energy'?'a proper rest':lowest.key==='hygiene'?'a wash':lowest.key==='comfort'?'some quiet comfort':lowest.key==='connection'?'some company':'time for something meaningful';
  const shortages=[life.resources.pantry<12?'prepared meals':null,life.resources.water<12?'stored water':null,life.resources.materials<6?'repair materials':null].filter(Boolean);
- const closed=life.facilities.filter(f=>f.closedFor>0||f.condition<15).map(f=>townLifeFacilities(life.seed).find(p=>p.id===f.id)?.label??'a service');
+ const closed=life.facilities.filter(f=>f.closedFor>0||f.condition<15).map(f=>townLifeFacilities(life.seed,life.townLayout).find(p=>p.id===f.id)?.label??'a service');
  const relation=[...r.relationships].sort((a,b)=>Math.abs(b.affinity)-Math.abs(a.affinity)||a.residentId.localeCompare(b.residentId))[0];
  const other=relation?roster.find(person=>person.id===relation.residentId)?.name:undefined;
  const social=relation&&other?relation.affinity>=25?`I have been getting along with ${other}. Having someone familiar nearby makes company more appealing.`:relation.affinity<=-15?`Things have been tense with ${other}. I may choose quieter company until we have had some space.`:`I know ${other}, but relationships take more than one pleasant conversation.`:'I would like to get to know more of the neighbors. We each make time for company differently.';
@@ -26,7 +26,7 @@ export function townLifeDialogue(life:TownLifeState,index:number):ConversationLi
 
 /** A concise, current town situation for the in-world quest area. No synthetic missions or rewards. */
 export function townLifeSituation(life:TownLifeState):{title:string;detail:string;residentId:string|null}{
- const facilities=townLifeFacilities(life.seed),closed=life.facilities.find((f,i)=>facilities[i]!.kind!=='home'&&(f.closedFor>0||f.condition<15));
+ const facilities=townLifeFacilities(life.seed,life.townLayout),closed=life.facilities.find((f,i)=>facilities[i]!.kind!=='home'&&(f.closedFor>0||f.condition<15));
  if(closed)return {title:'Hearthmere · a service needs help',detail:`${facilities.find(f=>f.id===closed.id)!.label} is unavailable. Residents are seeking alternatives; bring repair materials to the service if you can help.`,residentId:null};
  if(life.resources.pantry<20)return {title:'Hearthmere · meals are running low',detail:'Residents need harvested produce and water to cook. Check Town life for the missing supply or an interrupted service.',residentId:null};
  if(life.resources.water<20)return {title:'Hearthmere · water is running low',detail:'Drawing water takes time and a free station. A canister contribution at the water station can help the shared store.',residentId:null};

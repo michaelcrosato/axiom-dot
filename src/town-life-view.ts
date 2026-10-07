@@ -3,8 +3,8 @@ import {townLifeFacilities,type TownLifeState} from './town-life.ts';
 import {townLifeTaskPoint,townLifeTaskStages} from './town-navigation.ts';
 interface Part {facility:number;shape:0|1;x:number;y:number;z:number;w:number;h:number;d:number;color:number;marker?:boolean}
 /** Findable open-air stations in two instanced draws. Pads are markers, not hidden colliders. */
-export function createTownLifeView(seed:number){
- const root=new THREE.Group();root.name='hearthmere-life-services';const facilities=townLifeFacilities(seed),parts:Part[]=[];
+export function createTownLifeView(seed:number,townLayout?:import('./starting-town.ts').TownLayout){
+ const root=new THREE.Group();root.name='hearthmere-life-services';const facilities=townLifeFacilities(seed,townLayout),parts:Part[]=[];
  for(let i=0;i<facilities.length;i++){
   const f=facilities[i]!,add=(shape:0|1,x:number,y:number,z:number,w:number,h:number,d:number,color:number,marker=false)=>parts.push({facility:i,shape,x:f.x+x,y:6+y,z:f.z+z,w,h,d,color,...(marker?{marker:true}:{})});
   const color=f.kind==='home'?0x9da37b:f.kind==='garden'?0x608255:f.kind==='well'||f.kind==='apothecary'?0x70aaa4:f.kind==='square'?0xbe9e68:0xb28459;

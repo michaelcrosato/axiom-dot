@@ -1,3 +1,4 @@
+import type {TownLayout} from './starting-town.ts';
 import {regionalPlan,regionalHeight,regionalTownRoads,REGIONAL_MAX_ROAD_GRADE} from './regional-world.ts';
 import {worldValley} from './generation.ts';import {valleySurfaceHeight} from './valley.ts';
 export interface RegionalRoute {from:string;to:string;roadIds:string[];points:{x:number;y:number;z:number}[];horizontalMetres:number;surfaceMetres:number;maxGrade:number}
@@ -15,25 +16,25 @@ export function regionalRoute(seed:number,from:string,to:string):RegionalRoute|n
  let horizontalMetres=0,surfaceMetres=0,maxGrade=0;for(let i=1;i<points.length;i++){const a=points[i-1]!,b=points[i]!,d=Math.hypot(b.x-a.x,b.z-a.z);if(!d)continue;horizontalMetres+=d;surfaceMetres+=Math.hypot(d,b.y-a.y);maxGrade=Math.max(maxGrade,Math.abs(b.y-a.y)/d);}return {from,to,roadIds:sections.map(s=>s.road.id),points,horizontalMetres,surfaceMetres,maxGrade};
 }
 export interface RegionalTrailGrade {id:string;kind:'trail'|'town';horizontalMetres:number;maxGrade:number;at:{x:number;z:number}}
-export interface RegionalTrailGradeAudit {version:1;seed:number;limit:number;spacingMetres:number;trails:readonly RegionalTrailGrade[];steepest:RegionalTrailGrade;violations:readonly string[]}
-const gradeAudits=new Map<number,RegionalTrailGradeAudit>();
+export interface RegionalTrailGradeAudit {townLayout?:TownLayout;version:1;seed:number;limit:number;spacingMetres:number;trails:readonly RegionalTrailGrade[];steepest:RegionalTrailGrade;violations:readonly string[]}
+const gradeAudits=new Map<string,RegionalTrailGradeAudit>();
 /** Read-only developer evidence: every planned trail and Hearthmere street, sampled on
  * the committed regional surface (the heights the collision mesh is built from). */
-export function regionalTrailGradeAudit(seed:number,spacingMetres=2):RegionalTrailGradeAudit {
+export function regionalTrailGradeAudit(seed:number,spacingMetres=2,townLayout?:TownLayout):RegionalTrailGradeAudit {
  if(!Number.isFinite(spacingMetres)||spacingMetres<.25||spacingMetres>8)throw new RangeError('Grade sample spacing must be 0.25–8 m');
- const cached=spacingMetres===2?gradeAudits.get(seed):undefined;if(cached)return cached;
- const plan=regionalPlan(seed),roads=[...plan.roads.map(road=>({road,kind:'trail' as const})),...regionalTownRoads(seed).map(road=>({road,kind:'town' as const}))];
+ const key=seed+':'+(townLayout?.manifestHash??'legacy'),cached=spacingMetres===2?gradeAudits.get(key):undefined;if(cached)return cached;
+ const plan=regionalPlan(seed),roads=[...plan.roads.map(road=>({road,kind:'trail' as const})),...regionalTownRoads(seed,townLayout).map(road=>({road,kind:'town' as const}))];
  const trails=roads.map(({road,kind}):RegionalTrailGrade=>{
   let horizontalMetres=0,maxGrade=0,at={x:road.points[0]!.x,z:road.points[0]!.z};
   for(let i=1;i<road.points.length;i++){
    const a=road.points[i-1]!,b=road.points[i]!,length=Math.hypot(b.x-a.x,b.z-a.z);if(!length)continue;horizontalMetres+=length;
-   const steps=Math.ceil(length/spacingMetres);let previous=regionalHeight(seed,a.x,a.z);
-   for(let k=1;k<=steps;k++){const t=k/steps,x=a.x+(b.x-a.x)*t,z=a.z+(b.z-a.z)*t,y=regionalHeight(seed,x,z),grade=Math.abs(y-previous)/(length/steps);if(grade>maxGrade){maxGrade=grade;at={x,z};}previous=y;}
+   const steps=Math.ceil(length/spacingMetres);let previous=regionalHeight(seed,a.x,a.z,townLayout);
+   for(let k=1;k<=steps;k++){const t=k/steps,x=a.x+(b.x-a.x)*t,z=a.z+(b.z-a.z)*t,y=regionalHeight(seed,x,z,townLayout),grade=Math.abs(y-previous)/(length/steps);if(grade>maxGrade){maxGrade=grade;at={x,z};}previous=y;}
   }
   return Object.freeze({id:road.id,kind,horizontalMetres,maxGrade,at:Object.freeze(at)});
  });
  const steepest=trails.reduce((a,b)=>b.maxGrade>a.maxGrade?b:a);
- const audit:RegionalTrailGradeAudit=Object.freeze({version:1 as const,seed,limit:REGIONAL_MAX_ROAD_GRADE,spacingMetres,trails:Object.freeze(trails),steepest,violations:Object.freeze(trails.filter(t=>t.maxGrade>REGIONAL_MAX_ROAD_GRADE).map(t=>t.id))});
- if(spacingMetres===2){if(gradeAudits.size>=4)gradeAudits.delete(gradeAudits.keys().next().value!);gradeAudits.set(seed,audit);}
+ const audit:RegionalTrailGradeAudit=Object.freeze({version:1 as const,seed,...(townLayout?{townLayout}:{}),limit:REGIONAL_MAX_ROAD_GRADE,spacingMetres,trails:Object.freeze(trails),steepest,violations:Object.freeze(trails.filter(t=>t.maxGrade>REGIONAL_MAX_ROAD_GRADE).map(t=>t.id))});
+ if(spacingMetres===2){if(gradeAudits.size>=4)gradeAudits.delete(gradeAudits.keys().next().value!);gradeAudits.set(key,audit);}
  return audit;
 }

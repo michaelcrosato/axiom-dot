@@ -76,7 +76,7 @@ export class CoopClient {
     if(Object.hasOwn(snapshot.world,'wilderness')){try{snapshot.world={...snapshot.world,wilderness:immutableWildernessState(snapshot.world.wilderness,snapshot.world,this.current?.world.wilderness)};}catch{throw new CoopRequestError(503,'protocol_mismatch','This room returned an invalid resource ledger');}}
     // Certify the complete external dependency graph before accepting any regional
     // overlay. A valid-looking food ledger cannot refer to forged water or stores.
-    if(['frontierSupply','frontierTrade','frontierFood','town','townLife','townDirector','restoration','workshopConstruction','restorationCare','townSupply'].some(key=>Object.hasOwn(snapshot.world,key))){
+    if(['frontierSupply','frontierTrade','frontierFood','townLayout','town','townLife','townDirector','restoration','workshopConstruction','restorationCare','townSupply'].some(key=>Object.hasOwn(snapshot.world,key))){
       try{
         let world=snapshot.world;
                 if(Object.hasOwn(world,'restoration'))world={...world,restoration:immutableRestoration(world.restoration,worldRestorationPlan(world.seed))};

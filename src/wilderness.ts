@@ -6,7 +6,7 @@ import {withinBuildArea} from './waterworks.ts';
 import {generateObjects} from './world.ts';
 import {dodecahedronObstacle,nearestObstaclePoint,type WildernessObstacle,type WildernessPoint} from './wilderness-geometry.ts';
 export {wildernessSegmentClear,obstacleSegmentIntersects,obstaclePlanes,type WildernessObstacle,type WildernessPlane,type WildernessPoint} from './wilderness-geometry.ts';
-export interface WildernessIdentity {generation:1|2;seed:number;regional?:{version:1}}
+export interface WildernessIdentity {townLayout?:import('./starting-town.ts').TownLayout;generation:1|2;seed:number;regional?:{version:1}}
 export interface WildernessProjection {harvested:readonly string[]}
 export interface WildernessFeature {
  readonly id:string;readonly sourceId:string;readonly source:'tree'|'field-rock'|'river-rock'|'decoration'|'cave-rock';readonly kind:'tree'|'rock';
@@ -87,7 +87,7 @@ export function wildernessHarvested(state:WildernessProjection|undefined,id:stri
 export function wildernessObstaclesNear(identity:WildernessIdentity,x:number,z:number,state?:WildernessProjection):WildernessObstacle[]{
  if(!identity.regional)return wildernessObstacles(identity,state);
  const core=wildernessFeatures(identity).filter(f=>Math.abs(f.x-x)<=CHUNK_SIZE*2+8&&Math.abs(f.z-z)<=CHUNK_SIZE*2+8).flatMap(f=>wildernessFeatureObstacles(f,state));
- return [...core,...regionalObstaclesNear(identity.seed,x,z).filter(o=>!o.featureId||!wildernessHarvested(state,o.featureId)||!wildernessFeatureById(identity,o.featureId)?.removable)];
+ return [...core,...regionalObstaclesNear(identity.seed,x,z,identity.townLayout).filter(o=>!o.featureId||!wildernessHarvested(state,o.featureId)||!wildernessFeatureById(identity,o.featureId)?.removable)];
 }
 export const wildernessFeatureDepleted=(feature:WildernessFeature,state?:WildernessProjection)=>wildernessHarvested(state,feature.id);
 export const wildernessFeatureRemaining=(feature:WildernessFeature,state?:WildernessProjection)=>!(feature.removable&&wildernessFeatureDepleted(feature,state));

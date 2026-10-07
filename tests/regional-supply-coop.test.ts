@@ -101,7 +101,7 @@ test('regional commands use each actor current settlement and authoritative idle
 
 test('building cannot entomb any present or disconnected valley peer or the durable survey crate',()=>{
  const s=supplied(),box=regionalSupplyConstructionBoxes(s.seed,post(s).id).find(b=>b.solid)!;assert(box);
- for(const kind of ['present','disconnected','crate'] as const){const initial=copy(s),position={x:box.center.x,z:box.center.z};if(kind==='crate'){const body={...traversalBodies(initial)[0]!,...position,y:box.center.y};initial.traversal=traversalFromBodies([body],initial)!;valid(initial);}
+ for(const kind of ['present','disconnected','crate'] as const){const initial=copy(s),position={x:box.center.x,z:box.center.z};if(kind==='crate'){const body={...traversalBodies(initial)[0]!,...position,y:box.center.y};initial.traversal=traversalFromBodies([body,...traversalBodies(initial).slice(1)],initial)!;valid(initial);}
  const room=createRoom('host','Host',initial,1000),host=room.players[0]!;
  if(kind!=='crate'){const peer=makePlayer('guest','Guest',1,at(initial,position.x,position.z),1000);if(kind==='disconnected')peer.active=false;room.players.push(peer);}
  const before=copy(room.world.frontierSupply),notices=syncRoom(room,'host',{seq:1,sessionId:host.sessionId,actions:[command(room.world,'build')]},1000);assert.deepEqual(room.world.frontierSupply,before,kind);assert(notices.some(n=>n.includes('construction footprint')),kind);assert.equal(regionalSupplyObstacles(room.world.seed,room.world.frontierSupply!).length,0);valid(room.world);

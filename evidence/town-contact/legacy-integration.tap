@@ -1,0 +1,206 @@
+TAP version 13
+# AXIOM co-op request failed Error
+# AXIOM co-op request failed Error
+# AXIOM co-op request failed Error
+# AXIOM co-op request failed Error
+# AXIOM co-op request failed Error
+# AXIOM co-op request failed Error
+# AXIOM co-op request failed Error
+# AXIOM co-op request failed Error
+# AXIOM co-op request failed Error
+# AXIOM co-op request failed Error
+# (node:2860) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: regional supply HTTP allowlist rejects replacement stocks, peers, malformed commands and unbounded revisions
+ok 1 - regional supply HTTP allowlist rejects replacement stocks, peers, malformed commands and unbounded revisions
+  ---
+  duration_ms: 2064.267636
+  type: 'test'
+  ...
+# Subtest: four regional actors race one delivery across real SQLite CAS and preserve finite source accounting
+ok 2 - four regional actors race one delivery across real SQLite CAS and preserve finite source accounting
+  ---
+  duration_ms: 3712.189703
+  type: 'test'
+  ...
+# Subtest: concurrent build starts one conserved project, keeps the same solids through completion and rejects replay
+ok 3 - concurrent build starts one conserved project, keeps the same solids through completion and rejects replay
+  ---
+  duration_ms: 10490.223787
+  type: 'test'
+  ...
+# Subtest: regional commands use each actor current settlement and authoritative idle grounded posture
+ok 4 - regional commands use each actor current settlement and authoritative idle grounded posture
+  ---
+  duration_ms: 930.085559
+  type: 'test'
+  ...
+# Subtest: building cannot entomb any present or disconnected valley peer or the durable survey crate
+ok 5 - building cannot entomb any present or disconnected valley peer or the durable survey crate
+  ---
+  duration_ms: 875.612979
+  type: 'test'
+  ...
+# Subtest: new scaffold is an actual server motion solid and forged height cannot cross it
+ok 6 - new scaffold is an actual server motion solid and forged height cannot cross it
+  ---
+  duration_ms: 244.1548
+  type: 'test'
+  ...
+# Subtest: absent old regional rooms initialize once, malformed present data rejects, and legacy rooms stay unchanged
+ok 7 - absent old regional rooms initialize once, malformed present data rejects, and legacy rooms stay unchanged
+  ---
+  duration_ms: 644.039052
+  type: 'test'
+  ...
+# Subtest: saved build survives close/resume and replaced sessions; an absent host accrues no construction or water time
+ok 8 - saved build survives close/resume and replaced sessions; an absent host accrues no construction or water time
+  ---
+  duration_ms: 998.871401
+  type: 'test'
+  ...
+# Subtest: restoring a saved player inside an existing retrofit finds clear server-owned ground
+ok 9 - restoring a saved player inside an existing retrofit finds clear server-owned ground
+  ---
+  duration_ms: 167.785925
+  type: 'test'
+  ...
+# Subtest: four simultaneous HTTP polls advance construction and finished resident water simulation only once
+ok 10 - four simultaneous HTTP polls advance construction and finished resident water simulation only once
+  ---
+  duration_ms: 4960.748061
+  type: 'test'
+  ...
+# Subtest: regional weather and legacy rainfall both retain room-owned time across dry/recovery polls
+ok 11 - regional weather and legacy rainfall both retain room-owned time across dry/recovery polls
+  ---
+  duration_ms: 8355.596793
+  type: 'test'
+  ...
+# AXIOM co-op request failed Error
+# AXIOM co-op request failed Error
+# AXIOM co-op request failed Error
+# AXIOM co-op request failed Error
+# AXIOM co-op request failed Error
+# AXIOM co-op request failed Error
+# AXIOM co-op request failed Error
+# AXIOM co-op request failed Error
+# AXIOM co-op request failed Error
+# AXIOM co-op request failed Error
+# AXIOM co-op request failed Error
+# AXIOM co-op request failed Error
+# AXIOM co-op request failed Error
+# AXIOM co-op request failed Error
+# (node:2861) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: regional freight HTTP allowlist rejects injected stock, poses, clocks and stale authority replacements
+ok 12 - regional freight HTTP allowlist rejects injected stock, poses, clocks and stale authority replacements
+  ---
+  duration_ms: 1047.359015
+  type: 'test'
+  ...
+# Subtest: four HTTP actors race one source activation across real SQLite CAS and replay never recreates stock
+ok 13 - four HTTP actors race one source activation across real SQLite CAS and replay never recreates stock
+  ---
+  duration_ms: 1715.359719
+  type: 'test'
+  ...
+# Subtest: four far-apart retained actors use their own authoritative target and local neighborhood under a concurrent CAS race
+ok 14 - four far-apart retained actors use their own authoritative target and local neighborhood under a concurrent CAS race
+  ---
+  duration_ms: 2151.254987
+  type: 'test'
+  ...
+# Subtest: freight commands reject airborne crouched raised attacking and guarded poses despite client grounded claims
+ok 15 - freight commands reject airborne crouched raised attacking and guarded poses despite client grounded claims
+  ---
+  duration_ms: 325.332143
+  type: 'test'
+  ...
+# Subtest: source activation cannot entomb present, disconnected or expired retained peers, or the durable survey crate
+ok 16 - source activation cannot entomb present, disconnected or expired retained peers, or the durable survey crate
+  ---
+  duration_ms: 842.562509
+  type: 'test'
+  ...
+# Subtest: active source solids survive saved reload and server motion cannot use forged client height to pass through
+ok 17 - active source solids survive saved reload and server motion cannot use forged client height to pass through
+  ---
+  duration_ms: 508.27627
+  type: 'test'
+  ...
+# Subtest: optional freight absence migrates once; malformed present room ledgers are refused on read resume and import
+ok 18 - optional freight absence migrates once; malformed present room ledgers are refused on read resume and import
+  ---
+  duration_ms: 900.632946
+  type: 'test'
+  ...
+# Subtest: four simultaneous polls share one bounded room clock and host absence close resume never backfill freight time
+ok 19 - four simultaneous polls share one bounded room clock and host absence close resume never backfill freight time
+  ---
+  duration_ms: 2659.662704
+  type: 'test'
+  ...
+# Subtest: four-player repair and freight-store races commit one bounded job each and keep every material atom accounted for
+ok 20 - four-player repair and freight-store races commit one bounded job each and keep every material atom accounted for
+  ---
+  duration_ms: 2685.633737
+  type: 'test'
+  ...
+# Subtest: store construction uses the same durable-peer and crate footprint guard as source activation
+ok 21 - store construction uses the same durable-peer and crate footprint guard as source activation
+  ---
+  duration_ms: 318.112751
+  type: 'test'
+  ...
+# Subtest: a completed finite store persists through import close and resume without mining again or recharging completed freight
+ok 22 - a completed finite store persists through import close and resume without mining again or recharging completed freight
+  ---
+  duration_ms: 316.963952
+  type: 'test'
+  ...
+# Subtest: four-player reserve withdrawal races issue one shared credit and sequence or revision replay cannot pay again
+ok 23 - four-player reserve withdrawal races issue one shared credit and sequence or revision replay cannot pay again
+  ---
+  duration_ms: 1323.223115
+  type: 'test'
+  ...
+# Subtest: withdrawal neither creates a construction footprint nor spends the unchanged wilderness ledger
+ok 24 - withdrawal neither creates a construction footprint nor spends the unchanged wilderness ledger
+  ---
+  duration_ms: 161.842105
+  type: 'test'
+  ...
+# Subtest: withdrawn quarry and timber reserve funds V31 collector delivery once under concurrent clients without double allocation
+ok 25 - withdrawn quarry and timber reserve funds V31 collector delivery once under concurrent clients without double allocation
+  ---
+  duration_ms: 1574.869564
+  type: 'test'
+  ...
+# Subtest: the single regional survey crate saves and reloads beyond 80m independently of player position and resources
+ok 26 - the single regional survey crate saves and reloads beyond 80m independently of player position and resources
+  ---
+  duration_ms: 535.425248
+  type: 'test'
+  ...
+# Subtest: regional crate persistence follows world flavor through cave and dungeon visits
+ok 27 - regional crate persistence follows world flavor through cave and dungeon visits
+  ---
+  duration_ms: 7.360146
+  type: 'test'
+  ...
+# Subtest: regional crate bounds contain the whole finite box and skin, with strict malformed-state rejection and unchanged legacy limits
+ok 28 - regional crate bounds contain the whole finite box and skin, with strict malformed-state rejection and unchanged legacy limits
+  ---
+  duration_ms: 3.731952
+  type: 'test'
+  ...
+1..28
+# tests 28
+# suites 0
+# pass 28
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 34692.512921

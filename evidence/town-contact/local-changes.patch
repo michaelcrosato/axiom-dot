@@ -1,0 +1,786 @@
+diff --git a/CONTACT-ANIMATION.md b/CONTACT-ANIMATION.md
+index 371233e..31a130a 100644
+--- a/CONTACT-ANIMATION.md
++++ b/CONTACT-ANIMATION.md
+@@ -46,3 +46,7 @@ V25 verification: all 682 tests, strict TypeScript and production build pass. Th
+ These are numerical bounds, not a claim that the animation looks natural. The earlier browser access denial remains in force, and no alternate browser route was used. Rendered appearance and the user's assessment remain the visual acceptance gate.
+ 
+ Reproduce a full production worker/rig trace with `node --experimental-strip-types scripts/measure-ledge-mantle.mts /tmp/axiom-mantle-trace.json`. This export contains numeric matrices and contacts only, not rendered pixels.
++
++## Local reverse lowering and rear-yard extension
++
++See `TOWN-CONTACT.md` for current scope, controls and limitations. Tall-ledge lowering reverses the existing supported mantle, with reverse-direction sweeps at each tick, then holds a real hang. Crate hand-climbing and online traversal remain unavailable. New regional worlds have optional version-2 saved rear-yard crates; v1 saves retain their exact prior geometry. The disposable playable lab course is separate from the historical animation inspector and uses existing save isolation.
+diff --git a/DEVELOPER-EXPOSURE.md b/DEVELOPER-EXPOSURE.md
+index 3223533..e43ced4 100644
+--- a/DEVELOPER-EXPOSURE.md
++++ b/DEVELOPER-EXPOSURE.md
+@@ -103,3 +103,7 @@ The existing Campaign workshop rehearsal now exposes a phase inspector and bound
+ Workshop, town supply, habitat care and restoration show read-only readiness reasons from current authority, terrain and player pose. Their existing disposable scenarios remain bounded and keep campaign stores isolated; playable restoration practice now returns local rejection feedback without waiting for a campaign revision. Recipe drafts, selected targets, reset and evidence export retain their existing owners. Readiness and host ownership are safety gates, not adjustable tuning values.
+ 
+ Reproduce source-only readiness transitions with `scripts/verify-campaign-readiness-build.mts` after the production build: it exports the actual emitted engine's bounded condition matrix, source/asset hashes and reason counts. UI contract tests exercise rejection, current-state refresh, Recheck, navigation dismissal/reopening and stale callbacks. Deferred mock-HTTP client tests distinguish queued, sent, acknowledged, stale, retried and disconnected actions without a real room or campaign save. These are numerical/DOM/transport diagnostics, not browser or device acceptance. See CAMPAIGN-LOOP.md for recovery steps.
++
++## Solo contact course and fresh rear yards
++
++`TOWN-CONTACT.md` documents the partial local extension. Developer lab adds a playable disposable contact course with fixed 0.30/1.10/2.40 m stations, actual worker push/pull/jump/catch/pull-up/reverse lowering, obstruction fixtures, reset, bounded per-frame tuning/evidence text and last-action diagnostics. Existing staged movement tuning is the real consumer; fixed geometry/contact timing is not exposed as a fake editable value. Campaign save locking and restoration remain. Fresh-only saved v2 rear yards do not regenerate existing homes. Online traversal, a full organic core layout and low-crate hand-climbing remain unsupported and are explicitly described.
+diff --git a/scripts/verify-town-frame-build.mts b/scripts/verify-town-frame-build.mts
+index c157afc..2f24015 100644
+--- a/scripts/verify-town-frame-build.mts
++++ b/scripts/verify-town-frame-build.mts
+@@ -4,7 +4,7 @@ import {TownActivityMonitor} from '../src/town-activity.ts';
+ import {steadyCase,worldCase,assertSteadyCase,assertWorldCase,assertMainFrameContract,TEMPORAL_SCOPE} from '../tests/helpers/town-frame-cases.ts';
+ const root=resolve(import.meta.dirname,'..'),assets=resolve(root,'dist/client/assets'),files=readdirSync(assets);
+ let emittedView:typeof createTownView|undefined,emittedSeconds:typeof townFrameSeconds|undefined,helperFile='',helperExport='',emittedContinuity:typeof TownSnapshotContinuity|undefined,emittedMonitor:typeof TownActivityMonitor|undefined;
+-for(const file of files.filter(f=>/^(?:town-(?:projection|director|life|activity)|world)-.*\.js$/.test(f))){
++for(const file of files.filter(f=>/^(?:town-(?:projection|director|life|activity)|world|campaign-guidance-engine)-.*\.js$/.test(f))){
+  const module=await import(pathToFileURL(resolve(assets,file)).href);
+  for(const [key,value] of Object.entries(module) as [string,any][]){
+   if(typeof value==='function'&&value.toString().includes('hearthmere-residents'))emittedView=value;
+diff --git a/src/contact-physics.ts b/src/contact-physics.ts
+index 80a8d1e..2bda8e6 100644
+--- a/src/contact-physics.ts
++++ b/src/contact-physics.ts
+@@ -1,3 +1,4 @@
++import {constrainTownCrate} from './town-yards.ts';
+ import RAPIER from '@dimforge/rapier3d-compat';
+ import {MANTLE_TICKS,mantleSample,mantleContact,mantleWorld} from './ledge-mantle.ts';
+ import {emptyPlayerContact,type MovableBody,type PlayerContact,type Vec3} from './player-contact.ts';
+@@ -6,17 +7,19 @@ const copy=(v:Vec3):Vec3=>({x:v.x,y:v.y,z:v.z});
+ const add=(a:Vec3,b:Vec3,s=1):Vec3=>({x:a.x+b.x*s,y:a.y+b.y*s,z:a.z+b.z*s});
+ const distance=(a:Vec3,b:Vec3)=>Math.hypot(a.x-b.x,a.y-b.y,a.z-b.z);
+ type Crate={spec:MovableBody;body:RAPIER.RigidBody;collider:RAPIER.Collider;fallSpeed:number};
+-type Hang={normal:Vec3;point:Vec3;left:Vec3;right:Vec3;target:Vec3;tick:number;climbing:boolean;support:RAPIER.Collider};
++type Hang={normal:Vec3;point:Vec3;left:Vec3;right:Vec3;target:Vec3;tick:number;climbing:boolean;descending?:boolean;support:RAPIER.Collider};
+ export interface ContactSpatialPolicy {
+  /** Missing streamed support is dormancy, never an instruction to fall. */
+  supportAvailable(spec:MovableBody,position:Vec3):boolean;
+  constrainPosition(spec:MovableBody,position:Vec3):Vec3;
++ bodyClear?(position:Vec3,hx:number,hy:number,hz:number):boolean;
+ }
+ export interface ContactMotion { p:Vec3;feetY:number;grounded:boolean;crouched:boolean;vx:number;vz:number;inputX:number;inputZ:number;grab:boolean;crouch:boolean;jump:boolean }
+ /** Bounded, local-only interaction. No impulses or hidden position offsets reach the motor. */
+ export class ContactPhysics {
+  readonly crates:Crate[]=[];
+  contact=emptyPlayerContact();
++ diagnostic='Ready';
+  private grip:Crate|null=null;
+  private gripNormal:Vec3={x:0,y:0,z:0};
+  private hang:Hang|null=null;
+@@ -37,7 +40,7 @@ export class ContactPhysics {
+   this.enabled=enabled;this.spatialPolicy=spatialPolicy;
+   for(const original of movable){const spec={...original,...(spatialPolicy?.constrainPosition(original,original)??original)};const body=world.createRigidBody(RAPIER.RigidBodyDesc.kinematicPositionBased().setTranslation(spec.x,spec.y,spec.z));const collider=world.createCollider(RAPIER.ColliderDesc.cuboid(spec.hx,spec.hy,spec.hz),body);this.crates.push({spec:{...spec},body,collider,fallSpeed:0});}
+  }
+- reset(){this.grip=null;this.hang=null;this.grabPending=false;this.latchReleased=true;this.contact=emptyPlayerContact();}
++ reset(){this.grip=null;this.hang=null;this.grabPending=false;this.latchReleased=true;this.contact=emptyPlayerContact();this.diagnostic='Released';}
+  cancelPending(){this.grabPending=false;}
+  disable(){this.enabled=false;this.reset();}
+  requestGrab(){if(this.enabled)this.grabPending=true;}
+@@ -88,7 +91,7 @@ export class ContactPhysics {
+   if(!hands[0]||!hands[1])return null;
+   return {point,normal:copy(hit.normal),hands,distance:hit.timeOfImpact};
+  }
+- private clear(p:Vec3,half=HALF){return !this.world.intersectionWithShape(p,ROT,new RAPIER.Capsule(half,RADIUS),undefined,undefined,this.collider);}
++ private clear(p:Vec3,half=HALF){return (this.spatialPolicy?.bodyClear?.(p,RADIUS,half+RADIUS,RADIUS)??true)&&!this.world.intersectionWithShape(p,ROT,new RAPIER.Capsule(half,RADIUS),undefined,undefined,this.collider);}
+  private sweep(p:Vec3,delta:Vec3,shape:RAPIER.Shape,exclude:RAPIER.Collider,predicate?:(c:RAPIER.Collider)=>boolean){
+   const length=Math.hypot(delta.x,delta.y,delta.z);if(length<1e-8)return 1;
+   const hit=this.world.castShape(p,ROT,delta,shape,.003,1,true,undefined,undefined,exclude,undefined,predicate);
+@@ -96,12 +99,12 @@ export class ContactPhysics {
+  }
+  private pathClear(a:Vec3,b:Vec3){return this.clear(b)&&this.sweep(a,{x:b.x-a.x,y:b.y-a.y,z:b.z-a.z},new RAPIER.Capsule(HALF,RADIUS),this.collider)>.999;}
+  private mantlePosition(h:Hang,t:number){const s=mantleSample(t);return mantleWorld(h.point,h.normal,s.depth,s.height+CENTER);}
+- private mantleClear(h:Hang,t:number,previous:Vec3,previousHalf:number){
++ private mantleClear(h:Hang,t:number,previous:Vec3,previousHalf:number,previousProgress=Math.max(0,t-1/MANTLE_TICKS)){
+   const s=mantleSample(t),p=this.mantlePosition(h,t);
+   // Translate the smaller capsule, then expand at its destination. Its fixed root datum
+   // keeps capsule compaction separate from body motion and cannot produce an upward pop.
+   if(!this.clear(p,s.half)||this.sweep(previous,{x:p.x-previous.x,y:p.y-previous.y,z:p.z-previous.z},new RAPIER.Capsule(Math.min(previousHalf,s.half),RADIUS),this.collider)<.999)return false;
+-  const prior=mantleSample(Math.max(0,t-1/MANTLE_TICKS));
++  const prior=mantleSample(previousProgress);
+   for(const [along,radius] of [[.3,.26],[.77,.27],[.99,.34]]){
+    const center=mantleWorld(h.point,h.normal,s.depth+Math.sin(s.lean)*along!,s.height+s.hipHeight+Math.cos(s.lean)*along!);
+    const before=mantleWorld(h.point,h.normal,prior.depth+Math.sin(prior.lean)*along!,prior.height+prior.hipHeight+Math.cos(prior.lean)*along!);
+@@ -117,6 +120,24 @@ export class ContactPhysics {
+   return true;
+  }
+  private mantlePathClear(h:Hang,startTick=0){let previous=this.mantlePosition(h,startTick/MANTLE_TICKS),half=mantleSample(startTick/MANTLE_TICKS).half;for(let tick=startTick+1;tick<=MANTLE_TICKS;tick++){const t=tick/MANTLE_TICKS;if(!this.mantleClear(h,t,previous,half))return false;previous=this.mantlePosition(h,t);half=mantleSample(t).half;}return true;}
++ private tryDescend(m:ContactMotion){
++  if(!m.grounded||m.crouched||m.crouch||m.jump)return false;
++  const length=Math.hypot(m.inputX,m.inputZ);if(length<.3)return false;
++  const normal={x:m.inputX/length,y:0,z:m.inputZ/length};
++  const top=this.ray({x:m.p.x,y:m.feetY+.1,z:m.p.z},{x:0,y:-1,z:0},.2);
++  if(!top||top.normal.y<.9||this.crates.some(c=>c.collider.handle===top.collider.handle))return false;
++  const face=this.ray({x:m.p.x+normal.x*.95,y:m.feetY-.2,z:m.p.z+normal.z*.95},{x:-normal.x,y:0,z:-normal.z},1.2);
++  if(!face||face.collider.handle!==top.collider.handle||face.normal.x*normal.x+face.normal.z*normal.z<.99)return false;
++  const edge={x:m.p.x+normal.x*(.95-face.timeOfImpact),y:m.feetY+.1-top.timeOfImpact,z:m.p.z+normal.z*(.95-face.timeOfImpact)};
++  const point={x:edge.x-normal.x*.01,y:edge.y+.015,z:edge.z-normal.z*.01},tangent={x:normal.z,y:0,z:-normal.x},palm=add(point,normal,.06);palm.y=edge.y+.06;
++  const h:Hang={normal,point,left:add(palm,tangent,.22),right:add(palm,tangent,-.22),target:mantleWorld(point,normal,-.375,-1.9+CENTER),tick:MANTLE_TICKS,climbing:true,descending:true,support:top.collider};
++  const start=this.mantlePosition(h,1);
++  // Acquisition is a tiny swept alignment on the supported top, never an edge teleport.
++  if(distance(m.p,start)>.06||!this.pathClear(m.p,start)||!this.clear(h.target)||this.ray({x:h.target.x,y:edge.y-1.84,z:h.target.z},{x:0,y:-1,z:0},.2))return false;
++  let previous=start,half=HALF;
++  for(let tick=MANTLE_TICKS-1;tick>=0;tick--){const t=tick/MANTLE_TICKS;if(!this.mantleClear(h,t,previous,half,(tick+1)/MANTLE_TICKS))return false;previous=this.mantlePosition(h,t);half=mantleSample(t).half;}
++  this.hang=h;this.latchReleased=false;this.diagnostic='Lowering to supported hang';return true;
++ }
+  private tryHang(m:ContactMotion){
+   if(!this.enabled||!this.latchReleased||!m.grab||m.grounded||m.crouched||m.crouch)return;
+   const len=Math.hypot(m.inputX,m.inputZ);if(len<.3)return;
+@@ -140,7 +161,7 @@ export class ContactPhysics {
+   if([m.p,hangP].some(p=>[1,-1].some(side=>distance({x:p.x+normal.x*.021+tangent.x*side*.43,y:p.y-CENTER+1.435,z:p.z+normal.z*.021+tangent.z*side*.43},add(palm,tangent,side*.22))>.675)))return;
+   const candidate:Hang={normal,point,left:add(palm,tangent,.22),right:add(palm,tangent,-.22),target:hangP,tick:0,climbing:false,support:wall.collider};
+   if(!this.mantlePathClear(candidate))return;
+-  this.hang=candidate;
++  this.hang=candidate;this.diagnostic='Hanging: fresh Jump climbs; action or Crouch drops';
+   this.latchReleased=false;this.grip=null;
+  }
+  /** Called before the ordinary controller sweep. Returns a swept special move only for a real hang. */
+@@ -149,20 +170,20 @@ export class ContactPhysics {
+   if(!m.grab)this.latchReleased=true;
+   if(!this.enabled){this.grabPending=false;return {vx:m.vx,vz:m.vz};}
+   this.settleCrates();
+-  if(this.grabPending){this.grabPending=false;if(this.hang){this.hang=null;this.latchReleased=false;this.contact=emptyPlayerContact();return {vx:0,vz:0,consumeJump:true};}if(this.grip)this.grip=null;else if(m.grounded&&!m.crouched&&!m.crouch){const candidates=this.crates.map(c=>({c,e:this.gripEvidence(c,m)})).filter(v=>v.e).sort((a,b)=>a.e!.distance-b.e!.distance);if(candidates[0]){this.grip=candidates[0].c;this.gripNormal=candidates[0].e!.normal;}}}
++  if(this.grabPending){this.grabPending=false;this.diagnostic='Blocked: no reachable supported crate or clear ledge path';if(this.hang){this.hang=null;this.latchReleased=false;this.contact=emptyPlayerContact();this.diagnostic='Released into gravity';return {vx:0,vz:0,consumeJump:true};}if(this.grip){this.grip=null;this.diagnostic='Crate released';}else if(m.grounded&&!m.crouched&&!m.crouch){const candidates=this.crates.map(c=>({c,e:this.gripEvidence(c,m)})).filter(v=>v.e).sort((a,b)=>a.e!.distance-b.e!.distance);if(candidates[0]){this.grip=candidates[0].c;this.gripNormal=candidates[0].e!.normal;this.diagnostic='Crate gripped';}else this.tryDescend(m);}}
+   if(this.grip&&(m.crouch||m.jump||!m.grounded||!this.gripEvidence(this.grip,m)))this.grip=null;
+   if(!this.hang&&!this.grip)this.tryHang(m);
+   if(this.hang){
+    const h=this.hang;
+-   if(m.crouch||!h.support.isValid()||!this.clear(h.target)){this.hang=null;this.contact=emptyPlayerContact();return {vx:0,vz:0,consumeJump:true};}
++   if(m.crouch||!h.support.isValid()||!this.clear(h.target)){this.hang=null;this.contact=emptyPlayerContact();this.diagnostic='Released: crouch, lost support or obstruction';return {vx:0,vz:0,consumeJump:true};}
+    let consumeJump=false;if(m.jump&&!h.climbing){
+     consumeJump=true;if(distance(m.p,h.target)<.01&&this.mantlePathClear(h))h.climbing=true;
+    }
+    let next:Vec3,finished=false,half=HALF;
+    if(h.climbing){
+-    const tick=h.tick+1,t=tick/MANTLE_TICKS;
+-    if(!this.mantleClear(h,t,m.p,mantleSample(h.tick/MANTLE_TICKS).half)){
+-     this.hang=null;this.contact=emptyPlayerContact();return {vx:0,vz:0,consumeJump:true};
++    const tick=h.tick+(h.descending?-1:1),t=tick/MANTLE_TICKS;
++    if(!this.mantleClear(h,t,m.p,mantleSample(h.tick/MANTLE_TICKS).half,h.tick/MANTLE_TICKS)){
++     this.hang=null;this.contact=emptyPlayerContact();this.diagnostic='Released: traversal path obstructed';return {vx:0,vz:0,consumeJump:true};
+     }
+     h.tick=tick;next=this.mantlePosition(h,t);half=mantleSample(t).half;finished=tick===MANTLE_TICKS;
+    }else{
+@@ -178,6 +199,7 @@ export class ContactPhysics {
+     this.contact.supported=e.leftFootSupport||e.rightFootSupport||e.leftKnee!==null;
+    }
+    if(finished)this.hang=null;
++   if(h.descending&&h.tick===0){h.climbing=false;h.descending=false;this.diagnostic='Hanging: fresh Jump climbs; action or Crouch drops';}
+    return {vx:this.contact.resolved.x,vz:this.contact.resolved.z,position:next,climbing:h.climbing,consumeJump,finished,capsuleHalfHeight:half};
+   }
+   if(this.grip){
+@@ -185,13 +207,13 @@ export class ContactPhysics {
+    // Constrain movement to the crate's actual contact normal: lateral steering releases no forces.
+    const intent=-(m.vx*e.normal.x+m.vz*e.normal.z),speed=Math.max(-1.15,Math.min(1.15,intent));
+    let delta={x:-e.normal.x*speed*DT,y:0,z:-e.normal.z*speed*DT};const start=copy(c.body.translation());
+-   if(this.spatialPolicy){const target=this.spatialPolicy.constrainPosition(c.spec,add(start,delta));delta={x:target.x-start.x,y:0,z:target.z-start.z};}
++   {const proposed=constrainTownCrate(c.spec,add(start,delta)),target=this.spatialPolicy?.constrainPosition(c.spec,proposed)??proposed;delta={x:target.x-start.x,y:0,z:target.z-start.z};}
+    this.gripMode=speed<-.025?'pull':'push';
+    let fraction=this.sweep(start,delta,new RAPIER.Cuboid(c.spec.hx,c.spec.hy-.004,c.spec.hz),c.collider,q=>q.handle!==this.collider.handle);
+    // Both bodies sweep the same translation. Exclude only their own pair and prove their
+    // relative separation stays constant, so a pull never drags a box through its owner.
+    fraction=Math.min(fraction,this.sweep(m.p,delta,this.collider.shape,this.collider,q=>q.handle!==c.collider.handle));
+-   let next=add(start,delta,fraction);if(!this.supportedCrate(c,next)){fraction=0;next=start;}
++   let next=add(start,delta,fraction);if(!this.supportedCrate(c,next)||this.spatialPolicy?.bodyClear?.(next,c.spec.hx,c.spec.hy,c.spec.hz)===false||this.spatialPolicy?.bodyClear?.(add(m.p,delta,fraction),RADIUS,this.collider.halfHeight()+RADIUS,RADIUS)===false){fraction=0;next=start;this.diagnostic='Blocked: crate support, parcel boundary or actor';}
+    this.movedCrate=c;this.crateStart=start;this.crateDelta={x:delta.x*fraction,y:0,z:delta.z*fraction};
+    c.body.setTranslation(next,true);c.body.setNextKinematicTranslation(next);this.world.propagateModifiedBodyPositionsToColliders();
+    return {vx:delta.x*fraction/DT,vz:delta.z*fraction/DT};
+diff --git a/src/main.ts b/src/main.ts
+index be125de..eb53866 100644
+--- a/src/main.ts
++++ b/src/main.ts
+@@ -1,3 +1,5 @@
++import {CONTACT_COURSE,CONTACT_GUIDE} from './contact-course';
++import {townYards} from './town-yards';
+ import {CAMPAIGN_ACTION_READINESS_ENGINE} from './campaign-action-readiness';
+ import {CAMPAIGN_GUIDANCE_ENGINE,type CampaignGuidanceCard} from './campaign-guidance';
+ import {loadCampaignGuidance,storeCampaignGuidance,campaignGuidanceStorageKey,type CampaignGuidanceSelection,type CampaignGuidanceIdentity} from './campaign-guidance-storage';
+@@ -93,7 +95,7 @@ import {commitWildernessGather,wildernessGatherContext} from './world';
+ import {nearestGatherableWilderness} from './wilderness-state';
+ import {resolveWildernessStrikes} from './wilderness-combat';
+ import {emptyPlayerContact,validPlayerContact,validMovableBodies,type PlayerContact,type MovableBody} from './player-contact';
+-import {traversalPlan,traversalBodies,traversalFromBodies} from './traversal-world';
++import {traversalPlan,traversalBodies,traversalFromBodies,traversalObstacles} from './traversal-world';
+ import {playerContactContext} from './contact-context';
+ import {liveSentrySnapshot,LIVE_SENTRY_CASE_ID,LIVE_SENTRY_ARENA,type LivePracticeState,type LivePracticeFrame,type LivePracticeResult,type LivePracticePause} from './live-sentry-practice';
+ import {createLiveSentryTrace,appendLiveSentryTrace,exportLiveSentryTrace,type LivePracticeRecording,type LivePracticeCommand} from './live-sentry-trace';
+@@ -217,6 +219,7 @@ let selectedRegionalFoodFarm:string|undefined;let regionalFoodReport:ReturnType<
+ let regionalTradeReport:ReturnType<typeof runRegionalTradeLab>|null=null;let selectedRegionalTradeTarget:string|undefined;
+ let wildernessReport:WildernessLabReport|null=null,wildernessProbeController:AbortController|null=null;addEventListener('pagehide',()=>wildernessProbeController?.abort());
+ let labEquipment:EquipmentRef|undefined;
++let contactPractice=false;let contactEvidence:unknown[]=[];let contactDiagnostic='Ready';
+ let labActive=false,labTuning:LabTuning={...DEFAULT_TUNING},reducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ let labCaptureOnly=false;
+ const livePracticeSourceRevision=import.meta.env.VITE_AXIOM_SOURCE_REVISION??'not-recorded';
+@@ -443,7 +446,7 @@ for(const o of dungeon.objects){if(o.kind==='enemy'){const g=enemyVisual(o);dung
+  const ring=mesh(new THREE.TorusGeometry(o.kind==='exit'?1.4:.65,.045,5,32),color,g,0,.04,0);ring.rotation.x=-Math.PI/2;
+ }
+ const caveView=createCaveView(state.seed),caveRoot=caveView.root;scene.add(caveRoot);let caveFloodSignature='',caveFloodRevision=0;
+-function zoneObstacles(){return state.zone==='cave'?caveView.plan.walls:state.zone==='dungeon'?dungeon.walls:!coop.active&&!coopPending&&state.generation===2?[...obstacles,traversalPlan(state).ledge]:obstacles;}
++function zoneObstacles(){return state.zone==='cave'?caveView.plan.walls:state.zone==='dungeon'?dungeon.walls:!coop.active&&!coopPending&&state.generation===2?[...obstacles,...traversalObstacles(state)]:obstacles;}
+ function syncCavePhysics(){if(state.zone!=='cave'||!state.caveWater||!physicsReady||labActive)return;const signature=[0,1,2].map(i=>caveDepth(state.caveWater!,i as 0|1|2)>.45?'1':'0').join('');if(signature===caveFloodSignature)return;caveFloodSignature=signature;sendPhysics({type:'cell-load',key:'cave-flood',revision:++caveFloodRevision,obstacles:caveFloodObstacles(state.caveWater)});const safe=safeCavePosition(state.caveWater,state.player);if(!coop.active&&(safe.x!==state.player.x||safe.z!==state.player.z)){state=applyAction(state,{type:'move',...safe});sendPhysics({type:'teleport',...safe,y:0});targetPosition.set(safe.x,0,safe.z);player.position.copy(targetPosition);toast('Rising water carried your safety line back to the nearest dry bank');}}
+ // Jointed procedural avatar. Animation follows collision-resolved movement, never raw intent.
+ const onlinePeers=createCoopView();scene.add(onlinePeers.root);
+@@ -458,12 +461,27 @@ for(const z of [-.57,.57])box(crateRoot,0,.16,z,.7,.1,.035,'#acd8c0');
+ const loadingLedge=new THREE.Group();loadingLedge.name='camp-loading-ledge';traversalRoot.add(loadingLedge);
+ if(state.generation===2){const l=traversalPlan(state).ledge;loadingLedge.position.set(l.x,l.y,l.z);box(loadingLedge,0,0,0,l.hx*2,l.hy*2,l.hz*2,'#778f81');for(const z of [-l.hz,l.hz])box(loadingLedge,0,l.hy-.08,z,.01+l.hx*2,.14,.035,'#e0bd72');}
+ function contactEnabled(){return !coop.active&&!coopPending&&!labActive;}
+-function contactSpawnY(){const y=worldHeight(state,state.player.x,state.player.z);if(!contactEnabled()||state.zone!=='valley'||state.generation!==2)return y;const l=traversalPlan(state).ledge;return Math.abs(state.player.x-l.x)<l.hx+.34&&Math.abs(state.player.z-l.z)<l.hz+.34?Math.max(y,l.y+l.hy+.02):y;}
++function contactSpawnY(){let y=worldHeight(state,state.player.x,state.player.z);if(!contactEnabled()||state.zone!=='valley'||state.generation!==2)return y;for(const l of traversalObstacles(state))if(Math.abs(state.player.x-l.x)<l.hx+.34&&Math.abs(state.player.z-l.z)<l.hz+.34)y=Math.max(y,l.y+l.hy+.02);return y;}
+ function townActors():TownActor[]{return coop.active&&coop.snapshot?coop.snapshot.peers.filter(p=>p.connected&&p.zone==='valley').map(p=>({id:p.id,x:p.player.x,z:p.player.z,feetY:p.motion.feetY})):[{id:'solo',x:state.player.x,z:state.player.z,feetY:targetPosition.y}];}
+ function contactWorldPacket(){return {...(state.regional&&state.zone==='valley'&&!labActive?{town:{seed:state.seed,time:state.townLife?townLifeClock(state.townLife):townClock(state.causal),selfId:coop.snapshot?.selfId??'solo',actors:townActors(),...(state.townLife?{lifePoses:townLifePoses(state.townLife)}:{})}}:{}),interactionEnabled:contactEnabled(),online:coop.active||coopPending,movable:contactEnabled()&&state.zone==='valley'?traversalBodies(state):[]};}
+-function contactUI(){return playerContactContext(playerContact,movableBodies,{x:targetPosition.x,y:targetPosition.y,z:targetPosition.z},physicsMotion.grounded,contactEnabled()&&!physicsMotion.crouched&&physicsMotion.stance<.1);}
++function contactPlayable(){return contactEnabled()||labActive&&contactPractice;}
++function contactUI(){const tops=contactPractice?CONTACT_COURSE.obstacles:traversalObstacles(state);if(contactPlayable()&&physicsMotion.grounded&&!physicsMotion.crouched&&!contactBusy()&&tops.some(b=>b.hy>.8&&Math.abs(targetPosition.y-b.y-b.hy)<.08&&Math.abs(targetPosition.x-b.x)<b.hx&&Math.abs(targetPosition.z-b.z)<b.hz))return {label:'Lower to ledge',hint:'move toward edge, then tap · clear tall ledges only',kind:'reach' as const,targetId:null};return playerContactContext(playerContact,movableBodies,{x:targetPosition.x,y:targetPosition.y,z:targetPosition.z},physicsMotion.grounded,contactPlayable()&&!physicsMotion.crouched&&physicsMotion.stance<.1);}
+ function contactBusy(){return contactRequestId!==null||['push','pull','hang','climb'].includes(playerContact.mode);}
+-function syncContactProps(){traversalRoot.visible=contactEnabled()&&state.zone==='valley'&&state.generation===2;const crate=movableBodies.find(b=>b.id==='camp-survey-crate')??traversalBodies(state)[0];if(crate)crateRoot.position.set(crate.x,crate.y,crate.z);}
++const extraContactRoot=new THREE.Group();traversalRoot.add(extraContactRoot);let contactGeometryKey='';const extraCrates=new Map<string,THREE.Group>();
++function syncContactProps(){
++ traversalRoot.visible=contactPlayable()&&(contactPractice||state.zone==='valley'&&state.generation===2);if(!traversalRoot.visible)return;
++ const bodies=movableBodies.length?movableBodies:contactPractice?CONTACT_COURSE.movable:traversalBodies(state),key=contactPractice?'course':`${state.seed}:${state.traversal?.version??1}`;
++ if(key!==contactGeometryKey){contactGeometryKey=key;extraContactRoot.traverse(o=>{if(o instanceof THREE.Mesh)o.geometry.dispose();if(o instanceof THREE.Sprite){o.material.map?.dispose();o.material.dispose();}});extraContactRoot.clear();extraCrates.clear();
++  const solids=contactPractice?CONTACT_COURSE.obstacles:state.traversal?.version===2?townYards(state.seed).obstacles:[];
++  for(const o of solids)box(extraContactRoot,o.x,o.y,o.z,o.hx*2,o.hy*2,o.hz*2,o.hy<.3?'#cdb17b':'#778f81');
++  if(!contactPractice&&state.traversal?.version===2)for(const yard of townYards(state.seed).yards){for(let i=1;i<yard.road.length;i++){const a=yard.road[i-1]!,b=yard.road[i]!,path=box(extraContactRoot,(a.x+b.x)/2,6.008,(a.z+b.z)/2,1.2,.012,Math.hypot(a.x-b.x,a.z-b.z),'#827963');path.rotation.y=Math.atan2(b.x-a.x,b.z-a.z);}makeLabel(yard.name,yard.crate.x,yard.bounds.minZ,extraContactRoot);extraContactRoot.children.at(-1)!.position.y=8;}
++  if(contactPractice){box(extraContactRoot,0,-.12,0,36,.24,36,'#35545d');for(const [name,x,z] of CONTACT_COURSE.stations){makeLabel(name,x,z,extraContactRoot);extraContactRoot.children.at(-1)!.position.y=4.5;}}
++  for(const c of bodies){if(c.id==='camp-survey-crate')continue;const g=new THREE.Group();extraContactRoot.add(g);box(g,0,0,0,c.hx*2,c.hy*2,c.hz*2,'#9f8056');for(const x of [-c.hx*.8,c.hx*.8])box(g,x,0,0,.07,c.hy*2+.02,c.hz*2+.02,'#3e7168');extraCrates.set(c.id,g);}
++ }
++ crateRoot.visible=!contactPractice;loadingLedge.visible=!contactPractice;if(!contactPractice){const l=traversalPlan(state).ledge;loadingLedge.position.set(l.x,l.y,l.z);}
++ for(const c of bodies){const root=c.id==='camp-survey-crate'?crateRoot:extraCrates.get(c.id);root?.position.set(c.x,c.y,c.z);}
++}
++
+ let avatarAction:AvatarAction=null,actionAge=0,actionDuration=.55;
+ function animateAction(action:AvatarAction,duration=.55){avatarAction=action;actionAge=0;actionDuration=duration;}
+ const shadow=new THREE.Mesh(new THREE.CircleGeometry(.5,24),new THREE.MeshBasicMaterial({color:'#183c2e',transparent:true,opacity:.22,depthWrite:false}));shadow.rotation.x=-Math.PI/2;shadow.position.y=.04;scene.add(shadow);
+@@ -577,7 +595,7 @@ worker.onmessage=(e)=>{if(startup.failed)return;const m=e.data;if(m.type==='zone
+   if(m.town?.contactPoses)townView?.acceptPhysicsPoses(m.town.contactPoses);
+   if(state.regional){regionalPhysicsStats=m.streaming??null;recordRegionalTravel(m);}
+   if(contactRequestId!==null&&m.contactRequestId===contactRequestId)contactRequestId=null;
+-  playerContact=validPlayerContact(m.contact)?m.contact:emptyPlayerContact();if(validMovableBodies(m.movable))movableBodies=m.movable;
++  playerContact=validPlayerContact(m.contact)?m.contact:emptyPlayerContact();if(validMovableBodies(m.movable))movableBodies=m.movable;contactDiagnostic=typeof m.contactDiagnostic==='string'?m.contactDiagnostic:'Not reported';if(contactPractice&&contactEvidence.length<3600&&m.step!==lastPhysicsStep)contactEvidence.push({epoch:zoneEpoch,tuning:{...labTuning},step:m.step,x:m.x,y:m.feetY,z:m.z,contact:structuredClone(playerContact),movable:structuredClone(movableBodies),diagnostic:contactDiagnostic});
+   if(!activeConversation&&contactEnabled()&&state.zone==='valley'&&state.generation===2){const traversal=traversalFromBodies(movableBodies,state);if(traversal&&JSON.stringify(traversal)!==JSON.stringify(state.traversal)){state={...state,traversal};}}
+   targetPosition.set(m.x,m.feetY??Math.max(0,m.y-1.09),m.z);physicsMotion={vx:m.vx??0,vz:m.vz??0,vy:m.vy??0,landing:m.landing??0,landingSpeed:m.landingSpeed??0,grounded:m.grounded,crouched:m.crouched===true,stance:m.stance??0,sliding:m.sliding===true};
+   if(!startup.playing){lastPhysicsStep=m.step??-1;resolveStartupPose();return;}
+@@ -785,7 +803,7 @@ const guardView=createGuardView();scene.add(guardView.root);const enemyHP=new Ma
+ let impactHold=0,impactStrength=0,impactAge=0;const recoil=new Map<string,{x:number;z:number;age:number}>();
+ function currentEquipment(){return equipmentFor(labActive?(labRunning?undefined:labEquipment):state.equipment?.active??undefined);}
+ function combatTuning(){const base=equipmentCombat(currentEquipment());if(!labActive)return base;return sanitizeComboTuning({...base,inputBufferSeconds:labTuning.comboBuffer,staminaRegenPerSecond:labTuning.staminaRegen,attacks:base.attacks.map(a=>({...a,prep:a.prep*labTuning.comboTempo,active:a.active*labTuning.comboTempo,recovery:a.recovery*labTuning.comboTempo,damage:a.damage*labTuning.staffDamage,staminaCost:a.staminaCost*labTuning.staminaCost,knockback:a.knockback*labTuning.knockback}))});}
+-function combatObstacles():Obstacle[]{return labActive?LAB_OBSTACLES:state.zone==='cave'?[...caveView.plan.walls,...(state.caveWater?caveFloodObstacles(state.caveWater):[])]:state.zone==='dungeon'?dungeon.walls:[...obstacles,...WORKSHOP_CONSTRUCTION_VIEW_ENGINE.obstacles(workshopProjection.confirmed),...(contactEnabled()&&state.generation===2?[traversalPlan(state).ledge,...movableBodies]:[]),...machineWorldObstacles(state),...[...streamer.active.keys()].flatMap(k=>cellObstacles.get(k)??[]),...(state.regional?[...regionalConfirmedObstacles.values()].flat():[])];}
++function combatObstacles():Obstacle[]{return labActive?(contactPractice?[...CONTACT_COURSE.obstacles,...movableBodies]:LAB_OBSTACLES):state.zone==='cave'?[...caveView.plan.walls,...(state.caveWater?caveFloodObstacles(state.caveWater):[])]:state.zone==='dungeon'?dungeon.walls:[...obstacles,...WORKSHOP_CONSTRUCTION_VIEW_ENGINE.obstacles(workshopProjection.confirmed),...(contactEnabled()&&state.generation===2?[...traversalObstacles(state),...movableBodies]:[]),...machineWorldObstacles(state),...[...streamer.active.keys()].flatMap(k=>cellObstacles.get(k)??[]),...(state.regional?[...regionalConfirmedObstacles.values()].flat():[])];}
+ function nearbyPulseTargets(){return labActive?labTargets.filter(t=>t.hp>0&&Math.hypot(t.x-targetPosition.x,t.z-targetPosition.z)<=3.5):pulseTargets(state,objects,combatObstacles());}
+ function combatSnapshot(aim=false):ComboSnapshot{
+  const canHit=physicsMotion.grounded&&!physicsMotion.crouched&&physicsMotion.stance<=0;
+@@ -865,7 +883,7 @@ function openPanel(type:string){if(!startup.playing)return;if(sessionReloading||
+ <details class="menu-fresh"><summary>Start fresh / recover progress</summary><p>Restart the current seed from the beginning, or choose a different seed. Restart asks you to confirm and keeps a protected recovery copy of your current progress.</p><button id="fresh-settings">Restart this world…</button><button id="restore-reset-settings">Recover before restart…</button><button id="export-reset-settings">Export pre-restart recovery</button><p id="reset-availability"></p></details>
+ <h3>ONLINE CO-OP</h3><button id="coop-settings">${coop.active?'Online room · players & leave':'Host or join · up to 4 explorers'}</button><p>Online expeditions save on the server. Leave the room before loading or restarting a personal solo save. Restart never resets the shared room, including for its host. Friends need access to this private Site.</p></section>
+ <section data-menu-page="field" aria-label="Field tools" hidden><h3>EXPLORE & BUILD</h3><div class="menu-actions"><button id="field-plan-settings">Field plan · choose your next step</button><button id="journal-settings">Journal & objectives</button><button id="build-settings">Build waterworks</button>${state.regional?'<button id="town-supply-settings">Town supply · haul salvage home</button>':''}${state.restoration?'<button id="restoration-care-settings">Restored habitats → Greenlight care</button>':''}${state.regional?'<button id="workshop-construction-settings">West workshop · construction & repairs</button>':''}<button id="equipment-settings">Modular equipment workbench</button></div><h3>PEOPLE & RESOURCES</h3><div class="menu-actions">${state.ecology?'<button id="ecology-settings">Field ecology · climate & gardens</button>':''}${state.economy?'<button id="economy-settings">Workshop exchange · kits & repair</button>':''}${state.causal?.commonsTrade?'<button id="barter-settings">Household barter · water for scrap</button>':''}${state.causal?.waterRequests?'<button id="water-requests-settings">Recurring water relief · requests & deadlines</button>':''}</div></section>
+-<section data-menu-page="controls" aria-label="Controls" hidden><h3>MOVEMENT & CAMERA</h3><button id="camera-settings">Camera & movement</button><p>WASD moves · Shift sprints · C crouches · Space jumps · E interacts · F attacks · G guards · M opens the map · Escape closes.</p><p>Touch: left thumb moves, right side orbits, two right-side fingers pinch to zoom. X interacts, Y attacks, B crouches and A jumps. Action positions stay fixed.</p><h3>TOUCH COMBAT</h3><button id="auto-pulse-toggle" aria-pressed="true">Auto combo on touch: On</button><p>Automatically chain the staff combo at reachable sentries using the same timing, stamina, range and solid-wall checks. Keyboard and mouse remain manual.</p><label><input type="checkbox" id="settings-reduced-motion" ${reducedMotion?'checked':''}> Reduced motion · no impact hold or camera shake</label></section>
++<section data-menu-page="controls" aria-label="Controls" hidden><h3>MOVEMENT & CAMERA</h3><button id="camera-settings">Camera & movement</button><p>WASD moves · Shift sprints · C crouches · Space jumps · E interacts · F attacks · G guards · M opens the map · Escape closes.</p><p>Touch: left thumb moves, right side orbits, two right-side fingers pinch to zoom. X interacts, Y attacks, B crouches and A jumps. Action positions stay fixed.</p><h3>CRATES &amp; LEDGES</h3><p>${CONTACT_GUIDE}</p><p>New frontier worlds have three rear work yards beyond the southern homes, reached along the central lane. Existing saved towns keep their geometry. Developer lab → enter isolated lab → contact course provides a disposable practice area.</p><h3>TOUCH COMBAT</h3><button id="auto-pulse-toggle" aria-pressed="true">Auto combo on touch: On</button><p>Automatically chain the staff combo at reachable sentries using the same timing, stamina, range and solid-wall checks. Keyboard and mouse remain manual.</p><label><input type="checkbox" id="settings-reduced-motion" ${reducedMotion?'checked':''}> Reduced motion · no impact hold or camera shake</label></section>
+ <section data-menu-page="display" aria-label="Graphics and sound" hidden><h3>GRAPHICS</h3><label for="preset">Presentation</label><select id="preset"><option value="frontier">Frontier · low-poly</option><option value="cel">Cel · vivid flat light</option><option value="ps1">PS1 · low resolution</option><option value="16bit">16-bit · pixel presentation</option><option value="8bit">8-bit · coarse pixels</option></select><label for="render-mode">Rendering backend</label><select id="render-mode"><option value="auto">WebGPU preferred · automatic fallback</option><option value="webgl">Force WebGL2 · reloads</option></select><button id="fullscreen-toggle">Enter fullscreen</button><p id="fullscreen-status" role="status"></p><p>Browser and phone edge gestures still belong to the system. Keep thumbs away from the screen edges.</p><h3>SOUND</h3><button id="sound-toggle">Sound</button><label for="sound-volume">Volume</label><input id="sound-volume" type="range" min="0" max="1" step=".05"><p>Sound starts after a tap or key press and pauses with gameplay.</p></section>
+ <section data-menu-page="advanced" aria-label="Advanced tools" hidden><h3>DEVELOPER TOOLS</h3><div class="menu-actions"><button id="dev-settings">Developer lab · test & tune</button><a class="button" href="./system-workbench.html?seed=${state.seed}" target="_blank" rel="noopener">System workbench ↗</a><button id="workbench-settings">Procedural workbench</button><button id="workshop-authoring-settings">Author workshop recipe</button><button id="save-diff-settings">Inspect save differences</button><button id="region-settings">Inspect valley & vault plans</button></div><p>Inspection and disposable experiments. Return to solo before using the isolated lab.</p><details><summary>Older recovery checkpoints</summary><button id="export-pre-procedural">Export pre-procedural-systems save</button><button id="export-stored">Export last stored checkpoint</button><button id="export-preupgrade">Export local pre-upgrade rollback save</button><button id="export-pre-equipment">Export local pre-edited-staff save</button><button id="export-pre-barter">Export local pre-barter save</button><button id="export-pre-requests">Export local pre-recurring-request save</button><button id="export-pre-contact">Export local pre-contact save</button><button id="export-pre-regional-supply">Export pre-settlement-supply save</button><button id="export-pre-regional-food">Export pre-regional-food save</button><button id="export-pre-regional-trade">Export pre-regional-freight save</button><p>Earlier compatible saves are kept separately from rolling autosaves when available on this device. The edited-staff checkpoint preserves the last save before custom parts were first equipped; the barter checkpoint preserves the last save before household exchange records were introduced. The recurring-request checkpoint preserves the last save before the new renown ledger. These checkpoints do not contain later progress or online room saves.</p></details><details><summary>Diagnostics</summary><label><input type="checkbox" id="wilderness-collision-debug"> Show wilderness collision outlines</label><p id="diagnostics"></p><p>60 fps is a target, not a measured device benchmark.</p></details></section>`;bindMenuNavigation(panel);$('export-pre-procedural').onclick=()=>{try{const bytes=preProceduralSave(localStorage,state);if(bytes)downloadSaveText(bytes,'axiom-before-procedural-systems.json');else toast('No pre-procedural checkpoint exists for this world');}catch{toast('Protected checkpoint unavailable');}};const restorationSettings=document.getElementById('restoration-settings');if(restorationSettings)restorationSettings.onclick=()=>openPanel('restoration');$('resume-settings').onclick=closePanel;$('map-settings').onclick=()=>openPanel('map');const foodSettings=document.getElementById('regional-food-settings');if(foodSettings)foodSettings.onclick=()=>showRegionalFood(regionalFoodPlan(state.seed).farms[0]!.id);const tradeSettings=document.getElementById('regional-trade-settings');if(tradeSettings)tradeSettings.onclick=()=>showRegionalTrade(regionalTradePlan(state.seed).sources[0]!.id);const supplySettings=document.getElementById('regional-supply-settings');if(supplySettings)supplySettings.onclick=()=>showRegionalSupply(regionalSupplyPlan(state.seed).outposts[0]!.id);$('fresh-settings').onclick=()=>openPanel('restart');$('restore-reset-settings').onclick=()=>openPanel('recover');$('export-reset-settings').onclick=()=>{try{const raw=preResetSave(localStorage,state);if(raw)downloadSaveText(raw,'axiom-pre-restart-recovery.json');else toast('No pre-restart recovery exists for this world');}catch{toast('Browser storage unavailable');}};const localLocked=sessionLoadFailed||coop.active||coopPending||coop.status==='connecting'||labActive||transitioning;for(const id of ['save-panel','reload-save','import','fresh-settings','restore-reset-settings','worlds-settings'])($ (id) as HTMLButtonElement).disabled=localLocked;let hasRecovery=false;try{hasRecovery=sessionRecoverySaves(localStorage,state).length>0;}catch{}($('restore-reset-settings') as HTMLButtonElement).disabled=localLocked||!hasRecovery;($('export-reset-settings') as HTMLButtonElement).disabled=localLocked||!hasRecovery;$('reset-availability').textContent=localLocked?'Return to a ready solo world to restart or recover.':hasRecovery?'Protected recovery history is available for this seed.':'No restart recovery yet. One is created when you confirm a restart.';($('settings-reduced-motion') as HTMLInputElement).onchange=e=>{reducedMotion=(e.target as HTMLInputElement).checked;try{localStorage.setItem('axiom-reduced-motion',reducedMotion?'on':'off');}catch{}};$('coop-settings').onclick=()=>openPanel('coop');$('sound-toggle').textContent='Sound: '+(gameAudio.diagnostics().enabled?'On':'Off');$('sound-toggle').onclick=()=>{const enabled=!gameAudio.diagnostics().enabled;gameAudio.setEnabled(enabled);try{localStorage.setItem('axiom-sound',enabled?'on':'off');}catch{}$('sound-toggle').textContent='Sound: '+(enabled?'On':'Off');};($('sound-volume') as HTMLInputElement).value=String(gameAudio.diagnostics().volume);$('sound-volume').oninput=e=>{const volume=Number((e.target as HTMLInputElement).value);gameAudio.setVolume(volume);try{localStorage.setItem('axiom-volume',String(volume));}catch{}};($('preset') as HTMLSelectElement).value=preset;$('preset').onchange=e=>{preset=(e.target as HTMLSelectElement).value;resize();sun.intensity=preset==='cel'?4.5:3.5;};($('render-mode') as HTMLSelectElement).value=new URLSearchParams(location.search).get('backend')==='webgl'?'webgl':'auto';$('render-mode').onchange=e=>{persist();const u=new URL(location.href);u.searchParams.set('backend',(e.target as HTMLSelectElement).value);location.href=u.toString();};const ecologyButton=document.getElementById('ecology-settings');if(ecologyButton)ecologyButton.onclick=()=>{selectedGardenId=undefined;openPanel('ecology');};const economyButton=document.getElementById('economy-settings');if(economyButton)economyButton.onclick=()=>openPanel('economy');const barterButton=document.getElementById('barter-settings');if(barterButton)barterButton.onclick=()=>openPanel('barter');const waterRequestsButton=document.getElementById('water-requests-settings');if(waterRequestsButton)waterRequestsButton.onclick=()=>openPanel('water-requests');$('equipment-settings').onclick=()=>openPanel('equipment');$('dev-settings').onclick=()=>openPanel('dev');$('region-settings').onclick=()=>openPanel('region-plan');$('workbench-settings').onclick=()=>openPanel('workbench');$('workshop-authoring-settings').onclick=()=>openPanel('workshop-authoring');$('save-diff-settings').onclick=()=>openPanel('save-diff');$('field-plan-settings').onclick=()=>openPanel('campaign-guidance');$('journal-settings').onclick=()=>openPanel('journal');$('build-settings').onclick=()=>openPanel('build');const supplyBoard=document.getElementById('town-supply-settings');if(supplyBoard)supplyBoard.onclick=()=>openPanel('town-supply');const careSettings=document.getElementById('restoration-care-settings');if(careSettings)careSettings.onclick=()=>openPanel('restoration-care');const workshopSettings=document.getElementById('workshop-construction-settings');if(workshopSettings)workshopSettings.onclick=()=>openPanel('workshop-construction');$('auto-pulse-toggle').onclick=()=>{mobileAutoPulse=!mobileAutoPulse;try{localStorage.setItem('axiom-touch-auto-pulse',mobileAutoPulse?'on':'off');}catch{toast('Touch preference changed for this session; browser storage is unavailable');}updateAutoPulseUI();};updateAutoPulseUI();$('camera-settings').onclick=()=>openPanel('camera');$('fullscreen-toggle').onclick=()=>void toggleFullscreen();updateFullscreenUI();$('save-status').textContent=saveStatus;($('wilderness-collision-debug') as HTMLInputElement).checked=wildernessView.debugEnabled;$('wilderness-collision-debug').onchange=e=>{const v=(e.target as HTMLInputElement).checked;wildernessView.setDebug(v);regionalView?.setDebug(v);};$('diagnostics').textContent=`${state.regional?'10 km² streamed frontier · 3.162 km per side · 64 m terrain chunks. ':'This original valley save stays unchanged. Choose a frontier → Open 10 km² frontier to start a separate save. '}Three.js r186 · ${backend} · Rapier 0.20.0 worker · fixed 60 Hz · ${(state.zone==='dungeon'?dungeon.walls.length:obstacles.length)+5} fixed colliders · ${streamer.active.size}/${streamer.catalog.size} resident ownership cells · ${rigProfile.family} rig v${rigProfile.version} · world schema 6 · seed ${state.seed}. ${generationBootSummary(generationStartup)}`;$('export-stored').onclick=()=>{try{const raw=storedSaveText(localStorage,state);if(!raw){toast('No valid stored checkpoint exists for this world');return;}downloadSaveText(raw,'axiom-last-stored-checkpoint.json');}catch{toast('Browser storage is unavailable');}};$('export-preupgrade').onclick=()=>{try{const raw=preUpgradeSave(localStorage,state);if(!raw){toast('No older pre-upgrade save exists for this world');return;}downloadSaveText(raw,'axiom-pre-upgrade-rollback.json');}catch{toast('Browser storage is unavailable');}};$('export-pre-equipment').onclick=()=>{try{const raw=preEditedEquipmentSave(localStorage,state);if(!raw){toast('No local pre-edited-staff save exists for this world');return;}downloadSaveText(raw,'axiom-pre-edited-equipment-rollback.json');}catch{toast('Browser storage is unavailable');}};$('export-pre-barter').onclick=()=>{try{const raw=preCommonsTradeSave(localStorage,state);if(!raw){toast('No local pre-barter save exists for this world');return;}downloadSaveText(raw,'axiom-pre-barter-rollback.json');}catch{toast('Browser storage is unavailable');}};$('export-pre-regional-food').onclick=()=>{try{const raw=preRegionalFoodSave(localStorage,state);if(raw)downloadSaveText(raw,'axiom-pre-regional-food-rollback.json');else toast('No earlier regional food checkpoint exists on this device');}catch{toast('Browser storage is unavailable');}};$('export-pre-regional-trade').onclick=()=>{try{const raw=preRegionalTradeSave(localStorage,state);if(raw)downloadSaveText(raw,'axiom-pre-regional-trade-rollback.json');else toast('No earlier regional freight checkpoint exists on this device');}catch{toast('Browser storage is unavailable');}};$('export-pre-regional-supply').onclick=()=>{try{const raw=preRegionalSupplySave(localStorage,state);if(raw)downloadSaveText(raw,'axiom-pre-regional-supply-rollback.json');else toast('No earlier regional settlement checkpoint exists on this device');}catch{toast('Browser storage is unavailable');}};$('export-pre-contact').onclick=()=>{try{const raw=preContactSave(localStorage,state);if(!raw){toast('No local pre-contact save exists for this world');return;}downloadSaveText(raw,'axiom-pre-contact-rollback.json');}catch{toast('Browser storage is unavailable');}};$('export-pre-requests').onclick=()=>{try{const raw=preWaterRequestsSave(localStorage,state);if(!raw){toast('No local pre-recurring-request save exists for this world');return;}downloadSaveText(raw,'axiom-pre-recurring-request-rollback.json');}catch{toast('Browser storage is unavailable');}};$('worlds-settings').onclick=()=>openPanel('worlds');$('export').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([serializeSave(state)],{type:'application/json'}));a.download='axiom-valley-save.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);};$('import').onclick=()=>($('import-file') as HTMLInputElement).click();$('import-file').onchange=(()=>{let ticket=0;const input=$('import-file') as HTMLInputElement;return async()=>{const read=++ticket,epoch=zoneEpoch,identity={generation:state.generation,seed:state.seed,...(state.regional?{regional:state.regional}:{})},file=input.files?.[0];const current=()=>read===ticket&&!panel.hidden&&panel.dataset.type==='settings'&&document.getElementById('import-file')===input&&input.files?.[0]===file&&sameWorld(state,identity)&&zoneEpoch===epoch&&!sessionReloading&&!sessionLoadFailed&&!labActive&&!coop.active&&!coopPending&&coop.status!=='connecting'&&!transitioning;if(!current()){toast('Open solo Settings outside the lab to import a local save');return;}if(!file)return;if(file.size>12_000_000){toast('Save file too large');return;}let raw:string;try{raw=await file.text();}catch{if(current())toast('Could not read that save file. Your world is unchanged.');return;}if(!current())return;const s=parseSave(raw);if(!s){toast('Invalid or unsupported save file');return;}if(!sameWorld(state,s)){if(confirm('Import this world into its own save slot and open it? Existing progress in that slot will be replaced.')&&current())switchSession(s,true);return;}const saved=restoreWorld(s,true);closePanel();toast(saved?'Save imported, saved and world restored':'Save imported for this session, but storage failed. Export a copy before leaving.');};})();$('save-panel').onclick=()=>{persist();$('save-status').textContent=saveStatus;};$('reload-save').onclick=()=>{if(coop.active||coopPending||coop.status==='connecting'){toast('Return to solo before loading a local save');return;}try{const s=loadSavedWorld(localStorage,state);if(!s){toast('No valid local save');return;}if(!sameWorld(state,s)){switchSession(s);return;}restoreWorld(s);closePanel();toast('Last saved world restored');}catch{toast('Browser storage unavailable');}};}panel.querySelector<HTMLButtonElement>('.close')!.onclick=closePanel;const inspectBuild=document.getElementById('workbench-build');if(inspectBuild)inspectBuild.onclick=()=>openPanel('workbench');}
+ function resize(){if(!renderer)return;const pixel=preset==='8bit'?5:preset==='16bit'?3:preset==='ps1'?2:1;renderer.setPixelRatio(pixel>1?1/pixel:Math.min(devicePixelRatio,1.5));renderer.setSize(innerWidth,innerHeight);canvas.style.imageRendering=pixel>1?'pixelated':'auto';camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();}addEventListener('resize',resize);
+@@ -1175,10 +1193,11 @@ function resetLabTargets(){for(const g of labTargetVisuals.values()){g.removeFro
+ function cancelLabEntry(){if(!labEntering)return;labEntering=false;labCaptureToken++;clearTimeout(captureTimer);}
+ function requestLab(){if(sessionReloading||coop.active||coopPending||coop.status==='connecting')return;if(contactBusy()){toast('Release the crate or finish the ledge move before entering the lab');return;}if(labActive||labEntering||transitioning||!physicsReady)return;labEntering=true;clearInput();sendPhysics({type:'capture',requestId:++labCaptureToken});captureTimer=window.setTimeout(()=>{if(labEntering){cancelLabEntry();toast('The lab could not capture the paused world. Try again once movement is ready.');renderDevPanel();}},5000);renderDevPanel();}
+ function beginLab(physics:unknown){if(!labEntering||labActive)return;clearTimeout(captureTimer);labEntering=false;campaignCheckpoint={state,bytes:serializeSave(state),physics,animation:{...animation},motion:{...physicsMotion},position:player.position.clone(),target:targetPosition.clone(),camera:cameraTarget.clone(),orbit,zoom,combo:structuredClone(combo),guard:structuredClone(guard),heading:combatHeading,hp:new Map(enemyHP),action:avatarAction,actionAge,actionDuration,saveStatus};labActive=true;document.documentElement.classList.add('dev-lab-active');$('lab-banner').hidden=false;valleyRoot.visible=false;dungeonRoot.visible=false;caveRoot.visible=false;labRoot.visible=true;scene.background=new THREE.Color('#233f4b');scene.fog=new THREE.Fog('#233f4b',55,100);resetLabCase();closePanel();focusGameplay();toast('Isolated lab open. Your campaign is paused and its saves are locked');}
+-function resetLabCase(){clearRestorationPractice();playerContact=emptyPlayerContact();movableBodies=[];if(!labActive)return;stopLivePractice('suite');visualCapture.cancel('Course reset');clearInput();transitioning=true;physicsReady=false;zoneEpoch++;labTicks=0;lastLabStep=-1;labWarmup=60;labFrames=[];labMetrics=null;combo=createComboState(combatTuning());guard=createGuardState();avatarAction=null;impactHold=0;impactAge=1;recoil.clear();pulseTime=0;pulse.visible=false;
++function resetLabCase(){contactPractice=false;if(labActive)labRoot.visible=true;clearRestorationPractice();playerContact=emptyPlayerContact();movableBodies=[];if(!labActive)return;stopLivePractice('suite');visualCapture.cancel('Course reset');clearInput();transitioning=true;physicsReady=false;zoneEpoch++;labTicks=0;lastLabStep=-1;labWarmup=60;labFrames=[];labMetrics=null;combo=createComboState(combatTuning());guard=createGuardState();avatarAction=null;impactHold=0;impactAge=1;recoil.clear();pulseTime=0;pulse.visible=false;
+  const c=LAB_CASES[labCaseIndex]!;if(labCaptureOnly)visualCapture.arm({scenario:c.id,ticks:(LAB_CAPTURE_TICKS[c.id]??[]).filter(t=>t<Math.round(c.seconds*60)-3),maxTickLateness:2});labTargets=c.targets.map(t=>({...t}));resetLabTargets();combatHeading=c.facing;animation={...idleAnimation(),heading:c.facing};physicsMotion={vx:0,vz:0,vy:0,landing:0,landingSpeed:0,grounded:true,crouched:false,stance:0,sliding:false};targetPosition.set(c.spawn.x,0,c.spawn.z);player.position.copy(targetPosition);cameraTarget.copy(targetPosition);cameraTarget.y+=1;orbit=.5;zoom=23;sendPhysics({type:'zone',...c.spawn,y:0,bound:18,obstacles:LAB_OBSTACLES,sandbox:true});$('lab-live').textContent=c.name+' · '+(labRunning?`run ${labIteration}/${labIterations} · warming up`:'practice · saves locked');}
++function startContactPractice(){if(!labActive||transitioning||!physicsReady||coop.active||coopPending)return;interruptLab('Contact course reset');stopLivePractice('suite');clearRestorationPractice();clearInput();contactPractice=true;labRoot.visible=false;labRunning=false;labTargets=[];resetLabTargets();labAutoCombo=false;labUnlimitedStamina=false;labInfiniteTargets=false;labCaptureOnly=false;labWarmup=0;labTicks=0;labFrames=[];labMetrics=null;contactEvidence=[];contactDiagnostic='Ready';playerContact=emptyPlayerContact();contactRequestId=null;movableBodies=[];contactGeometryKey='';transitioning=true;physicsReady=false;zoneEpoch++;lastPhysicsStep=-1;lastLabStep=-1;combo=createComboState(combatTuning());guard=createGuardState();animation=idleAnimation();avatarAction=null;const p=CONTACT_COURSE.spawn;targetPosition.set(p.x,0,p.z);player.position.copy(targetPosition);cameraTarget.copy(targetPosition);sendPhysics({type:'zone',...p,y:0,bound:CONTACT_COURSE.bound,obstacles:CONTACT_COURSE.obstacles,movable:CONTACT_COURSE.movable,sandbox:true,interactionEnabled:true});$('lab-live').textContent='Contact course · saves locked · E/X action, Jump, Crouch · reopen Developer lab for guide, reset & evidence';closePanel();focusGameplay();}
+ function failLabRestore(reason:string){if(!pendingLabRestore)return;clearTimeout(restoreTimer);if(labReport)labReport.model.push({name:'Acknowledged physics pose restoration',pass:false,actual:reason,expected:'Matching post-restore worker capture'});pendingLabRestore=null;toast('Campaign data is safe, but movement could not be restored. Reload to recover your saved world.');}
+-function exitLab(){if(!labActive||!campaignCheckpoint)return;clearRestorationPractice();interruptLab('Returned to campaign');clearInput();stopLivePractice('exit');const saved=campaignCheckpoint;const unchanged=serializeSave(state)===saved.bytes;state=saved.state;labActive=false;labRoot.visible=false;document.documentElement.classList.remove('dev-lab-active');$('lab-banner').hidden=true;transitioning=true;physicsReady=false;zoneEpoch++;combo=saved.combo;guard=saved.guard;combatHeading=saved.heading;enemyHP.clear();for(const [id,hp] of saved.hp)enemyHP.set(id,hp);animation=saved.animation;physicsMotion=saved.motion;avatarAction=saved.action;actionAge=saved.actionAge;actionDuration=saved.actionDuration;orbit=saved.orbit;zoom=saved.zoom;saveStatus=saved.saveStatus;impactHold=0;impactAge=1;pulse.visible=false;pulseTime=0;recoil.clear();for(const key of new Set([...residentGroups.keys(),...pendingCells.keys()]))disposeCell(key);streamer=new CellStreamer(streamObjects,cellPositions);machineSignature='';showZone();player.position.copy(saved.position);targetPosition.copy(saved.target);cameraTarget.copy(saved.camera);syncFrontierVisuals(0,true);
++function exitLab(){if(!labActive||!campaignCheckpoint)return;contactPractice=false;contactRequestId=null;clearRestorationPractice();interruptLab('Returned to campaign');clearInput();stopLivePractice('exit');const saved=campaignCheckpoint;const unchanged=serializeSave(state)===saved.bytes;state=saved.state;labActive=false;labRoot.visible=false;document.documentElement.classList.remove('dev-lab-active');$('lab-banner').hidden=true;transitioning=true;physicsReady=false;zoneEpoch++;combo=saved.combo;guard=saved.guard;combatHeading=saved.heading;enemyHP.clear();for(const [id,hp] of saved.hp)enemyHP.set(id,hp);animation=saved.animation;physicsMotion=saved.motion;avatarAction=saved.action;actionAge=saved.actionAge;actionDuration=saved.actionDuration;orbit=saved.orbit;zoom=saved.zoom;saveStatus=saved.saveStatus;impactHold=0;impactAge=1;pulse.visible=false;pulseTime=0;recoil.clear();for(const key of new Set([...residentGroups.keys(),...pendingCells.keys()]))disposeCell(key);streamer=new CellStreamer(streamObjects,cellPositions);machineSignature='';showZone();player.position.copy(saved.position);targetPosition.copy(saved.target);cameraTarget.copy(saved.camera);syncFrontierVisuals(0,true);
+  pendingLabRestore={id:'lab-restore-'+zoneEpoch,physics:saved.physics};restoreTimer=window.setTimeout(()=>failLabRestore('Worker restoration acknowledgment timed out'),5000);if(state.regional)void sendWorldPacket('zone',{checkpoint:saved.physics});else sendPhysics({type:'zone',x:state.player.x,z:state.player.z,y:contactSpawnY(),obstacles:zoneObstacles(),...contactWorldPacket(),...initialCellPacket(),bound:worldBound(state),checkpoint:saved.physics,...(state.zone==='valley'&&valleyPlan?{terrain:valleyPlan.terrain}:{})});
+  if(labReport)labReport.model.push({name:'Campaign state unchanged on exit',pass:unchanged&&serializeSave(state)===saved.bytes,actual:unchanged?'Campaign bytes unchanged; physics restoration requested':'Campaign snapshot restored after unexpected mutation',expected:'Inventory, seed, causal actors, world and progression retain exact captured bytes'});campaignCheckpoint=null;closePanel();focusGameplay();sync();toast('Returning to campaign. Saved progress is unchanged');}
+ function labInput():LabInput{return labWarmup>0?{x:0,z:0}:LAB_CASES[labCaseIndex]!.input(labTicks);}
+@@ -1194,6 +1213,7 @@ function renderDevPanel(){
+  const report=labReport;const all=report?[...report.runs.flatMap(r=>r.checks),...report.model]:[];const failures=all.filter(c=>!c.pass).length;
+  panel.dataset.type='dev';panel.innerHTML=`<button class="close" aria-label="Close lab panel">×</button><span class="eyebrow">AXIOM · developer laboratory ${LAB_VERSION}</span><h2>Developer lab</h2><p class="lab-mode">${labActive?'SANDBOX ACTIVE · ordinary progress is locked':'NORMAL WORLD · experiments start separately'}</p><p class="lab-safety">${labActive?'Campaign paused · saving, rewards, world changes and imports are locked. Return restores the captured world, actor state and airborne/crouched pose. Reloading leaves your last normal campaign save intact.':'Enter an isolated course using the real movement worker, character rig and combat engine. Your campaign does not advance in the lab. Entry is unavailable during a world transition.'}</p><button id="lab-enter" ${labEntering||transitioning||!physicsReady||coop.active||coopPending||coop.status==='connecting'?'disabled':''}>${labActive?'Return to campaign':labEntering?'Capturing paused world…':'Enter isolated lab'}</button><p class="lab-availability">${coop.active||coopPending||coop.status==='connecting'?'Solo only: leave the online expedition before entering or applying gameplay tuning. Shared-world rules remain authoritative.':'Choose a station, enter the lab, then use Tune / report to adjust and repeat. Return to campaign restores the captured pose and progress.'}</p>${developerNavigationHTML()}<section data-lab-page="practice"><p class="lab-start">1. Enter isolated lab. 2. Open Tune / report, apply changes. 3. Reset a station or sentry, then export feedback.</p><h3>CHOOSE A PLAYABLE STATION</h3><label for="lab-case">Course station</label><select id="lab-case">${LAB_CASES.map((c,i)=>`<option value="${i}">${c.name}</option>`).join('')}</select><div class="row"><button id="lab-practice" ${!labActive||transitioning?'disabled':''}>Reset & practice</button><button id="lab-view" ${!labActive?'disabled':''}>Back to course</button></div><p id="lab-look"></p><details><summary>Sandbox-only aids</summary><label><input id="lab-auto" type="checkbox" ${labAutoCombo?'checked':''} ${!labActive||livePractice?'disabled':''}> Auto chain in practice · same combat rules</label><label><input id="lab-stamina" type="checkbox" ${labUnlimitedStamina?'checked':''} ${!labActive||livePractice?'disabled':''}> Unlimited practice stamina</label><label><input id="lab-targets" type="checkbox" ${labInfiniteTargets?'checked':''} ${!labActive||livePractice?'disabled':''}> Indestructible practice dummy</label><p>Measurement runs turn both off. They never apply in the campaign.</p></details><button id="lab-equipment" ${!labActive?'disabled':''}>Equipment · preview, compare & practice</button><p>Practice uses your selected lab loadout. Starting the nine-scenario suite resets your lab loadout to the unchanged survey-staff baseline; matched equipment comparisons are available in the equipment workbench.</p><h3>LIVE SENTRY PRACTICE</h3><p>A real quadruped and nearby solid wall, using the same warning, guard, low-strike and staff rules. Practice health and costs are separate from your campaign. Face the sentry with movement, read the amber warning, then sidestep or jump; G guards one timed front contact. Q/R only orbit the camera. No result here is an automatic visual pass.</p><button id="lab-live-reset" ${!labActive||transitioning||!physicsReady?'disabled':''}>${livePractice?'Reset live sentry · fresh attempt':'Start live sentry practice'}</button><div class="row"><button id="lab-live-resume" ${!livePractice||!['paused','ready'].includes(livePractice.status)?'disabled':''}>Resume live practice</button><button id="lab-live-stop" ${!livePractice?'disabled':''}>Stop · return to course</button></div><p id="lab-live-status"></p><div class="row"><button id="lab-live-capture" ${!livePractice||!['active','paused','ready'].includes(livePractice.status)?'disabled':''}>Capture next 2 seconds</button><button id="lab-live-export" ${!liveRecording?'disabled':''}>Export practice trace</button></div><p>Reset replaces the disposable attempt. Menus pause it; missed physics steps require Resume or Reset. Suit or sentry defeat requires Reset. Change equipment/tuning before starting. Unlimited stamina, indestructible dummy and auto-chain aids do not apply.</p><h3>REPEATABLE MEASUREMENT</h3><p>The physics worker schedules every scripted input on its own fixed clock, including when rendering stalls. Each case rebuilds a fresh physics world and resets character, targets, combo, camera and inputs. One second / 60 simulation steps of warmup is excluded. Automated checks use collision-resolved snapshots. Visual quality needs your review below.</p><label for="lab-iterations">Identical full-suite runs</label><select id="lab-iterations"><option value="1">1 run · about 35 seconds</option><option value="3">3 runs · about 2 minutes</option><option value="5">5 runs · about 3 minutes</option></select><button id="lab-run" ${!labActive||transitioning?'disabled':''}>Run all nine scenarios</button><p>Keep this tab focused. Menus, app switching, resize, backgrounding or leaving the lab interrupt the measurement; incomplete runs are never marked passed.</p></section><section data-lab-page="systems" hidden><h3>WORLD SYSTEM SCENARIOS</h3><p>These open separate, disposable production models. They are fast-forward tests, not playable terrain. Seed, target, rainfall, travel model and fixed-step playback are editable there; each has reset, balances, actions and export/replay.</p><div class="lab-scenario-grid"><a class="lab-scenario-link" href="./system-workbench.html?seed=${state.seed}&amp;system=settlement" target="_blank" rel="noopener"><strong>From-zero settlement ↗</strong><span>Freight, construction, water, farming and meals together</span></a><a class="lab-scenario-link" href="./system-workbench.html?seed=${state.seed}&amp;system=water" target="_blank" rel="noopener"><strong>Rain & drought ↗</strong><span>Collector storage, spillage and thirsty residents</span></a><a class="lab-scenario-link" href="./system-workbench.html?seed=${state.seed}&amp;system=trade" target="_blank" rel="noopener"><strong>Freight & wet roads ↗</strong><span>Finite extraction, road repair and store construction</span></a><a class="lab-scenario-link" href="./system-workbench.html?seed=${state.seed}&amp;system=food" target="_blank" rel="noopener"><strong>Farm to meals ↗</strong><span>Crop water, growth, pantry, hunger and stewardship</span></a><a class="lab-scenario-link" href="./system-workbench.html?seed=${state.seed}&amp;system=food&amp;irrigation=canister" target="_blank" rel="noopener"><strong>Emergency irrigation ↗</strong><span>One earned canister, one real manual use</span></a></div><h3>PROGRESSION & RESOURCES</h3><p>AXIOM has no XP or level system. Progression uses earned materials, community renown, construction and stewardship. Reward budgets and resource ledgers are replay-validated, so arbitrary XP, reward or stock multipliers are not exposed. Run world systems below to test earned rewards, manufacture, ecology, barter and water requests; use from-zero settlement for the regional chain.</p><h3>REPEATABLE WORLD SYSTEM CHECKS</h3><p>Disposable production-model checks cover enemy warning/counterplay, all three flood-route solutions, water-supported manufacture, garden recipes, cave delivery, guard timing, a fixed-seed household-barter repair counterfactual and two consumption-driven request episodes. These do not certify pixels, internet play or frame rate.</p><h3>REGIONAL FOOD LOOP</h3><button id="regional-food-lab">Run disposable farm-to-meal checks</button><button id="regional-food-export" ${regionalFoodReport?'':'disabled'}>Export food report</button><p id="regional-food-lab-status">New collector overflow → seed → crop → reserved food → local carrier → pantry → meals. Independent worlds never change your campaign.</p><h3>REGIONAL FREIGHT LOOP</h3><button id="regional-trade-lab">Run disposable freight-route checks</button><button id="regional-trade-export" ${regionalTradeReport?'':'disabled'}>Export freight report</button><p id="regional-trade-lab-status">Finite extraction → reserved cargo → real road travel → repair → delivery → freight-store construction. These disposable checks never change your campaign.</p><h3>REGIONAL SETTLEMENT LOOP</h3><button id="regional-supply-lab">Run disposable supply-loop checks</button><button id="regional-supply-export" ${regionalSupplyReport?'':'disabled'}>Export settlement report</button><p id="regional-supply-lab-status">Gather → deliver → construction → resident water benefit → leave, return and save. Uses independent deterministic worlds and real material IDs; it does not certify rendered visuals or internet latency.</p><h3>WILDERNESS COLLISION</h3><div class="row"><button id="wilderness-probes">Run isolated solid probes</button><button id="wilderness-probes-export">Export collision report</button></div><button id="wilderness-outlines">Toggle wilderness solid outlines</button><p id="wilderness-probes-status">Repeated real-worker tree and rock approaches, both saved generations. Campaign data stays untouched; rendered appearance needs your review.</p><button id="lab-systems">Run world systems · repeated checks</button><button id="lab-systems-export" ${systemsReport?'':'disabled'}>Export world systems report</button><p id="lab-systems-summary"></p></section><section data-lab-page="inspect" hidden><h3>PROCEDURAL GENERATION</h3><div class="row"><button id="lab-procedural" ${labActive?'disabled':''}>Seed & recipe inspector</button><button id="lab-plans" ${labActive?'disabled':''}>Valley & vault plans</button></div><p>${labActive?'Return to campaign first to use these two read-only in-game inspectors. The separate system workbench remains available while the lab is open. ':''}Preview another seed, recipe or domain and inspect real constraints, geometry and manifests. Compile regenerates only the preview. Saved worlds keep their pinned generation. Terrain amplitude, room counts, enemy counts and arbitrary scripts are not currently supported controls.</p><h3>RENDERED VISUAL TOOLS</h3><p><a href="./visual-review.html?subject=animation" target="_blank" rel="noopener">Open isolated animation inspector</a> · play, scrub and frame-step production physics/rig snapshots; capture PNG and pose/contact JSON without booting this world. Actual captured images are never automatic visual approval.</p><p>Contact animation clips include wall pressure, crate push/pull and ledge mantle. These are fixed worker replays you can scrub, not editable campaign props.</p><button id="lab-capture-run" ${!labActive||transitioning?'disabled':''}>Capture selected station · real worker replay</button><div class="row"><button id="lab-capture-png">Download captured contact sheet</button><button id="lab-capture-json">Download capture evidence</button></div><p id="capture-status"></p></section><section data-lab-page="tuning" hidden><h3>SESSION TUNING</h3><p>Edit a draft, then Apply. Closing this panel discards unapplied edits. Ordinary campaign mechanics use release defaults. Live sentry settings are latched: stop the attempt before applying, then start a fresh attempt.</p><label for="lab-quick-preset">Ready-to-test draft</label><select id="lab-quick-preset"><option value="">Choose a setup…</option>${Object.entries(LAB_QUICK_PRESETS).map(([id,p])=>`<option value="${id}">${p.label}</option>`).join('')}</select><label for="lab-filter">Find a control</label><input id="lab-filter" type="search" placeholder="Damage, gravity, camera…"><p id="lab-draft-status" role="status" aria-live="polite">Applied values shown · no pending changes</p><fieldset id="lab-tuning-fields" ${livePractice||coop.active||coopPending||coop.status==='connecting'?'disabled':''}>${tuningHTML(labTuning)}</fieldset><div class="lab-apply-bar"><button id="lab-apply">Apply draft to lab</button><button id="lab-cancel-draft">Discard draft</button><button id="lab-defaults">Reset all draft values</button></div><p>Movement and camera take effect after Apply in the paused lab. Staff changes affect the next accepted strike. Sentry damage takes effect on its next reset. A modified setup may fail a release-baseline measurement; that is useful feedback.</p><div class="row"><button id="lab-save-preset">Save applied device preset</button><button id="lab-load-preset">Load device preset into draft</button></div><p>Explicit save/load only. Presets never load automatically and never write a campaign slot.</p><label><input id="lab-reduced" type="checkbox" ${reducedMotion?'checked':''}> Reduced motion · no impact hold or camera shake</label></section><section data-lab-page="reports" hidden><h3>STARTUP DIAGNOSTICS</h3><p>Inspect or copy the latest startup report. Tests apply once after a full reload from the last saved checkpoint; unsaved play is not carried into the test. They never alter a save or persist a bad setting.</p><button id="lab-startup-report">Open startup report</button><label for="lab-startup-test">Next startup scenario</label><select id="lab-startup-test">${STARTUP_TESTS.map(test=>`<option value="${test.id}">${test.label}</option>`).join('')}</select><p id="lab-startup-test-effect"></p><button id="lab-startup-run" ${coop.active||coopPending?'disabled':''}>Reload from saved checkpoint &amp; test</button><h3>SHARE A REPRODUCIBLE TEST</h3><p>Export the applied setup or feedback with build, seed, scenario, settings and available measured evidence. No account or room tokens are included. Import accepts only bounded lab presets and stages a draft; it never starts a test or changes world saves.</p><div class="row"><button id="lab-preset-export">Export applied preset</button><button id="lab-feedback-export">Export feedback report</button><button id="lab-copy">Copy prepared JSON</button></div><label for="lab-portable">Preset / feedback JSON · copy fallback</label><textarea id="lab-portable" rows="7" maxlength="24000" spellcheck="false" placeholder="Export prepares readable text here. Paste a lab preset here to import."></textarea><div class="row"><button id="lab-import-preset">Import text into draft</button><button id="lab-import-file">Choose preset file</button><input id="lab-preset-file" type="file" accept="application/json,.json" hidden></div><p id="lab-portable-status" role="status" aria-live="polite"></p><h3>MEASURED REPORT</h3><p id="lab-summary">${report?`${report.status.toUpperCase()} · ${report.runs.length} case-runs · ${all.length-failures}/${all.length} observed checks passed${report.interruption?' · '+report.interruption:''}`:'No runs measured yet. Nothing below is a pre-recorded device benchmark.'}</p><button id="lab-export" ${report?'':'disabled'}>Export JSON report</button><div id="lab-results"></div><h3>MANUAL VISUAL REVIEW</h3><p>These are never auto-passed. Use practice, then choose your own rating for each station. Check both portrait and landscape on your real device, and test movement + action + right-hand camera gestures.</p><div id="lab-manual"></div></section><section data-lab-page="systems" hidden><h3>RESTORATION · MODULAR BODY &amp; FIELDS</h3><button id="restoration-care-lab-open">Habitat care · delivery &amp; recovery scenarios</button><button id="restoration-model-open">Field numerical model · tune &amp; inspect</button><button id="restoration-practice-start" ${!labActive||transitioning||!physicsReady?'disabled':''}>Start / reset playable restoration practice</button><button id="restoration-practice-controls" ${!restorationPractice?'disabled':''}>Practice controls · real local actions</button><button id="restoration-practice-export" ${!restorationPractice?'disabled':''}>Export playable practice evidence</button><p>Enter the isolated lab first. Three finite habitat plots use the actual explorer, field kernels, utility timing and body recipes. Walk to each dock or the moving automaton to operate it. Campaign progress stays locked; Reset replaces only this practice. Return to campaign restores the captured world.</p><h3>HEARTHMERE · STARTING TOWN</h3><button id="town-director-lab-open">Request director · causes &amp; history</button><button id="campaign-guidance-lab-open">Field plan · competing goals &amp; tracking</button><button id="town-supply-lab-open">Town supply · finite cargo scenarios</button><button id="workshop-construction-lab-open">Campaign workshop · paid construction scenarios</button><button id="workshop-authoring-lab-open">Workshop recipe authoring</button><button id="town-life-lab-open">Living town · needs, desires &amp; resources</button><button id="conversation-lab-open">Conversation rehearsal · every resident</button><button id="town-lab-open">Open disposable town scenario</button><button id="town-lab-real">Visit real town</button><p>Inspect and test actual needs, desires, resources, service capacity and relationships in Living town. The original town scenario remains a separate fixed-routine crowd/contact diagnostic; the campaign roster stays 100.</p><h3>STREAMED FRONTIER · METRES & CLOCK</h3><div id="regional-lab"></div>${state.regional?'':'<p>Walking telemetry is available in a regional frontier. Use the separate world-system scenarios above from any campaign; no world switch is required.</p>'}</section><section data-lab-page="reports" hidden><h3>CAPABILITIES & LIMITS</h3><p>${backend} renderer · Rapier worker · ${innerWidth} × ${innerHeight} viewport · ${navigator.maxTouchPoints} reported touch points. Frame p50/p95/p99 are measured callback intervals with sample counts, not theoretical FPS or GPU timings. This small fixed workload does not establish full-valley performance, phone ergonomics or console-quality animation.</p></section>`;
+  panel.querySelector<HTMLButtonElement>('.close')!.onclick=closePanel;($('lab-iterations') as HTMLSelectElement).value=String(labIterations);($('lab-case') as HTMLSelectElement).value=String(labCaseIndex);const showLook=()=>{$('lab-look').textContent=LAB_CASES[Number(($('lab-case') as HTMLSelectElement).value)]!.lookFor;};showLook();$('lab-case').onchange=showLook;bindDeveloperNavigation(panel);$('lab-procedural').onclick=()=>openPanel('workbench');$('lab-plans').onclick=()=>openPanel('region-plan');
++ const contactSection=document.createElement('section');const title=document.createElement('h3');title.textContent='CRATES & LEDGES · SOLO PRACTICE';const guide=document.createElement('p');guide.textContent=CONTACT_GUIDE;const reset=document.createElement('button');reset.textContent='Reset & practice contact course';reset.disabled=!labActive;reset.onclick=startContactPractice;const status=document.createElement('p');status.textContent=(labActive?'Disposable course; campaign saves locked. ':'Enter the isolated lab first. ')+contactDiagnostic+' · Evidence '+contactEvidence.length+'/3600 snapshots. Movement tuning uses the existing staged Apply/reset controls.';const output=document.createElement('textarea');output.readOnly=true;output.setAttribute('aria-label','Contact course evidence JSON');const exportButton=document.createElement('button');exportButton.textContent='Prepare contact evidence text';exportButton.onclick=()=>{output.value=JSON.stringify({kind:'axiom-contact-course',version:1,source:livePracticeSourceRevision,build:DEVELOPER_BUILD,seed:state.seed,mode:contactPractice?'disposable-playable-course':'inactive',fixture:CONTACT_COURSE,appliedTuning:labTuning,frames:contactEvidence,limits:'Numerical snapshots only; no browser/device acceptance; solo only'},null,2);};contactSection.append(title,guide,status,reset,exportButton,output);panel.append(contactSection);
+  $('restoration-care-lab-open').onclick=()=>openPanel('restoration-care-lab');$('restoration-model-open').onclick=()=>openPanel('restoration-lab');$('restoration-practice-start').onclick=startRestorationPractice;$('restoration-practice-controls').onclick=()=>openPanel('restoration-practice');$('restoration-practice-export').onclick=()=>{if(restorationPractice)downloadJSON(restorationPractice.report(),'axiom-restoration-playable.json');};$('town-director-lab-open').onclick=()=>openPanel('town-director-lab');$('campaign-guidance-lab-open').onclick=()=>openPanel('campaign-guidance-lab');$('town-supply-lab-open').onclick=()=>openPanel('town-supply-lab');$('workshop-construction-lab-open').onclick=()=>openPanel('workshop-construction-lab');$('workshop-authoring-lab-open').onclick=()=>openPanel('workshop-authoring');$('town-life-lab-open').onclick=()=>openPanel('town-life-lab');$('conversation-lab-open').onclick=()=>openPanel('conversation-lab');$('town-lab-open').onclick=()=>openPanel('town-lab');$('town-lab-real').onclick=()=>visitTown();
+  $('lab-live-reset').onclick=startLivePractice;$('lab-live-resume').onclick=()=>{if(!livePractice||!['paused','ready'].includes(livePractice.status))return;closePanel();focusGameplay();liveResumeRequested=true;};$('lab-live-stop').onclick=()=>{if(!labActive)return;resetLabCase();closePanel();focusGameplay();};$('lab-live-status').textContent=livePractice?livePracticeText():'Enter the isolated lab, then start a disposable sentry attempt.';$('lab-live-capture').onclick=captureLivePractice;$('lab-live-export').onclick=exportLivePractice;
+  if(state.regional)mountRegionalLab();
+@@ -1359,8 +1379,9 @@ function presentLivePractice(result:LivePracticeResult){
+ }
+ function pauseLivePractice(reason:LivePracticePause){if(!labActive||!livePractice)return;liveResumeRequested=false;if(livePractice.status==='active')sendLiveCommand({type:'suspend',reason});visualCapture.cancel('Live practice paused: '+reason);}
+ function stopLivePractice(reason:'suite'|'exit'){if(!livePractice)return;if(liveRecording){const next=appendLiveSentryTrace(liveRecording,{type:'disable',reason});liveRecording=next;livePractice=next.state;}liveResumeRequested=false;visualCapture.cancel('Live practice stopped');livePractice=null;if(livePracticeVisual)livePracticeVisual.root.visible=false;}
+-function startLivePractice(){clearRestorationPractice();
++function startLivePractice(){
+  if(!labActive||coop.active||coopPending||transitioning||!physicsReady)return;
++ contactPractice=false;labRoot.visible=true;clearRestorationPractice();
+  interruptLab('Live practice selected');clearInput();transitioning=true;physicsReady=false;zoneEpoch++;lastLabStep=-1;labWarmup=0;labTicks=0;labFrames=[];labMetrics=null;labCaptureOnly=false;labUnlimitedStamina=false;labInfiniteTargets=false;labAutoCombo=false;labTargets=[];resetLabTargets();
+  liveRecording=createLiveSentryTrace({seed:state.seed,epoch:zoneEpoch,tuning:combatTuning(),enemyDamageScale:labTuning.enemyDamage});livePractice=liveRecording.state;liveResumeRequested=true;livePracticeEvents=[];combo=structuredClone(livePractice.combo);guard=structuredClone(livePractice.guard);avatarAction=null;impactHold=0;impactAge=1;recoil.clear();pulseTime=0;pulse.visible=false;
+  livePracticeVisual?.dispose();livePracticeVisual=createQuadruped(livePractice.bodySeed);labRoot.add(livePracticeVisual.root);livePracticeVisual.update(livePractice.encounters.enemies[0]!);
+@@ -1440,6 +1461,7 @@ function restorationReady(){return physicsReady&&!transitioning&&!sessionReloadi
+ function clearRestorationPractice(){restorationCollisionRetryAt=0;restorationCollisionSignature='';restorationConfirmedPoint=null;restorationPendingCollision=null;restorationPracticeView?.dispose();restorationPracticeView=null;restorationPractice=null;}
+ function startRestorationPractice(){
+  if(!labActive||transitioning||!physicsReady||coop.active||coopPending)return;
++ contactPractice=false;labRoot.visible=true;
+  interruptLab('Restoration practice started');stopLivePractice('suite');clearRestorationPractice();clearInput();
+  restorationPractice=new RestorationPractice(state.seed,livePracticeSourceRevision);restorationPracticeView=RESTORATION_VIEW_ENGINE.create(restorationPractice.plan);labRoot.add(restorationPracticeView.root);
+  labRunning=false;labTargets=[];resetLabTargets();labWarmup=0;lastLabStep=-1;lastPhysicsStep=-1;combo=createComboState(combatTuning());guard=createGuardState();avatarAction=null;playerContact=emptyPlayerContact();movableBodies=[];
+diff --git a/src/physics.worker.ts b/src/physics.worker.ts
+index 3d462e3..ab54cb1 100644
+--- a/src/physics.worker.ts
++++ b/src/physics.worker.ts
+@@ -243,7 +243,8 @@ function replaceWorld(m:WorldMessage){
+  if(terrain){let low=Infinity,high=-Infinity;for(let i=1;i<terrain.vertices.length;i+=3){low=Math.min(low,terrain.vertices[i]!);high=Math.max(high,terrain.vertices[i]!);}wallY=(low+high)/2;wallHalf=(high-low)/2+10;}
+  for(const o of [{x:bound+1,z:0,hx:1,hz:bound+2},{x:-bound-1,z:0,hx:1,hz:bound+2},{x:0,z:bound+1,hx:bound+2,hz:1},{x:0,z:-bound-1,hx:bound+2,hz:1}])perimeterColliders.add(world.createCollider(RAPIER.ColliderDesc.cuboid(o.hx,wallHalf,o.hz).setTranslation(o.x,wallY,o.z)).handle);
+  const savedStart=m.checkpoint??m,start=streamedTerrain?{x:clampRegionalCoordinate(savedStart.x,bound),z:clampRegionalCoordinate(savedStart.z,bound)}:savedStart;body=world.createRigidBody(RAPIER.RigidBodyDesc.kinematicPositionBased().setTranslation(start.x,normalizedSpawnElevation(savedStart.x,savedStart.z,start.x,start.z,m.checkpoint?.feetY??m.y)+STAND_HALF+RADIUS+SKIN,start.z));collider=world.createCollider(RAPIER.ColliderDesc.capsule(STAND_HALF,RADIUS),body);
+- contacts=new ContactPhysics(world,body,collider,m.movable??[],m.interactionEnabled===true&&m.online!==true&&!sandbox,streamedTerrain?{
++ contacts=new ContactPhysics(world,body,collider,m.movable??[],m.interactionEnabled===true&&m.online!==true,streamedTerrain?{
++  bodyClear:(p,hx,hy,hz)=>{const actors=[...(lastTownContactPoses??townLifePoses??[]).map(a=>({x:a.x,z:a.z,feetY:6})),...townActors.filter(a=>a.id!==townSelfId)];return actors.every(a=>Math.abs(p.y-((a.feetY??6)+.95))>=hy+.95||Math.abs(p.x-a.x)>=hx+.36||Math.abs(p.z-a.z)>=hz+.36);},
+   supportAvailable:(spec,p)=>[-1,0,1].every(dx=>[-1,0,1].every(dz=>Number.isFinite(sampleStreamedElevation(p.x+dx*(spec.hx+SKIN),p.z+dz*(spec.hz+SKIN))))),
+   constrainPosition:(spec,p)=>{const bx=regionalBodyCenterBound(bound,spec.hx),bz=regionalBodyCenterBound(bound,spec.hz);return {x:Math.max(-bx,Math.min(bx,p.x)),y:p.y,z:Math.max(-bz,Math.min(bz,p.z))};},
+  }:undefined);
+@@ -340,7 +341,7 @@ self.onmessage=async(e:MessageEvent)=>{const m=e.data;if(!m||typeof m!=='object'
+  }
+  }catch(error){ready=false;if(m.type==='init')initializing=false;self.postMessage({type:'error',epoch,message:error instanceof Error?error.message:'Physics failure'});}};
+ function snapshot(vx:number,vz:number){
+- const p=body.translation(),feetY=p.y-halfHeight()-RADIUS-SKIN;self.postMessage({type:'snapshot',epoch,step:simulationStep,sandbox,...(townCrowd?{town:{time:townTime,roster:100,rigidBodies:0,source:townLifePoses?'life':'routine',...(lastTownContactPoses?{contactPoses:lastTownContactPoses}:{})}}:{}),playback:labPlayback?{...labPlayback}:null,x:p.x,y:p.y,z:p.z,feetY:hasTerrain()?feetY:Math.max(0,feetY),vx,vz,vy:input.paused?0:vy,grounded,crouched,stance,sliding:motor.slide>0,landing:landing/LANDING_TIME,landingSpeed,contact:contacts.contact,contactRequestId,movable:contacts.snapshot(),...(streamedTerrain?{streaming:{activeCells:cells.size,terrainCells:cellTerrains.size,cellColliders:cellColliderCount(),totalColliders:world.colliders.len(),revisionKeys:cellRevisions.size,pendingUnloads:pendingUnloads.size,blocked:streamBlocked,maxCells:MAX_ACTIVE_CELLS,maxColliders:MAX_CELL_COLLIDERS,maxHistory:MAX_CELL_HISTORY}}:{})});
++ const p=body.translation(),feetY=p.y-halfHeight()-RADIUS-SKIN;self.postMessage({type:'snapshot',epoch,step:simulationStep,sandbox,...(townCrowd?{town:{time:townTime,roster:100,rigidBodies:0,source:townLifePoses?'life':'routine',...(lastTownContactPoses?{contactPoses:lastTownContactPoses}:{})}}:{}),playback:labPlayback?{...labPlayback}:null,x:p.x,y:p.y,z:p.z,feetY:hasTerrain()?feetY:Math.max(0,feetY),vx,vz,vy:input.paused?0:vy,grounded,crouched,stance,sliding:motor.slide>0,landing:landing/LANDING_TIME,landingSpeed,contact:contacts.contact,contactDiagnostic:contacts.diagnostic,contactRequestId,movable:contacts.snapshot(),...(streamedTerrain?{streaming:{activeCells:cells.size,terrainCells:cellTerrains.size,cellColliders:cellColliderCount(),totalColliders:world.colliders.len(),revisionKeys:cellRevisions.size,pendingUnloads:pendingUnloads.size,blocked:streamBlocked,maxCells:MAX_ACTIVE_CELLS,maxColliders:MAX_CELL_COLLIDERS,maxHistory:MAX_CELL_HISTORY}}:{})});
+ }
+ export function physicsTick(){
+  if(!ready)return;
+diff --git a/src/traversal-world.ts b/src/traversal-world.ts
+index a3c96c5..b1b3af9 100644
+--- a/src/traversal-world.ts
++++ b/src/traversal-world.ts
+@@ -2,8 +2,9 @@ import {REGION_BOUND} from './regional-world.ts';
+ import {regionalBodyCenterBound} from './regional-bounds.ts';
+ import {buildOrigin} from './generation.ts';
+ import {isFiniteVec3,type MovableBody} from './player-contact.ts';
++import {townYards,constrainTownCrate} from './town-yards.ts';
+ /** Solo prop state is independent of every reward/resource ledger. Old saves omit it. */
+-export interface TraversalState {version:1;crate:{x:number;y:number;z:number}}
++export type TraversalState = {version:1;crate:{x:number;y:number;z:number}} | {version:2;crate:{x:number;y:number;z:number};yards:{x:number;y:number;z:number}[]};
+ export interface TraversalIdentity {generation:number;seed:number;regional?:{version:1}}
+ export const SURVEY_CRATE_ID='camp-survey-crate';
+ export const SURVEY_CRATE_HALF=Object.freeze({hx:.56,hy:.65,hz:.56});
+@@ -17,16 +18,25 @@ export function validTraversal(value:unknown,identity:TraversalIdentity){
+  // The one survey crate belongs to its saved world, even while the explorer is
+  // underground. Its complete box plus collision skin must fit the region.
+  const bound=regional?regionalBodyCenterBound(REGION_BOUND,SURVEY_CRATE_HALF.hx):79.4,minY=regional?-256:-20,maxY=regional?256:100;
+- return s.version===1&&isFiniteVec3(s.crate)&&Math.abs(s.crate.x)<=bound&&Math.abs(s.crate.z)<=bound&&s.crate.y>=minY&&s.crate.y<=maxY;
++ const survey=(s.version===1||s.version===2)&&isFiniteVec3(s.crate)&&Math.abs(s.crate.x)<=bound&&Math.abs(s.crate.z)<=bound&&s.crate.y>=minY&&s.crate.y<=maxY;
++ if(!survey)return false;if(s.version===1)return true;
++ if(!regional||Object.keys(s).sort().join(',')!=='crate,version,yards'||Object.keys(s.crate).sort().join(',')!=='x,y,z'||!Array.isArray(s.yards)||s.yards.length!==3||Object.keys(s.yards).join(',')!=='0,1,2')return false;
++ const plan=townYards(identity.seed);
++ return s.yards.every((p,i)=>{if(!isFiniteVec3(p)||Object.keys(p).sort().join(',')!=='x,y,z'||p.y<6.55||p.y>6.575)return false;const b=plan.crates[i]!,q=constrainTownCrate(b,p);return Math.abs(q.x-p.x)<.0001&&Math.abs(q.z-p.z)<.0001&&!plan.obstacles.some(o=>Math.abs(p.x-o.x)<b.hx+o.hx+.002&&Math.abs(p.y-o.y)<b.hy+o.hy+.002&&Math.abs(p.z-o.z)<b.hz+o.hz+.002);});
+ }
++export function createTownTraversal(identity:TraversalIdentity):TraversalState{return {version:2,crate:((({x,y,z})=>({x,y,z}))(traversalPlan(identity).crate)),yards:townYards(identity.seed).crates.map(({x,y,z})=>({x,y,z}))};}
++export function traversalObstacles(s:TraversalIdentity&{traversal?:TraversalState}){return s.generation!==2?[]:[traversalPlan(s).ledge,...(s.traversal?.version===2?townYards(s.seed).obstacles:[])];}
+ export function traversalBodies(s:TraversalIdentity&{traversal?:TraversalState}):MovableBody[]{
+  if(s.generation!==2)return [];
+- const base=traversalPlan(s).crate;
+- return [{...base,...(s.traversal?.crate??{})}];
++ const base=traversalPlan(s).crate,saved=s.traversal;
++ return [{...base,...(s.traversal?.crate??{})},...(saved?.version===2?townYards(s.seed).crates.map((b,i)=>({...b,...saved.yards[i]})):[])];
+ }
+-export function traversalFromBodies(bodies:unknown,identity:TraversalIdentity):TraversalState|null {
+- if(!Array.isArray(bodies)||bodies.length!==1)return null;
++export function traversalFromBodies(bodies:unknown,identity:TraversalIdentity&{traversal?:TraversalState}):TraversalState|null {
++ const v2=identity.traversal?.version===2;
++ if(!Array.isArray(bodies)||bodies.length!==(v2?4:1))return null;
+  const body=bodies[0] as MovableBody;if(!body||body.id!==SURVEY_CRATE_ID||body.hx!==SURVEY_CRATE_HALF.hx||body.hy!==SURVEY_CRATE_HALF.hy||body.hz!==SURVEY_CRATE_HALF.hz)return null;
+- const result:TraversalState={version:1,crate:{x:body.x,y:body.y,z:body.z}};
++ if(v2&&townYards(identity.seed).crates.some((b,i)=>{const p=bodies[i+1];return !p||p.id!==b.id||p.hx!==b.hx||p.hy!==b.hy||p.hz!==b.hz;}))return null;
++ const crate={x:body.x,y:body.y,z:body.z};
++ const result:TraversalState=v2?{version:2,crate,yards:bodies.slice(1).map(({x,y,z})=>({x,y,z}))}:{version:1,crate};
+  return validTraversal(result,identity)?result:null;
+ }
+diff --git a/src/world.ts b/src/world.ts
+index 7b7f946..94612e0 100644
+--- a/src/world.ts
++++ b/src/world.ts
+@@ -10,7 +10,7 @@ import {createTownLifeOpening,advanceTownLife,advanceTownLifeWithWorkshopWork,va
+ import {createTownState,validTownState,townBalance,purchaseTown,TOWN_SPAWN,type TownState,type TownCommand} from './starting-town.ts';
+ import {REGIONAL_FOOD_MAX_TICKS,regionalFoodCost,createRegionalFood,advanceRegionalFood,applyRegionalFoodCommand,observeRegionalFoodTrade,validRegionalFood,immutableRegionalFood,type RegionalFoodState,type RegionalFoodCommand} from './regional-food.ts';
+ import {createRegionalTrade,advanceRegionalTrade,applyRegionalTradeCommand,validRegionalTrade,immutableRegionalTrade,regionalTradeObstacles,type RegionalTradeState,type RegionalTradeCommand} from './regional-trade.ts';
+-import {validTraversal,traversalBodies,type TraversalState} from './traversal-world.ts';
++import {validTraversal,traversalBodies,createTownTraversal,type TraversalState} from './traversal-world.ts';
+ import {createRegionalSupply,advanceRegionalSupply,applyRegionalSupplyCommand,validRegionalSupply,immutableRegionalSupply,regionalSupplyObstacles,type RegionalSupplyState,type RegionalSupplyCommand} from './regional-supply.ts';
+ import {gatherWilderness,immutableWildernessState,validWildernessState,validWildernessGatherAction,type WildernessState,type WildernessGatherContext,type WildernessQueryObstacle} from './wilderness-state.ts';
+ import {wildernessFeatureById} from './wilderness.ts';
+@@ -139,7 +139,7 @@ export function createState(seed = 1): State {
+ /** Old worlds remain generation 1; entering generation 2 is an explicit new-world action. */
+ export function createConnectedState(seed=73129):State {const s=createState(seed),plan=worldValley(seed);const next:State={...s,generation:2,generationManifest:CONNECTED_GENERATION_MANIFEST,player:{x:plan.endpoints.spawn.x,z:plan.endpoints.spawn.z,hp:100},events:['Field architect deployed. Survey the connected valley, its settlements and the Echo Vault.']};next.causal=reconcileCausal(createCausalState(seed),causalContext(next));return next;}
+ /** Explicit new-world flavor. Never applied as a migration to an existing save. */
+-export function createRegionalState(seed=73129):State {return {...createConnectedState(seed),regional:{version:1},town:createTownState(),player:{x:TOWN_SPAWN.x,z:TOWN_SPAWN.z,hp:100},events:['Welcome to Hearthmere. Meet 100 townspeople, browse seven businesses, then follow the east road to Mossbank and the 10 km² frontier.']};}
++export function createRegionalState(seed=73129):State {return {...createConnectedState(seed),regional:{version:1},traversal:createTownTraversal({generation:2,seed,regional:{version:1}}),town:createTownState(),player:{x:TOWN_SPAWN.x,z:TOWN_SPAWN.z,hp:100},events:['Welcome to Hearthmere. Meet 100 townspeople, browse seven businesses, then follow the east road to Mossbank and the 10 km² frontier.']};}
+ export function worldEndpoints(s:Pick<State,'generation'|'seed'>){return s.generation===2?worldValley(s.seed).endpoints:{spawn:{x:-13,z:12},entrance:CAVE_ENTRANCE,return:CAVE_RETURN,pump:PUMP_POSITION,settlement:SETTLEMENT_POSITION,buildOrigin:{x:0,y:0,z:0}};}
+ export function worldObjects(s:Pick<State,'generation'|'seed'>):readonly WorldObject[]{return s.generation===2?worldValley(s.seed).objects:generateObjects(s.seed);}
+ export function worldBound(s:Pick<State,'generation'|'seed'|'regional'>&{zone?:State['zone']}){return s.zone==='cave'?naturalCave(s.seed).bound:s.generation===2?(s.zone==='dungeon'?worldDungeon(s).bound:s.regional?.version===1?REGION_BOUND:worldValley(s.seed).terrain.bound):WORLD_BOUND;}
+diff --git a/tests/helpers/main-source.ts b/tests/helpers/main-source.ts
+index cbd24b6..5449eab 100644
+--- a/tests/helpers/main-source.ts
++++ b/tests/helpers/main-source.ts
+@@ -20,5 +20,6 @@ export function restorationInitialState(source:string):string {
+  const collision=source.match(/^let restorationCollisionSignature=.*$/m)?.[0];
+  const practice=source.match(/^let restorationView:.*$/m)?.[0];
+  assert(collision&&practice,'production restoration state declarations');
+- return collision+'\n'+practice+'\n';
++ const contact=source.match(/^let contactPractice=.*$/m)?.[0];assert(contact,'production contact course state');
++ return collision+'\n'+practice+'\n'+contact+"\nlet contactGeometryKey='';\n";
+ }
+diff --git a/tests/helpers/town-main-integration.ts b/tests/helpers/town-main-integration.ts
+index 68c3093..c937f03 100644
+--- a/tests/helpers/town-main-integration.ts
++++ b/tests/helpers/town-main-integration.ts
+@@ -108,7 +108,7 @@ export async function runTownMainIntegration(options:MainIntegrationOptions={}){
+   state:start,worker:{onmessage:null,postMessage:(m:any)=>{if(m.type==='input'&&m.townLifePoses)lastContactPacket=m;const candidate=view.contactPoses??view.poses;if(m.type==='input'&&m.townLifePoses?.[0]?.authoritativeMotion===1&&view.root.visible&&candidate[0]?.authoritativeMotion===1){metrics.authoritativeContactPackets++;for(let i=0;i<100;i++)metrics.candidateContactPacketDifference=Math.max(metrics.candidateContactPacketDifference,distance(m.townLifePoses[i],candidate[i]!));}worker?.send(m);}},startup:{failed:false,playing:false,note:noop,detail:noop,fail:(...v:unknown[])=>fail('Startup failed: '+v.join(' '))},zoneEpoch:0,physicsReady:false,transitioning:true,lastPhysicsStep:-1,labActive:false,labRunning:false,coopPending:false,coop:{active:false,snapshot:null},panel:{hidden:true},document:{hidden:false},windowActive:true,
+   targetPosition:new THREE.Vector3(start.player.x,6,start.player.z),physicsMotion:{grounded:true,crouched:false},activeConversation:null,combo:{phase:'idle'},guard:createGuardState(),combatHeading:0,DEFAULT_TUNING,stepFacing,guardBusy,stepGuardedWorldEncounters,consumeGuardEvents:noop,stepCombat:noop,
+   guardContext:()=>({player:{...context.state.player,y:context.targetPosition.y,facing:0,grounded:context.physicsMotion.grounded,crouched:context.physicsMotion.crouched},playing:true,obstacles:[]}),
+-  applyAction,encounterObjects,objects:[],worldHeight,validPlayerContact,validMovableBodies,emptyPlayerContact,playerContact:emptyPlayerContact(),movableBodies:[],contactRequestId:null,traversalBodies,traversalFromBodies,
++  applyAction,encounterObjects,objects:[],worldHeight,validPlayerContact,validMovableBodies,emptyPlayerContact,playerContact:emptyPlayerContact(),movableBodies:[],contactRequestId:null,contactPractice:false,contactEvidence:[],contactDiagnostic:'Ready',traversalBodies,traversalFromBodies,
+   workshopProjection:new WORKSHOP_CONSTRUCTION_VIEW_ENGINE.Projection(),WORKSHOP_CONSTRUCTION_VIEW_ENGINE,restorationPendingCollision:null,restorationConfirmedPoint:null,restorationCollisionSignature:'',restorationCollisionRetryAt:0,pendingLabRestore:null,pendingCells:new Map(),confirmCell:()=>false,regionalLoadTarget:null,machineSignature:'',startupInitialCellCount:0,resolvePhysics:noop,resolveStartupPose:noop,updateBackend:noop,failLabRestore:fail,rejectPhysics:(e:Error)=>{throw e;},interruptLab:noop,toast:noop,syncMachine:noop,syncCavePhysics:noop,gameAudio:{cue:noop},$:()=>({style:{}}),
+   townView:view,townLifeView:null,townSnapshotContinuity:new TownSnapshotContinuity(),townActivity:{pause:noop},townLifeClock,townLifePoses,copyTownLifePoses,townFrameSeconds,townClock,lastTownLifeContact:undefined,townLifeFacilities,startingTown,
+   frontierRoot:{visible:false},residentVisuals:new Map(),workplaceVisuals:new Map(),sourceVisual:null,frontierTarget:new THREE.Vector3(),reducedMotion:false,
+diff --git a/tests/lab-orchestration.test.ts b/tests/lab-orchestration.test.ts
+index bf17401..3fcc615 100644
+--- a/tests/lab-orchestration.test.ts
++++ b/tests/lab-orchestration.test.ts
+@@ -19,7 +19,7 @@ async function run(batch){
+  ${between('worker.onmessage=(e)=>', 'worker.onerror=')}
+  ${main.slice(main.indexOf('function guardContext()'))}
+  return {getReport:()=>structuredClone(labReport),getStatus:()=>({labRunning,labCaseIndex,labTicks,labWarmup,zoneEpoch}),init(){sendPhysics({type:'init',...LAB_CASES[0].spawn,obstacles:LAB_OBSTACLES,bound:18,sandbox:true})}};`;
+- const deps={WORKSHOP_CONSTRUCTION_VIEW_ENGINE,workshopProjection:new WORKSHOP_CONSTRUCTION_VIEW_ENGINE.Projection(),...contactModel,THREE,worker,...combat,...lab,...tuning,...motion,...gear,...gearCombat,...world,...guards,...guardView,...guardResolution};let api;try{api=new Function(...Object.keys(deps),stripTypeScriptTypes('function body(){const activeConversation=null;function closeConversation(){}const startup={playing:true,failed:false,detail(){},fail(){},cleanup(){}};'+source+'}',{mode:'strip'})+';return body();')(...Object.values(deps));
++ const deps={labRoot:new THREE.Group(),WORKSHOP_CONSTRUCTION_VIEW_ENGINE,workshopProjection:new WORKSHOP_CONSTRUCTION_VIEW_ENGINE.Projection(),...contactModel,THREE,worker,...combat,...lab,...tuning,...motion,...gear,...gearCombat,...world,...guards,...guardView,...guardResolution};let api;try{api=new Function(...Object.keys(deps),stripTypeScriptTypes('function body(){const activeConversation=null;function closeConversation(){}const startup={playing:true,failed:false,detail(){},fail(){},cleanup(){}};'+source+'}',{mode:'strip'})+';return body();')(...Object.values(deps));
+  await take('boot');api.init();await take('ready');for(let step=0;api.getStatus().labRunning&&step<20000;step+=batch){worker.postMessage({type:'advance',n:batch});await take('done');if(error)throw error;}const report=api.getReport();assert.equal(report.status,'completed',JSON.stringify(api.getStatus()));assert.equal(report.runs.length,27);assert.deepEqual(report.runs.flatMap(r=>r.checks.filter(x=>!x.pass)),[]);assert.equal(report.runs.reduce((n,r)=>n+r.metrics.samples,0),4950);assert.ok(Object.values(report.manual).every(v=>v==='not-reviewed'));assert.ok(report.runs.every(r=>r.frames.sampleCount===0));return report.runs.map(({metrics,...r})=>({caseId:r.caseId,iteration:r.iteration,metrics}));}finally{await w.terminate()}
+ }
+ test('production lab orchestration repeats all 27 case-runs identically with immediate and batched worker delivery',{timeout:30000},async()=>{const a=await run(1),b=await run(40);assert.deepEqual(a,b);});
+diff --git a/tests/live-sentry-main.test.ts b/tests/live-sentry-main.test.ts
+index e7bf401..7b10063 100644
+--- a/tests/live-sentry-main.test.ts
++++ b/tests/live-sentry-main.test.ts
+@@ -1,3 +1,4 @@
++import {CONTACT_COURSE,CONTACT_GUIDE} from '../src/contact-course.ts';
+ import {WORKSHOP_CONSTRUCTION_VIEW_ENGINE} from '../src/workshop-construction-view.ts';
+ import {mainFunction,restorationInitialState} from './helpers/main-source.ts';
+ import {RestorationPractice,RESTORATION_PRACTICE_SPAWN} from '../src/restoration-practice.ts';
+@@ -44,7 +45,7 @@ function fn(name:string){
+  throw new Error('Unterminated production function '+name);
+ }
+ const between=(a:string,b:string)=>{const from=main.indexOf(a),to=main.indexOf(b,from);assert(from>=0&&to>from,`production range ${a}`);return main.slice(from,to);};
+-const functions=['clearRestorationPractice','startRestorationPractice','recordTownMotion','recordTownActivity','contactBusy','contactEnabled','contactSpawnY','contactWorldPacket','persist','sendPhysics','refreshHeldActions','sendMovement','clearInput','closePanel','focusGameplay','openPanel','currentEquipment','combatTuning','combatObstacles','nearbyPulseTargets','combatSnapshot','consumeCombat','wildernessImpact','attack','stepCombat','cancelLabEntry','requestLab','beginLab','resetLabCase','failLabRestore','exitLab','labInput','tickLab','interruptLab','startLabSuite','updateLabVisuals','renderDevPanel','equipLoadout','assembleLoadout','guardContext','consumeGuardEvents','guardForDisplay','cancelGuardInput','pressGuard','livePracticeText','presentLivePractice','pauseLivePractice','stopLivePractice','startLivePractice','tickLivePractice','captureLivePractice','exportLivePractice','sendLiveCommand'];
++const functions=['startContactPractice','clearRestorationPractice','startRestorationPractice','recordTownMotion','recordTownActivity','contactBusy','contactEnabled','contactSpawnY','contactWorldPacket','persist','sendPhysics','refreshHeldActions','sendMovement','clearInput','closePanel','focusGameplay','openPanel','currentEquipment','combatTuning','combatObstacles','nearbyPulseTargets','combatSnapshot','consumeCombat','wildernessImpact','attack','stepCombat','cancelLabEntry','requestLab','beginLab','resetLabCase','failLabRestore','exitLab','labInput','tickLab','interruptLab','startLabSuite','updateLabVisuals','renderDevPanel','equipLoadout','assembleLoadout','guardContext','consumeGuardEvents','guardForDisplay','cancelGuardInput','pressGuard','livePracticeText','presentLivePractice','pauseLivePractice','stopLivePractice','startLivePractice','tickLivePractice','captureLivePractice','exportLivePractice','sendLiveCommand'];
+ 
+ function harness(post?:(m:any)=>void){
+  const messages:any[]=[],commands:any[]=[],results:any[]=[],audio:any[]=[],toasts:string[]=[],downloads:any[]=[],renderOrder:string[]=[],nodes=new Map<string,any>(),listeners=new Map<string,Function[]>(),timers=new Map<number,Function>();let writes=0;
+@@ -94,7 +95,7 @@ function harness(post?:(m:any)=>void){
+  ,read(){return {state,labActive,labEntering,labRunning,labReport,labTargets,campaignCheckpoint,pendingLabRestore,animation:structuredClone(animation),physicsMotion:structuredClone(physicsMotion),position:player.position.clone(),target:targetPosition.clone(),camera:cameraTarget.clone(),orbit,zoom,combo:structuredClone(combo),guard:structuredClone(guard),hp:new Map(enemyHP),saveStatus,zoneEpoch,lastPhysicsStep,transitioning,physicsReady,livePractice:livePractice?structuredClone(livePractice):null,liveRecording:liveRecording?structuredClone(liveRecording):null,liveResumeRequested,labTuning:structuredClone(labTuning),labEquipment,labUnlimitedStamina,labInfiniteTargets,labAutoCombo,events:structuredClone(livePracticeEvents),rig:livePracticeVisual,heading:combatHeading,avatarAction,actionAge,actionDuration}},
+  set(options){if('coopActive' in options)coop.active=options.coopActive;if('coopPending' in options)coopPending=options.coopPending;if('heading' in options)combatHeading=options.heading;if('panelHidden' in options)panel.hidden=options.panelHidden;if('windowActive' in options)windowActive=options.windowActive;if('labEquipment' in options)labEquipment=options.labEquipment;if('labTuning' in options)labTuning={...labTuning,...options.labTuning};if('aids' in options){labUnlimitedStamina=options.aids;labInfiniteTargets=options.aids;labAutoCombo=options.aids}},
+  cleanup(){livePracticeVisual?.dispose()}};`;
+- const deps={workshopProjection:new WORKSHOP_CONSTRUCTION_VIEW_ENGINE.Projection(),WORKSHOP_CONSTRUCTION_VIEW_ENGINE,RestorationPractice,RESTORATION_PRACTICE_SPAWN,RESTORATION_VIEW_ENGINE,TownMotionRecorder,STARTUP_TESTS,createPanelNavigation,resolveWildernessStrikes,...contactModel,...traversal,THREE,HTMLElement,...combat,...lab,...tuning,...motion,...gear,...gearCombat,...world,...guards,...guardView,...guardResolution,...controls,...practice,...trace,createQuadruped,initial,worker,$,panel,document,addEventListener,canvas,visualCapture,audio,toasts,downloads,renderOrder,timers,storageWrite:()=>writes++,appendLiveSentryTrace(recording:any,command:any){commands.push(structuredClone(command));const r=trace.appendLiveSentryTrace(recording,command);results.push(r.result);return r;}};
++ const deps={CONTACT_COURSE,CONTACT_GUIDE,workshopProjection:new WORKSHOP_CONSTRUCTION_VIEW_ENGINE.Projection(),WORKSHOP_CONSTRUCTION_VIEW_ENGINE,RestorationPractice,RESTORATION_PRACTICE_SPAWN,RESTORATION_VIEW_ENGINE,TownMotionRecorder,STARTUP_TESTS,createPanelNavigation,resolveWildernessStrikes,...contactModel,...traversal,THREE,HTMLElement,...combat,...lab,...tuning,...motion,...gear,...gearCombat,...world,...guards,...guardView,...guardResolution,...controls,...practice,...trace,createQuadruped,initial,worker,$,panel,document,addEventListener,canvas,visualCapture,audio,toasts,downloads,renderOrder,timers,storageWrite:()=>writes++,appendLiveSentryTrace(recording:any,command:any){commands.push(structuredClone(command));const r=trace.appendLiveSentryTrace(recording,command);results.push(r.result);return r;}};
+  const api=new Function(...Object.keys(deps),stripTypeScriptTypes('function body(){const activeConversation=null;function closeConversation(){}const startup={playing:true,initialized:true,failed:false,detail(){},fail(){},cleanup(){},report(){return String();},show(){}};'+source+'}',{mode:'strip'})+';return body();')(...Object.values(deps));
+  return {api,messages,commands,results,audio,toasts,downloads,renderOrder,visualCapture,slider,$,document,panel,canvas,timers,get writes(){return writes;},emit(name:string,event:any={}){for(const cb of listeners.get(name)??[])cb(event)},key(code:string,repeat=false){this.emit('keydown',{code,repeat,target:node(),preventDefault(){}})},focusedKey(code:string){let prevented=false;const target=document.activeElement??node('body');this.emit('keydown',{code,repeat:false,target,preventDefault(){prevented=true}});return {prevented,target};}};
+ }
+diff --git a/tests/regional-supply-coop.test.ts b/tests/regional-supply-coop.test.ts
+index c8e6d9b..b41d5f2 100644
+--- a/tests/regional-supply-coop.test.ts
++++ b/tests/regional-supply-coop.test.ts
+@@ -101,7 +101,7 @@ test('regional commands use each actor current settlement and authoritative idle
+ 
+ test('building cannot entomb any present or disconnected valley peer or the durable survey crate',()=>{
+  const s=supplied(),box=regionalSupplyConstructionBoxes(s.seed,post(s).id).find(b=>b.solid)!;assert(box);
+- for(const kind of ['present','disconnected','crate'] as const){const initial=copy(s),position={x:box.center.x,z:box.center.z};if(kind==='crate'){const body={...traversalBodies(initial)[0]!,...position,y:box.center.y};initial.traversal=traversalFromBodies([body],initial)!;valid(initial);}
++ for(const kind of ['present','disconnected','crate'] as const){const initial=copy(s),position={x:box.center.x,z:box.center.z};if(kind==='crate'){const body={...traversalBodies(initial)[0]!,...position,y:box.center.y};initial.traversal=traversalFromBodies([body,...traversalBodies(initial).slice(1)],initial)!;valid(initial);}
+  const room=createRoom('host','Host',initial,1000),host=room.players[0]!;
+  if(kind!=='crate'){const peer=makePlayer('guest','Guest',1,at(initial,position.x,position.z),1000);if(kind==='disconnected')peer.active=false;room.players.push(peer);}
+  const before=copy(room.world.frontierSupply),notices=syncRoom(room,'host',{seq:1,sessionId:host.sessionId,actions:[command(room.world,'build')]},1000);assert.deepEqual(room.world.frontierSupply,before,kind);assert(notices.some(n=>n.includes('construction footprint')),kind);assert.equal(regionalSupplyObstacles(room.world.seed,room.world.frontierSupply!).length,0);valid(room.world);
+diff --git a/tests/regional-trade-coop.test.ts b/tests/regional-trade-coop.test.ts
+index e6a510f..c7de84c 100644
+--- a/tests/regional-trade-coop.test.ts
++++ b/tests/regional-trade-coop.test.ts
+@@ -82,7 +82,7 @@ test('freight commands reject airborne crouched raised attacking and guarded pos
+ });
+ test('source activation cannot entomb present, disconnected or expired retained peers, or the durable survey crate',()=>{
+  const s=source(),box=regionalTradeConstructionBoxes(s.seed,plan(s).sources[0]!.id).find(b=>b.solid)!;assert(box);
+- for(const kind of ['present','disconnected','expired','crate'] as const){const initial=copy(s),position={x:box.center.x,z:box.center.z};if(kind==='crate'){const body={...traversalBodies(initial)[0]!,...position,y:box.center.y};initial.traversal=traversalFromBodies([body],initial)!;valid(initial);}
++ for(const kind of ['present','disconnected','expired','crate'] as const){const initial=copy(s),position={x:box.center.x,z:box.center.z};if(kind==='crate'){const body={...traversalBodies(initial)[0]!,...position,y:box.center.y};initial.traversal=traversalFromBodies([body,...traversalBodies(initial).slice(1)],initial)!;valid(initial);}
+  const room=createRoom('host','Host',initial,1000),host=room.players[0]!;
+  if(kind!=='crate'){const peer=makePlayer('guest','Guest',1,at(initial,position.x,position.z),1000);if(kind==='disconnected')peer.active=false;if(kind==='expired')peer.lastSeen=-100000;room.players.push(peer);}
+  const before=copy(room.world.frontierTrade),notices=syncRoom(room,'host',{seq:1,sessionId:host.sessionId,actions:[command(room.world)]},1000);assert.deepEqual(room.world.frontierTrade,before,kind);assert(notices.some(n=>n.includes('construction footprint')),`${kind}: ${notices}`);assert.equal(regionalTradeObstacles(room.world.seed,room.world.frontierTrade!).length,0);valid(room.world);
+@@ -125,7 +125,7 @@ test('four-player repair and freight-store races commit one bounded job each and
+ });
+ test('store construction uses the same durable-peer and crate footprint guard as source activation',()=>{
+  const s=readyStore(),box=regionalTradeConstructionBoxes(s.seed,plan(s).projects[0]!.id).find(b=>b.solid)!;assert(box);
+- for(const kind of ['present','disconnected','crate'] as const){let initial=copy(s);if(kind==='crate'){initial={...initial,traversal:traversalFromBodies([{...traversalBodies(initial)[0]!,x:box.center.x,y:box.center.y,z:box.center.z}],initial)!};valid(initial);}
++ for(const kind of ['present','disconnected','crate'] as const){let initial=copy(s);if(kind==='crate'){initial={...initial,traversal:traversalFromBodies([{...traversalBodies(initial)[0]!,x:box.center.x,y:box.center.y,z:box.center.z},...traversalBodies(initial).slice(1)],initial)!};valid(initial);}
+  const room=createRoom('host','Host',initial,1000),host=room.players[0]!;if(kind!=='crate'){const peer=makePlayer('guest','Guest',1,at(initial,box.center.x,box.center.z),1000);if(kind==='disconnected')peer.active=false;room.players.push(peer);}
+  const before=copy(room.world.frontierTrade),notices=syncRoom(room,'host',{seq:1,sessionId:host.sessionId,actions:[command(room.world,'build-store')]},1000);assert.deepEqual(room.world.frontierTrade,before,kind);assert(notices.some(n=>n.includes('construction footprint')),`${kind}: ${notices}`);assert.equal(room.world.frontierTrade!.routes[0]!.embodied,0);valid(room.world);
+  }
+@@ -150,7 +150,7 @@ test('four-player reserve withdrawal races issue one shared credit and sequence
+  }finally{f.stop();}
+ });
+ test('withdrawal neither creates a construction footprint nor spends the unchanged wilderness ledger',()=>{
+- let s=finishRoute(source(),0);const box=regionalTradeConstructionBoxes(s.seed,plan(s).projects[0]!.id).find(b=>b.solid)!;s={...s,traversal:traversalFromBodies([{...traversalBodies(s)[0]!,x:box.center.x,y:box.center.y,z:box.center.z}],s)!};valid(s);
++ let s=finishRoute(source(),0);const box=regionalTradeConstructionBoxes(s.seed,plan(s).projects[0]!.id).find(b=>b.solid)!;s={...s,traversal:traversalFromBodies([{...traversalBodies(s)[0]!,x:box.center.x,y:box.center.y,z:box.center.z},...traversalBodies(s).slice(1)],s)!};valid(s);
+  const room=createRoom('host','Host',s,1000),host=room.players[0]!,before=copy(regionalTradeObstacles(s.seed,s.frontierTrade!));const notices=syncRoom(room,'host',{seq:1,sessionId:host.sessionId,actions:[command(room.world,'withdraw-reserve')]},1000);assert.deepEqual(notices,[]);assert.deepEqual(regionalTradeWithdrawn(room.world.frontierTrade),{wood:0,stone:8});assert.deepEqual(regionalTradeObstacles(s.seed,room.world.frontierTrade!),before);assert.deepEqual(room.world.wilderness,s.wilderness);valid(room.world);
+ });
+ test('withdrawn quarry and timber reserve funds V31 collector delivery once under concurrent clients without double allocation',async()=>{
+diff --git a/tests/regional-traversal-save.test.ts b/tests/regional-traversal-save.test.ts
+index a51a0d3..4c2cf66 100644
+--- a/tests/regional-traversal-save.test.ts
++++ b/tests/regional-traversal-save.test.ts
+@@ -1,11 +1,13 @@
+ import test from 'node:test';
+ import assert from 'node:assert/strict';
+-import {createState,createConnectedState,createRegionalState,applyAction,parseSave,serializeSave,validateSave,worldEndpoints,type State} from '../src/world.ts';
++import {createState,createConnectedState,createRegionalState as freshRegionalState,applyAction,parseSave,serializeSave,validateSave,worldEndpoints,type State} from '../src/world.ts';
+ import {worldHeight} from '../src/generation.ts';
+ import {REGION_BOUND} from '../src/regional-world.ts';
+ import {regionalBodyCenterBound,REGIONAL_PLAYER_SKIN} from '../src/regional-bounds.ts';
+ import {traversalBodies,traversalFromBodies,validTraversal,SURVEY_CRATE_HALF,SURVEY_CRATE_ID} from '../src/traversal-world.ts';
+ import {saveKey,storeSession,loadSavedWorld} from '../src/session.ts';
++// Retain the historical one-crate regional-save contract; fresh v2 worlds have separate coverage.
++function createRegionalState(seed:number){const s=freshRegionalState(seed);delete s.traversal;return s;}
+ class Store{data=new Map<string,string>();getItem(k:string){return this.data.get(k)??null;}setItem(k:string,v:string){this.data.set(k,v);}}
+ 
+ test('the single regional survey crate saves and reloads beyond 80m independently of player position and resources',()=>{
+diff --git a/tests/session-reset.test.ts b/tests/session-reset.test.ts
+index 6dc06dd..6385d94 100644
+--- a/tests/session-reset.test.ts
++++ b/tests/session-reset.test.ts
+@@ -102,7 +102,8 @@ test('old confirmations reject autosaves, pointer changes, mutations and a newer
+ });
+ 
+ test('pre-upgrade and pre-contact checkpoints retain exact original bytes across fresh epochs',()=>{
+- const store=new Store(),old=progress(createRegionalState(17)),raw=JSON.stringify(old,null,2)+'\n';store.setItem(saveKey(old),raw);store.setItem(ACTIVE_WORLD_KEY,saveKey(old));store.setItem(preContactKey(old),raw);
++ const store=new Store(),old=progress(createRegionalState(17));delete old.traversal; // Historical pre-contact checkpoint: fresh worlds now include v2 props.
++ const raw=JSON.stringify(old,null,2)+'\n';store.setItem(saveKey(old),raw);store.setItem(ACTIVE_WORLD_KEY,saveKey(old));store.setItem(preContactKey(old),raw);
+  const current=packs(old);storeSession(store,current,true);assert.equal(preUpgradeSave(store,current),raw);restartSession(store,current);storeSession(store,packs(loadSession(store)),true);assert.equal(preUpgradeSave(store,current),raw);assert.equal(preContactSave(store,current),raw);assert.equal(store.getItem(preUpgradeKey(old)),raw);
+ });
+ 
+diff --git a/tests/startup-physics.test.ts b/tests/startup-physics.test.ts
+index 7ee62eb..a024324 100644
+--- a/tests/startup-physics.test.ts
++++ b/tests/startup-physics.test.ts
+@@ -3,7 +3,7 @@ test('real Rapier startup remains at simulation step zero through preload and pa
+ test('initial dynamic colliders participate in overlap recovery before the zero-tick pose is returned',async t=>{const h=await regionalPhysics(t,{startPaused:true,initialCells:[terrainCell(0,0),{key:'waterworks',revision:1,obstacles:[{x:32,y:1.5,z:32,hx:1.2,hy:1.5,hz:1.2}]}]});assert.equal(h.latest.step,0);assert(Math.hypot(h.latest.x-32,h.latest.z-32)>1.2||h.latest.feetY>=3,'resolved spawn clears the initial dynamic blocker');const before={...h.latest};await h.tick(90);assert.equal(h.latest.step,0);assert.equal(h.latest.x,before.x);assert.equal(h.latest.feetY,before.feetY);});
+ test('actual main snapshot handler does not tick, move, save or consume controls during renderer warmup',()=>{
+  const main=readFileSync(new URL('../src/main.ts',import.meta.url),'utf8');const handler=main.slice(main.indexOf('worker.onmessage=(e)=>'),main.indexOf('worker.onmessageerror=',main.indexOf('worker.onmessage=(e)=>')));
+- const body=`const activeConversation=null;const startup={playing:false,failed:false},worker={},state={generation:1,zone:'valley',regional:false,player:{x:3,z:4},clock:{tick:99}},before=JSON.stringify(state);let zoneEpoch=0,transitioning=false,lastPhysicsStep=-1,playerContact=null,movableBodies=[],contactRequestId=null,physicsMotion={},poses=0,reducerCalls=0,saves=0;const targetPosition={x:0,y:0,z:0,set(x,y,z){this.x=x;this.y=y;this.z=z;}};const validPlayerContact=()=>false,emptyPlayerContact=()=>({mode:'none'}),validMovableBodies=()=>false,contactEnabled=()=>false,resolveStartupPose=()=>poses++,applyAction=()=>{reducerCalls++;},persist=()=>{saves++;};${handler};return {snapshot(m){worker.onmessage({data:{type:'snapshot',epoch:0,step:0,x:6,z:7,feetY:2,grounded:true,...m}})},read(){return {poses,reducerCalls,saves,unchanged:JSON.stringify(state)===before,targetPosition}}};`;
++ const body=`const activeConversation=null;const startup={playing:false,failed:false},worker={},state={generation:1,zone:'valley',regional:false,player:{x:3,z:4},clock:{tick:99}},before=JSON.stringify(state);let contactPractice=false,contactEvidence=[],contactDiagnostic='Ready',zoneEpoch=0,transitioning=false,lastPhysicsStep=-1,playerContact=null,movableBodies=[],contactRequestId=null,physicsMotion={},poses=0,reducerCalls=0,saves=0;const targetPosition={x:0,y:0,z:0,set(x,y,z){this.x=x;this.y=y;this.z=z;}};const validPlayerContact=()=>false,emptyPlayerContact=()=>({mode:'none'}),validMovableBodies=()=>false,contactEnabled=()=>false,resolveStartupPose=()=>poses++,applyAction=()=>{reducerCalls++;},persist=()=>{saves++;};${handler};return {snapshot(m){worker.onmessage({data:{type:'snapshot',epoch:0,step:0,x:6,z:7,feetY:2,grounded:true,...m}})},read(){return {poses,reducerCalls,saves,unchanged:JSON.stringify(state)===before,targetPosition}}};`;
+  const api=new Function(stripTypeScriptTypes('function run(){'+body+'}')+';return run();')();for(let i=0;i<20;i++)api.snapshot({step:i});const result=api.read();assert.equal(result.poses,20);assert.equal(result.reducerCalls,0);assert.equal(result.saves,0);assert.equal(result.unchanged,true);assert.equal(result.targetPosition.x,6);
+ });
+ 
+diff --git a/TOWN-CONTACT.md b/TOWN-CONTACT.md
+new file mode 100644
+index 0000000..0f329b5
+--- /dev/null
++++ b/TOWN-CONTACT.md
+@@ -0,0 +1,35 @@
++# Local town contact extension — partial implementation
++
++This local change is not published. It extends the existing solo Rapier contact controller; it does not implement the complete requested organic town/co-op feature set.
++
++## Player instructions
++
++Menu → Controls explains the keyboard and touch bindings. Keyboard: WASD/arrows move, Space jumps, E uses the contextual action, C crouches/drops. Touch: left movement area and the fixed X action, A Jump and B Crouch buttons. There is no gamepad adapter or gamepad acceptance claim.
++
++New regional worlds include three seeded rear work yards beyond the southern houses. Follow the central north/south lane through the gap in the homes, then the rear access markings. Their parcel names describe salvage sorting, market packing and trail loading. Each has a movable 1.10 m crate, a 0.30 m step and a 2.40 m loading ledge. Crates remain within their marked rear parcel: they cannot be hauled onto resident streets or into doors/services. Pushing against that limit stops real motion.
++
++Approach a crate from the side, tap E/X, then move toward it to push or away to pull. Tap again to release. Back a pace before jumping toward its top; release horizontal movement once above it to land. Walking off uses the normal gravity/landing controller. The short step supports automatic step-up and step-down. A separate low-crate hand-climb or controlled low-crate climb-down is **not implemented**.
++
++Jump toward a tall ledge and tap E/X during the approach. Catch requires paired hand support and a clear full mantle path. Releasing the action button keeps the hang; this is a toggle interaction. Release Jump, then press it again to pull up. Tap action again or Crouch to drop. From the top, stand about 0.45 m inside an edge, move toward the edge and tap the “Lower to ledge” action. The alignment window is narrow (6 cm around the supported trajectory); failed attempts do not snap the player into place. Lowering reverses the supported hand/knee/boot trajectory and ends hanging. Use action/Crouch to drop the remaining distance or a fresh Jump to climb again. Path obstruction or explicit interruption releases into the actual collision controller.
++
++Props, ledge catch and lowering remain **solo only**. Shared rooms retain their existing server movement/jump rules. No new shared prop ownership, replication or retries are claimed.
++
++## Developer course and evidence
++
++Menu → Advanced → Developer lab. Enter the isolated lab first, reopen Tune/report, then choose **Reset & practice contact course**. The fixed course has a short step, crate, clear tall ledge, overhead-blocked ledge and backing wall. It uses the real worker/controller and normal controls. Existing staged movement tuning applies to the worker; Apply, defaults and preset handling stay in the existing lab registry. Geometry dimensions and contact timing remain fixed supported contracts, not cosmetic sliders.
++
++Reopen the lab for the last worker contact diagnostic, reset and **Prepare contact evidence text**. The read-only text export contains source/build, seed, actual fixture, current settings and up to 3,600 worker snapshots; each frame records its own applied tuning and epoch. Reset clears the trace. It contains no room credentials or campaign snapshot. After the cap it retains the bounded prefix rather than claiming an ongoing recording. Return to campaign restores the existing captured campaign and physical pose; normal saves stay locked throughout practice. Reload returns to the last normal checkpoint.
++
++## Ownership and compatibility
++
++`ContactPhysics` owns achieved crate movement and forward/reverse mantle contacts. Every reverse step sweeps the compact capsule and torso/head envelopes and verifies loaded support on the same collider. Existing cancellation recovery and jump input edges remain. Streamed contact policy rejects player/crate proposals intersecting other authoritative actors/residents. This is an obstruction gate, not dynamic resident routing.
++
++`TraversalState` v1 retains the exact legacy survey-crate contract. Optional v2 additionally saves three yard crate positions. Only explicit **new regional worlds** create v2. Existing saves/imports are not upgraded or given new occupied geometry. v2 import checks parcel bounds, floor height, known body identities/dimensions and static yard solid overlap. Movement uses the same parcel constraint; streaming dormancy remains. Town residents, 40 homes, seven shops, facilities, service slots, schedules and navigation code are unchanged. New yards lie beyond the resident navigation/work/egress area.
++
++The rear access markings dog-leg between seeded parcels. This does **not** make the existing residential/business layout organic. A complete new-world layout needs a persisted layout identity threaded through generation, town life, service placement, navigation, server collision and import. That work remains outstanding. The current extension deliberately retains existing occupied foundations.
++
++## Validation boundary
++
++Evidence is under `evidence/town-contact`. Exact results are recorded there; historical documents are not acceptance for this change. Numerical tests exercise source and emitted worker movement, reverse-mantle rig meshes/anchors, interrupted descent, occupied landing, paired movement blocked by another actor, moved saves, malformed imports, parcel separation and production main course lifecycle. Existing permitted suites cover variable-FPS resident movement and co-op stale/retry handling. They do not establish online traversal parity.
++
++Browser QA and registry routes remain blocked and were not retried. No pixels, device ergonomics, performance, aesthetic acceptance or actual gamepad support are certified. The 13 held regional test files and regional food coupling are untouched. No commit, push, PR, deployment, Site or publication action is part of this local task.
+diff --git a/scripts/verify-town-contact-build.mts b/scripts/verify-town-contact-build.mts
+new file mode 100644
+index 0000000..79f16c9
+--- /dev/null
++++ b/scripts/verify-town-contact-build.mts
+@@ -0,0 +1,10 @@
++/** Node-only actual emitted controller and rig replay; never a browser/GPU check. */
++import {readFileSync,readdirSync,writeFileSync} from 'node:fs';
++import {resolve} from 'node:path';import {pathToFileURL} from 'node:url';
++import {spawnSync} from 'node:child_process';import {createHash} from 'node:crypto';import assert from 'node:assert/strict';
++const folder=resolve('dist/client/assets'),files=readdirSync(folder),worker=files.find(f=>/^physics\.worker-.*\.js$/.test(f));assert(worker);
++const avatarFile=files.find(f=>/^guard-view-.*\.js$/.test(f));assert(avatarFile);const module=await import(pathToFileURL(resolve(folder,avatarFile)).href);
++const avatar=Object.entries(module).find(([,value])=>typeof value==='function'&&value.toString().includes('avatarRoot')&&value.toString().includes('getPoseEvidence'));assert(avatar,'discover actual emitted avatar factory');
++const result=spawnSync(process.execPath,['--experimental-strip-types','--test','tests/town-contact-extension.test.ts'],{encoding:'utf8',env:{...process.env,AXIOM_CONTACT_WORKER:pathToFileURL(resolve(folder,worker)).href,AXIOM_CONTACT_AVATAR:pathToFileURL(resolve(folder,avatarFile)).href,AXIOM_CONTACT_AVATAR_EXPORT:avatar[0]},maxBuffer:10_000_000});
++const output=process.argv[2]??'evidence/town-contact/emitted-contact.json';writeFileSync(output+'.tap',result.stdout+result.stderr);assert.equal(result.status,0,'emitted worker and rig tests: '+result.stdout+result.stderr);assert.match(result.stdout,/# skipped 0/);assert.match(result.stdout,/# cancelled 0/);
++const hash=(file:string)=>createHash('sha256').update(readFileSync(file)).digest('hex');const report={kind:'axiom-town-contact-emitted',scope:'Actual emitted Rapier worker and Three rig; source main course harness and save model. No browser/GPU/device or shared traversal claim.',worker:{file:worker,sha256:hash(resolve(folder,worker))},avatar:{file:avatarFile,export:avatar[0],sha256:hash(resolve(folder,avatarFile))},tests:Number(result.stdout.match(/^# tests (\d+)$/m)?.[1]),pass:Number(result.stdout.match(/^# pass (\d+)$/m)?.[1]),fail:0,skipped:0,cancelled:0};writeFileSync(output,JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
+diff --git a/src/contact-course.ts b/src/contact-course.ts
+new file mode 100644
+index 0000000..7189214
+--- /dev/null
++++ b/src/contact-course.ts
+@@ -0,0 +1,15 @@
++/** Fixed disposable course. Heights are metres; existing movement tuning applies.
++ * No campaign geometry, clocks, rewards or saved props belong to this fixture. */
++export const CONTACT_COURSE={
++ version:1,spawn:{x:-5,z:-5},bound:18,
++ obstacles:[
++  {x:-8,y:.15,z:0,hx:2,hy:.15,hz:1},
++  {x:0,y:1.2,z:0,hx:1.8,hy:1.2,hz:2},
++  {x:7,y:1.2,z:0,hx:1.8,hy:1.2,hz:2},
++  {x:7,y:3.8,z:0,hx:2,hy:.2,hz:2.5},
++  {x:-5,y:1.4,z:7,hx:.15,hy:1.4,hz:2},
++ ],
++ movable:[{id:'course-crate',x:-8,y:.57,z:-5,hx:.58,hy:.55,hz:.58}],
++ stations:[['0.30 m · STEP UP / DOWN',-8,0],['2.40 m · HANG / PULL UP / LOWER',0,0],['BLOCKED HEAD / LANDING',7,0],['1.10 m · CRATE PUSH / PULL / JUMP',-8,-5],['PULL BACKING WALL',-5,7]] as const,
++};
++export const CONTACT_GUIDE='Solo only. Keyboard: WASD/arrows move, Space jumps, E grips or releases, C crouches/drops. Touch: use the existing Move, Jump, Crouch and contextual X action. Grip from the crate side, then move toward/away to push/pull. Back a pace and jump toward the low crate; walk off to fall and land. The 0.30 m step uses supported auto-step. Jump toward a tall ledge and tap action to catch; release Jump then press it again to pull up. Releasing the action button keeps the hang; tap again or Crouch to drop. To lower from a tall ledge, stand about 0.45 m inside its edge, move outward and tap action. Lowering ends in a hang. Obstructed or unsupported paths are refused. Menus pause; interruptions release into collision-tested gravity. Co-op props and ledge traversal are unavailable.';
+diff --git a/src/town-yards.ts b/src/town-yards.ts
+new file mode 100644
+index 0000000..c8cca62
+--- /dev/null
++++ b/src/town-yards.ts
+@@ -0,0 +1,27 @@
++import {TOWN_CENTER} from './starting-town.ts';
++import {hashSeed} from './procedural.ts';
++import type {MovableBody,Vec3} from './player-contact.ts';
++
++/** Optional new-world geometry. Never substituted for an occupied town plan.
++ * The rear yards sit beyond every resident route/work/egress envelope (z <= 53.4).
++ * Crates remain in their individual yards, including after save/import. */
++export const TOWN_YARDS_VERSION=1;
++export const TOWN_YARD_NAMES=['Salvage sorting yard','Market packing yard','Trail loading yard'] as const;
++export function townYardBounds(index:number){return {minX:TOWN_CENTER.x-30+index*30-7,maxX:TOWN_CENTER.x-30+index*30+7,minZ:TOWN_CENTER.z+55.3,maxZ:TOWN_CENTER.z+61};}
++export function townYardIndex(id:string){const match=/^town-yard-crate-([0-2])$/.exec(id);return match?Number(match[1]):-1;}
++export function constrainTownCrate(spec:MovableBody,p:Vec3):Vec3{
++ const index=townYardIndex(spec.id);if(index<0)return p;const b=townYardBounds(index),skin=.04;
++ return {x:Math.max(b.minX+spec.hx+skin,Math.min(b.maxX-spec.hx-skin,p.x)),y:p.y,z:Math.max(b.minZ+spec.hz+skin,Math.min(b.maxZ-spec.hz-skin,p.z))};
++}
++export function townYards(seed:number){
++ const yards=TOWN_YARD_NAMES.map((name,index)=>{
++  const random=hashSeed(`${seed}/town-yard/${index}`)/0xffffffff,x=TOWN_CENTER.x-30+index*30,z=TOWN_CENTER.z+58.1+(random-.5)*.7;
++  const crate:MovableBody={id:`town-yard-crate-${index}`,x:x-3.8+(random-.5),y:6.57,z:z-.5,hx:.58,hy:.55,hz:.58};
++  const ledge={x:x+2.1,y:7.2,z:z+.65,hx:1.8,hy:1.2,hz:1.25};
++  const step={x:x-1,y:6.15,z:z+.65,hx:.65,hy:.15,hz:1.25};
++  // Purposeful, gently dog-legged rear access. These are ground markings, not walls.
++  const road=[{x:TOWN_CENTER.x,z:TOWN_CENTER.z+54.5},{x:x*.5+TOWN_CENTER.x*.5,z:TOWN_CENTER.z+54.7+random*.2},{x,z:z-1.9}];
++  return {name,index,crate,ledge,step,road,bounds:townYardBounds(index)};
++ });
++ return {version:TOWN_YARDS_VERSION,yards,crates:yards.map(y=>y.crate),obstacles:yards.flatMap(y=>[y.ledge,y.step])};
++}
+diff --git a/tests/town-contact-extension.test.ts b/tests/town-contact-extension.test.ts
+new file mode 100644
+index 0000000..72dd425
+--- /dev/null
++++ b/tests/town-contact-extension.test.ts
+@@ -0,0 +1,103 @@
++import {MANTLE_TICKS} from '../src/ledge-mantle.ts';
++import test,{type TestContext} from 'node:test';
++import assert from 'node:assert/strict';
++import {Worker} from 'node:worker_threads';
++import {validPlayerContact,validMovableBodies,emptyPlayerContact,type PlayerContact,type MovableBody} from '../src/player-contact.ts';
++type Snapshot={type:string;epoch:number;step:number;x:number;y:number;z:number;feetY:number;vx:number;vy:number;vz:number;grounded:boolean;contact:PlayerContact;movable:MovableBody[]};
++async function physics(t:TestContext,config:Record<string,unknown>={}){
++ const worker=new Worker(`const {parentPort}=require('node:worker_threads');globalThis.self=globalThis;self.postMessage=m=>parentPort.postMessage(m);parentPort.on('message',m=>self.onmessage({data:m}));import(${JSON.stringify(process.env.AXIOM_CONTACT_WORKER??new URL('../src/physics.worker.ts',import.meta.url).href)}).then(()=>parentPort.postMessage({type:'boot'}));`,{eval:true,execArgv:['--experimental-strip-types']});
++ t.after(()=>worker.terminate());const messages:any[]=[],snapshots:Snapshot[]=[];let error:Error|undefined,epoch=0,latest:Snapshot;
++ worker.on('error',e=>error=e);worker.on('message',m=>{messages.push(m);if(m.type==='error')error=new Error(m.message);if(m.type==='snapshot'){latest=m;snapshots.push(m);}});
++ const take=async(type:string)=>{const end=Date.now()+5000;for(;;){if(error)throw error;const i=messages.findIndex(m=>m.type===type);if(i>=0)return messages.splice(i,1)[0];assert.ok(Date.now()<end,`Waiting ${type}`);await new Promise(r=>setTimeout(r,2));}};
++ const send=(m:Record<string,unknown>)=>worker.postMessage({epoch,...m});
++ const tick=async(ticks=1)=>{const n=snapshots.length;for(let left=ticks;left>0;left-=120){send({type:'step',ticks:Math.min(120,left),requestId:Math.random()});await take('stepped');}return snapshots.slice(n);};
++ const input=(values:Record<string,unknown>={})=>send({type:'input',x:0,z:0,...values});
++ await take('boot');send({type:'init',x:0,z:0,obstacles:[],manual:true,interactionEnabled:true,...config});await take('ready');await tick(3);
++ return {send,input,tick,get latest(){return latest!;},async zone(config:Record<string,unknown>={}){epoch++;send({type:'zone',x:0,z:0,obstacles:[],manual:true,interactionEnabled:true,...config});await take('ready');await tick(3);}};
++}
++import {createRegionalState,createConnectedState,parseSave,serializeSave,validateSave} from '../src/world.ts';
++import {traversalBodies,traversalFromBodies,traversalObstacles} from '../src/traversal-world.ts';
++import {townYards,constrainTownCrate} from '../src/town-yards.ts';
++import {startingTown,TOWN_CENTER} from '../src/starting-town.ts';
++import {townResidents} from '../src/town-residents.ts';
++import {createAvatar as sourceAvatar} from '../src/avatar.ts';
++const createAvatar:typeof sourceAvatar=process.env.AXIOM_CONTACT_AVATAR? (await import(process.env.AXIOM_CONTACT_AVATAR))[process.env.AXIOM_CONTACT_AVATAR_EXPORT!]:sourceAvatar;
++import {idleAnimation} from '../src/locomotion.ts';
++import * as THREE from 'three/webgpu';
++import {readFileSync} from 'node:fs';
++import {stripTypeScriptTypes} from 'node:module';
++import {mainFunction} from './helpers/main-source.ts';
++import {CONTACT_COURSE} from '../src/contact-course.ts';
++const ledge={x:1.5,y:1.2,z:0,hx:.8,hy:1.2,hz:2};
++
++test('fresh yards are seeded, bounded and moved crates roundtrip while old occupied geometry stays absent',()=>{
++ for(const seed of [0,1,42,73129,4294967295]){
++  const s=createRegionalState(seed),bodies=traversalBodies(s);assert.equal(bodies.length,4);assert.deepEqual(townYards(seed),townYards(seed));
++  const old={...s};delete old.traversal;assert.equal(traversalBodies(parseSave(serializeSave(old))!).length,1);assert.equal(traversalObstacles(old).length,1);
++  for(const b of bodies.slice(1)){b.x+=.3;b.z-=.1;}
++  const next={...s,traversal:traversalFromBodies(bodies,s)!};assert.ok(validateSave(next));assert.deepEqual(parseSave(serializeSave(next)),next);assert.deepEqual(traversalBodies(next),bodies);
++  const embedded=structuredClone(s);if(embedded.traversal?.version===2){const l=townYards(seed).yards[0]!.ledge;embedded.traversal.yards[0]={x:l.x,y:6.57,z:l.z};assert.equal(validateSave(embedded),false);embedded.traversal.yards=new Array(3);assert.equal(validateSave(embedded),false);}
++  bodies[1]!.z=TOWN_CENTER.z;assert.equal(traversalFromBodies(bodies,s),null);
++  assert.equal(traversalFromBodies(traversalBodies(s).reverse(),s),null);
++ }
++ assert.notDeepEqual(townYards(1),townYards(2));assert.equal(traversalBodies(createConnectedState(1)).length,1);
++});
++
++test('yard solids and every allowed crate location stay beyond all existing buildings and resident navigation domain',()=>{
++ for(const seed of [0,1,42,73129,4294967295]){
++  const plan=startingTown(seed);assert.equal(townResidents(seed).length,100);
++  for(const y of townYards(seed).yards){
++   assert.ok(y.bounds.minZ>TOWN_CENTER.z+54);assert.ok(y.bounds.maxZ<=TOWN_CENTER.z+62);
++   for(const b of plan.boxes)assert.ok(b.center.z+b.half.z<y.bounds.minZ||b.center.x+b.half.x<y.bounds.minX||b.center.x-b.half.x>y.bounds.maxX);
++   for(const x of [-1e6,1e6])for(const z of [-1e6,1e6]){const p=constrainTownCrate(y.crate,{x,y:6.57,z});assert.ok(p.x-y.crate.hx>y.bounds.minX&&p.x+y.crate.hx<y.bounds.maxX);assert.ok(p.z-y.crate.hz>y.bounds.minZ&&p.z+y.crate.hz<y.bounds.maxZ);}
++  }
++ }
++});
++
++test('production worker reverses the supported mantle into a hang, holds on button release and drops on explicit release',async t=>{
++ const p=await physics(t,{obstacles:[ledge]});p.input({x:.7,jump:true,grab:true});await p.tick(30);assert.equal(p.latest.contact.mode,'hang');p.input();await p.tick();p.input({jump:true});await p.tick(MANTLE_TICKS+4);assert.ok(p.latest.grounded&&p.latest.feetY>2.38);
++ p.input({x:-.7});p.send({type:'contact-grab'});const descent=await p.tick(MANTLE_TICKS);assert.ok(descent.some(s=>s.contact.mode==='climb'&&s.contact.mantle!.progress<.9));assert.equal(descent.at(-1)!.contact.mantle?.progress,0);assert.ok(descent.every(s=>validPlayerContact(s.contact)));verifyDescent(descent);
++ p.input();await p.tick(20);assert.equal(p.latest.contact.mode,'hang');assert.ok(Math.abs(p.latest.feetY-.5)<.02);p.send({type:'contact-release'});const drop=await p.tick(60);assert.ok(drop.some(s=>s.vy<0));assert.ok(p.latest.grounded);
++});
++
++test('new roof blocks descent acquisition and an interrupted reverse mantle safely recovers',async t=>{
++ const p=await physics(t,{x:1.15,y:2.4,obstacles:[ledge]});p.input({x:-.7});p.send({type:'contact-grab'});const descent=await p.tick(110);assert.ok(descent.some(s=>s.contact.mode==='climb'));
++ p.send({type:'contact-release'});p.input();const recovery=await p.tick(200);assert.ok(recovery.every(s=>[s.x,s.y,s.z].every(Number.isFinite)));assert.ok(p.latest.grounded);assert.equal(p.latest.contact.mode,'none');
++ await p.zone({x:1.15,y:2.4,obstacles:[ledge,{x:.5,y:3.5,z:0,hx:.13,hy:.2,hz:1}]});p.input({x:-.7});p.send({type:'contact-grab'});const blocked=await p.tick(2);assert.ok(blocked.every(s=>s.contact.mode!=='climb'));
++});
++
++test('disposable course accepts actual sandbox grip and jump landing while online keeps authority gate',async t=>{
++ const crate=CONTACT_COURSE.movable[0]!;
++ const p=await physics(t,{x:crate.x+.95,z:crate.z,sandbox:true,movable:[crate]});p.input({x:-1});p.send({type:'contact-grab'});await p.tick(30);assert.ok(p.latest.movable[0]!.x<crate.x-.2,JSON.stringify(p.latest));assert.equal(p.latest.contact.mode,'push');
++ await p.zone({x:crate.x+1.2,z:crate.z,movable:[crate]});p.input({jump:true});const jump=await p.tick(10);p.input({x:-1});jump.push(...await p.tick(12));p.input();jump.push(...await p.tick(50));assert.ok(jump.some(s=>s.grounded&&s.feetY>1.09),JSON.stringify(jump.map(s=>[s.x,s.feetY,s.grounded])));
++ await p.zone({x:crate.x+.95,z:crate.z,sandbox:true,online:true,movable:[crate]});p.input({x:-1});p.send({type:'contact-grab'});await p.tick(60);assert.equal(p.latest.movable[0]!.x,crate.x);assert.notEqual(p.latest.contact.mode,'push');
++});
++
++function verifyDescent(frames:Snapshot[]){
++ const avatar=createAvatar();let previous:number|undefined;
++ for(const s of frames){const m=s.contact.mantle;if(!m)continue;
++  if(previous!==undefined)assert.ok(m.progress<previous);previous=m.progress;
++  for(const b of [ledge,{x:0,y:-.2,z:0,hx:48,hy:.2,hz:48}]){const d=Math.hypot(Math.max(0,Math.abs(s.x-b.x)-b.hx),Math.max(0,Math.abs(s.y-b.y)-m.capsuleHalfHeight-b.hy),Math.max(0,Math.abs(s.z-b.z)-b.hz));assert.ok(d>=.3198,'independent capsule clearance');}
++  avatar.root.position.set(s.x,s.feetY,s.z);avatar.update({...idleAnimation(),heading:Math.PI/2,grounded:false},null,0,undefined,s.contact);const pose=avatar.getPoseEvidence();
++  for(const side of ['left','right'] as const){if(s.contact[side==='left'?'leftHand':'rightHand']){assert.equal(pose.anchors[side].clamped,false);assert.ok(pose.anchors[side].error!<1e-6);}const foot=m[side==='left'?'leftFoot':'rightFoot'];assert.ok(new THREE.Vector3().fromArray(pose.joints[side+'Ankle']!.world.position).distanceTo(new THREE.Vector3(foot.x,foot.y,foot.z))<1e-6);}
++  avatar.root.traverse(o=>{if(!(o instanceof THREE.Mesh))return;const points=o.geometry.getAttribute('position');for(let i=0;i<points.count;i++){const v=new THREE.Vector3().fromBufferAttribute(points,i).applyMatrix4(o.matrixWorld);assert.ok(!(v.y<2.38&&v.x>.72&&v.x<2.28&&Math.abs(v.z)<1.98),'real mesh clearance at '+m.progress);}});
++ }
++ assert.ok(previous===0);
++}
++
++test('actual main contact-course entry clears old combat aids, gates transitions and resets bounded evidence',()=>{
++ const source=readFileSync(new URL('../src/main.ts',import.meta.url),'utf8'),sent:unknown[]=[],label={textContent:''},point={set(){},copy(){}};let resets=0;
++ const deps={labActive:true,transitioning:false,physicsReady:true,coop:{active:false},coopPending:false,interruptLab:()=>{},stopLivePractice:()=>{},clearRestorationPractice:()=>{},clearInput:()=>{},labRoot:{visible:true},resetLabTargets:()=>{resets++;},emptyPlayerContact,createComboState:()=>({}),combatTuning:()=>({}),createGuardState:()=>({}),idleAnimation,targetPosition:point,player:{position:point},cameraTarget:point,sendPhysics:(m:unknown)=>sent.push(m),CONTACT_COURSE,$:()=>label,closePanel:()=>{},focusGameplay:()=>{}};
++ const declarations="let contactPractice=false,labRunning=true,labTargets=[{}],labAutoCombo=true,labUnlimitedStamina=true,labInfiniteTargets=true,labCaptureOnly=true,labWarmup=1,labTicks=9,labFrames=[{}],labMetrics={},contactEvidence=[{}],contactDiagnostic='',playerContact={},contactRequestId='old',movableBodies=[{}],contactGeometryKey='old',zoneEpoch=1,lastPhysicsStep=8,lastLabStep=8,combo={},guard={},animation={},avatarAction='gather';";
++ const body=stripTypeScriptTypes(declarations+mainFunction(source,'startContactPractice'))+';return {start:startContactPractice,get:()=>({contactPractice,labTargets,labAutoCombo,labUnlimitedStamina,contactEvidence,zoneEpoch,contactRequestId}),ready:()=>{physicsReady=true;transitioning=false;}};';
++ const run=new Function(...Object.keys(deps),body)(...Object.values(deps));run.start();assert.deepEqual(run.get(),{contactPractice:true,labTargets:[],labAutoCombo:false,labUnlimitedStamina:false,contactEvidence:[],zoneEpoch:2,contactRequestId:null});assert.equal(resets,1);assert.equal(sent.length,1);assert.deepEqual((sent[0] as any).movable,CONTACT_COURSE.movable);assert.equal((sent[0] as any).sandbox,true);run.start();assert.equal(sent.length,1);run.ready();run.start();assert.equal(sent.length,2);assert.equal(run.get().zoneEpoch,3);
++});
++
++import {terrainCell,REGION_BOUND} from './helpers/town-life-physics.ts';
++test('streamed worker respects another actor in landing clearance and paired crate travel',async t=>{
++ const crate={id:'test-crate',x:33,y:.62,z:32,hx:.5,hy:.6,hz:.5},ledgeAt={...ledge,x:33.5,z:32},town={seed:1,time:0,selfId:'solo',actors:[{id:'other',x:33.2,z:32,feetY:2.4}]};
++ const config={x:32,z:32,bound:REGION_BOUND,streamedTerrain:true,initialCells:[terrainCell(0,0)],town,obstacles:[ledgeAt]};
++ const p=await physics(t,config);p.input({x:.7,jump:true,grab:true});const blocked=await p.tick(80);assert.ok(blocked.every(s=>!['hang','climb'].includes(s.contact.mode)),'occupied top cannot authorize traversal');
++ await p.zone({...config,town:{...town,actors:[]}});p.input({x:.7,jump:true,grab:true});await p.tick(30);assert.equal(p.latest.contact.mode,'hang','same unoccupied ledge accepts real catch');
++ await p.zone({...config,obstacles:[],movable:[crate],town:{...town,actors:[{id:'other',x:34.6,z:32,feetY:0}]}});p.input({x:1});p.send({type:'contact-grab'});await p.tick(180);assert.ok(p.latest.movable[0]!.x>33.1);assert.ok(p.latest.movable[0]!.x+.5<=34.6-.36+.001,'crate never overlaps second actor');
++});

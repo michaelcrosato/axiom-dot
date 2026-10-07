@@ -19,7 +19,7 @@ export interface TownLifeActionOption {command:TownLifeCommand;label:string;cost
 
 /** Labels explain the finite material exchange; the pure command kernel owns eligibility. */
 export function townLifeActionOptions(life:TownLifeState,context:TownLifePanelContext,index:number,facilityId:string,targetPosition?:(command:TownLifeCommand)=>{x:number;z:number}|undefined):TownLifeActionOption[]{
- const facilities=townLifeFacilities(life.seed),resident=life.residents[index],roster=townResidents(life.seed);
+ const facilities=townLifeFacilities(life.seed,life.townLayout),resident=life.residents[index],roster=townResidents(life.seed);
  const well=facilities.find(f=>f.kind==='well'),workshop=facilities.find(f=>f.kind==='workshop'),square=facilities.find(f=>f.kind==='square');
  const selected=facilities.find(f=>f.id===facilityId&&f.kind!=='home')??well;
  const result:TownLifeActionOption[]=[];
@@ -41,9 +41,9 @@ export function townLifeActionOptions(life:TownLifeState,context:TownLifePanelCo
 
 export function townLifeResidentHTML(life:TownLifeState,index:number,tuning:Readonly<TownLifeTuning>=TOWN_LIFE_DEFAULTS):string{
  const resident=life.residents[index],profile=townResidents(life.seed)[index];if(!resident||!profile)return '<p>Resident unavailable. Choose an existing resident.</p>';
- const summary=townLifeSummary(life,index),facility=townLifeFacilities(life.seed).find(f=>f.id===resident.facilityId),service=life.facilities.find(f=>f.id===resident.facilityId);
+ const summary=townLifeSummary(life,index),facility=townLifeFacilities(life.seed,life.townLayout).find(f=>f.id===resident.facilityId),service=life.facilities.find(f=>f.id===resident.facilityId);
  const queued=service?.queue.indexOf(index)??-1;
- const home=townLifeFacilities(life.seed).find(f=>f.homeIndex===profile.homeIndex),homeState=life.facilities.find(f=>f.id===home?.id);
+ const home=townLifeFacilities(life.seed,life.townLayout).find(f=>f.homeIndex===profile.homeIndex),homeState=life.facilities.find(f=>f.id===home?.id);
  const serviceInfo=facility&&service?`Service: ${service.occupants.length} acting + ${service.reservations.length} reserved / ${facility.capacity} places; ${service.queue.length} queued. Condition ${number(service.condition)}/100; ${service.closedFor>0?'closed for '+seconds(service.closedFor):service.condition<TOWN_LIFE_SERVICE_THRESHOLD?'unavailable below '+TOWN_LIFE_SERVICE_THRESHOLD+' condition':'open'}.`:'';
  const homeInfo=home&&homeState?`Home station: ${esc(home.label)} · ${point(home)} · ${home.capacity} places, ${homeState.occupants.length} acting, ${homeState.reservations.length} reserved, ${homeState.queue.length} queued.`:'';
  let remainingDistance=0,prior={x:resident.x,z:resident.z};for(const next of resident.path.slice(resident.pathIndex)){remainingDistance+=Math.hypot(next.x-prior.x,next.z-prior.z);prior=next;}
@@ -53,7 +53,7 @@ export function townLifeResidentHTML(life:TownLifeState,index:number,tuning:Read
 }
 
 export function townLifeFacilitiesHTML(life:TownLifeState,selectedId:string):string{
- const facilities=townLifeFacilities(life.seed),shown=facilities.filter(f=>f.kind!=='home'||f.id===selectedId);
+ const facilities=townLifeFacilities(life.seed,life.townLayout),shown=facilities.filter(f=>f.kind!=='home'||f.id===selectedId);
  return shown.map(f=>{const state=life.facilities.find(s=>s.id===f.id),occupied=state?.occupants.length??0,reserved=state?.reservations.length??0,closed=state?.closedFor??0;return `<article class="life-card"><h4>${esc(f.label)}${f.id===selectedId?' · SELECTED':''}</h4><p>${point(f)} · ${esc(f.kind)} · ${f.capacity} service places<br>Condition ${number(state?.condition??0)}/100 · ${closed>0?`closed for ${seconds(closed)}`:(state?.condition??0)<TOWN_LIFE_SERVICE_THRESHOLD?'Out of service':'Open · activities still require supplies'}<br>${occupied} acting · ${reserved} reserved / traveling · ${state?.queue.length??0} queued · ${closed>0||(state?.condition??0)<TOWN_LIFE_SERVICE_THRESHOLD?0:Math.max(0,f.capacity-occupied-reserved)} places available<br>Supports: ${f.actions.map(a=>esc(a.replaceAll('-',' '))).join(', ')}</p></article>`;}).join('');
 }
 
@@ -68,7 +68,7 @@ export function drawTownLifeMap(canvas:HTMLCanvasElement,life:TownLifeState,inde
  const xy=(p:{x:number;z:number})=>({x:width/2+(p.x-TOWN_CENTER.x)*scale,y:height/2+(p.z-TOWN_CENTER.z)*scale});
  ctx.fillStyle='#0b211e';ctx.fillRect(0,0,width,height);ctx.strokeStyle='#456b5944';ctx.lineWidth=10;ctx.beginPath();
  for(const z of [-44,-24,0,24,44]){const a=xy({x:TOWN_CENTER.x-55,z:TOWN_CENTER.z+z}),b=xy({x:TOWN_CENTER.x+55,z:TOWN_CENTER.z+z});ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);}ctx.stroke();
- for(const f of townLifeFacilities(life.seed)){const p=xy(f),selected=f.id===facilityId,state=life.facilities.find(s=>s.id===f.id);ctx.fillStyle=(state?.closedFor??0)>0||(state?.condition??0)<TOWN_LIFE_SERVICE_THRESHOLD?'#c1786c':f.kind==='home'?'#527262':'#d0b775';ctx.fillRect(p.x-4,p.y-4,8,8);if(selected){ctx.strokeStyle='#fff1af';ctx.lineWidth=2;ctx.strokeRect(p.x-7,p.y-7,14,14);}if(f.kind!=='home'){ctx.fillStyle='#e5e7d4';ctx.font='10px sans-serif';ctx.fillText(f.label.slice(0,20),p.x+6,p.y-6);}}
+ for(const f of townLifeFacilities(life.seed,life.townLayout)){const p=xy(f),selected=f.id===facilityId,state=life.facilities.find(s=>s.id===f.id);ctx.fillStyle=(state?.closedFor??0)>0||(state?.condition??0)<TOWN_LIFE_SERVICE_THRESHOLD?'#c1786c':f.kind==='home'?'#527262':'#d0b775';ctx.fillRect(p.x-4,p.y-4,8,8);if(selected){ctx.strokeStyle='#fff1af';ctx.lineWidth=2;ctx.strokeRect(p.x-7,p.y-7,14,14);}if(f.kind!=='home'){ctx.fillStyle='#e5e7d4';ctx.font='10px sans-serif';ctx.fillText(f.label.slice(0,20),p.x+6,p.y-6);}}
  for(const r of life.residents){const p=xy(r);ctx.fillStyle=r.index===index?'#ffe4a0':r.mood==='distressed'?'#e89d84':'#a9cbbb';ctx.beginPath();ctx.arc(p.x,p.y,r.index===index?4.5:1.8,0,Math.PI*2);ctx.fill();if(r.index===index){ctx.strokeStyle='#fff3c2';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(p.x,p.y,8,0,Math.PI*2);ctx.stroke();}}
  if(player){const p=xy(player);ctx.fillStyle='#ffffff';ctx.beginPath();ctx.moveTo(p.x,p.y-5);ctx.lineTo(p.x+5,p.y+4);ctx.lineTo(p.x-5,p.y+4);ctx.closePath();ctx.fill();}
  ctx.fillStyle='#d7ddc8';ctx.font='12px sans-serif';ctx.fillText('N ↑  ·  schematic, no teleport',10,16);
@@ -76,7 +76,7 @@ export function drawTownLifeMap(canvas:HTMLCanvasElement,life:TownLifeState,inde
 
 /** Read-only inspection plus real explicitly requested, revision-checked player commands. */
 export function mountTownLifePanel(panel:HTMLElement,options:{state:()=>TownLifePanelContext;act:(command:TownLifeCommand)=>void;visit:()=>void;close:()=>void;ready:()=>boolean;selectedResident?:string;selectedFacility?:string;requests?:()=>void;target?:(command:TownLifeCommand)=>{x:number;z:number}|undefined}){
- const initial=options.state(),seed=initial.seed,roster=townResidents(seed),facilities=townLifeFacilities(seed),publicFacilities=facilities.filter(f=>f.kind!=='home');
+ const initial=options.state(),seed=initial.seed,roster=townResidents(seed),facilities=townLifeFacilities(seed,initial.townLife?.townLayout),publicFacilities=facilities.filter(f=>f.kind!=='home');
  let alive=true,selected=roster.findIndex(r=>r.id===options.selectedResident),selectedFacility=publicFacilities.find(f=>f.id===options.selectedFacility)?.id??publicFacilities[0]?.id??'',pendingRevision:number|null=null,locked=false;
  if(selected<0)selected=0;
  panel.innerHTML=`<div class="town-life"><button type="button" class="close" aria-label="Close town life">×</button><span class="eyebrow">Hearthmere · living town</span><h2>Life around you</h2><p>Inspect all 100 residents’ actual needs, choices and shared services. In solo play this menu pauses the world; close it to let people travel, wait and act. Online time continues.</p><div class="row"><button type="button" id="life-visit">Visit town square</button><button type="button" id="life-refresh">Refresh action status</button>${options.requests?'<button type="button" id="life-requests">Town requests & history</button>':''}</div><p>Visit reaches the normal town entrance. Walk from there to a resident or the service coordinates below.</p><label for="life-person">Resident · all 100 people</label><select id="life-person">${roster.map((r,i)=>`<option value="${i}">${esc(r.name)} · ${esc(r.role)}</option>`).join('')}</select><p id="life-clock"></p><canvas id="life-map" width="560" height="430" aria-label="Town schematic with resident and service positions"></canvas><p class="life-legend">Gold ring: selected resident · outlined square: selected service · white triangle: you · red: distressed resident or closed service. Exact positions are listed below.</p><div id="life-person-detail"></div><h3>Shared stores</h3><div id="life-shared"></div><h3>Help the town</h3><p id="life-inventory"></p><label for="life-service">Service to inspect or repair</label><select id="life-service">${publicFacilities.map(f=>`<option value="${esc(f.id)}">${esc(f.label)} · ${point(f)}</option>`).join('')}</select><p id="life-status" class="life-status" role="status">Actions use your real inventory. Eligibility is rechecked when you act.</p><div id="life-actions"></div><details><summary>Service capacity, queues & locations</summary><div id="life-facilities"></div></details><details><summary>Town event journal</summary><div id="life-journal"></div></details><details><summary>Resource conservation evidence</summary><pre id="life-ledger"></pre></details></div>`;

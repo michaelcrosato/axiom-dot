@@ -1,0 +1,24 @@
+{
+  "head": "cdb067b47acdf2f86aa119f6a3e1a767708cf6ba",
+  "heldFileHashes": {
+    "tests/ecology.test.ts": "8dba88aa7fa9c7b5805fad5f617d728cb2b8181736b2c0f105a74a083b1c205d",
+    "tests/regional-clock-precision.test.ts": "dab4d56ada5eea5cf93d0e77cd4d7ea8f2e7313646508299343cc2c2463e47ab",
+    "tests/regional-food-trade-witness.test.ts": "d5c527b428cb0c4b8123353b3b16ef3559e3ca5f03ca42020e26ecfdbc3fd115",
+    "tests/regional-food-world-authority.test.ts": "d93b967fb0b8f923dc96ae7f45c6ae29c39c01a4bd70933ae1aee7ef8f94f18c",
+    "tests/regional-food.test.ts": "4421c33cad47d49db85ae7be0e256de9b710a449733b2800dc885c4ad3c8bf04",
+    "tests/regional-supply.test.ts": "576861b39029f3f0f353fc741e23267acf7ee49ef3f4c3ccec8666050c428db7",
+    "tests/regional-trade-integration.test.ts": "73822a613c5e4755694ea740f685c2131c9ee59461f8222263cb510c5d97e78c",
+    "tests/regional-trade-timeline.test.ts": "b33ea23ead2a4bab6965f1b313226a9a067eb91c3d1aece64f0206e0957b57b7",
+    "tests/regional-trade.test.ts": "c5596901e8ef929e869d332c86f87447f0c3f45c48836311366496ed57ab82b1",
+    "tests/regional-weather-cold.test.ts": "15d9223233a03043b1b0d63219eb41cb6b366b72f8022b3c3f15eb491c312c91",
+    "tests/regional-weather-trade-authority.test.ts": "580ef43e6f69bb9b9fad85776a3023be77a1fa59ce639913e0a0071f68b9c6c9",
+    "tests/regional-weather-trade.test.ts": "05ecd2db4577c626123f5546580b7b74bc4e2df2ea3220a2894ffe13843be0de",
+    "tests/regional-weather.test.ts": "fa8c437f8ae0e5b02fccf179e8c639474d0ce79b9953548e99909b0ca3c8a1d5"
+  },
+  "heldModified": [],
+  "heldExecuted": false,
+  "browserOrRegistryRetry": false,
+  "downloads": false,
+  "publication": false,
+  "privateSiteChanges": false
+}

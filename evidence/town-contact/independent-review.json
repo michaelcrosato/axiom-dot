@@ -1,0 +1,123 @@
+{
+  "kind": "independent-local-review",
+  "version": 1,
+  "date": "2026-10-06T18:49:35.276Z",
+  "reviewer": "independent review agent",
+  "scope": "Current partial solo contact extension; no complete organic core redesign or online traversal acceptance.",
+  "result": "No remaining blocking issue identified within reviewed partial scope.",
+  "validation": {
+    "command": "node --experimental-strip-types --test tests/town-contact-extension.test.ts",
+    "node": "v22.23.0",
+    "exitCode": 0,
+    "tests": 7,
+    "passed": 7,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "names": [
+      "fresh yards are seeded, bounded and moved crates roundtrip while old occupied geometry stays absent",
+      "yard solids and every allowed crate location stay beyond all existing buildings and resident navigation domain",
+      "production worker reverses the supported mantle into a hang, holds on button release and drops on explicit release",
+      "new roof blocks descent acquisition and an interrupted reverse mantle safely recovers",
+      "disposable course accepts actual sandbox grip and jump landing while online keeps authority gate",
+      "actual main contact-course entry clears old combat aids, gates transitions and resets bounded evidence",
+      "streamed worker respects another actor in landing clearance and paired crate travel"
+    ],
+    "diffWhitespaceCheck": "passed"
+  },
+  "fixedFindings": [
+    {
+      "id": "import-static-overlap",
+      "verified": "v2 rejects static yard overlap, out-of-floor y and sparse arrays; embedded and sparse cases executed."
+    },
+    {
+      "id": "hidden-lab-targets",
+      "verified": "Course entry clears target model/meshes and combat aids; extracted production handler executed."
+    },
+    {
+      "id": "readiness-noop",
+      "verified": "Live/restoration mode mutations follow readiness guards; source inspected."
+    },
+    {
+      "id": "tuning-evidence",
+      "verified": "Each recorded frame captures tuning and epoch; source inspected."
+    },
+    {
+      "id": "unsupported-gamepad",
+      "verified": "Guide lists keyboard/touch only and documentation disclaims gamepad adapter."
+    }
+  ],
+  "coverage": [
+    "Legacy geometry fallback and moved crate roundtrip across five seeds",
+    "Protected parcel separation",
+    "Actual reverse worker mantle plus Three rig mesh/anchor numerical clearance",
+    "Descent obstruction and interruption",
+    "Sandbox grip and separate physical jump/landing",
+    "Actual main course reset and transition gate",
+    "Streamed other-actor landing and paired-movement obstruction"
+  ],
+  "limits": [
+    "Read-only code review plus seven targeted cases; aggregate/build/typechecks remain parent evidence",
+    "No browser, GPU pixels, device performance or touch ergonomics acceptance",
+    "No online traversal implementation or acceptance",
+    "Existing town core remains grid-based; legacy worlds do not gain yard geometry",
+    "No separate low-crate hand-climb or controlled low-crate descent",
+    "Source hashes identify reviewed files, not a publication or full-workspace freeze"
+  ],
+  "files": {
+    "src/contact-physics.ts": "bcf6a828d94b575bc00c6d33487b8cf2fde2358ee2e88ef66eca0ee2f363d06d",
+    "src/physics.worker.ts": "507fb411aa2cb526754ee1999e70ea90c603a73436a06ca6af6148bcd46d087b",
+    "src/traversal-world.ts": "ea8c7f015babc094898131b1624f729aee54c4ccf8cc732676b6560a1291cd87",
+    "src/town-yards.ts": "a87c0a2d77b9138d7a05564e834ffa3a226d88906223b3185cfd03d4e511ecf0",
+    "src/contact-course.ts": "de38cf9bbc6d275168265f2b2845c09d05c949ef69b287c6fa8423369ef802ef",
+    "src/main.ts": "ec05cede01045edc172df8649d950c1a05e4b066eeb498f95c29f583ec2ad973",
+    "src/world.ts": "001df44f79f922130ad0583a25ab9fa3227c7d75585a81c207463b8cdbc5c245",
+    "tests/town-contact-extension.test.ts": "f865d72c5724e01a22f449cb421a200f6d80d3ae2a225b300b75dfc2e8a37a68",
+    "TOWN-CONTACT.md": "a2f3d90e103e9ddfd5b4d68973477b36f61f14e18b839cec4f68ea5af2c10102"
+  },
+  "verificationFixtureFollowup": {
+    "at": "2026-10-06T18:55:40.092Z",
+    "mode": "Read-only review of five verification-only changes; no additional tests or source edits",
+    "result": "Assertions preserved; no blocking fixture issue identified",
+    "findings": [
+      "Town main VM adds required neutral contact-practice state; production handler and assertions unchanged.",
+      "Emitted frame verifier broadens chunk discovery to campaign-guidance-engine; export discovery and pass/fail assertions unchanged.",
+      "Regional survey-save tests explicitly exercise absent/v1 traversal by omitting optional fresh v2 initialization; historical bounds, persistence and rejection assertions retained; fresh v2 separately covered.",
+      "Supply/trade co-op construction fixtures retain every saved yard crate while moving only the targeted survey crate; obstruction and resource assertions retained."
+    ],
+    "productionHashesUnchanged": true,
+    "files": {
+      "scripts/verify-town-frame-build.mts": "7692f14491e189d814932f39dc71e72135b2045a414e5f8da386877696f4cff3",
+      "tests/helpers/town-main-integration.ts": "96d09ba9d28a081d60e0acbeae4e17481e4a0ce91a9eb4cd8a9d67edba1bc6ad",
+      "tests/regional-supply-coop.test.ts": "abc5e6929ce21c7d0ee74b7b531434a70fc37bbf7903207ebb5e3bedef89ff51",
+      "tests/regional-trade-coop.test.ts": "633a41101a5134da2b9d2bdb6c720660e4853449ec954656011df81a38cc1f34",
+      "tests/regional-traversal-save.test.ts": "2e54f867382e1188bda00fa28e1963c9bb471b09d19503e95a22f334ff4e8b4c"
+    },
+    "limits": "Parent reports emitted gates and 28 legacy cases passing; this follow-up independently reviews code only and does not duplicate those runs."
+  },
+  "postAggregateFixtureReview": {
+    "at": "2026-10-06T19:30:55.718Z",
+    "mode": "Read-only independent inspection; evidence-only update; no tests run by reviewer",
+    "result": "Two minimal fixture corrections preserve all assertions.",
+    "files": {
+      "tests/session-reset.test.ts": "d21c055360fa8c9d19518ea60aaefb25bf2c3caa10e7c9ab66fa2da2afd40a78",
+      "tests/startup-physics.test.ts": "17be15c0fcd22f5b0884ff2c3600a87806d46623a5619873fe6186fdc1e0f7c3"
+    },
+    "findings": [
+      "session-reset historical pre-contact fixture deletes newly initialized optional traversal before computing original raw bytes. All exact-byte checkpoint assertions remain unchanged.",
+      "startup-physics extracted production handler receives neutral initial contactPractice/contactEvidence/contactDiagnostic bindings. All warmup pose/reducer/save/state assertions remain unchanged."
+    ],
+    "productionHashesUnchanged": true,
+    "aggregateReportedByParent": {
+      "total": 1913,
+      "passed": 1911,
+      "failed": 2,
+      "cancelled": 0,
+      "skipped": 0,
+      "durationMs": 2454020,
+      "status": "Natural full run completed with two fixture failures before these corrections. No clean full aggregate rerun claimed."
+    },
+    "rerunStatus": "Parent rerunning both complete corrected test files; results belong to parent evidence."
+  }
+}

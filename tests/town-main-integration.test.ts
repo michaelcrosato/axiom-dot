@@ -7,13 +7,17 @@ test('town integration executes complete production main handler and ordered con
 });
 
 const cases:MainIntegrationOptions[]=[
+ {cadence:5,fixture:'fresh',seconds:120,organic:true},
+ {cadence:15,fixture:'fresh',seconds:120,organic:true},
+ {cadence:60,fixture:'fresh',seconds:120,organic:true,actorWalk:true},
+ {cadence:'jitter',fixture:'fresh',seconds:125,organic:true,pause:true,deliveryJitter:true},
  {cadence:5,fixture:'150',seconds:120},
  {cadence:10,fixture:'175',seconds:120},
  {cadence:30,fixture:'15',seconds:120},
  {cadence:60,fixture:'fresh',seconds:120,actorWalk:true},
  {cadence:'jitter',fixture:'150',seconds:125,pause:true,deliveryJitter:true},
 ];
-for(const options of cases)test(`real worker/main/matrices sustain ${options.seconds}s ${options.cadence}fps ${options.fixture}${options.pause?' with jitter pause and burst recovery':''}`,{timeout:240000},async t=>{
+for(const options of cases)test(`real worker/main/matrices sustain ${options.seconds}s ${options.cadence}fps ${options.fixture}${options.organic?' organic':''}${options.pause?' with jitter pause and burst recovery':''}`,{timeout:240000},async t=>{
  const result=await runTownMainIntegration(options);
  t.diagnostic(JSON.stringify({...result,finalState:undefined,residents:undefined,productionFrame:undefined}));
  assertTownMainIntegration(result);

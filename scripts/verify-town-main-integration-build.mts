@@ -21,7 +21,7 @@ assert.match(physics,/authoritativeMotion/,'emitted physics keeps the authoritat
 const hash=(value:string)=>createHash('sha256').update(value).digest('hex');
 const identity={main:{file:mainFile,sha256:hash(main)},worker:{file:workerFile,sha256:hash(physics)},projection:{file:projectionFile,sha256:hash(readFileSync(resolve(assets,projectionFile),'utf8'))}};
 const held=[...readFileSync(resolve(root,'EXPERIMENTAL-PREVIEW.md'),'utf8').matchAll(/^- (tests\/[^\n]+\.test\.ts)$/gm)].map(m=>m[1]);assert.equal(held.length,13,'preserve the existing held-test boundary');
-const profiles:MainIntegrationOptions[]=[{cadence:5,fixture:'fresh',seconds:120,actorWalk:true},{cadence:'jitter',fixture:'150',seconds:125,pause:true,deliveryJitter:true}];
+const profiles:MainIntegrationOptions[]=[{cadence:5,fixture:'fresh',seconds:120,organic:true,actorWalk:true},{cadence:'jitter',fixture:'fresh',seconds:125,organic:true,pause:true,deliveryJitter:true},{cadence:5,fixture:'fresh',seconds:120,actorWalk:true},{cadence:'jitter',fixture:'150',seconds:125,pause:true,deliveryJitter:true}];
 const cases=[];
 for(const options of profiles){
  console.error('Production source boundary',JSON.stringify(options));const source=assertTownMainIntegration(await runTownMainIntegration(options));

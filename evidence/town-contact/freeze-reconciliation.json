@@ -1,0 +1,12 @@
+{
+  "at": "2026-10-06T18:51:51.980187+00:00",
+  "changedAfterInitialFreeze": [
+    "scripts/verify-town-frame-build.mts",
+    "tests/helpers/town-main-integration.ts",
+    "tests/regional-supply-coop.test.ts",
+    "tests/regional-trade-coop.test.ts",
+    "tests/regional-traversal-save.test.ts"
+  ],
+  "productionSourceChanged": false,
+  "note": "Harness fixes completed before parent freeze instruction. Current suite had not reached these changed test files. No further source changes allowed. Preserve initial hash receipt separately."
+}

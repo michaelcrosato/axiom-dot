@@ -114,7 +114,7 @@ export function townDirectorCandidates(life:TownLifeState,tuning:TownDirectorTun
   candidates.push({kind,issuerId:issuer(life.seed,kind,targetId),serviceId:service(kind,targetId),targetId,evidence:{...observation,estimatedActions},severity});
  };
  add('water-shortage','well',life.cooldowns.donate);add('material-shortage','workshop',life.cooldowns.donate);
- for(const f of townLifeFacilities(life.seed))if(f.kind!=='home')add('service-wear',f.id,life.cooldowns.repair);
+ for(const f of townLifeFacilities(life.seed,life.townLayout))if(f.kind!=='home')add('service-wear',f.id,life.cooldowns.repair);
  for(const r of life.residents)add('resident-support',r.id,r.encouragementCooldown);
  candidates.sort((a,b)=>b.severity-a.severity||hash(life.seed,keyOf(a))-hash(life.seed,keyOf(b))||keyOf(a).localeCompare(keyOf(b)));
  return freeze(candidates);
@@ -211,7 +211,7 @@ function observationFields(v:Record<string,unknown>,kind:TownEpisodeKind,revisio
  * consistency. Unknown/accessor/prototype fields are rejected before reading. */
 export function validTownDirector(v:unknown,life:TownLifeState):v is TownDirectorState {
  if(!validTownLife(life,life.seed)||!keys(v,['seed','version','revision','accumulator','phaseSteps','restSteps','observedLifeRevision','tuning','episodes'])||v.version!==1||v.seed!==life.seed||!integer(v.revision,0,96)||!finite(v.accumulator,0,TOWN_DIRECTOR_STEP-1e-8)||!integer(v.phaseSteps,0,SCAN_STEPS-1)||!integer(v.restSteps,0,600)||!integer(v.observedLifeRevision,0,life.revision)||!validTownDirectorTuning(v.tuning)||!array(v.episodes,TOWN_DIRECTOR_EPISODE_LIMIT))return false;
- const roster=townResidents(life.seed),facilities=townLifeFacilities(life.seed),repeat=new Map<string,number>(),activeKeys=new Set<string>();let revision=0,activeCount=0;
+ const roster=townResidents(life.seed),facilities=townLifeFacilities(life.seed,life.townLayout),repeat=new Map<string,number>(),activeKeys=new Set<string>();let revision=0,activeCount=0;
  for(let i=0;i<v.episodes.length;i++){
   const e=v.episodes[i];if(!keys(e,['id','kind','issuerId','serviceId','targetId','status','deadlineSteps','remainingSteps','evidence','accepted','contribution','outcome'])||e.id!==`town-request-${i+1}`||!KINDS.includes(e.kind as TownEpisodeKind)||!STATUSES.includes(e.status as TownEpisodeStatus)||typeof e.targetId!=='string')return false;
   const kind=e.kind as TownEpisodeKind,status=e.status as TownEpisodeStatus,target=e.targetId;

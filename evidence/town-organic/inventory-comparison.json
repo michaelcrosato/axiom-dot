@@ -1,0 +1,71 @@
+{
+  "priorCases": 1913,
+  "finalCases": 1925,
+  "added": [
+    [
+      "tests/session-reset.test.ts",
+      "restart createOrganicRegionalState keeps exact foundation and seed, clearing all progress"
+    ],
+    [
+      "tests/town-contact-extension.test.ts",
+      "low crate uses supported hand-climb and reverse ground descent with safe release and blocked head clearance"
+    ],
+    [
+      "tests/town-main-integration.test.ts",
+      "real worker/main/matrices sustain 120s 5fps fresh organic"
+    ],
+    [
+      "tests/town-main-integration.test.ts",
+      "real worker/main/matrices sustain 120s 15fps fresh organic"
+    ],
+    [
+      "tests/town-main-integration.test.ts",
+      "real worker/main/matrices sustain 120s 60fps fresh organic"
+    ],
+    [
+      "tests/town-main-integration.test.ts",
+      "real worker/main/matrices sustain 125s jitterfps fresh organic with jitter pause and burst recovery"
+    ],
+    [
+      "tests/town-organic-layout.test.ts",
+      "versioned organic parcels preserve exact legacy manifests, 100 identities and all service work/egress envelopes"
+    ],
+    [
+      "tests/town-organic-layout.test.ts",
+      "organic and occupied legacy slots coexist; strict imports retain layout, moved crates, households and current routes"
+    ],
+    [
+      "tests/town-organic-layout.test.ts",
+      "regional chunks, world heights and server collision resolve the same pinned parcel plan; stale layout results fail"
+    ],
+    [
+      "tests/town-organic-layout.test.ts",
+      "actual regional generation worker reloads both layout identities without stale geometry reuse"
+    ],
+    [
+      "tests/town-organic-layout.test.ts",
+      "organic authority achieves journeys and work for 100 residents; source or emitted matrices remain live at variable FPS"
+    ],
+    [
+      "tests/town-ui.test.ts",
+      "organic town lab stages a bounded recipe, resets real plan consumers, exports identity and discards unapplied layout"
+    ]
+  ],
+  "removed": [],
+  "files": 277,
+  "excluded": [
+    "tests/ecology.test.ts",
+    "tests/regional-clock-precision.test.ts",
+    "tests/regional-food-trade-witness.test.ts",
+    "tests/regional-food-world-authority.test.ts",
+    "tests/regional-food.test.ts",
+    "tests/regional-supply.test.ts",
+    "tests/regional-trade-integration.test.ts",
+    "tests/regional-trade-timeline.test.ts",
+    "tests/regional-trade.test.ts",
+    "tests/regional-weather-cold.test.ts",
+    "tests/regional-weather-trade-authority.test.ts",
+    "tests/regional-weather-trade.test.ts",
+    "tests/regional-weather.test.ts"
+  ]
+}

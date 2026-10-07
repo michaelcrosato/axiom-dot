@@ -9,7 +9,7 @@ const plans=new Map<number,ValleyPlan>();
 export function worldValley(seed:number):ValleyPlan {let p=plans.get(seed);if(!p){p=generateValley(seed);if(plans.size>=4)plans.clear();plans.set(seed,p);}return p;}
 const dungeons=new Map<string,ReturnType<typeof generateDungeonPlan>|(ReturnType<typeof generateDungeon>&{spawn:typeof DUNGEON_SPAWN;bound:number})>();
 export function worldDungeon(s:{seed:number;generation:number}){const key=`${s.generation}:${s.seed}`;let d=dungeons.get(key);if(!d){d=s.generation===2?generateDungeonPlan(s.seed):{...generateDungeon(s.seed),spawn:DUNGEON_SPAWN,bound:48};if(dungeons.size>=4)dungeons.clear();dungeons.set(key,d);}return d;}
-export function worldHeight(s:{seed:number;generation:number;zone:string;regional?:{version:1}},x:number,z:number){return s.generation===2&&s.zone==='valley'?(s.regional?.version===1&&Math.max(Math.abs(x),Math.abs(z))>80?regionalHeight(s.seed,x,z):valleySurfaceHeight(worldValley(s.seed),x,z)):0;}
+export function worldHeight(s:{townLayout?:import('./starting-town.ts').TownLayout;seed:number;generation:number;zone:string;regional?:{version:1}},x:number,z:number){return s.generation===2&&s.zone==='valley'?(s.regional?.version===1&&Math.max(Math.abs(x),Math.abs(z))>80?regionalHeight(s.seed,x,z,s.townLayout):valleySurfaceHeight(worldValley(s.seed),x,z)):0;}
 export function buildOrigin(s:{seed:number;generation:number}){return s.generation===2?worldValley(s.seed).endpoints.buildOrigin:{x:0,y:0,z:0};}
 export function buildPlayer(s:{seed:number;generation:number;player:{x:number;z:number}}){const o=buildOrigin(s);return {x:s.player.x-o.x,z:s.player.z-o.z};}
 export function validGenerationManifest(value:unknown):value is GenerationManifest {

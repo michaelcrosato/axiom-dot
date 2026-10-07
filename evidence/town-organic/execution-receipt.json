@@ -1,0 +1,8 @@
+{
+  "firstRunExitCode": 1,
+  "firstRunNaturalExit": true,
+  "finalRunExitCode": 0,
+  "forceExitUsed": false,
+  "transientTransportDisconnect": "One status read failed; execution recovered and running test sessions were preserved.",
+  "finalRunNaturalExit": true
+}

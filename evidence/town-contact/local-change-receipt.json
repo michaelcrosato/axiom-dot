@@ -1,0 +1,30 @@
+{
+  "base": "cdb067b47acdf2f86aa119f6a3e1a767708cf6ba",
+  "patchSha256": "53a3c27a508c57a2ffa561198400c52813464d15c04a1863e2540b2bd968475b",
+  "trackedChangedFiles": [
+    "CONTACT-ANIMATION.md",
+    "DEVELOPER-EXPOSURE.md",
+    "scripts/verify-town-frame-build.mts",
+    "src/contact-physics.ts",
+    "src/main.ts",
+    "src/physics.worker.ts",
+    "src/traversal-world.ts",
+    "src/world.ts",
+    "tests/helpers/main-source.ts",
+    "tests/helpers/town-main-integration.ts",
+    "tests/lab-orchestration.test.ts",
+    "tests/live-sentry-main.test.ts",
+    "tests/regional-supply-coop.test.ts",
+    "tests/regional-trade-coop.test.ts",
+    "tests/regional-traversal-save.test.ts",
+    "tests/session-reset.test.ts",
+    "tests/startup-physics.test.ts"
+  ],
+  "heldFilesChanged": [],
+  "publicationActions": "none",
+  "productionSourceUnchangedSinceBuildAndAggregate": true,
+  "postAggregateChanges": [
+    "tests/session-reset.test.ts",
+    "tests/startup-physics.test.ts"
+  ]
+}

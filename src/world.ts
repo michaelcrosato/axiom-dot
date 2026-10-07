@@ -7,10 +7,10 @@ import {TOWN_DIRECTOR_ENGINE,createTownDirector,advanceTownDirector,applyTownDir
 import {townLifeInteractionTarget} from './town-life-runtime.ts';
 import type {TownActor} from './town-crowd.ts';
 import {createTownLifeOpening,advanceTownLife,advanceTownLifeWithWorkshopWork,validTownLife,immutableTownLife,applyTownLifeCommand,townLifePlayerCost,type TownLifeState,type TownLifeCommand} from './town-life.ts';
-import {createTownState,validTownState,townBalance,purchaseTown,TOWN_SPAWN,type TownState,type TownCommand} from './starting-town.ts';
+import {newTownLayout,validTownLayout,sameTownLayout,type TownLayout,createTownState,validTownState,townBalance,purchaseTown,TOWN_SPAWN,type TownState,type TownCommand} from './starting-town.ts';
 import {REGIONAL_FOOD_MAX_TICKS,regionalFoodCost,createRegionalFood,advanceRegionalFood,applyRegionalFoodCommand,observeRegionalFoodTrade,validRegionalFood,immutableRegionalFood,type RegionalFoodState,type RegionalFoodCommand} from './regional-food.ts';
 import {createRegionalTrade,advanceRegionalTrade,applyRegionalTradeCommand,validRegionalTrade,immutableRegionalTrade,regionalTradeObstacles,type RegionalTradeState,type RegionalTradeCommand} from './regional-trade.ts';
-import {validTraversal,traversalBodies,type TraversalState} from './traversal-world.ts';
+import {validTraversal,traversalBodies,createTownTraversal,type TraversalState} from './traversal-world.ts';
 import {createRegionalSupply,advanceRegionalSupply,applyRegionalSupplyCommand,validRegionalSupply,immutableRegionalSupply,regionalSupplyObstacles,type RegionalSupplyState,type RegionalSupplyCommand} from './regional-supply.ts';
 import {gatherWilderness,immutableWildernessState,validWildernessState,validWildernessGatherAction,type WildernessState,type WildernessGatherContext,type WildernessQueryObstacle} from './wilderness-state.ts';
 import {wildernessFeatureById} from './wilderness.ts';
@@ -38,6 +38,7 @@ export interface State {
   /** Separate save flavor; the generation-2 core and all of its ledgers stay pinned. */
   regional?:{version:1};
   wilderness?:WildernessState;
+  townLayout?:TownLayout;
   town?:TownState;
   /** Additive active-play autonomy; absent historical saves stay valid until explicitly enabled. */
   townLife?:TownLifeState;
@@ -139,8 +140,9 @@ export function createState(seed = 1): State {
 /** Old worlds remain generation 1; entering generation 2 is an explicit new-world action. */
 export function createConnectedState(seed=73129):State {const s=createState(seed),plan=worldValley(seed);const next:State={...s,generation:2,generationManifest:CONNECTED_GENERATION_MANIFEST,player:{x:plan.endpoints.spawn.x,z:plan.endpoints.spawn.z,hp:100},events:['Field architect deployed. Survey the connected valley, its settlements and the Echo Vault.']};next.causal=reconcileCausal(createCausalState(seed),causalContext(next));return next;}
 /** Explicit new-world flavor. Never applied as a migration to an existing save. */
-export function createRegionalState(seed=73129):State {return {...createConnectedState(seed),regional:{version:1},town:createTownState(),player:{x:TOWN_SPAWN.x,z:TOWN_SPAWN.z,hp:100},events:['Welcome to Hearthmere. Meet 100 townspeople, browse seven businesses, then follow the east road to Mossbank and the 10 km² frontier.']};}
+export function createRegionalState(seed=73129):State {return {...createConnectedState(seed),regional:{version:1},traversal:createTownTraversal({generation:2,seed,regional:{version:1}}),town:createTownState(),player:{x:TOWN_SPAWN.x,z:TOWN_SPAWN.z,hp:100},events:['Welcome to Hearthmere. Meet 100 townspeople, browse seven businesses, then follow the east road to Mossbank and the 10 km² frontier.']};}
 export function worldEndpoints(s:Pick<State,'generation'|'seed'>){return s.generation===2?worldValley(s.seed).endpoints:{spawn:{x:-13,z:12},entrance:CAVE_ENTRANCE,return:CAVE_RETURN,pump:PUMP_POSITION,settlement:SETTLEMENT_POSITION,buildOrigin:{x:0,y:0,z:0}};}
+export function createOrganicRegionalState(seed=73129):State {return {...createRegionalState(seed),townLayout:newTownLayout(seed)};}
 export function worldObjects(s:Pick<State,'generation'|'seed'>):readonly WorldObject[]{return s.generation===2?worldValley(s.seed).objects:generateObjects(s.seed);}
 export function worldBound(s:Pick<State,'generation'|'seed'|'regional'>&{zone?:State['zone']}){return s.zone==='cave'?naturalCave(s.seed).bound:s.generation===2?(s.zone==='dungeon'?worldDungeon(s).bound:s.regional?.version===1?REGION_BOUND:worldValley(s.seed).terrain.bound):WORLD_BOUND;}
 export function dungeonSpawn(s:Pick<State,'generation'|'seed'>){return s.generation===2?worldDungeon(s).spawn:DUNGEON_SPAWN;}
@@ -381,6 +383,8 @@ export function validateSave(value: unknown): value is State {
   if (!object(value) || value.schemaVersion !== 6 || (value.generation !== 1 && value.generation !== 2) || !seedOK(value.seed)) return false;
   if(Object.hasOwn(value,'regional')&&(!object(value.regional)||value.generation!==2||value.regional.version!==1||Reflect.ownKeys(value.regional).length!==1||!Object.hasOwn(value.regional,'version')||![Object.prototype,null].includes(Object.getPrototypeOf(value.regional))))return false;
   const regional=value.regional as State['regional'];
+  if(Object.hasOwn(value,'townLayout')&&(!regional||!validTownLayout(value.townLayout,value.seed)))return false;
+  if(value.townLife&&!sameTownLayout((value.townLife as TownLifeState).townLayout,value.townLayout as TownLayout|undefined))return false;
   if(Object.hasOwn(value,'townLife')&&(!regional||value.generation!==2||!validTownLife(value.townLife,value.seed)))return false;
   if(Object.hasOwn(value,'workshopConstruction')&&(!regional||!value.townLife||!validWorkshopConstruction(value.workshopConstruction,value.seed)||(value.workshopConstruction as WorkshopConstructionState).materialsPaid!==(value.townLife as TownLifeState).workshopSpent))return false;
   if(!Object.hasOwn(value,'workshopConstruction')&&((value.townLife as TownLifeState|undefined)?.workshopSpent??0)!==0)return false;
@@ -546,7 +550,7 @@ export function wildernessGatherContext(s:State,authority:WildernessGatherAuthor
  const pump=worldEndpoints(s).pump;
  fixed.push({x:pump.x,y:worldHeight({...s,zone:'valley'},pump.x,pump.z)+1.5,z:pump.z,hx:1,hz:1,hy:1.5},...machineWorldObstacles(s),...(s.frontierSupply?regionalSupplyObstacles(s.seed,s.frontierSupply):[]),...(s.frontierTrade?regionalTradeObstacles(s.seed,s.frontierTrade):[]));
  const ground=Number.isFinite(s.player.x)&&Number.isFinite(s.player.z)?worldHeight(s,s.player.x,s.player.z):NaN;
- return {generation:s.generation,seed:s.seed,...(s.regional?{regional:s.regional}:{}),zone:s.zone,player:s.player,...(Object.hasOwn(s,'wilderness')?{wilderness:s.wilderness!}:{}),feetY:authority.feetY??ground,grounded:authority.grounded??true,obstacles:[...fixed,...(authority.obstacles??[])]};
+ return {generation:s.generation,seed:s.seed,...(s.townLayout?{townLayout:s.townLayout}:{}),...(s.regional?{regional:s.regional}:{}),zone:s.zone,player:s.player,...(Object.hasOwn(s,'wilderness')?{wilderness:s.wilderness!}:{}),feetY:authority.feetY??ground,grounded:authority.grounded??true,obstacles:[...fixed,...(authority.obstacles??[])]};
 }
 /** Solo and co-op commit through the same finite source ledger using their accepted physical pose. */
 export function commitWildernessGather(s:State,id:string,authority:WildernessGatherAuthority={}):State {
@@ -561,7 +565,7 @@ export function commitWildernessGather(s:State,id:string,authority:WildernessGat
 export function enableStartingTown(s:State):State{
  if(!s.regional)return s;
  if(Object.hasOwn(s,'town')&&!validTownState(s.town)||Object.hasOwn(s,'townLife')&&!validTownLife(s.townLife,s.seed)||Object.hasOwn(s,'townDirector')&&(!s.townLife||!validTownDirector(s.townDirector,s.townLife)))throw RangeError('Invalid existing town state cannot be replaced.');
- const town=Object.hasOwn(s,'town')?s.town!:createTownState(),townLife=Object.hasOwn(s,'townLife')?s.townLife!:createTownLifeOpening(s.seed),townDirector=Object.hasOwn(s,'townDirector')?s.townDirector!:TOWN_DIRECTOR_ENGINE.create(townLife);
+ const town=Object.hasOwn(s,'town')?s.town!:createTownState(),townLife=Object.hasOwn(s,'townLife')?s.townLife!:createTownLifeOpening(s.seed,s.townLayout),townDirector=Object.hasOwn(s,'townDirector')?s.townDirector!:TOWN_DIRECTOR_ENGINE.create(townLife);
  return town===s.town&&townLife===s.townLife&&townDirector===s.townDirector?s:{...s,town,townLife,townDirector};
 }
 

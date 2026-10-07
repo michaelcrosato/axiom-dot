@@ -1,0 +1,13 @@
+{
+  "allReceiptAssetsMatch": true,
+  "verified": {
+    "dist/client/assets/campaign-guidance-engine-N0lATrHY.js": "c8d0d39ecc7fee718811fad7478d41d06a56e9fb3ed67280d644c357a6b0574f",
+    "dist/client/assets/physics.worker-BhBMXpZh.js": "d2721a786416183f7317606b34764da87948fbea9faf04d83d525be82fb3d826",
+    "dist/client/assets/guard-view-BQ1E04ic.js": "ca0d90ff745399ed32a9000c1d2790e518124099ad0828da3c04ea808549f4a2",
+    "dist/client/assets/main-M7lNtYaV.js": "e1efc08dafd7dc86c3028f7605057ea9ba0a9daa348086e07b0f047d4d0a0282",
+    "dist/client/assets/town-projection-DXLejfsq.js": "f4e0c78fafd8552d751190f956a43a57ad1b4bb23ffb8ef9a194441bc1a1944d",
+    "dist/client/assets/regional.worker-BpcpB3Hs.js": "339acba2113be9264998a0b31bdb63bd771aa51117b601025fe8b64d9720f4cc",
+    "dist/server/index.js": "2399fe308efc6e6628b5905a3995f674e246766cadfbfaeebdd44f5b27751c43"
+  },
+  "fullBuildFiles": 33
+}

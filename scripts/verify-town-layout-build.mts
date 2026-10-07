@@ -1,0 +1,12 @@
+/** Actual emitted regional generator, town-life engine and matrix view. No browser. */
+import {readFileSync,readdirSync,writeFileSync} from 'node:fs';
+import {resolve} from 'node:path';import {pathToFileURL} from 'node:url';
+import {spawnSync} from 'node:child_process';import {createHash} from 'node:crypto';import assert from 'node:assert/strict';
+const folder=resolve('dist/client/assets'),files=readdirSync(folder),worker=files.find(f=>/^regional\.worker-.*\.js$/.test(f));assert(worker);
+const candidates=files.filter(f=>/^(town-projection|town-life|campaign-guidance-engine)-.*\.js$/.test(f));
+let view:{file:string;name:string}|undefined,life:{file:string;name:string}|undefined;
+for(const file of candidates){const m=await import(pathToFileURL(resolve(folder,file)).href);for(const [name,v]of Object.entries(m)){if(typeof v==='function'&&v.toString().includes('hearthmere-residents'))view={file,name};if(v&&typeof v==='object'&&(v as any).kind==='axiom-town-life')life={file,name};}}
+assert(view&&life,'actual emitted view and life engine');
+const result=spawnSync(process.execPath,['--experimental-strip-types','--test','tests/town-organic-layout.test.ts'],{encoding:'utf8',env:{...process.env,AXIOM_LAYOUT_WORKER:pathToFileURL(resolve(folder,worker)).href,AXIOM_LAYOUT_VIEW:pathToFileURL(resolve(folder,view.file)).href,AXIOM_LAYOUT_VIEW_EXPORT:view.name,AXIOM_LAYOUT_LIFE:pathToFileURL(resolve(folder,life.file)).href,AXIOM_LAYOUT_LIFE_EXPORT:life.name},maxBuffer:10_000_000});
+const output=process.argv[2]??'evidence/town-organic/emitted-layout.json';writeFileSync(output+'.tap',result.stdout+result.stderr);assert.equal(result.status,0,result.stdout+result.stderr);assert.match(result.stdout,/# skipped 0/);assert.match(result.stdout,/# cancelled 0/);
+const asset=(file:string)=>({file,sha256:createHash('sha256').update(readFileSync(resolve(folder,file))).digest('hex')});const report={kind:'axiom-town-layout-emitted',scope:'Actual emitted generation worker, town-life engine and Three matrix view. Source save/server models. No browser/GPU/device or shared traversal certification.',worker:asset(worker),view:asset(view.file),life:asset(life.file),tests:Number(result.stdout.match(/^# tests (\d+)$/m)?.[1]),pass:Number(result.stdout.match(/^# pass (\d+)$/m)?.[1]),fail:0,skipped:0,cancelled:0};writeFileSync(output,JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));

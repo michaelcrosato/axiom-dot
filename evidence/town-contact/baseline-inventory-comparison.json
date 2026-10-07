@@ -1,0 +1,37 @@
+{
+  "baselineCases": 1906,
+  "finalCases": 1913,
+  "retained": 1906,
+  "missing": [],
+  "added": [
+    [
+      "tests/town-contact-extension.test.ts",
+      "fresh yards are seeded, bounded and moved crates roundtrip while old occupied geometry stays absent"
+    ],
+    [
+      "tests/town-contact-extension.test.ts",
+      "yard solids and every allowed crate location stay beyond all existing buildings and resident navigation domain"
+    ],
+    [
+      "tests/town-contact-extension.test.ts",
+      "production worker reverses the supported mantle into a hang, holds on button release and drops on explicit release"
+    ],
+    [
+      "tests/town-contact-extension.test.ts",
+      "new roof blocks descent acquisition and an interrupted reverse mantle safely recovers"
+    ],
+    [
+      "tests/town-contact-extension.test.ts",
+      "disposable course accepts actual sandbox grip and jump landing while online keeps authority gate"
+    ],
+    [
+      "tests/town-contact-extension.test.ts",
+      "actual main contact-course entry clears old combat aids, gates transitions and resets bounded evidence"
+    ],
+    [
+      "tests/town-contact-extension.test.ts",
+      "streamed worker respects another actor in landing clearance and paired crate travel"
+    ]
+  ],
+  "exclusionsEqual": true
+}

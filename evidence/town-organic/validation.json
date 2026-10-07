@@ -1,0 +1,50 @@
+{
+  "kind": "axiom-local-town-continuation-validation",
+  "at": "2026-10-06T20:58:44.950438+00:00",
+  "head": "cdb067b47acdf2f86aa119f6a3e1a767708cf6ba",
+  "publication": false,
+  "scope": "Versioned organic new-world town layout and solo contact extension; preserved legacy saves, server authority/retries and identity. Online contact traversal remains gated. No browser/device acceptance.",
+  "runtime": "v22.23.0",
+  "typeScriptProjects": 2,
+  "typecheck": "passed",
+  "productionBuild": "passed",
+  "aggregate": {
+    "counts": {
+      "tests": 1925,
+      "suites": 0,
+      "pass": 1925,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "files": 277,
+    "heldExcluded": 13,
+    "durationMs": 2982738.653671,
+    "naturalCompletion": true,
+    "forceExit": false,
+    "exactNameInventoryMatch": true,
+    "exitCode": 0
+  },
+  "frozenFiles": 653,
+  "changedSinceFinalFreeze": [],
+  "heldFilesModified": [],
+  "independentReview": "independent-review.json",
+  "emittedReceipts": [
+    "emitted-contact.json",
+    "emitted-hash-reconciliation.json",
+    "emitted-layout.json",
+    "emitted-main-boundary.json",
+    "emitted-server-save.json",
+    "emitted-town-frame.json"
+  ],
+  "limitations": [
+    "Shared prop/traversal remains disabled online.",
+    "Legacy 1.30m survey crate lacks hand-climb/down; 1.10m yard crates support it.",
+    "No browser/GPU/device/gamepad acceptance; denied routes not retried.",
+    "Buildings remain axis-aligned; public service forecourts stay fixed."
+  ],
+  "historicalAttempt": "first-run-result.json; startup constructor-name fixture corrected and complete final suite rerun.",
+  "buildFiles": 33,
+  "buildHashesUnchanged": true
+}

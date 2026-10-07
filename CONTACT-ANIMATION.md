@@ -46,3 +46,9 @@ V25 verification: all 682 tests, strict TypeScript and production build pass. Th
 These are numerical bounds, not a claim that the animation looks natural. The earlier browser access denial remains in force, and no alternate browser route was used. Rendered appearance and the user's assessment remain the visual acceptance gate.
 
 Reproduce a full production worker/rig trace with `node --experimental-strip-types scripts/measure-ledge-mantle.mts /tmp/axiom-mantle-trace.json`. This export contains numeric matrices and contacts only, not rendered pixels.
+
+## Local reverse lowering and rear-yard extension
+
+See `TOWN-CONTACT.md` for current scope, controls and limitations. Tall-ledge lowering reverses the existing supported mantle, with reverse-direction sweeps at each tick, then holds a real hang. Crate hand-climbing and online traversal remain unavailable. New regional worlds have optional version-2 saved rear-yard crates; v1 saves retain their exact prior geometry. The disposable playable lab course is separate from the historical animation inspector and uses existing save isolation.
+
+The local continuation adds supported low-crate hand-climb/down and an explicit new-world layout revision. See [town layout and recipe controls](TOWN-LAYOUT.md) and [contact player/course guide](TOWN-CONTACT.md). The disposable town model has staged legacy/new recipe selection and seed reset; current town diagnostics expose the actual manifest and streets. Online contact traversal remains gated. Final continuation evidence lives in `evidence/town-organic`.

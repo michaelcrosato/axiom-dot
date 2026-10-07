@@ -3,12 +3,12 @@ import type {TownActivityReport} from './town-activity.ts';
 import type {TownLifeState} from './town-life.ts';
 import {TOWN_LIFE_MOTION_VERSION} from './town-life.ts';
 import type {CrowdPose} from './town-crowd.ts';
-import {TOWN_CENTER} from './starting-town.ts';
+import {sameTownLayout,type TownLayout,TOWN_CENTER} from './starting-town.ts';
 export const TOWN_MOTION_CAPTURE={version:1,seconds:15,maxFrames:3600,subjects:4} as const;
 type Point=[number,number];
 export interface TownMotionSubject {index:number;status:string;action:string|null;reason:string;facility:string|null;next:Point|null;authority:Point;target:Point;display:Point;speed:number;distance:number;yielding:boolean;visible:boolean}
 export interface TownMotionFrame {frame:number;seconds:number;dt:number;authorityTick:number;authorityFraction:number;renderTime:number;paused:boolean;mode:'solo'|'online';observer:Point;camera:[number,number,number];counts:{traveling:number;acting:number;queued:number;idle:number;visible:number};subjects:TownMotionSubject[]}
-export interface TownMotionReport {kind:'axiom-town-motion';version:1;motionVersion:number;status:'idle'|'recording'|'completed'|'interrupted';reason:string|null;seed:number;source:string;selected:number;subjects:number[];duration:number;frames:TownMotionFrame[];scope:string}
+export interface TownMotionReport {townLayout?:TownLayout;kind:'axiom-town-motion';version:1;motionVersion:number;status:'idle'|'recording'|'completed'|'interrupted';reason:string|null;seed:number;source:string;selected:number;subjects:number[];duration:number;frames:TownMotionFrame[];scope:string}
 const number=(n:number)=>Number.isFinite(n)?Math.round(n*100000)/100000:0;
 const point=(p:{x:number;z:number}):Point=>[number(p.x),number(p.z)];
 const fresh=():TownMotionReport=>({kind:'axiom-town-motion',version:1,motionVersion:TOWN_LIFE_MOTION_VERSION,status:'idle',reason:null,seed:0,source:'not-recorded',selected:0,subjects:[],duration:0,frames:[],scope:'Explicit local capture of actual game render callbacks. Numeric root trajectories and separate game-canvas contact sheet; no automatic visual approval. Contains only town activity/position evidence, no inventory, saves, account, room IDs/tokens or network data. No automatic upload. Timestamped render interpolation trails completed authority steps by half a second; an online underrun may prime one additional quarter-second reserve.'});
@@ -21,12 +21,12 @@ export class TownMotionRecorder {
  arm(seed:number,source:string,selected:number,observer:{x:number;z:number},life:TownLifeState,now:number){
   if(!Number.isInteger(selected)||selected<0||selected>=100||life.seed!==seed||!Number.isFinite(now))throw Error('Choose a current resident and a ready town.');
   const nearby=life.residents.map(r=>({index:r.index,d:Math.hypot(r.x-observer.x,r.z-observer.z)})).sort((a,b)=>a.d-b.d||a.index-b.index);
-  this.value={...fresh(),status:'recording',seed,source:/^[\w.-]{1,100}$/.test(source)?source:'not-recorded',selected,subjects:[selected,...nearby.filter(r=>r.index!==selected).slice(0,TOWN_MOTION_CAPTURE.subjects-1).map(r=>r.index)]};this.started=now;
+  this.value={...fresh(),...(life.townLayout?{townLayout:life.townLayout}:{}),status:'recording',seed,source:/^[\w.-]{1,100}$/.test(source)?source:'not-recorded',selected,subjects:[selected,...nearby.filter(r=>r.index!==selected).slice(0,TOWN_MOTION_CAPTURE.subjects-1).map(r=>r.index)]};this.started=now;
  }
  stop(reason='Stopped by player'){if(this.active){this.value.status='interrupted';this.value.reason=reason;}}
  record(input:{now:number;dt:number;seed:number;life:TownLifeState|undefined;poses:readonly CrowdPose[];targets:readonly CrowdPose[];visible:readonly number[];renderTime:number;paused:boolean;mode:'solo'|'online';observer:{x:number;z:number};camera:{x:number;y:number;z:number}}){
   if(!this.active)return;
-  if(input.seed!==this.value.seed||!input.life){this.stop('World or town changed');return;}
+  if(input.seed!==this.value.seed||!input.life||!sameTownLayout(input.life.townLayout,this.value.townLayout)){this.stop('World or town changed');return;}
   const prior=this.value.frames.at(-1);if(prior&&input.life.tick<prior.authorityTick){this.stop('Authority time restarted');return;}
   const elapsed=Math.max(0,(input.now-this.started)/1000);if(!Number.isFinite(elapsed)){this.stop('Invalid callback time');return;}
   const life=input.life,counts={traveling:0,acting:0,queued:0,idle:0,visible:input.visible.length};for(const r of life.residents)counts[r.status]++;

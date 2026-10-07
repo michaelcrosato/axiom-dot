@@ -1,0 +1,138 @@
+TAP version 13
+# Subtest: fresh yards are seeded, bounded and moved crates roundtrip while old occupied geometry stays absent
+ok 1 - fresh yards are seeded, bounded and moved crates roundtrip while old occupied geometry stays absent
+  ---
+  duration_ms: 732.138402
+  type: 'test'
+  ...
+# Subtest: yard solids and every allowed crate location stay beyond all existing buildings and resident navigation domain
+ok 2 - yard solids and every allowed crate location stay beyond all existing buildings and resident navigation domain
+  ---
+  duration_ms: 30.705036
+  type: 'test'
+  ...
+# Subtest: production worker reverses the supported mantle into a hang, holds on button release and drops on explicit release
+ok 3 - production worker reverses the supported mantle into a hang, holds on button release and drops on explicit release
+  ---
+  duration_ms: 1221.376163
+  type: 'test'
+  ...
+# Subtest: new roof blocks descent acquisition and an interrupted reverse mantle safely recovers
+ok 4 - new roof blocks descent acquisition and an interrupted reverse mantle safely recovers
+  ---
+  duration_ms: 562.754382
+  type: 'test'
+  ...
+# (node:7365) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: disposable course accepts actual sandbox grip and jump landing while online keeps authority gate
+ok 5 - disposable course accepts actual sandbox grip and jump landing while online keeps authority gate
+  ---
+  duration_ms: 508.395905
+  type: 'test'
+  ...
+# Subtest: actual main contact-course entry clears old combat aids, gates transitions and resets bounded evidence
+ok 6 - actual main contact-course entry clears old combat aids, gates transitions and resets bounded evidence
+  ---
+  duration_ms: 11.466431
+  type: 'test'
+  ...
+# Subtest: streamed worker respects another actor in landing clearance and paired crate travel
+ok 7 - streamed worker respects another actor in landing clearance and paired crate travel
+  ---
+  duration_ms: 1991.772865
+  type: 'test'
+  ...
+# Subtest: low crate uses supported hand-climb and reverse ground descent with safe release and blocked head clearance
+ok 8 - low crate uses supported hand-climb and reverse ground descent with safe release and blocked head clearance
+  ---
+  duration_ms: 1303.992476
+  type: 'test'
+  ...
+# Subtest: versioned organic parcels preserve exact legacy manifests, 100 identities and all service work/egress envelopes
+ok 9 - versioned organic parcels preserve exact legacy manifests, 100 identities and all service work/egress envelopes
+  ---
+  duration_ms: 7664.85552
+  type: 'test'
+  ...
+# Subtest: organic and occupied legacy slots coexist; strict imports retain layout, moved crates, households and current routes
+ok 10 - organic and occupied legacy slots coexist; strict imports retain layout, moved crates, households and current routes
+  ---
+  duration_ms: 2262.06901
+  type: 'test'
+  ...
+# Subtest: regional chunks, world heights and server collision resolve the same pinned parcel plan; stale layout results fail
+ok 11 - regional chunks, world heights and server collision resolve the same pinned parcel plan; stale layout results fail
+  ---
+  duration_ms: 823.511969
+  type: 'test'
+  ...
+# Subtest: actual regional generation worker reloads both layout identities without stale geometry reuse
+ok 12 - actual regional generation worker reloads both layout identities without stale geometry reuse
+  ---
+  duration_ms: 758.564751
+  type: 'test'
+  ...
+# Subtest: organic authority achieves journeys and work for 100 residents; source or emitted matrices remain live at variable FPS
+ok 13 - organic authority achieves journeys and work for 100 residents; source or emitted matrices remain live at variable FPS
+  ---
+  duration_ms: 15226.061138
+  type: 'test'
+  ...
+# Subtest: town directory dispatches exact expected revision, recovers pending rejection and disposes polling
+ok 14 - town directory dispatches exact expected revision, recovers pending rejection and disposes polling
+  ---
+  duration_ms: 583.305278
+  type: 'test'
+  ...
+# Subtest: disposable town model applies actual knobs, stages strict import, resets and never mutates campaign
+ok 15 - disposable town model applies actual knobs, stages strict import, resets and never mutates campaign
+  ---
+  duration_ms: 47.588612
+  type: 'test'
+  ...
+# Subtest: town startup, normal visit and developer access retain existing readiness and lifecycle gates
+ok 16 - town startup, normal visit and developer access retain existing readiness and lifecycle gates
+  ---
+  duration_ms: 4.400239
+  type: 'test'
+  ...
+# Subtest: town v2 appearance gait spacing controls and repeatable crossing expose actual applied results
+ok 17 - town v2 appearance gait spacing controls and repeatable crossing expose actual applied results
+  ---
+  duration_ms: 212.019514
+  type: 'test'
+  ...
+# Subtest: town directory shows each household relationship backstory and actual daily timetable
+ok 18 - town directory shows each household relationship backstory and actual daily timetable
+  ---
+  duration_ms: 42.607251
+  type: 'test'
+  ...
+# Subtest: household lab clock seeks are bounded and phase seeks reach the real routine without campaign writes
+ok 19 - household lab clock seeks are bounded and phase seeks reach the real routine without campaign writes
+  ---
+  duration_ms: 308.007242
+  type: 'test'
+  ...
+# Subtest: household selection and seed reset rebuild the resident and phase inspector without stale identity
+ok 20 - household selection and seed reset rebuild the resident and phase inspector without stale identity
+  ---
+  duration_ms: 52.721033
+  type: 'test'
+  ...
+# Subtest: organic town lab stages a bounded recipe, resets real plan consumers, exports identity and discards unapplied layout
+ok 21 - organic town lab stages a bounded recipe, resets real plan consumers, exports identity and discards unapplied layout
+  ---
+  duration_ms: 1052.742351
+  type: 'test'
+  ...
+1..21
+# tests 21
+# suites 0
+# pass 21
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 27891.492546

@@ -20,5 +20,6 @@ export function restorationInitialState(source:string):string {
  const collision=source.match(/^let restorationCollisionSignature=.*$/m)?.[0];
  const practice=source.match(/^let restorationView:.*$/m)?.[0];
  assert(collision&&practice,'production restoration state declarations');
- return collision+'\n'+practice+'\n';
+ const contact=source.match(/^let contactPractice=.*$/m)?.[0];assert(contact,'production contact course state');
+ return collision+'\n'+practice+'\n'+contact+"\nlet contactGeometryKey='';\n";
 }

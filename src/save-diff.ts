@@ -1,3 +1,4 @@
+import {validTownLayout} from './starting-town.ts';
 import {GENERATION_MANIFEST,CONNECTED_GENERATION_MANIFEST,type GenerationManifest} from './generation-manifest.ts';
 /** A read-only projection, never a save loader. Free-form events, names, URLs, room/session
  * IDs, credentials and unlisted state fields are neither read nor exported. */
@@ -32,7 +33,7 @@ const directorSpec=obj({version:en(1),seed:num(0xffffffff,true),revision:num(96,
  evidence:obj({...observationFields,estimatedActions:num(4,true)}),accepted:nullable(obj(observationFields)),outcome:nullable(obj({...observationFields,reason:en('helped','recovered','deadline','declined')})),
  contribution:nullable(obj({command:obj({kind:en('donate-water','donate-supplies','repair-service','encourage-resident'),targetId:townTarget,expectedRevision:num(1e9,true)}),lifeRevision:num(1e9,true),tick:num(1e9,true),beforeValue:num(1200),afterValue:num(1200),beforeAux:num(1e9),afterAux:num(1e9),count:num(64,true)})),
  }),24)});
-const stateSpec=obj({schemaVersion:en(6),seed:num(0xffffffff,true),generation:en(1,2),revision:num(1e9,true),inventory:metrics,settlement:obj(fields(['reserve','consumed','spilled','served'],num(2e9))),waterworks:obj(fields(['stored','extracted','delivered','drained'],num())),jobs:obj({completed:arr(en(...JOBS),3),active:nullable(obj({id:en(...JOBS),deliveredAt:num(),servedAt:num(2e9)})),renown:num()}),causal:causalSpec,townLife:townSpec,townDirector:directorSpec},['causal','townLife','townDirector']);
+const stateSpec=obj({townLayout:obj({version:en(3),recipe:en(1),manifestHash:{kind:'text',pattern:/^[a-f0-9]{1,8}$/}}),schemaVersion:en(6),seed:num(0xffffffff,true),generation:en(1,2),revision:num(1e9,true),inventory:metrics,settlement:obj(fields(['reserve','consumed','spilled','served'],num(2e9))),waterworks:obj(fields(['stored','extracted','delivered','drained'],num())),jobs:obj({completed:arr(en(...JOBS),3),active:nullable(obj({id:en(...JOBS),deliveredAt:num(),servedAt:num(2e9)})),renown:num()}),causal:causalSpec,townLife:townSpec,townDirector:directorSpec},['causal','townLife','townDirector','townLayout']);
 function record(v:unknown):v is Record<string,unknown>{if(!v||typeof v!=='object'||Array.isArray(v))return false;const p=Object.getPrototypeOf(v);return p===null||p===Object.prototype;}
 function read(v:Record<string,unknown>,key:string):unknown{const d=Object.getOwnPropertyDescriptor(v,key);if(!d||!('value' in d))throw new Error(`Missing data field ${key}`);return d.value;}
 function project(value:unknown,spec:Spec,strict:boolean,path='snapshot'):Data{
@@ -50,6 +51,7 @@ function same(a:unknown,b:unknown):boolean{if(a===b)return true;if(Array.isArray
 function freeze<T>(v:T):T{if(v&&typeof v==='object'){for(const item of Object.values(v))freeze(item);Object.freeze(v);}return v;}
 export interface SaveSnapshot {format:'axiom-save-inspection';version:1;generationManifest:GenerationManifest;state:Record<string,Data>}
 function checkIdentity(state:Record<string,Data>,manifest:unknown):GenerationManifest{
+ if(state.townLayout&&!validTownLayout(state.townLayout,Number(state.seed)))throw Error('Unknown town layout identity');
  const expected=state.generation===1?GENERATION_MANIFEST:CONNECTED_GENERATION_MANIFEST;if(!same(manifest,expected))throw new Error('Unknown generation domains, recipes, framework or content hash');
  const town=state.townLife as Record<string,Data>|undefined;if(town&&town.seed!==state.seed)throw new Error('Town seed does not match world seed');
  const director=state.townDirector as Record<string,Data>|undefined;if(director){if(!town||director.seed!==state.seed||Number(director.observedLifeRevision)>Number(town.revision))throw new Error('Director does not match the captured town authority');for(const [i,row]of (director.episodes as Record<string,Data>[]).entries()){if(row.id!==`town-request-${i+1}`||!(row.issuerId as string).startsWith(`town-resident:${state.seed}:`))throw new Error('Director episode identity mismatch');for(const key of ['targetId','serviceId']){const target=row[key] as string;if(target.startsWith('town-resident:')&&!target.startsWith(`town-resident:${state.seed}:`))throw new Error('Director target seed mismatch');}}}
@@ -78,7 +80,7 @@ export function diffSaveSnapshots(before:SaveSnapshot,after:SaveSnapshot):SaveDi
  // Revalidate typed callers as well as imported input. No trusted cast bypasses the size/version limits.
  const a=parseSaveSnapshot(exportSaveSnapshot(before)),b=parseSaveSnapshot(exportSaveSnapshot(after)),left=new Map<string,Scalar>(),right=new Map<string,Scalar>();flatten(a.state,'',left);flatten(b.state,'',right);
  const changes:SaveChange[]=[];for(const path of [...new Set([...left.keys(),...right.keys()])].sort()){const x=left.get(path),y=right.get(path);if(x!==y)changes.push({path,before:x,after:y,...(typeof x==='number'&&typeof y==='number'?{delta:y-x}:{})});}
- if(changes.length>4096)throw new Error('Difference exceeds 4096 changed records');const ca=a.state.causal as Record<string,Data>|undefined,cb=b.state.causal as Record<string,Data>|undefined;const comparable=a.state.seed===b.state.seed&&a.state.generation===b.state.generation&&same(a.generationManifest,b.generationManifest)&&(!ca||!cb||ca.manifestHash===cb.manifestHash);
+ if(changes.length>4096)throw new Error('Difference exceeds 4096 changed records');const ca=a.state.causal as Record<string,Data>|undefined,cb=b.state.causal as Record<string,Data>|undefined;const comparable=same(a.state.townLayout,b.state.townLayout)&&a.state.seed===b.state.seed&&a.state.generation===b.state.generation&&same(a.generationManifest,b.generationManifest)&&(!ca||!cb||ca.manifestHash===cb.manifestHash);
  const explanations:string[]=[];const change=(path:string)=>changes.find(c=>c.path===path),delta=(path:string)=>change(path)?.delta??0;
  if(!comparable)explanations.push('World seed or generation/causal domain identity differs. These are cross-world differences; no gameplay causal attribution is made.');
  else {

@@ -1,21 +1,21 @@
-import {createState,createConnectedState,createRegionalState,parseSave,serializeSave,type State} from './world.ts';
+import {createState,createConnectedState,createRegionalState,createOrganicRegionalState,parseSave,serializeSave,type State} from './world.ts';
 export interface SaveStorage {getItem(key:string):string|null;setItem(key:string,value:string):void;readonly length?:number;key?(index:number):string|null}
 export const ACTIVE_WORLD_KEY='axiom-active-world';
 export const LEGACY_SAVE_KEY='axiom-save-v1';
-export function saveKey(s:Pick<State,'generation'|'seed'|'regional'>){return s.regional?.version===1?`axiom-save-region1-${s.seed}`:`axiom-save-valley${s.generation}-${s.seed}`;}
-export function sameWorld(a:Pick<State,'generation'|'seed'|'regional'>,b:Pick<State,'generation'|'seed'|'regional'>){return a.generation===b.generation&&a.seed===b.seed&&a.regional?.version===b.regional?.version;}
+export function saveKey(s:Pick<State,'generation'|'seed'|'regional'|'townLayout'>){return s.regional?.version===1?`axiom-save-region1-${s.seed}${s.townLayout?'-layout3':''}`:`axiom-save-valley${s.generation}-${s.seed}`;}
+export function sameWorld(a:Pick<State,'generation'|'seed'|'regional'|'townLayout'>,b:Pick<State,'generation'|'seed'|'regional'|'townLayout'>){return a.generation===b.generation&&a.seed===b.seed&&a.regional?.version===b.regional?.version&&a.townLayout?.manifestHash===b.townLayout?.manifestHash;}
 export function loadSlot(storage:SaveStorage,key:string):State|null {
- if(key!==LEGACY_SAVE_KEY&&!/^axiom-save-(?:valley[12]|region1)-\d{1,10}$/.test(key))return null;
+ if(key!==LEGACY_SAVE_KEY&&!/^axiom-save-(?:valley[12]|region1)-\d{1,10}(?:-layout3)?$/.test(key))return null;
  if(key!==LEGACY_SAVE_KEY){const epoch=readSessionEpoch(storage,key);if(epoch)return validSlotText(epoch.current,key)??validSlotText(epoch.backup,key);}
  for(const candidate of [key,key===LEGACY_SAVE_KEY?'axiom-save-backup-v1':`${key}-backup`]){const s=parseSave(storage.getItem(candidate)??'');if(s&&(saveKey(s)===key||key===LEGACY_SAVE_KEY&&s.generation===1)){if(key===LEGACY_SAVE_KEY){const epoch=readSessionEpoch(storage,saveKey(s));if(epoch)return validSlotText(epoch.current,saveKey(s))??validSlotText(epoch.backup,saveKey(s));}return s;}}return null;
 }
 /** Resolve an original legacy alias without selecting a different seed. */
-export function loadSavedWorld(storage:SaveStorage,identity:Pick<State,'generation'|'seed'|'regional'>):State|null {const current=loadSlot(storage,saveKey(identity));if(current)return current;const legacy=identity.generation===1?loadSlot(storage,LEGACY_SAVE_KEY):null;return legacy&&sameWorld(legacy,identity)?legacy:null;}
+export function loadSavedWorld(storage:SaveStorage,identity:Pick<State,'generation'|'seed'|'regional'|'townLayout'>):State|null {const current=loadSlot(storage,saveKey(identity));if(current)return current;const legacy=identity.generation===1?loadSlot(storage,LEGACY_SAVE_KEY):null;return legacy&&sameWorld(legacy,identity)?legacy:null;}
 /** Read-only startup. Old saves are never upgraded into a different foundation. */
 export function loadSession(storage:SaveStorage):State {
  const selected=storage.getItem(ACTIVE_WORLD_KEY);if(selected){const state=loadSlot(storage,selected);if(state)return state;}
  const legacy=loadSlot(storage,LEGACY_SAVE_KEY);if(legacy)return loadSlot(storage,saveKey(legacy))??legacy;
- return loadSlot(storage,'axiom-save-valley2-73129')??savedWorlds(storage)[0]?.state??loadSlot(storage,'axiom-save-region1-73129')??createRegionalState(73129);
+ return loadSlot(storage,'axiom-save-valley2-73129')??savedWorlds(storage)[0]?.state??loadSlot(storage,'axiom-save-region1-73129')??createOrganicRegionalState(73129);
 }
 export function storeSession(storage:SaveStorage,state:State,activate=false,expectedRevision?:number){
  const key=saveKey(state),epoch=readSessionEpoch(storage,key);
@@ -42,39 +42,39 @@ export function storeSession(storage:SaveStorage,state:State,activate=false,expe
 /** A seed with prior progress is resumed rather than overwritten. */
 export function selectSeed(storage:SaveStorage,seed:number):State {const next=createConnectedState(seed);return loadSlot(storage,saveKey(next))??next;}
 /** Regional seeds occupy their own slots even when a connected valley uses the same seed. */
-export function selectRegionalSeed(storage:SaveStorage,seed:number):State {const next=createRegionalState(seed);return loadSlot(storage,saveKey(next))??next;}
+export function selectRegionalSeed(storage:SaveStorage,seed:number):State {const next=createOrganicRegionalState(seed);return loadSlot(storage,`axiom-save-region1-${seed}`)??loadSlot(storage,saveKey(next))??next;}
 export function savedWorlds(storage:SaveStorage){
  const result=new Map<string,{key:string;state:State}>(),keys=new Set([LEGACY_SAVE_KEY]);
- for(let i=0;i<(storage.length??0);i++){const key=storage.key?.(i);if(key&&/^axiom-save-(?:valley[12]|region1)-\d{1,10}(?:-backup|-session-v1)?$/.test(key))keys.add(key.replace(/(?:-backup|-session-v1)$/,''));}
+ for(let i=0;i<(storage.length??0);i++){const key=storage.key?.(i);if(key&&/^axiom-save-(?:valley[12]|region1)-\d{1,10}(?:-layout3)?(?:-backup|-session-v1)?$/.test(key))keys.add(key.replace(/(?:-backup|-session-v1)$/,''));}
  for(const key of keys){const state=loadSlot(storage,key);if(state)result.set(saveKey(state),{key,state});}
  return [...result.values()].sort((a,b)=>a.state.generation-b.state.generation||a.state.seed-b.state.seed||Number(!!a.state.regional)-Number(!!b.state.regional));
 }
 
 /** Immutable pre-pack checkpoint. Later rolling autosave backups never overwrite it. */
-export function preUpgradeKey(s:Pick<State,'generation'|'seed'|'regional'>){return `${saveKey(s)}-before-overnight-2026-10-01`;}
+export function preUpgradeKey(s:Pick<State,'generation'|'seed'|'regional'|'townLayout'>){return `${saveKey(s)}-before-overnight-2026-10-01`;}
 function hasOvernightPacks(s:State){return !!(s.encounters||s.economy||s.caveWater||s.ecology||s.caveSupply||s.causal?.commonsTrade||s.causal?.waterRequests||s.equipment?.active?.version===2);}
-function compatibleBeforeUpgrade(raw:string|null,s:Pick<State,'generation'|'seed'|'regional'>):raw is string {if(!raw)return false;const parsed=parseSave(raw);return !!parsed&&sameWorld(parsed,s)&&!hasOvernightPacks(parsed);}
+function compatibleBeforeUpgrade(raw:string|null,s:Pick<State,'generation'|'seed'|'regional'|'townLayout'>):raw is string {if(!raw)return false;const parsed=parseSave(raw);return !!parsed&&sameWorld(parsed,s)&&!hasOvernightPacks(parsed);}
 function rollbackCheckpointError(message:string):never {const error=new Error(message);error.name='RollbackCheckpointError';throw error;}
 function assertPreUpgradeCheckpoint(storage:SaveStorage,s:State){if(!hasOvernightPacks(s))return;const raw=storage.getItem(preUpgradeKey(s));if(raw!==null&&!compatibleBeforeUpgrade(raw,s))rollbackCheckpointError('Pre-overnight rollback checkpoint is invalid');}
-export function preUpgradeSave(storage:SaveStorage,s:Pick<State,'generation'|'seed'|'regional'>):string|null {const raw=storage.getItem(preUpgradeKey(s));return compatibleBeforeUpgrade(raw,s)?raw:null;}
+export function preUpgradeSave(storage:SaveStorage,s:Pick<State,'generation'|'seed'|'regional'|'townLayout'>):string|null {const raw=storage.getItem(preUpgradeKey(s));return compatibleBeforeUpgrade(raw,s)?raw:null;}
 function preservePreUpgradeSave(storage:SaveStorage,s:State){
  if(!hasOvernightPacks(s)||storage.getItem(preUpgradeKey(s))!==null)return;
  const candidates=saveCandidates(storage,s);
  for(const raw of candidates)if(compatibleBeforeUpgrade(raw,s)){storage.setItem(preUpgradeKey(s),raw);return;}
 }
 /** Read-only exact-byte recovery export; never silently serialize an upgraded in-memory world. */
-export function storedSaveText(storage:SaveStorage,s:Pick<State,'generation'|'seed'|'regional'>):string|null {
+export function storedSaveText(storage:SaveStorage,s:Pick<State,'generation'|'seed'|'regional'|'townLayout'>):string|null {
  for(const raw of saveCandidates(storage,s)){if(!raw)continue;const parsed=parseSave(raw);if(parsed&&sameWorld(parsed,s))return raw;}
  return null;
 }
 
 /** Immutable last compatible raw save before the first persisted custom equipment ref. */
-export function preEditedEquipmentKey(s:Pick<State,'generation'|'seed'|'regional'>){return `${saveKey(s)}-before-edited-equipment-v2`;}
-function compatibleBeforeEditedEquipment(raw:string|null,s:Pick<State,'generation'|'seed'|'regional'>):raw is string {
+export function preEditedEquipmentKey(s:Pick<State,'generation'|'seed'|'regional'|'townLayout'>){return `${saveKey(s)}-before-edited-equipment-v2`;}
+function compatibleBeforeEditedEquipment(raw:string|null,s:Pick<State,'generation'|'seed'|'regional'|'townLayout'>):raw is string {
  if(!raw)return false;const parsed=parseSave(raw);return !!parsed&&sameWorld(parsed,s)&&parsed.equipment?.active?.version!==2;
 }
 /** Return original bytes for direct Blob export; never reserialize or fabricate a downgraded world. */
-export function preEditedEquipmentSave(storage:SaveStorage,s:Pick<State,'generation'|'seed'|'regional'>):string|null {
+export function preEditedEquipmentSave(storage:SaveStorage,s:Pick<State,'generation'|'seed'|'regional'|'townLayout'>):string|null {
  const raw=storage.getItem(preEditedEquipmentKey(s));return compatibleBeforeEditedEquipment(raw,s)?raw:null;
 }
 function preservePreEditedEquipmentSave(storage:SaveStorage,s:State){
@@ -86,11 +86,11 @@ function preservePreEditedEquipmentSave(storage:SaveStorage,s:State){
 }
 
 /** Last compatible raw world before household trade receipts were introduced. */
-export function preCommonsTradeKey(s:Pick<State,'generation'|'seed'|'regional'>){return `${saveKey(s)}-before-commons-trade-v1`;}
-function compatibleBeforeCommonsTrade(raw:string|null,s:Pick<State,'generation'|'seed'|'regional'>):raw is string {
+export function preCommonsTradeKey(s:Pick<State,'generation'|'seed'|'regional'|'townLayout'>){return `${saveKey(s)}-before-commons-trade-v1`;}
+function compatibleBeforeCommonsTrade(raw:string|null,s:Pick<State,'generation'|'seed'|'regional'|'townLayout'>):raw is string {
  if(!raw)return false;const parsed=parseSave(raw);return !!parsed&&sameWorld(parsed,s)&&!Object.hasOwn(parsed.causal??{},'commonsTrade');
 }
-export function preCommonsTradeSave(storage:SaveStorage,s:Pick<State,'generation'|'seed'|'regional'>):string|null {
+export function preCommonsTradeSave(storage:SaveStorage,s:Pick<State,'generation'|'seed'|'regional'|'townLayout'>):string|null {
  const raw=storage.getItem(preCommonsTradeKey(s));return compatibleBeforeCommonsTrade(raw,s)?raw:null;
 }
 function preservePreCommonsTradeSave(storage:SaveStorage,s:State){
@@ -101,11 +101,11 @@ function preservePreCommonsTradeSave(storage:SaveStorage,s:State){
 }
 
 /** Preserve the last raw world before recurring requests extend the renown ledger. */
-export function preWaterRequestsKey(s:Pick<State,'generation'|'seed'|'regional'>){return `${saveKey(s)}-before-water-requests-v1`;}
-function compatibleBeforeWaterRequests(raw:string|null,s:Pick<State,'generation'|'seed'|'regional'>):raw is string {
+export function preWaterRequestsKey(s:Pick<State,'generation'|'seed'|'regional'|'townLayout'>){return `${saveKey(s)}-before-water-requests-v1`;}
+function compatibleBeforeWaterRequests(raw:string|null,s:Pick<State,'generation'|'seed'|'regional'|'townLayout'>):raw is string {
  if(!raw)return false;const parsed=parseSave(raw);return !!parsed&&sameWorld(parsed,s)&&!Object.hasOwn(parsed.causal??{},'waterRequests');
 }
-export function preWaterRequestsSave(storage:SaveStorage,s:Pick<State,'generation'|'seed'|'regional'>):string|null {
+export function preWaterRequestsSave(storage:SaveStorage,s:Pick<State,'generation'|'seed'|'regional'|'townLayout'>):string|null {
  const raw=storage.getItem(preWaterRequestsKey(s));return compatibleBeforeWaterRequests(raw,s)?raw:null;
 }
 function preservePreWaterRequestsSave(storage:SaveStorage,s:State){
@@ -116,8 +116,8 @@ function preservePreWaterRequestsSave(storage:SaveStorage,s:State){
 }
 
 /** Exact pre-contact bytes are retained once, independently of rolling autosaves. */
-export function preContactKey(s:Pick<State,'generation'|'seed'|'regional'>){return `${saveKey(s)}-before-player-contact-v1`;}
-export function preContactSave(storage:SaveStorage,s:Pick<State,'generation'|'seed'|'regional'>):string|null {
+export function preContactKey(s:Pick<State,'generation'|'seed'|'regional'|'townLayout'>){return `${saveKey(s)}-before-player-contact-v1`;}
+export function preContactSave(storage:SaveStorage,s:Pick<State,'generation'|'seed'|'regional'|'townLayout'>):string|null {
  const raw=storage.getItem(preContactKey(s));if(!raw)return null;const parsed=parseSave(raw);return parsed&&sameWorld(parsed,s)&&!parsed.traversal?raw:null;
 }
 function preservePreContactSave(storage:SaveStorage,s:State){
@@ -128,8 +128,8 @@ function preservePreContactSave(storage:SaveStorage,s:State){
 
 /** The first regional-supply upgrade preserves exact earlier bytes, never a
  * synthesized downgrade. A failed checkpoint write stops the outgoing save. */
-export function preRegionalSupplyKey(s:Pick<State,'generation'|'seed'|'regional'>){return `${saveKey(s)}-before-regional-supply-v1`;}
-export function preRegionalSupplySave(storage:SaveStorage,s:Pick<State,'generation'|'seed'|'regional'>):string|null {
+export function preRegionalSupplyKey(s:Pick<State,'generation'|'seed'|'regional'|'townLayout'>){return `${saveKey(s)}-before-regional-supply-v1`;}
+export function preRegionalSupplySave(storage:SaveStorage,s:Pick<State,'generation'|'seed'|'regional'|'townLayout'>):string|null {
  const raw=storage.getItem(preRegionalSupplyKey(s));if(!raw)return null;
  const parsed=parseSave(raw);return parsed&&sameWorld(parsed,s)&&!!parsed.regional&&!Object.hasOwn(parsed,'frontierSupply')?raw:null;
 }
@@ -141,8 +141,8 @@ function preservePreRegionalSupplySave(storage:SaveStorage,s:State){
 
 /** Preserve the exact last pre-freight save once, including completed V31 collectors.
  * No downgrade is synthesized and failure leaves the outgoing save uncommitted. */
-export function preRegionalTradeKey(s:Pick<State,'generation'|'seed'|'regional'>){return `${saveKey(s)}-before-regional-trade-v1`;}
-export function preRegionalTradeSave(storage:SaveStorage,s:Pick<State,'generation'|'seed'|'regional'>):string|null {
+export function preRegionalTradeKey(s:Pick<State,'generation'|'seed'|'regional'|'townLayout'>){return `${saveKey(s)}-before-regional-trade-v1`;}
+export function preRegionalTradeSave(storage:SaveStorage,s:Pick<State,'generation'|'seed'|'regional'|'townLayout'>):string|null {
  const raw=storage.getItem(preRegionalTradeKey(s));if(!raw)return null;
  const parsed=parseSave(raw);return parsed&&sameWorld(parsed,s)&&!!parsed.regional&&!Object.hasOwn(parsed,'frontierTrade')?raw:null;
 }
@@ -154,8 +154,8 @@ function preservePreRegionalTradeSave(storage:SaveStorage,s:State){
 
 /** Preserve the exact pre-food campaign bytes once. Existing collector, freight,
  * garden and player progress are never synthesized from an upgraded state. */
-export function preRegionalFoodKey(s:Pick<State,'generation'|'seed'|'regional'>){return `${saveKey(s)}-before-regional-food-v1`;}
-export function preRegionalFoodSave(storage:SaveStorage,s:Pick<State,'generation'|'seed'|'regional'>):string|null {
+export function preRegionalFoodKey(s:Pick<State,'generation'|'seed'|'regional'|'townLayout'>){return `${saveKey(s)}-before-regional-food-v1`;}
+export function preRegionalFoodSave(storage:SaveStorage,s:Pick<State,'generation'|'seed'|'regional'|'townLayout'>):string|null {
  const raw=storage.getItem(preRegionalFoodKey(s));if(!raw)return null;
  const parsed=parseSave(raw);return parsed&&sameWorld(parsed,s)&&!!parsed.regional&&!Object.hasOwn(parsed,'frontierFood')?raw:null;
 }
@@ -167,7 +167,7 @@ function preservePreRegionalFoodSave(storage:SaveStorage,s:State){
 
 /** A restart commits one atomic record. Original slot bytes and every checkpoint remain intact. */
 interface SessionEpoch {version:1;epoch:number;current:string;backup:string;recoveryKey:string}
-type WorldIdentity=Pick<State,'generation'|'seed'|'regional'>;
+type WorldIdentity=Pick<State,'generation'|'seed'|'regional'|'townLayout'>;
 export function sessionEpochKey(s:WorldIdentity){return `${saveKey(s)}-session-v1`;}
 /** Capture at document boot; ordinary saves must retain this revision until reload. */
 export function sessionResetRevision(storage:SaveStorage,s:WorldIdentity):number {return readSessionEpoch(storage,saveKey(s))?.epoch??0;}
@@ -213,7 +213,7 @@ export function createSessionResetOperation(storage:SaveStorage,current:State,ki
  const recoveryRaw=recoveryKey?storage.getItem(recoveryKey):null;
  const recovered=recoveryRaw&&validSlotText(recoveryRaw,key)?recoveryRaw:null;
  if(kind==='restore'&&!recovered)resetError('No valid pre-restart checkpoint exists for this world');
- const next=kind==='restore'?parseSave(recovered!)!:current.regional?.version===1?createRegionalState(current.seed):current.generation===1?createState(current.seed):createConnectedState(current.seed);
+ const next=kind==='restore'?parseSave(recovered!)!:current.regional?.version===1?(current.townLayout?createOrganicRegionalState(current.seed):createRegionalState(current.seed)):current.generation===1?createState(current.seed):createConnectedState(current.seed);
  const serialized=kind==='restore'?recovered!:serializeSave(next);
  let committed=false;
  return {commit(){
@@ -254,8 +254,8 @@ export function sessionRecoverySaves(storage:SaveStorage,s:WorldIdentity):Sessio
 }
 
 /** Exact pre-autonomy checkpoint; historical saves never simulate elapsed history on upgrade. */
-export function preTownLifeKey(s:Pick<State,'generation'|'seed'|'regional'>){return `${saveKey(s)}-before-town-life-v1`;}
-export function preTownLifeSave(storage:SaveStorage,s:Pick<State,'generation'|'seed'|'regional'>):string|null {
+export function preTownLifeKey(s:Pick<State,'generation'|'seed'|'regional'|'townLayout'>){return `${saveKey(s)}-before-town-life-v1`;}
+export function preTownLifeSave(storage:SaveStorage,s:Pick<State,'generation'|'seed'|'regional'|'townLayout'>):string|null {
  const raw=storage.getItem(preTownLifeKey(s));if(!raw)return null;const parsed=parseSave(raw);return parsed&&sameWorld(parsed,s)&&!Object.hasOwn(parsed,'townLife')?raw:null;
 }
 function preservePreTownLifeSave(storage:SaveStorage,s:State){
@@ -265,8 +265,8 @@ function preservePreTownLifeSave(storage:SaveStorage,s:State){
 }
 
 /** Exact pre-addition bytes, retained once before procedural request/restoration packs. */
-export function preProceduralKey(s:Pick<State,'generation'|'seed'|'regional'>){return `${saveKey(s)}-before-procedural-v1`;}
-export function preProceduralSave(storage:SaveStorage,s:Pick<State,'generation'|'seed'|'regional'>):string|null {const raw=storage.getItem(preProceduralKey(s));if(!raw)return null;const old=parseSave(raw);return old&&sameWorld(old,s)&&!Object.hasOwn(old,'townDirector')&&!Object.hasOwn(old,'restoration')?raw:null;}
+export function preProceduralKey(s:Pick<State,'generation'|'seed'|'regional'|'townLayout'>){return `${saveKey(s)}-before-procedural-v1`;}
+export function preProceduralSave(storage:SaveStorage,s:Pick<State,'generation'|'seed'|'regional'|'townLayout'>):string|null {const raw=storage.getItem(preProceduralKey(s));if(!raw)return null;const old=parseSave(raw);return old&&sameWorld(old,s)&&!Object.hasOwn(old,'townDirector')&&!Object.hasOwn(old,'restoration')?raw:null;}
 function preservePreProceduralSave(storage:SaveStorage,s:State){
  if(!Object.hasOwn(s,'townDirector')&&!Object.hasOwn(s,'restoration'))return;const key=preProceduralKey(s),existing=storage.getItem(key);
  if(existing!==null){if(!preProceduralSave(storage,s))rollbackCheckpointError('Procedural rollback checkpoint is invalid');return;}

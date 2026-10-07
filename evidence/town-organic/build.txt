@@ -1,0 +1,56 @@
+
+> axiom-living-frontier@0.1.0 build
+> node scripts/build.mjs
+
+vite v8.3.1 building client environment for production...
+transforming...
+✓ 207 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/client/system-workbench.html                               0.84 kB │ gzip:   0.45 kB
+dist/client/visual-review.html                                  0.93 kB │ gzip:   0.45 kB
+dist/client/index.html                                         22.02 kB │ gzip:   8.11 kB
+dist/client/assets/generation.worker-CH1g_wUC.js               48.90 kB
+dist/client/assets/regional.worker-BpcpB3Hs.js                 62.52 kB
+dist/client/assets/system-workbench.worker-DuIKGN-s.js        499.98 kB
+dist/client/assets/physics.worker-BhBMXpZh.js               2,937.93 kB
+dist/client/assets/visualReview-DmLGc_Zm.css                    3.53 kB │ gzip:   1.36 kB
+dist/client/assets/systemWorkbench-HFq8o4RD.css                 6.06 kB │ gzip:   1.97 kB
+dist/client/assets/main-dYnUxjd1.css                           43.51 kB │ gzip:   9.67 kB
+dist/client/assets/modulepreload-polyfill-P2Xu9kJm.js           0.67 kB │ gzip:   0.38 kB
+dist/client/assets/campaign-action-readiness-CkN_8uqe.js        1.66 kB │ gzip:   0.76 kB
+dist/client/assets/game-CO3ohUSN.js                             2.18 kB │ gzip:   1.19 kB
+dist/client/assets/campaign-guidance-scenarios-D-16gSXi.js      6.67 kB │ gzip:   2.59 kB
+dist/client/assets/workshop-construction-view-BJLwAdNH.js       6.77 kB │ gzip:   3.02 kB
+dist/client/assets/town-activity-w88JOKG6.js                   11.63 kB │ gzip:   4.34 kB
+dist/client/assets/town-projection-DXLejfsq.js                 13.46 kB │ gzip:   6.17 kB
+dist/client/assets/coop-client-qvl-PwL8.js                     21.75 kB │ gzip:   7.28 kB
+dist/client/assets/regional-food-lab-C2rOegTe.js               23.56 kB │ gzip:   9.22 kB
+dist/client/assets/systemWorkbench-CJG73Ps7.js                 29.96 kB │ gzip:  10.74 kB
+dist/client/assets/visualReview-D-ezttY6.js                    37.48 kB │ gzip:  13.86 kB
+dist/client/assets/npc-dialogue-CDKBEjAc.js                    37.62 kB │ gzip:  13.83 kB
+dist/client/assets/guard-view-BQ1E04ic.js                      59.89 kB │ gzip:  23.37 kB
+dist/client/assets/campaign-guidance-engine-N0lATrHY.js       535.08 kB │ gzip: 177.09 kB
+dist/client/assets/main-M7lNtYaV.js                           704.14 kB │ gzip: 234.73 kB
+dist/client/assets/restoration-view-BoN3Qrmf.js               806.96 kB │ gzip: 221.17 kB
+
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 1.30s
+vite v8.3.1 building ssr environment for production...
+transforming...
+✓ 76 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/server/index.js  8,419.08 kB │ gzip: 3,208.62 kB
+
+✓ built in 569ms
+{"sourceRevision":"cdb067b47acdf2f86aa119f6a3e1a767708cf6ba-working","assets":27,"assetBytes":5926035,"workerBytes":8419088}
+npm notice
+npm notice New major version of npm available! 10.9.8 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

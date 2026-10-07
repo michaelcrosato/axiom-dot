@@ -1,0 +1,4 @@
+(node:8054) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:8054) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+{"files":277,"cases":1925,"excluded":13,"output":"evidence/town-organic/final-registered-cases.json"}

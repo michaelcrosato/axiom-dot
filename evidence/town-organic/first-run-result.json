@@ -1,0 +1,16 @@
+{
+  "counts": {
+    "tests": 1925,
+    "suites": 0,
+    "pass": 1924,
+    "fail": 1,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "failures": [
+    "actual startup boundary awaits only bounded preparation and retains the ordinary source-of-truth loaders afterward"
+  ],
+  "naturalCompletion": true,
+  "durationMs": 3030890.882802
+}

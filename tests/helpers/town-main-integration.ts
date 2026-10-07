@@ -17,7 +17,7 @@ import {copyTownLifePoses} from '../../src/town-life-projection.ts';
 import {townLifePoses,townLifeClock,townFrameSeconds,TownSnapshotContinuity} from '../../src/town-life-runtime.ts';
 import {townClock,townPathClear,TOWN_BODY_RADIUS} from '../../src/town-crowd.ts';
 import {immutableTownLife,townLifeFacilities,type TownLifeResidentState} from '../../src/town-life.ts';
-import {createRegionalState,enableStartingTown,serializeSave,parseSave,applyAction,encounterObjects,type State} from '../../src/world.ts';
+import {createRegionalState,createOrganicRegionalState,enableStartingTown,serializeSave,parseSave,applyAction,encounterObjects,type State} from '../../src/world.ts';
 import {TOWN_CENTER,TOWN_SPAWN,startingTown} from '../../src/starting-town.ts';
 import {generateRegionalChunk,REGION_BOUND} from '../../src/regional-world.ts';
 import {RegionalStreamer,type RegionalEntry} from '../../src/regional-stream.ts';
@@ -36,13 +36,13 @@ import {townLifeTaskPoint} from '../../src/town-navigation.ts';
 
 export const MAIN_INTEGRATION_SCOPE='Node 22 manual-clock production Rapier worker and real generated initial terrain; complete production main message handler, actual collision confirmations, world actions, contact packets and Three instance matrices. Intact town frame statements are executed in source order. Unrelated DOM/audio/combat effects are stubbed. No browser, GPU pixels, real worker timer, device FPS or regional food/terminal-clock review.';
 export type IntegrationCadence=5|10|30|60|'jitter';
-export interface MainIntegrationOptions {seconds?:number;cadence?:IntegrationCadence;fixture?:'fresh'|'15'|'150'|'175';seed?:number;pause?:boolean;deliveryJitter?:boolean;workerFile?:URL;factory?:typeof createTownView;mainSource?:string;captureContacts?:boolean;actorAt?:Point;actorWalk?:boolean;onProgress?:(value:Record<string,unknown>)=>void}
+export interface MainIntegrationOptions {organic?:boolean;seconds?:number;cadence?:IntegrationCadence;fixture?:'fresh'|'15'|'150'|'175';seed?:number;pause?:boolean;deliveryJitter?:boolean;workerFile?:URL;factory?:typeof createTownView;mainSource?:string;captureContacts?:boolean;actorAt?:Point;actorWalk?:boolean;onProgress?:(value:Record<string,unknown>)=>void}
 type Point={x:number;z:number};
 const distance=(a:Point,b:Point)=>Math.hypot(a.x-b.x,a.z-b.z);
 const noop=()=>{};
 const PHYSICAL_ACTOR_GAP=TOWN_BODY_RADIUS+TOWN_PLAYER_CONTACT.radius;
 const PHYSICAL_PEER_GAP=TOWN_BODY_RADIUS*2;
-const SOURCE_FILES=['main.ts','physics.worker.ts','town-view.ts','town-crowd.ts','town-life.ts','town-life-runtime.ts','town-life-projection.ts','town-navigation.ts','town-player-contact.ts','world.ts'];
+const SOURCE_FILES=['starting-town.ts','town-road-route.ts','town-residents.ts','regional-world.ts','main.ts','physics.worker.ts','town-view.ts','town-crowd.ts','town-life.ts','town-life-runtime.ts','town-life-projection.ts','town-navigation.ts','town-player-contact.ts','world.ts'];
 const sourceHashes=()=>Object.fromEntries(SOURCE_FILES.map(file=>[file,createHash('sha256').update(readFileSync(new URL('../../src/'+file,import.meta.url))).digest('hex')]));
 
 /** Source is parsed as syntax: the entire handler is used, never an invented tick. */
@@ -75,7 +75,7 @@ async function productionWorker(file:URL,onPacket:(packet:any)=>void,captureCont
 }
 
 function initialState(options:MainIntegrationOptions){
- const seed=options.seed??73129;let state=enableStartingTown(createRegionalState(seed));
+ const seed=options.seed??73129;let state=enableStartingTown(options.organic?createOrganicRegionalState(seed):createRegionalState(seed));
  if(options.fixture&&options.fixture!=='fresh')state={...state,townLife:immutableTownLife(JSON.parse(readFileSync(new URL(`../fixtures/town-motion-v11/${options.fixture}.json`,import.meta.url),'utf8')),seed)};
  state={...state,player:{...state.player,...(options.actorAt??TOWN_SPAWN)}};
  const parsed=parseSave(serializeSave(state));assert(parsed,'scenario must survive actual save validation');assert.deepEqual(parsed,state);return parsed;
@@ -84,7 +84,7 @@ function initialState(options:MainIntegrationOptions){
 export async function runTownMainIntegration(options:MainIntegrationOptions={}){
  const seconds=options.seconds??120,cadence=options.cadence??10,source=productionTownMain(options.mainSource),start=initialState(options),seed=start.seed;
  const hashesBefore=sourceHashes();
- const view=(options.factory??createTownView)(seed),initialLife=start.townLife!,initialTime=townLifeClock(initialLife);
+ const view=(options.factory??createTownView)(seed,start.townLayout),initialLife=start.townLife!,initialTime=townLifeClock(initialLife);
  let workerVersion='';let now=0,workerTime=0,scheduledAt=0,packetSeq=0,receivedSnapshots=0,handledSnapshots=0,duplicateSnapshots=0,acks=0,initialCells=0,pausedSeconds=0,paused=false,lastProcessedStep=-1;
  let worker:any;const packets:{at:number;order:number;packet:any}[]=[],contactPackets:any[]=[];let lastContactPacket:any;
  const metrics={maxLag:0,maxRootStep:0,unsafeVisibleChords:0,completionBeforeVisibleArrival:0,completionBeforeAuthorityArrival:0,taskProgressAwayFromStation:0,completedActions:0,minimumVisible:100,maximumVisible:0,peakUnresolvedActorContacts:0,workerProjectionDifference:0,workerAuthoritativeProjectionDifference:0,nonAuthoritativeWorkerSamplesAfterWarmup:0,candidateContactPacketDifference:0,drawnAcceptedSnapshotDifference:0,acknowledgedContactSnapshots:0,authoritativeContactPackets:0,minVisibleBodyGap:Infinity,minVisibleActorGap:Infinity,peerOverlapSamples:0,actorOverlapSamples:0,settledPeerOverlapSamples:0,settledActorOverlapSamples:0};
@@ -108,7 +108,7 @@ export async function runTownMainIntegration(options:MainIntegrationOptions={}){
   state:start,worker:{onmessage:null,postMessage:(m:any)=>{if(m.type==='input'&&m.townLifePoses)lastContactPacket=m;const candidate=view.contactPoses??view.poses;if(m.type==='input'&&m.townLifePoses?.[0]?.authoritativeMotion===1&&view.root.visible&&candidate[0]?.authoritativeMotion===1){metrics.authoritativeContactPackets++;for(let i=0;i<100;i++)metrics.candidateContactPacketDifference=Math.max(metrics.candidateContactPacketDifference,distance(m.townLifePoses[i],candidate[i]!));}worker?.send(m);}},startup:{failed:false,playing:false,note:noop,detail:noop,fail:(...v:unknown[])=>fail('Startup failed: '+v.join(' '))},zoneEpoch:0,physicsReady:false,transitioning:true,lastPhysicsStep:-1,labActive:false,labRunning:false,coopPending:false,coop:{active:false,snapshot:null},panel:{hidden:true},document:{hidden:false},windowActive:true,
   targetPosition:new THREE.Vector3(start.player.x,6,start.player.z),physicsMotion:{grounded:true,crouched:false},activeConversation:null,combo:{phase:'idle'},guard:createGuardState(),combatHeading:0,DEFAULT_TUNING,stepFacing,guardBusy,stepGuardedWorldEncounters,consumeGuardEvents:noop,stepCombat:noop,
   guardContext:()=>({player:{...context.state.player,y:context.targetPosition.y,facing:0,grounded:context.physicsMotion.grounded,crouched:context.physicsMotion.crouched},playing:true,obstacles:[]}),
-  applyAction,encounterObjects,objects:[],worldHeight,validPlayerContact,validMovableBodies,emptyPlayerContact,playerContact:emptyPlayerContact(),movableBodies:[],contactRequestId:null,traversalBodies,traversalFromBodies,
+  applyAction,encounterObjects,objects:[],worldHeight,validPlayerContact,validMovableBodies,emptyPlayerContact,playerContact:emptyPlayerContact(),movableBodies:[],contactRequestId:null,contactPractice:false,contactEvidence:[],contactDiagnostic:'Ready',traversalBodies,traversalFromBodies,
   workshopProjection:new WORKSHOP_CONSTRUCTION_VIEW_ENGINE.Projection(),WORKSHOP_CONSTRUCTION_VIEW_ENGINE,restorationPendingCollision:null,restorationConfirmedPoint:null,restorationCollisionSignature:'',restorationCollisionRetryAt:0,pendingLabRestore:null,pendingCells:new Map(),confirmCell:()=>false,regionalLoadTarget:null,machineSignature:'',startupInitialCellCount:0,resolvePhysics:noop,resolveStartupPose:noop,updateBackend:noop,failLabRestore:fail,rejectPhysics:(e:Error)=>{throw e;},interruptLab:noop,toast:noop,syncMachine:noop,syncCavePhysics:noop,gameAudio:{cue:noop},$:()=>({style:{}}),
   townView:view,townLifeView:null,townSnapshotContinuity:new TownSnapshotContinuity(),townActivity:{pause:noop},townLifeClock,townLifePoses,copyTownLifePoses,townFrameSeconds,townClock,lastTownLifeContact:undefined,townLifeFacilities,startingTown,
   frontierRoot:{visible:false},residentVisuals:new Map(),workplaceVisuals:new Map(),sourceVisual:null,frontierTarget:new THREE.Vector3(),reducedMotion:false,
@@ -117,7 +117,7 @@ export async function runTownMainIntegration(options:MainIntegrationOptions={}){
   regionalView:{commit:noop,discard:noop,unload:noop},regionalSupplyPlan,regionalSupplyProjectBoxes,regionalTradeProjectBoxes,wildernessFeatureRemaining,
  };
  const vm=createContext(context);runInContext(source.code,vm,{timeout:1000});if(source.coupling)runInContext(source.coupling,vm,{timeout:1000});
- const generator={backend:'integration-real-generation',request:async(s:number,cx:number,cz:number)=>generateRegionalChunk(s,cx,cz),dispose:noop};
+ const generator={backend:'integration-real-generation',request:async(s:number,cx:number,cz:number)=>generateRegionalChunk(s,cx,cz,start.townLayout),dispose:noop};
  const stage=(entry:RegionalEntry,initial:boolean)=>{context.regionalPending.set(entry.key,{entry,group:{},obstacles:context.regionalPhysical(entry),projects:[],tradeTargets:[]});if(!initial)context.sendPhysics({type:'cell-load',...context.regionalPacket(entry)});};
  const stream=new RegionalStreamer(seed,generator,stage,(key,revision)=>context.sendPhysics({type:'cell-unload',key,revision}),()=> '');context.regionalStreamer=stream;
  context.streamWorld=()=>{if(context.startup.playing&&context.physicsReady)stream.update(context.targetPosition.x,context.targetPosition.z);};
@@ -126,7 +126,7 @@ export async function runTownMainIntegration(options:MainIntegrationOptions={}){
   const before=context.state.townLife;context.worker.onmessage({data:packet});const life=context.state.townLife;
   if(life?.residents!==before?.residents){lifeChanges++;for(const r of life.residents){const p=before.residents[r.index],root=lastRoots.get(r.index);authorityDistances[r.index]+=Math.max(0,r.distance-p.distance);
    if(r.status==='acting'&&root&&distance(root,r)<.9)arrivedAction.add(r.index);
-   const stage=before.navigation?.residents[r.index]?.stage,facility=p.facilityId?townLifeFacilities(seed).find(f=>f.id===p.facilityId):undefined,away=stage!==undefined&&stage>=0&&p.action&&facility?distance(p,townLifeTaskPoint(facility,p.slot,p.action,stage))>1e-6:false;
+   const stage=before.navigation?.residents[r.index]?.stage,facility=p.facilityId?townLifeFacilities(seed,start.townLayout).find(f=>f.id===p.facilityId):undefined,away=stage!==undefined&&stage>=0&&p.action&&facility?distance(p,townLifeTaskPoint(facility,p.slot,p.action,stage))>1e-6:false;
    if(p.status==='acting'&&r.status==='acting'&&p.facilityId===r.facilityId&&p.action===r.action&&r.remaining<p.remaining){if(away)metrics.taskProgressAwayFromStation++;if(root&&distance(root,r)<.9){const dt=p.remaining-r.remaining;meaningfulActionSeconds[r.index]+=dt;windowWork[r.index]+=dt;}}
    if(r.completed>p.completed){metrics.completedActions+=r.completed-p.completed;if(p.status!=='acting'||p.path.length||away)metrics.completionBeforeAuthorityArrival++;if(root&&distance(root,p)>1.2&&!arrivedAction.has(r.index))metrics.completionBeforeVisibleArrival++;}
    if(r.status!=='acting')arrivedAction.delete(r.index);
@@ -178,7 +178,7 @@ export async function runTownMainIntegration(options:MainIntegrationOptions={}){
   const state=context.state as State,roundTrip=parseSave(serializeSave(state));assert.deepEqual(roundTrip,state,'final accepted world survives save/reload');
   const packet=lastContactPacket;const progressStalledResidentIds=initialLife.residents.filter(r=>progressWindows.some((w,n)=>n>0&&w.stuck.includes(r.index)&&progressWindows[n-1]!.stuck.includes(r.index))).map(r=>r.id);
   const hashesAfter=sourceHashes(),sourceChangedDuringRun=SOURCE_FILES.filter(file=>hashesBefore[file]!==hashesAfter[file]);
-  const result={scope:MAIN_INTEGRATION_SCOPE,runtime:process.version,workerVersion,seed,cadence,fixture:options.fixture??'fresh',seconds,pausedSeconds,pauseSettlingSeconds,pauseSettlingRootDrift,resumeMaxRootStep,resumeMaxLag,actorWalk:options.actorWalk??false,playerTravelMetres:context.regionalTravel.metres,sourceHashes:hashesBefore,sourceChangedDuringRun,sourceHandlerLines:source.handler.split('\n').length,productionFrame:source.frame,initialCells,confirmedCells:context.regionalConfirmedObstacles.size,acks,receivedSnapshots,handledSnapshots,duplicateSnapshots,workerStep:lastProcessedStep,authoritySeconds:townLifeClock(state.townLife!)-initialTime,lifeChanges,renderFrames:view.stats.renderFrames,completedActions:metrics.completedActions,metrics,physicalActorGap:PHYSICAL_ACTOR_GAP,physicalPeerGap:PHYSICAL_PEER_GAP,actorContacts,physicsActorContacts,physicsMinActorGap,physicsOverlapSteps,maxPhysicsOverlapSeconds,finalMaxLag,burstEnd,burstRecoverySeconds,
+  const result={scope:MAIN_INTEGRATION_SCOPE,runtime:process.version,workerVersion,seed,townLayout:start.townLayout??null,cadence,fixture:options.fixture??'fresh',seconds,pausedSeconds,pauseSettlingSeconds,pauseSettlingRootDrift,resumeMaxRootStep,resumeMaxLag,actorWalk:options.actorWalk??false,playerTravelMetres:context.regionalTravel.metres,sourceHashes:hashesBefore,sourceChangedDuringRun,sourceHandlerLines:source.handler.split('\n').length,productionFrame:source.frame,initialCells,confirmedCells:context.regionalConfirmedObstacles.size,acks,receivedSnapshots,handledSnapshots,duplicateSnapshots,workerStep:lastProcessedStep,authoritySeconds:townLifeClock(state.townLife!)-initialTime,lifeChanges,renderFrames:view.stats.renderFrames,completedActions:metrics.completedActions,metrics,physicalActorGap:PHYSICAL_ACTOR_GAP,physicalPeerGap:PHYSICAL_PEER_GAP,actorContacts,physicsActorContacts,physicsMinActorGap,physicsOverlapSteps,maxPhysicsOverlapSeconds,finalMaxLag,burstEnd,burstRecoverySeconds,
    residentsWalkingMeaningfully:[...rootDistances].filter((v,i)=>v>=2&&span(bounds[i]!)>=1).length,residentsDoingMeaningfulTasks:[...meaningfulActionSeconds].filter(v=>v>=2).length,inactiveResidentIds:initialLife.residents.filter((_,i)=>(rootDistances[i]!<2||span(bounds[i]!)<1)&&meaningfulActionSeconds[i]!<2).map(r=>r.id),stuckResidentIds:initialLife.residents.filter((_,i)=>maxStuckSeconds[i]!>=5).map(r=>r.id),stuckEpisodes,lagEpisodes,progressStalledResidentIds,persistentLagResidentIds:initialLife.residents.filter((_,i)=>maxLagSeconds[i]!>=5).map(r=>r.id),progressWindows,
    residents:initialLife.residents.map((r,i)=>({index:i,id:r.id,rootMetres:rootDistances[i],visibleExcursionMetres:span(bounds[i]!),authorityMetres:authorityDistances[i],taskSeconds:meaningfulActionSeconds[i],walkingSeconds:walkingSeconds[i],maxStuckSeconds:maxStuckSeconds[i],maxLag:peakLag[i]})),workerContactSamples:contactPackets.length,lastContactPacketAuthoritative:!!packet?.townLifePoses?.every((p:any)=>p.authoritativeMotion===1),finalState:state};
   return result;

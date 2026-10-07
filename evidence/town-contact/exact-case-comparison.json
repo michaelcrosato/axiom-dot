@@ -1,0 +1,21 @@
+{
+  "orderedAggregateNamesExactlyMatchInventory": true,
+  "aggregateCases": 1913,
+  "registeredCases": 1913,
+  "fileCount": 276,
+  "excludedFileCount": 13,
+  "sequentialCaseIds": true,
+  "aggregateFailures": [
+    "pre-upgrade and pre-contact checkpoints retain exact original bytes across fresh epochs",
+    "actual main snapshot handler does not tick, move, save or consume controls during renderer warmup"
+  ],
+  "rerunFiles": [
+    "tests/session-reset.test.ts",
+    "tests/startup-physics.test.ts"
+  ],
+  "rerunOrderedNamesExactlyMatchInventorySubset": true,
+  "rerunCases": 29,
+  "allAggregateFailuresPassedOnRerun": true,
+  "noSkippedCancelledOrTodo": true,
+  "cleanAggregateRerun": false
+}

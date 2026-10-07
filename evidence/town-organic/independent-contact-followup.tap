@@ -1,0 +1,318 @@
+TAP version 13
+# Subtest: contact contract rejects nonfinite and duplicate movable data
+ok 1 - contact contract rejects nonfinite and duplicate movable data
+  ---
+  duration_ms: 1.230955
+  type: 'test'
+  ...
+# Subtest: production wall evidence uses real normals, obstruction and reachable palms; release clears anchors
+ok 2 - production wall evidence uses real normals, obstruction and reachable palms; release clears anchors
+  ---
+  duration_ms: 465.075431
+  type: 'test'
+  ...
+# Subtest: deliberate grip drives bounded actual crate push/pull and respects solid backing
+ok 3 - deliberate grip drives bounded actual crate push/pull and respects solid backing
+  ---
+  duration_ms: 1041.012891
+  type: 'test'
+  ...
+# Subtest: ledge hang is deliberate, uses real supports, drops on crouch and climbs on a fresh jump
+ok 4 - ledge hang is deliberate, uses real supports, drops on crouch and climbs on a fresh jump
+  ---
+  duration_ms: 757.186702
+  type: 'test'
+  ...
+# Subtest: crate grip requires real proximity, two reachable palms, line of sight and support
+ok 5 - crate grip requires real proximity, two reachable palms, line of sight and support
+  ---
+  duration_ms: 651.338316
+  type: 'test'
+  ...
+# Subtest: pulling is jointly swept against player backing; ground-level boxes move without penetrating floor
+ok 6 - pulling is jointly swept against player backing; ground-level boxes move without penetrating floor
+  ---
+  duration_ms: 1359.331917
+  type: 'test'
+  ...
+# Subtest: supports at a cliff stop a crate before it becomes a hovering bridge
+ok 7 - supports at a cliff stop a crate before it becomes a hovering bridge
+  ---
+  duration_ms: 1093.51752
+  type: 'test'
+  ...
+# Subtest: online and default-off worlds suppress grip/hang while retaining real wall contact
+ok 8 - online and default-off worlds suppress grip/hang while retaining real wall contact
+  ---
+  duration_ms: 995.888363
+  type: 'test'
+  ...
+# Subtest: epochs, teleport, pause, release and online authority discard old interaction state
+ok 9 - epochs, teleport, pause, release and online authority discard old interaction state
+  ---
+  duration_ms: 1345.411508
+  type: 'test'
+  ...
+# Subtest: a ceiling or missing paired top support prevents hang, and a new roof rejects a climb
+ok 10 - a ceiling or missing paired top support prevents hang, and a new roof rejects a climb
+  ---
+  duration_ms: 2191.266671
+  type: 'test'
+  ...
+# Subtest: saved x/z inside crate resolves onto its clear top or a clear side under a low roof
+ok 11 - saved x/z inside crate resolves onto its clear top or a clear side under a low roof
+  ---
+  duration_ms: 589.348237
+  type: 'test'
+  ...
+# Subtest: manual replay is deterministic and one-shot deliberate ledge action survives an input pulse
+ok 12 - manual replay is deterministic and one-shot deliberate ledge action survives an input pulse
+  ---
+  duration_ms: 1136.497629
+  type: 'test'
+  ...
+# Subtest: explicit release drops a hang and paused grab events cannot leak through a menu
+ok 13 - explicit release drops a hang and paused grab events cannot leak through a menu
+  ---
+  duration_ms: 994.571016
+  type: 'test'
+  ...
+# Subtest: pause freezes committed hang/grip and resumes them without retaining pending actions
+ok 14 - pause freezes committed hang/grip and resumes them without retaining pending actions
+  ---
+  duration_ms: 1085.198395
+  type: 'test'
+  ...
+# Subtest: grip request receipt appears only on a snapshot after the exact request is consumed
+ok 15 - grip request receipt appears only on a snapshot after the exact request is consumed
+  ---
+  duration_ms: 628.111627
+  type: 'test'
+  ...
+# Subtest: worker mantle visits every phase and transfers real support before releasing both hands
+ok 16 - worker mantle visits every phase and transfers real support before releasing both hands
+  ---
+  duration_ms: 1071.240253
+  type: 'test'
+  ...
+# Subtest: mantle is a bounded nonballistic root transfer with independently clear body and capsule
+ok 17 - mantle is a bounded nonballistic root transfer with independently clear body and capsule
+  ---
+  duration_ms: 1230.407513
+  type: 'test'
+  ...
+# Subtest: pause freezes a compact mantle and its resumed sequence is deterministic
+ok 18 - pause freezes a compact mantle and its resumed sequence is deterministic
+  ---
+  duration_ms: 1504.884782
+  type: 'test'
+  ...
+# Subtest: release during brace keeps the actual body continuous and collision safe
+ok 19 - release during brace keeps the actual body continuous and collision safe
+  ---
+  duration_ms: 1081.547107
+  type: 'test'
+  ...
+# Subtest: crouch during brace keeps the actual body continuous and collision safe
+ok 20 - crouch during brace keeps the actual body continuous and collision safe
+  ---
+  duration_ms: 898.677631
+  type: 'test'
+  ...
+# Subtest: release during compact pull keeps the actual body continuous and collision safe
+ok 21 - release during compact pull keeps the actual body continuous and collision safe
+  ---
+  duration_ms: 1117.808215
+  type: 'test'
+  ...
+# Subtest: crouch during compact pull keeps the actual body continuous and collision safe
+ok 22 - crouch during compact pull keeps the actual body continuous and collision safe
+  ---
+  duration_ms: 1119.834164
+  type: 'test'
+  ...
+# Subtest: release during knee keeps the actual body continuous and collision safe
+ok 23 - release during knee keeps the actual body continuous and collision safe
+  ---
+  duration_ms: 1007.528895
+  type: 'test'
+  ...
+# Subtest: crouch during knee keeps the actual body continuous and collision safe
+ok 24 - crouch during knee keeps the actual body continuous and collision safe
+  ---
+  duration_ms: 1281.043925
+  type: 'test'
+  ...
+# Subtest: release during transfer keeps the actual body continuous and collision safe
+ok 25 - release during transfer keeps the actual body continuous and collision safe
+  ---
+  duration_ms: 1173.681073
+  type: 'test'
+  ...
+# Subtest: crouch during transfer keeps the actual body continuous and collision safe
+ok 26 - crouch during transfer keeps the actual body continuous and collision safe
+  ---
+  duration_ms: 912.983169
+  type: 'test'
+  ...
+# Subtest: release during final stand keeps the actual body continuous and collision safe
+ok 27 - release during final stand keeps the actual body continuous and collision safe
+  ---
+  duration_ms: 821.889115
+  type: 'test'
+  ...
+# Subtest: crouch during final stand keeps the actual body continuous and collision safe
+ok 28 - crouch during final stand keeps the actual body continuous and collision safe
+  ---
+  duration_ms: 869.893219
+  type: 'test'
+  ...
+# Subtest: removing the supporting cell during transfer releases safely rather than finishing on air
+ok 29 - removing the supporting cell during transfer releases safely rather than finishing on air
+  ---
+  duration_ms: 519.685079
+  type: 'test'
+  ...
+# Subtest: a roof streamed in during the compact transfer blocks growth and cannot be tunneled through
+ok 30 - a roof streamed in during the compact transfer blocks growth and cannot be tunneled through
+  ---
+  duration_ms: 697.581608
+  type: 'test'
+  ...
+# Subtest: axis-rotated approaches and reachable ledge heights preserve the mantle safety contract
+ok 31 - axis-rotated approaches and reachable ledge heights preserve the mantle safety contract
+  ---
+  duration_ms: 866.839239
+  type: 'test'
+  ...
+# Subtest: default-off and online worlds retain ordinary jumps without explicit mantle traversal
+ok 32 - default-off and online worlds retain ordinary jumps without explicit mantle traversal
+  ---
+  duration_ms: 360.074018
+  type: 'test'
+  ...
+# Subtest: a lip that fits the original catch cannot claim wider later palm supports outside its edges
+ok 33 - a lip that fits the original catch cannot claim wider later palm supports outside its edges
+  ---
+  duration_ms: 413.134032
+  type: 'test'
+  ...
+# Subtest: cancel at 0.3 fully recovers to standing with matching intermediate visual stance
+ok 34 - cancel at 0.3 fully recovers to standing with matching intermediate visual stance
+  ---
+  duration_ms: 465.680477
+  type: 'test'
+  ...
+# Subtest: cancel at 0.5 fully recovers to standing with matching intermediate visual stance
+ok 35 - cancel at 0.5 fully recovers to standing with matching intermediate visual stance
+  ---
+  duration_ms: 395.310975
+  type: 'test'
+  ...
+# Subtest: cancel at 0.68 fully recovers to standing with matching intermediate visual stance
+ok 36 - cancel at 0.68 fully recovers to standing with matching intermediate visual stance
+  ---
+  duration_ms: 382.870777
+  type: 'test'
+  ...
+# Subtest: cancel at 0.94 fully recovers to standing with matching intermediate visual stance
+ok 37 - cancel at 0.94 fully recovers to standing with matching intermediate visual stance
+  ---
+  duration_ms: 439.512927
+  type: 'test'
+  ...
+# Subtest: crouch can be re-pressed halfway through recovery and released again
+ok 38 - crouch can be re-pressed halfway through recovery and released again
+  ---
+  duration_ms: 532.68473
+  type: 'test'
+  ...
+# Subtest: fresh yards are seeded, bounded and moved crates roundtrip while old occupied geometry stays absent
+ok 39 - fresh yards are seeded, bounded and moved crates roundtrip while old occupied geometry stays absent
+  ---
+  duration_ms: 1272.901032
+  type: 'test'
+  ...
+# Subtest: yard solids and every allowed crate location stay beyond all existing buildings and resident navigation domain
+ok 40 - yard solids and every allowed crate location stay beyond all existing buildings and resident navigation domain
+  ---
+  duration_ms: 101.908763
+  type: 'test'
+  ...
+# Subtest: production worker reverses the supported mantle into a hang, holds on button release and drops on explicit release
+ok 41 - production worker reverses the supported mantle into a hang, holds on button release and drops on explicit release
+  ---
+  duration_ms: 2189.716716
+  type: 'test'
+  ...
+# Subtest: new roof blocks descent acquisition and an interrupted reverse mantle safely recovers
+ok 42 - new roof blocks descent acquisition and an interrupted reverse mantle safely recovers
+  ---
+  duration_ms: 725.858119
+  type: 'test'
+  ...
+# (node:7770) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: disposable course accepts actual sandbox grip and jump landing while online keeps authority gate
+ok 43 - disposable course accepts actual sandbox grip and jump landing while online keeps authority gate
+  ---
+  duration_ms: 1481.407382
+  type: 'test'
+  ...
+# Subtest: actual main contact-course entry clears old combat aids, gates transitions and resets bounded evidence
+ok 44 - actual main contact-course entry clears old combat aids, gates transitions and resets bounded evidence
+  ---
+  duration_ms: 25.614227
+  type: 'test'
+  ...
+# Subtest: streamed worker respects another actor in landing clearance and paired crate travel
+ok 45 - streamed worker respects another actor in landing clearance and paired crate travel
+  ---
+  duration_ms: 2022.49707
+  type: 'test'
+  ...
+# Subtest: low crate uses supported hand-climb and reverse ground descent with safe release and blocked head clearance
+ok 46 - low crate uses supported hand-climb and reverse ground descent with safe release and blocked head clearance
+  ---
+  duration_ms: 2389.314722
+  type: 'test'
+  ...
+# Subtest: optional prop state preserves old progress and roundtrips independently of all resource ledgers
+ok 47 - optional prop state preserves old progress and roundtrips independently of all resource ledgers
+  ---
+  duration_ms: 374.97369
+  type: 'test'
+  ...
+# Subtest: first persisted contact state keeps immutable exact pre-change save bytes through later saves
+ok 48 - first persisted contact state keeps immutable exact pre-change save bytes through later saves
+  ---
+  duration_ms: 10.024146
+  type: 'test'
+  ...
+# Subtest: camp contact props stay beside the construction grid and on the existing leveled pad across seeds
+ok 49 - camp contact props stay beside the construction grid and on the existing leveled pad across seeds
+  ---
+  duration_ms: 792.941434
+  type: 'test'
+  ...
+# Subtest: context actions occupy existing slot and never offer online grip or distant crate hands
+ok 50 - context actions occupy existing slot and never offer online grip or distant crate hands
+  ---
+  duration_ms: 4.008784
+  type: 'test'
+  ...
+# Subtest: backward pulling reverses supported local foot travel while keeping facing and total distance
+ok 51 - backward pulling reverses supported local foot travel while keeping facing and total distance
+  ---
+  duration_ms: 10.77824
+  type: 'test'
+  ...
+1..51
+# tests 51
+# suites 0
+# pass 51
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 19790.069848

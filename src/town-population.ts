@@ -16,7 +16,7 @@ export function validateTownTuning(v:unknown):TownTuning{if(!v||typeof v!=='obje
 export class TownPopulation{
  readonly residents;readonly plan;readonly poses:ReturnType<typeof townResidentPose>[];private near:number[]=[];private nearAt=-Infinity;private farAt=-Infinity;private sampleClock=-Infinity;activeCount=0;visibleCount=0;updates=0;
  readonly seed:number;
- constructor(seed:number){this.seed=seed;this.residents=townResidents(seed);this.plan=startingTown(seed);this.poses=this.residents.map(r=>townResidentPose(r,0,this.plan));}
+ constructor(seed:number,townLayout?:import('./starting-town.ts').TownLayout){this.seed=seed;this.residents=townResidents(seed);this.plan=startingTown(seed,townLayout);this.poses=this.residents.map(r=>townResidentPose(r,0,this.plan));}
  isActive(index:number){return this.near.includes(index);}
  update(elapsed:number,observer:{x:number;z:number},tuning:TownTuning=DEFAULT_TOWN_TUNING,force=false){
   if(!Number.isFinite(elapsed)||elapsed<0)return false;

@@ -1,0 +1,86 @@
+{
+  "baselineCases": 1906,
+  "finalCases": 1925,
+  "baselineFiles": 275,
+  "finalFiles": 277,
+  "retained": 1906,
+  "missing": [],
+  "added": [
+    [
+      "tests/session-reset.test.ts",
+      "restart createOrganicRegionalState keeps exact foundation and seed, clearing all progress"
+    ],
+    [
+      "tests/town-contact-extension.test.ts",
+      "fresh yards are seeded, bounded and moved crates roundtrip while old occupied geometry stays absent"
+    ],
+    [
+      "tests/town-contact-extension.test.ts",
+      "yard solids and every allowed crate location stay beyond all existing buildings and resident navigation domain"
+    ],
+    [
+      "tests/town-contact-extension.test.ts",
+      "production worker reverses the supported mantle into a hang, holds on button release and drops on explicit release"
+    ],
+    [
+      "tests/town-contact-extension.test.ts",
+      "new roof blocks descent acquisition and an interrupted reverse mantle safely recovers"
+    ],
+    [
+      "tests/town-contact-extension.test.ts",
+      "disposable course accepts actual sandbox grip and jump landing while online keeps authority gate"
+    ],
+    [
+      "tests/town-contact-extension.test.ts",
+      "actual main contact-course entry clears old combat aids, gates transitions and resets bounded evidence"
+    ],
+    [
+      "tests/town-contact-extension.test.ts",
+      "streamed worker respects another actor in landing clearance and paired crate travel"
+    ],
+    [
+      "tests/town-contact-extension.test.ts",
+      "low crate uses supported hand-climb and reverse ground descent with safe release and blocked head clearance"
+    ],
+    [
+      "tests/town-main-integration.test.ts",
+      "real worker/main/matrices sustain 120s 5fps fresh organic"
+    ],
+    [
+      "tests/town-main-integration.test.ts",
+      "real worker/main/matrices sustain 120s 15fps fresh organic"
+    ],
+    [
+      "tests/town-main-integration.test.ts",
+      "real worker/main/matrices sustain 120s 60fps fresh organic"
+    ],
+    [
+      "tests/town-main-integration.test.ts",
+      "real worker/main/matrices sustain 125s jitterfps fresh organic with jitter pause and burst recovery"
+    ],
+    [
+      "tests/town-organic-layout.test.ts",
+      "versioned organic parcels preserve exact legacy manifests, 100 identities and all service work/egress envelopes"
+    ],
+    [
+      "tests/town-organic-layout.test.ts",
+      "organic and occupied legacy slots coexist; strict imports retain layout, moved crates, households and current routes"
+    ],
+    [
+      "tests/town-organic-layout.test.ts",
+      "regional chunks, world heights and server collision resolve the same pinned parcel plan; stale layout results fail"
+    ],
+    [
+      "tests/town-organic-layout.test.ts",
+      "actual regional generation worker reloads both layout identities without stale geometry reuse"
+    ],
+    [
+      "tests/town-organic-layout.test.ts",
+      "organic authority achieves journeys and work for 100 residents; source or emitted matrices remain live at variable FPS"
+    ],
+    [
+      "tests/town-ui.test.ts",
+      "organic town lab stages a bounded recipe, resets real plan consumers, exports identity and discards unapplied layout"
+    ]
+  ]
+}

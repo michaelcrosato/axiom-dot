@@ -1,11 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {createState,createConnectedState,createRegionalState,applyAction,parseSave,serializeSave,validateSave,worldEndpoints,type State} from '../src/world.ts';
+import {createState,createConnectedState,createRegionalState as freshRegionalState,applyAction,parseSave,serializeSave,validateSave,worldEndpoints,type State} from '../src/world.ts';
 import {worldHeight} from '../src/generation.ts';
 import {REGION_BOUND} from '../src/regional-world.ts';
 import {regionalBodyCenterBound,REGIONAL_PLAYER_SKIN} from '../src/regional-bounds.ts';
 import {traversalBodies,traversalFromBodies,validTraversal,SURVEY_CRATE_HALF,SURVEY_CRATE_ID} from '../src/traversal-world.ts';
 import {saveKey,storeSession,loadSavedWorld} from '../src/session.ts';
+// Retain the historical one-crate regional-save contract; fresh v2 worlds have separate coverage.
+function createRegionalState(seed:number){const s=freshRegionalState(seed);delete s.traversal;return s;}
 class Store{data=new Map<string,string>();getItem(k:string){return this.data.get(k)??null;}setItem(k:string,v:string){this.data.set(k,v);}}
 
 test('the single regional survey crate saves and reloads beyond 80m independently of player position and resources',()=>{

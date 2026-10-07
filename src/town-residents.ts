@@ -1,3 +1,5 @@
+import {townRoadRoute} from './town-road-route.ts';
+import type {TownPlan} from './starting-town.ts';
 /** Pure, bounded population model. Existing named quest workers are not included. */
 import {seedSample} from './procedural.ts';
 
@@ -66,6 +68,7 @@ export interface TownResident {
   readonly phaseOffset: number;
 }
 export interface TownResidentPlan {
+  readonly layoutVersion?:number;
   readonly homes: readonly {readonly entry: Readonly<{x: number; z: number}>}[];
   readonly shops: readonly {readonly entry: Readonly<{x: number; z: number}>}[];
   readonly center: Readonly<{x: number; z: number}>;
@@ -357,7 +360,7 @@ function validatePlan(plan: TownResidentPlan): void {
     }
     const dx = Math.abs(entry.x - plan.center.x);
     const dz = Math.abs(entry.z - plan.center.z);
-    if (dx > 44 || (i < TOWN_HOUSE_COUNT ? Math.abs(dz - (i < 20 ? 24 : 44)) > 1e-6 : dz > 1e-6)) {
+    if (plan.layoutVersion===3 ? dx>44||dz>47.9 : dx > 44 || (i < TOWN_HOUSE_COUNT ? Math.abs(dz - (i < 20 ? 24 : 44)) > 1e-6 : dz > 1e-6)) {
       throw new RangeError('Town entries must meet the horizontal street layout contract.');
     }
   }
@@ -428,13 +431,18 @@ function itineraryFor(resident: TownResident, plan: TownResidentPlan): Itinerary
   const squareColumnX = (squareColumn < 25 ? squareColumn - 25 : squareColumn - 24) * 1.7;
   const square = Object.freeze({x: plan.center.x + squareColumnX,
     z: plan.center.z - 1.3 - Math.floor(squareSlot / 50) * 0.8});
+  const route=(from:Point,roadFrom:number,to:Point,roadTo:number)=>{
+    if(plan.layoutVersion!==3)return streetRoute(from,roadFrom,to,roadTo,plan.center.x,plan.center.z,resident);
+    const path=townRoadRoute(plan as TownPlan,from,to);if(!path)throw Error('Unreachable organic resident itinerary');
+    const points=[from,...path],lengths=path.map((p,i)=>Math.hypot(p.x-points[i]!.x,p.z-points[i]!.z));return {points,lengths,length:lengths.reduce((a,b)=>a+b,0)};
+  };
   const itinerary: Itinerary = Object.freeze({
     home, work, square,
     homeFacing: homeSide < 0 ? 0 : Math.PI,
     squareFacing: Math.atan2(plan.center.x - square.x, plan.center.z - square.z),
-    toWork: streetRoute(home, homeEntry.z, work, plan.center.z, plan.center.x, plan.center.z, resident),
-    toSquare: streetRoute(work, plan.center.z, square, plan.center.z, plan.center.x, plan.center.z, resident),
-    toHome: streetRoute(square, plan.center.z, home, homeEntry.z, plan.center.x, plan.center.z, resident),
+    toWork: route(home, homeEntry.z, work, plan.center.z),
+    toSquare: route(work, plan.center.z, square, plan.center.z),
+    toHome: route(square, plan.center.z, home, homeEntry.z),
   });
   residents.set(resident, itinerary);
   return itinerary;

@@ -1,5 +1,5 @@
 import {townPlayerContactRecovery} from './town-player-contact.ts';
-import {TOWN_CENTER,TOWN_BOUNDS} from './starting-town.ts';
+import {validTownLayout,type TownLayout,TOWN_CENTER,TOWN_BOUNDS} from './starting-town.ts';
 import {TownCrowd,slideTownCrowd,type TownActor} from './town-crowd.ts';
 import type {TownResidentPose} from './town-residents.ts';
 import {validTownLifePoses,copyTownLifePoses,sameTownLifePoses} from './town-life-projection.ts';
@@ -14,9 +14,9 @@ interface Obstacle { x:number;z:number;hx:number;hz:number;hy:number;y?:number;c
 interface CellBounds {minX:number;maxX:number;minZ:number;maxZ:number}
 interface InitialCell {key:string;revision:number;obstacles:Obstacle[];terrain?:Terrain;bounds?:CellBounds}
 interface Terrain {vertices:number[];indices:number[];bound:number;step?:number}
-interface TownContext {seed:number;time:number;selfId:string;actors:TownActor[];lifePoses?:readonly TownResidentPose[]}
+interface TownContext {townLayout?:TownLayout;seed:number;time:number;selfId:string;actors:TownActor[];lifePoses?:readonly TownResidentPose[]}
 const validTownActors=(v:unknown):v is TownActor[]=>Array.isArray(v)&&v.length<=8&&v.every(a=>a&&typeof a.id==='string'&&a.id.length<=160&&[a.x,a.z,a.feetY??6].every(Number.isFinite));
-const validTown=(v:TownContext)=>v&&Number.isInteger(v.seed)&&v.seed>=0&&v.seed<=0xffffffff&&Number.isFinite(v.time)&&v.time>=0&&typeof v.selfId==='string'&&v.selfId.length<=160&&validTownActors(v.actors)&&(v.lifePoses===undefined||validTownLifePoses(v.lifePoses));
+const validTown=(v:TownContext)=>v&&(v.townLayout===undefined||validTownLayout(v.townLayout,v.seed))&&Number.isInteger(v.seed)&&v.seed>=0&&v.seed<=0xffffffff&&Number.isFinite(v.time)&&v.time>=0&&typeof v.selfId==='string'&&v.selfId.length<=160&&validTownActors(v.actors)&&(v.lifePoses===undefined||validTownLifePoses(v.lifePoses));
 let townCrowd:TownCrowd|undefined,townTime=0,townAnchor=0,townAnchorStep=0,townOnline=false,townSelfId='solo',townActors:TownActor[]=[];
 let townLifePoses:readonly TownResidentPose[]|undefined,lastTownContactPoses:readonly TownResidentPose[]|undefined;
 interface WorldMessage {town?:TownContext;x:number;z:number;y?:number;obstacles:Obstacle[];initialCells?:InitialCell[];epoch?:number;bound?:number;terrain?:Terrain;streamedTerrain?:boolean;sandbox?:boolean;checkpoint?:Checkpoint;movable?:MovableBody[];interactionEnabled?:boolean;online?:boolean;manual?:boolean;startPaused?:boolean}
@@ -228,7 +228,7 @@ function replaceWorld(m:WorldMessage){
  // allocation or spawn resolution fails, restore its exact references and motion.
  const previous={townCrowd,townTime,townAnchor,townAnchorStep,townOnline,townSelfId,townActors,townLifePoses,lastTownContactPoses,world,floor,body,collider,controller,terrain,streamedTerrain,streamBlocked,pendingContactRequestId,contactRequestId,contacts,grabHeld,grabActive,grabPulse,manual,input,motor,crouched,stance,traversalRecovery,ready,initializing,epoch,vy,grounded,coyote,jumpBuffer,jumpHeld,landing,landingSpeed,labPlayback,onlineRevision,onlineJumpId,onlineLandingId,currentBound,sandbox,tuning,simulationStep,cells,cellRevisions,cellTerrains,pendingUnloads,perimeterColliders};let candidate:RAPIER.World|undefined;
  try{
- townCrowd=m.town?new TownCrowd(m.town.seed):undefined;townTime=townAnchor=m.town?.time??0;townAnchorStep=simulationStep;townOnline=m.online===true;townSelfId=m.town?.selfId??'solo';townActors=m.town?.actors??[];townLifePoses=m.town?.lifePoses?copyTownLifePoses(m.town.lifePoses):undefined;lastTownContactPoses=undefined;
+ townCrowd=m.town?new TownCrowd(m.town.seed,m.town.townLayout):undefined;townTime=townAnchor=m.town?.time??0;townAnchorStep=simulationStep;townOnline=m.online===true;townSelfId=m.town?.selfId??'solo';townActors=m.town?.actors??[];townLifePoses=m.town?.lifePoses?copyTownLifePoses(m.town.lifePoses):undefined;lastTownContactPoses=undefined;
  candidate=new RAPIER.World({x:0,y:-GRAVITY,z:0});
  ready=false;labPlayback=null;manual=m.manual===true;if(manual)simulationStep=0;townAnchorStep=simulationStep;terrain=m.terrain;streamedTerrain=m.streamedTerrain===true;streamBlocked=false;sandbox=m.sandbox===true;tuning={...DEFAULT_TUNING};resetMotion(false);if(sandbox||m.startPaused===true)input={...neutral(),paused:true};cells=new Map();cellTerrains=new Map();pendingUnloads=new Map();cellRevisions=new Map();perimeterColliders=new Set();epoch=m.epoch??0;
  world=candidate;world.timestep=DT;
@@ -243,7 +243,8 @@ function replaceWorld(m:WorldMessage){
  if(terrain){let low=Infinity,high=-Infinity;for(let i=1;i<terrain.vertices.length;i+=3){low=Math.min(low,terrain.vertices[i]!);high=Math.max(high,terrain.vertices[i]!);}wallY=(low+high)/2;wallHalf=(high-low)/2+10;}
  for(const o of [{x:bound+1,z:0,hx:1,hz:bound+2},{x:-bound-1,z:0,hx:1,hz:bound+2},{x:0,z:bound+1,hx:bound+2,hz:1},{x:0,z:-bound-1,hx:bound+2,hz:1}])perimeterColliders.add(world.createCollider(RAPIER.ColliderDesc.cuboid(o.hx,wallHalf,o.hz).setTranslation(o.x,wallY,o.z)).handle);
  const savedStart=m.checkpoint??m,start=streamedTerrain?{x:clampRegionalCoordinate(savedStart.x,bound),z:clampRegionalCoordinate(savedStart.z,bound)}:savedStart;body=world.createRigidBody(RAPIER.RigidBodyDesc.kinematicPositionBased().setTranslation(start.x,normalizedSpawnElevation(savedStart.x,savedStart.z,start.x,start.z,m.checkpoint?.feetY??m.y)+STAND_HALF+RADIUS+SKIN,start.z));collider=world.createCollider(RAPIER.ColliderDesc.capsule(STAND_HALF,RADIUS),body);
- contacts=new ContactPhysics(world,body,collider,m.movable??[],m.interactionEnabled===true&&m.online!==true&&!sandbox,streamedTerrain?{
+ contacts=new ContactPhysics(world,body,collider,m.movable??[],m.interactionEnabled===true&&m.online!==true,streamedTerrain?{
+  bodyClear:(p,hx,hy,hz)=>{const actors=[...(lastTownContactPoses??townLifePoses??[]).map(a=>({x:a.x,z:a.z,feetY:6})),...townActors.filter(a=>a.id!==townSelfId)];return actors.every(a=>Math.abs(p.y-((a.feetY??6)+.95))>=hy+.95||Math.abs(p.x-a.x)>=hx+.36||Math.abs(p.z-a.z)>=hz+.36);},
   supportAvailable:(spec,p)=>[-1,0,1].every(dx=>[-1,0,1].every(dz=>Number.isFinite(sampleStreamedElevation(p.x+dx*(spec.hx+SKIN),p.z+dz*(spec.hz+SKIN))))),
   constrainPosition:(spec,p)=>{const bx=regionalBodyCenterBound(bound,spec.hx),bz=regionalBodyCenterBound(bound,spec.hz);return {x:Math.max(-bx,Math.min(bx,p.x)),y:p.y,z:Math.max(-bz,Math.min(bz,p.z))};},
  }:undefined);
@@ -340,7 +341,7 @@ self.onmessage=async(e:MessageEvent)=>{const m=e.data;if(!m||typeof m!=='object'
  }
  }catch(error){ready=false;if(m.type==='init')initializing=false;self.postMessage({type:'error',epoch,message:error instanceof Error?error.message:'Physics failure'});}};
 function snapshot(vx:number,vz:number){
- const p=body.translation(),feetY=p.y-halfHeight()-RADIUS-SKIN;self.postMessage({type:'snapshot',epoch,step:simulationStep,sandbox,...(townCrowd?{town:{time:townTime,roster:100,rigidBodies:0,source:townLifePoses?'life':'routine',...(lastTownContactPoses?{contactPoses:lastTownContactPoses}:{})}}:{}),playback:labPlayback?{...labPlayback}:null,x:p.x,y:p.y,z:p.z,feetY:hasTerrain()?feetY:Math.max(0,feetY),vx,vz,vy:input.paused?0:vy,grounded,crouched,stance,sliding:motor.slide>0,landing:landing/LANDING_TIME,landingSpeed,contact:contacts.contact,contactRequestId,movable:contacts.snapshot(),...(streamedTerrain?{streaming:{activeCells:cells.size,terrainCells:cellTerrains.size,cellColliders:cellColliderCount(),totalColliders:world.colliders.len(),revisionKeys:cellRevisions.size,pendingUnloads:pendingUnloads.size,blocked:streamBlocked,maxCells:MAX_ACTIVE_CELLS,maxColliders:MAX_CELL_COLLIDERS,maxHistory:MAX_CELL_HISTORY}}:{})});
+ const p=body.translation(),feetY=p.y-halfHeight()-RADIUS-SKIN;self.postMessage({type:'snapshot',epoch,step:simulationStep,sandbox,...(townCrowd?{town:{time:townTime,roster:100,rigidBodies:0,source:townLifePoses?'life':'routine',...(lastTownContactPoses?{contactPoses:lastTownContactPoses}:{})}}:{}),playback:labPlayback?{...labPlayback}:null,x:p.x,y:p.y,z:p.z,feetY:hasTerrain()?feetY:Math.max(0,feetY),vx,vz,vy:input.paused?0:vy,grounded,crouched,stance,sliding:motor.slide>0,landing:landing/LANDING_TIME,landingSpeed,contact:contacts.contact,contactDiagnostic:contacts.diagnostic,contactRequestId,movable:contacts.snapshot(),...(streamedTerrain?{streaming:{activeCells:cells.size,terrainCells:cellTerrains.size,cellColliders:cellColliderCount(),totalColliders:world.colliders.len(),revisionKeys:cellRevisions.size,pendingUnloads:pendingUnloads.size,blocked:streamBlocked,maxCells:MAX_ACTIVE_CELLS,maxColliders:MAX_CELL_COLLIDERS,maxHistory:MAX_CELL_HISTORY}}:{})});
 }
 export function physicsTick(){
  if(!ready)return;

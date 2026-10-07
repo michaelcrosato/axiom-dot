@@ -1,0 +1,40 @@
+TAP version 13
+# Subtest: versioned organic parcels preserve exact legacy manifests, 100 identities and all service work/egress envelopes
+ok 1 - versioned organic parcels preserve exact legacy manifests, 100 identities and all service work/egress envelopes
+  ---
+  duration_ms: 3076.293816
+  type: 'test'
+  ...
+# Subtest: organic and occupied legacy slots coexist; strict imports retain layout, moved crates, households and current routes
+ok 2 - organic and occupied legacy slots coexist; strict imports retain layout, moved crates, households and current routes
+  ---
+  duration_ms: 2188.051137
+  type: 'test'
+  ...
+# Subtest: regional chunks, world heights and server collision resolve the same pinned parcel plan; stale layout results fail
+ok 3 - regional chunks, world heights and server collision resolve the same pinned parcel plan; stale layout results fail
+  ---
+  duration_ms: 717.297743
+  type: 'test'
+  ...
+# Subtest: actual regional generation worker reloads both layout identities without stale geometry reuse
+ok 4 - actual regional generation worker reloads both layout identities without stale geometry reuse
+  ---
+  duration_ms: 597.359575
+  type: 'test'
+  ...
+# Subtest: organic authority achieves journeys and work for 100 residents; source or emitted matrices remain live at variable FPS
+ok 5 - organic authority achieves journeys and work for 100 residents; source or emitted matrices remain live at variable FPS
+  ---
+  duration_ms: 12475.812326
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 19681.602806

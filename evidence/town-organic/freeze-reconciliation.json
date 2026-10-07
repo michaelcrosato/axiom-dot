@@ -1,0 +1,10 @@
+{
+  "changedBetweenRuns": [
+    "tests/generation-main-lifecycle.test.ts"
+  ],
+  "productionSourceChanged": false,
+  "buildChanged": false,
+  "reason": "Startup ordering assertion now names the new organic constructor; all ordering and bounded warmup checks retained.",
+  "focusedResult": "3/3; no skipped/cancelled cases",
+  "firstRunContinuesNaturally": true
+}

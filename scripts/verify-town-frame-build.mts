@@ -4,7 +4,7 @@ import {TownActivityMonitor} from '../src/town-activity.ts';
 import {steadyCase,worldCase,assertSteadyCase,assertWorldCase,assertMainFrameContract,TEMPORAL_SCOPE} from '../tests/helpers/town-frame-cases.ts';
 const root=resolve(import.meta.dirname,'..'),assets=resolve(root,'dist/client/assets'),files=readdirSync(assets);
 let emittedView:typeof createTownView|undefined,emittedSeconds:typeof townFrameSeconds|undefined,helperFile='',helperExport='',emittedContinuity:typeof TownSnapshotContinuity|undefined,emittedMonitor:typeof TownActivityMonitor|undefined;
-for(const file of files.filter(f=>/^(?:town-(?:projection|director|life|activity)|world)-.*\.js$/.test(f))){
+for(const file of files.filter(f=>/^(?:town-(?:projection|director|life|activity)|world|campaign-guidance-engine)-.*\.js$/.test(f))){
  const module=await import(pathToFileURL(resolve(assets,file)).href);
  for(const [key,value] of Object.entries(module) as [string,any][]){
   if(typeof value==='function'&&value.toString().includes('hearthmere-residents'))emittedView=value;

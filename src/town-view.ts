@@ -11,8 +11,8 @@ export function townConversationPose(pose:CrowdPose,target:{x:number;z:number},o
  return {...pose,facing:Math.atan2(target.x-pose.x,target.z-pose.z),...(!online?{speed:0,moving:false,activity:'meeting neighbors' as const}:{})};
 }
 /** Six geometry buckets, one material, articulated instances; zero per-person scene graphs/bodies. */
-export function createTownView(seed:number){
- const population=new TownPopulation(seed),crowd=new TownCrowd(seed),actorProjection=new TownCrowd(seed),clock=new TownPresentationClock(),motion=new TownRenderMotion(),lifeBuffer=new TownLifeRenderBuffer(),root=new THREE.Group();root.name='hearthmere-residents';
+export function createTownView(seed:number,townLayout?:import('./starting-town.ts').TownLayout){
+ const population=new TownPopulation(seed,townLayout),crowd=new TownCrowd(seed,townLayout),actorProjection=new TownCrowd(seed,townLayout),clock=new TownPresentationClock(),motion=new TownRenderMotion(),lifeBuffer=new TownLifeRenderBuffer(),root=new THREE.Group();root.name='hearthmere-residents';
  const bodyMaterial=new THREE.MeshStandardMaterial({color:0xffffff,flatShading:true,roughness:1});
  const geometries=[new THREE.BoxGeometry(1,1,1),new THREE.CylinderGeometry(.8,1,1,6),new THREE.IcosahedronGeometry(1,0),new THREE.CylinderGeometry(1,1,1,8),new THREE.ConeGeometry(1,1,6),new THREE.CylinderGeometry(.68,1,1,6)];
  const parts=geometries.map((g,i)=>{const m=new THREE.InstancedMesh(g,bodyMaterial,i===0?2000:i===2?300:100);m.count=0;m.frustumCulled=false;m.castShadow=true;root.add(m);return m;});

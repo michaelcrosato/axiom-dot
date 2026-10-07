@@ -21,10 +21,10 @@ export interface WorldMapModel {
  entrance:MapPoint;coreBound:number|null;
  sample:(x:number,z:number)=>{height:number;color:string};
 }
-export type WorldMapIdentity=Pick<State,'generation'|'seed'|'regional'>;
+export type WorldMapIdentity=Pick<State,'generation'|'seed'|'regional'|'townLayout'>;
 const clamp=(value:number,min:number,max:number)=>Math.max(min,Math.min(max,value));
 const finite=(...values:number[])=>values.every(Number.isFinite);
-export function worldMapIdentity(state:WorldMapIdentity){return `${state.regional?.version===1&&state.generation===2?'region1':`valley${state.generation}`}:${state.seed}`;}
+export function worldMapIdentity(state:WorldMapIdentity){return `${state.regional?.version===1&&state.generation===2?'region1':`valley${state.generation}`}:${state.seed}${state.townLayout?':layout3:'+state.townLayout.manifestHash:''}`;}
 export function worldMapBounds(model:Pick<WorldMapModel,'bound'>):MapBounds {return {minX:-model.bound,maxX:model.bound,minZ:-model.bound,maxZ:model.bound};}
 
 /** Read the same frozen macro-plan and exact height authority as the playable world. */
@@ -61,14 +61,14 @@ export function createWorldMapModel(state:WorldMapIdentity):WorldMapModel {
   {id:'valley/pump',name:'Waterworks',kind:'pump',...valley.endpoints.pump,detail:'Valley water pump and build yard',local:regional},
   {id:'valley/spawn',name:'Arrival camp',kind:'spawn',...valley.endpoints.spawn,detail:'Deployment point',local:regional},
   ...valley.buildings.map((b,i)=>({id:b.id,name:`${valley.settlements.find(s=>s.id===b.settlementId)?.name??'Valley'} workshop ${i%2+1}`,kind:'workshop' as const,...b.origin,detail:'Procedural workshop',local:true})),
-  ...(regional?[{id:`town:1:${seed}`,name:'Hearthmere · starting town',kind:'settlement' as const,...TOWN_CENTER,detail:'100 residents in 40 homes: singles, couples and varied adult families; seven material-trading businesses. The east road leads to Mossbank.'},...startingTown(seed).shops.map(b=>({id:b.id,name:b.name,kind:'workshop' as const,...b.entry,detail:'Hearthmere Market Street · approach the shop sign to interact'}))]:[]),
+  ...(regional?[{id:`town:1:${seed}`,name:'Hearthmere · starting town',kind:'settlement' as const,...TOWN_CENTER,detail:'100 residents in 40 homes: singles, couples and varied adult families; seven material-trading businesses. The east road leads to Mossbank.'},...startingTown(seed,state.townLayout).shops.map(b=>({id:b.id,name:b.name,kind:'workshop' as const,...b.entry,detail:'Hearthmere Market Street · approach the shop sign to interact'}))]:[]),
   ...(plan?.sites.map(s=>({id:s.id,name:s.name,kind:s.kind,...s.position,detail:s.description}))??[]),
  ];
  return {identity,title:regional?'The 10 km² frontier':'Connected valley',bound,area:plan?.area??(bound*2)**2,regional,generation:2,
-  roads:[...valley.roads,...(plan?.roads??[]),...(regional?regionalTownRoads(seed):[])],water:[{id:'valley/river',...valley.river},...(plan?.water??[])],markers,
-  buildings:[...valley.buildings.map(b=>({...b.origin,width:b.width,depth:b.depth})),...(regional?[...startingTown(seed).homes,...startingTown(seed).shops].map(b=>({...b.center,width:b.shopIndex===undefined?5.6:9,depth:b.shopIndex===undefined?6:8})):[])],entrance:{...valley.endpoints.entrance},coreBound:regional?valley.terrain.bound:null,
+  roads:[...valley.roads,...(plan?.roads??[]),...(regional?regionalTownRoads(seed,state.townLayout):[])],water:[{id:'valley/river',...valley.river},...(plan?.water??[])],markers,
+  buildings:[...valley.buildings.map(b=>({...b.origin,width:b.width,depth:b.depth})),...(regional?[...startingTown(seed,state.townLayout).homes,...startingTown(seed,state.townLayout).shops].map(b=>({...b.center,width:b.shopIndex===undefined?5.6:9,depth:b.shopIndex===undefined?6:8})):[])],entrance:{...valley.endpoints.entrance},coreBound:regional?valley.terrain.bound:null,
   regions:plan?[{name:'Pinewatch Highlands',color:'#526f60',x:-940,z:740},{name:'Redstone Uplands',color:'#9a8067',x:840,z:-850},{name:'Windward Heath',color:'#8a9270',x:850,z:960},{name:'Sunmeadow Reach',color:'#80976b',x:-670,z:-260}]:[],
-  sample:(x,z)=>{if(!finite(x,z))throw new RangeError('Invalid map sample');const height=regional?regionalHeight(seed,x,z):valleyHeight(valley,x,z);return {height,color:regional?regionalBiomeAt(seed,x,z).color:height<valley.river.waterLevel+.3?'#799887':height>5?'#6b8d69':'#83a274'};},
+  sample:(x,z)=>{if(!finite(x,z))throw new RangeError('Invalid map sample');const height=regional?regionalHeight(seed,x,z,state.townLayout):valleyHeight(valley,x,z);return {height,color:regional?regionalBiomeAt(seed,x,z).color:height<valley.river.waterLevel+.3?'#799887':height>5?'#6b8d69':'#83a274'};},
  };
 }
 

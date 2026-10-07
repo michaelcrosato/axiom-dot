@@ -1,0 +1,10 @@
+{
+  "orderedAggregateNamesExactlyMatchInventory": true,
+  "aggregateCases": 1925,
+  "registeredCases": 1925,
+  "fileCount": 277,
+  "excludedFileCount": 13,
+  "sequentialCaseIds": true,
+  "noSkippedCancelledOrTodo": true,
+  "cleanAggregateRerun": true
+}

@@ -1,4 +1,4 @@
-import {hashSeed} from './procedural.ts';
+import {hashSeed,seedSample} from './procedural.ts';
 import {townResidentAddress,TOWN_HOUSE_COUNT} from './town-residents.ts';
 /** Additive regional town. Legacy valley plans, residents and quest IDs are untouched. */
 export const TOWN_VERSION=1 as const;
@@ -12,13 +12,15 @@ export const TOWN_NAME='Hearthmere';
 export const TOWN_SHOP_NAMES=['Trail & Tin Supplies','Ember Smithy','Second Life Salvage','The Copper Kettle','Lantern House Inn','Greenlight Apothecary','Wayfarer Outfitter'] as const;
 export interface TownBox{id:string;center:{x:number;y:number;z:number};half:{x:number;y:number;z:number};material:string;solid:boolean}
 export interface TownBuilding{id:string;name:string;entry:{x:number;z:number};center:{x:number;z:number};shopIndex?:number;homeIndex?:number;boxes:TownBox[]}
-export interface TownPlan{version:1;layoutVersion:typeof TOWN_LAYOUT_VERSION;seed:number;id:string;center:typeof TOWN_CENTER;spawn:typeof TOWN_SPAWN;shops:TownBuilding[];homes:TownBuilding[];boxes:TownBox[]}
-const plans=new Map<number,TownPlan>();
+export interface TownLayout {version:3;recipe:1;manifestHash:string}
+export interface TownStreet {id:string;width:number;points:{x:number;y:number;z:number}[]}
+export interface TownPlan{version:1;layoutVersion:2|3;streets?:TownStreet[];manifestHash?:string;seed:number;id:string;center:typeof TOWN_CENTER;spawn:typeof TOWN_SPAWN;shops:TownBuilding[];homes:TownBuilding[];boxes:TownBox[]}
+const plans=new Map<string,TownPlan>();
 function freeze<T>(v:T):T{if(v&&typeof v==='object'&&!Object.isFrozen(v)){Object.values(v).forEach(freeze);Object.freeze(v);}return v;}
 export function townReserved(x:number,z:number,margin=0){return Math.abs(x-TOWN_CENTER.x)<TOWN_BOUNDS.halfWidth+margin&&Math.abs(z-TOWN_CENTER.z)<TOWN_BOUNDS.halfDepth+margin;}
 export function townTerrainHeight(x:number,z:number,original:number){const d=Math.max(Math.abs(x-TOWN_CENTER.x)-TOWN_BOUNDS.halfWidth,Math.abs(z-TOWN_CENTER.z)-TOWN_BOUNDS.halfDepth,0);if(d>=20)return original;const t=Math.min(1,d/20),blend=t*t*(3-2*t);return Math.fround(6+(original-6)*blend);}
-export function startingTown(seed:number):TownPlan{
- if(!Number.isInteger(seed)||seed<0||seed>0xffffffff)throw RangeError('Invalid town seed');const known=plans.get(seed);if(known)return known;
+function compileTown(seed:number,organic=false):TownPlan{
+ if(!Number.isInteger(seed)||seed<0||seed>0xffffffff)throw RangeError('Invalid town seed');const key=`${seed}:${organic?3:2}`,known=plans.get(key);if(known)return known;
  const id=`town:1:${seed}`,shops:TownBuilding[]=[],homes:TownBuilding[]=[],boxes:TownBox[]=[];
  const building=(key:string,name:string,x:number,z:number,front:number,shopIndex?:number,homeIndex?:number)=>{
   const width=shopIndex===undefined?5.6:9,depth=shopIndex===undefined?6:8,height=shopIndex===4?4.4:3.2,entry={x,z:z+front*(depth/2+3)},b:TownBuilding={id:`${id}/${key}`,name,center:{x,z},entry,boxes:[],...(shopIndex===undefined?{}:{shopIndex}),...(homeIndex===undefined?{}:{homeIndex})};
@@ -32,17 +34,40 @@ export function startingTown(seed:number):TownPlan{
   if(shopIndex!==undefined){box('counter',0,.45,-front*(depth/2-1.2),width*.32,.45,.55,'town-timber');box('sign',width/2-.4,2.35,front*(depth/2+.3),1,.3,.08,'town-marker',false);}
   return b;
  };
- for(let i=0;i<7;i++)shops.push(building(`shop/${i}`,TOWN_SHOP_NAMES[i]!,TOWN_CENTER.x-36+i*12,TOWN_CENTER.z-7,1,i));
+ const sample=(purpose:string,i:number)=>seedSample(seed,3,'town-layout',purpose,'parcel',i);
+ for(let i=0;i<7;i++)shops.push(building(`shop/${i}`,TOWN_SHOP_NAMES[i]!,TOWN_CENTER.x-36+i*12+(organic?(sample('shop-x',i)-.5)*1.2:0),TOWN_CENTER.z-7-(organic?1+2*Math.sin(i*Math.PI/6)+sample('shop-z',i):0),1,i));
  const xs=[-40,-32,-24,-16,-8,8,16,24,32,40];
  // Preserve the original twenty building IDs, entrances and geometry exactly.
- for(const distance of [30,50])for(const side of [-1,1])for(const dx of xs){const i=homes.length;homes.push(building(`home/${i}`,townResidentAddress(i),TOWN_CENTER.x+dx,TOWN_CENTER.z+side*distance,-side,undefined,i));}
+ for(const distance of [30,50])for(const side of [-1,1])for(const dx of xs){const i=homes.length;
+  const shift=organic?(sample('row-shift',Math.floor(i/10))-.5)*2.4+(sample('frontage',i)-.5)*.6:0;
+  // Outer parcels bend inward, preserving the workshop and saved rear-yard envelopes.
+  const bend=organic?(distance===50?-side*(1.2+1.6*Math.sin((dx+44)/88*Math.PI)):2.1*Math.sin(dx/18+sample('row-phase',Math.floor(i/10))*2)):0;
+  homes.push(building(`home/${i}`,townResidentAddress(i),TOWN_CENTER.x+dx+shift,TOWN_CENTER.z+side*distance+bend+(organic?(sample('setback',i)-.5)*.6:0),-side,undefined,i));}
+ const streets:TownStreet[]=[];
+ if(organic){
+  const point=(x:number,z:number)=>({x,y:6,z}),street=(id:string,points:ReturnType<typeof point>[],width=4)=>streets.push({id:`${id}`,width,points});
+  const west=TOWN_CENTER.x-49.3,east=TOWN_CENTER.x+49.3;
+  const rows=Array.from({length:4},(_,row)=>homes.slice(row*10,row*10+10).map(h=>point(h.entry.x,h.entry.z)));
+  for(let i=0;i<rows.length;i++){const row=rows[i]!;street(`residential-${i}`,[point(west,row[0]!.z),...row,point(east,row.at(-1)!.z)]);}
+  const market=[point(west,TOWN_CENTER.z),...shops.map(b=>point(b.entry.x,b.entry.z)),point(east,TOWN_CENTER.z)];street('market',market,5);
+  for(const x of [west,east])street(`loop-${x}`,rows.map(row=>point(x,x===west?row[0]!.z:row.at(-1)!.z)).concat(point(x,TOWN_CENTER.z)).sort((a,b)=>a.z-b.z));
+  // A south-side cross-link serves the gardens and square without crossing a business.
+  street('garden-crossing',[point(shops[3]!.entry.x,shops[3]!.entry.z),point(TOWN_CENTER.x,TOWN_CENTER.z),point(TOWN_CENTER.x,TOWN_CENTER.z+21),point(TOWN_CENTER.x,TOWN_CENTER.z+43)]);
+  street('garden-frontage',[point(west,TOWN_CENTER.z+21),point(TOWN_CENTER.x,TOWN_CENTER.z+21),point(east,TOWN_CENTER.z+21)]);
+ }
+
  if(homes.length!==TOWN_HOUSE_COUNT)throw new Error('Town housing contract mismatch');
  // Plinth, trough and lamps are outside the collision-free square and lane centerlines.
  for(const dx of [-53,53])for(const dz of [-16,16])boxes.push({id:`${id}/lamp/${dx}/${dz}`,center:{x:TOWN_CENTER.x+dx,y:7.7,z:TOWN_CENTER.z+dz},half:{x:.16,y:1.7,z:.16},material:'town-marker',solid:true});
- const plan=freeze({version:1 as const,layoutVersion:TOWN_LAYOUT_VERSION,seed,id,center:TOWN_CENTER,spawn:TOWN_SPAWN,shops,homes,boxes});if(plans.size>=4)plans.delete(plans.keys().next().value!);plans.set(seed,plan);return plan;
+ const plan=freeze({version:1 as const,layoutVersion:organic?3 as const:TOWN_LAYOUT_VERSION,...(organic?{streets,manifestHash:hashSeed(JSON.stringify({recipe:1,boxes,streets})).toString(16)}:{}),seed,id,center:TOWN_CENTER,spawn:TOWN_SPAWN,shops,homes,boxes});if(plans.size>=4)plans.delete(plans.keys().next().value!);plans.set(key,plan);return plan;
 }
-export function townChunkBoxes(seed:number,cx:number,cz:number){return startingTown(seed).boxes.filter(b=>Math.floor(b.center.x/64)===cx&&Math.floor(b.center.z/64)===cz);}
-export function safeTownPosition(seed:number,p:{x:number;z:number}){const blocked=startingTown(seed).boxes.some(b=>b.solid&&b.center.y-b.half.y<8.2&&b.center.y+b.half.y>6.05&&Math.abs(p.x-b.center.x)<b.half.x+.4&&Math.abs(p.z-b.center.z)<b.half.z+.4);return blocked?{x:TOWN_SPAWN.x,z:TOWN_SPAWN.z}:{...p};}
+/** Absence is always the occupied legacy recipe. No ambient/global layout selection. */
+export function newTownLayout(seed:number):TownLayout{return freeze({version:3,recipe:1,manifestHash:compileTown(seed,true).manifestHash!});}
+export function validTownLayout(value:unknown,seed:number):value is TownLayout{return Number.isInteger(seed)&&seed>=0&&seed<=0xffffffff&&keys(value,['version','recipe','manifestHash'])&&value.version===3&&value.recipe===1&&value.manifestHash===compileTown(seed,true).manifestHash;}
+export function sameTownLayout(a:TownLayout|undefined,b:TownLayout|undefined){return a?.version===b?.version&&a?.recipe===b?.recipe&&a?.manifestHash===b?.manifestHash;}
+export function startingTown(seed:number,layout?:TownLayout):TownPlan{if(layout!==undefined&&!validTownLayout(layout,seed))throw RangeError('Unknown or mismatched town layout');return compileTown(seed,layout!==undefined);}
+export function townChunkBoxes(seed:number,cx:number,cz:number,layout?:TownLayout){return startingTown(seed,layout).boxes.filter(b=>Math.floor(b.center.x/64)===cx&&Math.floor(b.center.z/64)===cz);}
+export function safeTownPosition(seed:number,p:{x:number;z:number},layout?:TownLayout){const blocked=startingTown(seed,layout).boxes.some(b=>b.solid&&b.center.y-b.half.y<8.2&&b.center.y+b.half.y>6.05&&Math.abs(p.x-b.center.x)<b.half.x+.4&&Math.abs(p.z-b.center.z)<b.half.z+.4);return blocked?{x:TOWN_SPAWN.x,z:TOWN_SPAWN.z}:{...p};}
 export type TownResource='scrap'|'core'|'water';
 export interface TownOffer{id:string;shopIndex:number;label:string;cost:Record<TownResource,number>;gain:Record<TownResource,number>;heal:number;stock:number}
 const amount=(scrap=0,core=0,water=0)=>({scrap,core,water});
@@ -71,9 +96,9 @@ export function validTownState(v:unknown):v is TownState{
 export function townBalance(town?:TownState){const spent=amount(),exported=amount();for(const r of town?.receipts??[]){const o=TOWN_OFFERS.find(o=>o.id===r.offerId)!;if(!o)continue;for(const k of ['scrap','core','water'] as const){spent[k]+=o.cost[k];exported[k]+=o.gain[k];}}return {spent,exported,net:{scrap:spent.scrap-exported.scrap,core:spent.core-exported.core,water:spent.water-exported.water}};}
 export function townStock(town:TownState,offerId:string){const o=TOWN_OFFERS.find(o=>o.id===offerId);return o?o.stock-town.receipts.filter(r=>r.offerId===offerId).length:0;}
 /** Stocked service counters remain usable during the keeper’s home/social routine. */
-export function purchaseTown(town:TownState,context:{seed:number;zone:string;player:{x:number;z:number;hp:number};inventory:Record<TownResource,number>},command:TownCommand){
+export function purchaseTown(town:TownState,context:{seed:number;townLayout?:TownLayout;zone:string;player:{x:number;z:number;hp:number};inventory:Record<TownResource,number>},command:TownCommand){
  if(!validTownCommand(command)||!validTownState(town)||command.expectedRevision!==town.revision||context.zone!=='valley'||context.player.hp<=0)return null;
- const o=TOWN_OFFERS.find(o=>o.id===command.offerId)!,entry=startingTown(context.seed).shops[o.shopIndex]!.entry;
+ const o=TOWN_OFFERS.find(o=>o.id===command.offerId)!,entry=startingTown(context.seed,context.townLayout).shops[o.shopIndex]!.entry;
  if(Math.hypot(context.player.x-entry.x,context.player.z-entry.z)>3.5||townStock(town,o.id)<=0||o.heal>0&&context.player.hp>=100||(['scrap','core','water'] as const).some(k=>!Number.isSafeInteger(context.inventory[k])||context.inventory[k]<o.cost[k]))return null;
  const inventory={...context.inventory};for(const k of ['scrap','core','water'] as const)inventory[k]+=o.gain[k]-o.cost[k];const hp=Math.min(100,context.player.hp+o.heal);
  return {town:freeze({...town,revision:town.revision+1,receipts:[...town.receipts,{offerId:o.id,hpBefore:context.player.hp,hpAfter:hp}]}),inventory,hp,message:`${TOWN_SHOP_NAMES[o.shopIndex]}: ${o.label}. Receipt ${town.revision+1}; ${townStock(town,o.id)-1} remaining.`};

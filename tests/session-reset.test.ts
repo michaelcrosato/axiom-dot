@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {createState,createConnectedState,createRegionalState,applyAction,activeObjects,serializeSave,parseSave,enableEncounters,enableEconomy,enableEcology,enableCaveSupply,enableCommonsTrade,enableWaterRequests,type State} from '../src/world.ts';
+import {createState,createConnectedState,createRegionalState,createOrganicRegionalState,applyAction,activeObjects,serializeSave,parseSave,enableEncounters,enableEconomy,enableEcology,enableCaveSupply,enableCommonsTrade,enableWaterRequests,type State} from '../src/world.ts';
 import {ACTIVE_WORLD_KEY,LEGACY_SAVE_KEY,saveKey,loadSlot,loadSession,storeSession,loadSavedWorld,storedSaveText,savedWorlds,selectSeed,selectRegionalSeed,preUpgradeKey,preUpgradeSave,preContactKey,preContactSave,sessionEpochKey,sessionResetRevision,preResetSave,sessionRecoverySaves,createSessionResetOperation,restartSession,restoreResetSession} from '../src/session.ts';
 class Store {
  data=new Map<string,string>();writes:string[]=[];fail:string|null=null;
@@ -11,9 +11,9 @@ class Store {
 }
 function progress(s:State){const item=activeObjects(s).find(o=>o.kind==='scrap')!;s=applyAction(s,{type:'move',x:item.x,z:item.z});return applyAction(s,{type:'collect',id:item.id});}
 function packs(s:State){return enableWaterRequests(enableCommonsTrade(enableCaveSupply(enableEcology(enableEconomy(enableEncounters(s))))));}
-function initial(s:State){return s.regional?createRegionalState(s.seed):s.generation===1?createState(s.seed):createConnectedState(s.seed);}
+function initial(s:State){return s.regional?(s.townLayout?createOrganicRegionalState(s.seed):createRegionalState(s.seed)):s.generation===1?createState(s.seed):createConnectedState(s.seed);}
 
-for(const factory of [createState,createConnectedState,createRegionalState])test(`restart ${factory.name} keeps exact foundation and seed, clearing all progress`,()=>{
+for(const factory of [createState,createConnectedState,createRegionalState,createOrganicRegionalState])test(`restart ${factory.name} keeps exact foundation and seed, clearing all progress`,()=>{
  const store=new Store(),current=packs(progress(factory(73129)));storeSession(store,current,true);
  const original=new Map(store.data),before=serializeSave(current),operation=createSessionResetOperation(store,current);assert.deepEqual(store.data,original,'preparation and Cancel are read-only');
  const result=operation.commit();assert.equal(result.committed,true);assert.deepEqual(result.state,initial(current));assert.deepEqual(loadSession(store),initial(current));assert.equal(preResetSave(store,current),before);
@@ -58,8 +58,8 @@ test('restore failures preserve the fresh run and its original recovery checkpoi
 });
 
 test('unsaved live progress is checkpointed without an initial mutating save',()=>{
- const store=new Store(),current=progress(createRegionalState(73129));assert.equal(loadSession(store).seed,current.seed);const before=serializeSave(current);restartSession(store,current);assert.equal(preResetSave(store,current),before);assert.deepEqual(loadSession(store),createRegionalState(73129));assert.equal(store.getItem(ACTIVE_WORLD_KEY),null);assert.equal(store.getItem(saveKey(current)),null);assert.equal(savedWorlds(store).length,1);
- const minimal={getItem:(key:string)=>store.getItem(key),setItem:(key:string,v:string)=>store.setItem(key,v)};assert.deepEqual(loadSession(minimal),createRegionalState(73129));
+ const store=new Store(),current=progress(createOrganicRegionalState(73129));assert.equal(loadSession(store).seed,current.seed);const before=serializeSave(current);restartSession(store,current);assert.equal(preResetSave(store,current),before);assert.deepEqual(loadSession(store),createOrganicRegionalState(73129));assert.equal(store.getItem(ACTIVE_WORLD_KEY),null);assert.equal(store.getItem(saveKey(current)),null);assert.equal(savedWorlds(store).length,1);
+ const minimal={getItem:(key:string)=>store.getItem(key),setItem:(key:string,v:string)=>store.setItem(key,v)};assert.deepEqual(loadSession(minimal),createOrganicRegionalState(73129));
 });
 
 test('legacy-only and legacy-selected generation-1 sessions restart without modifying the v1 alias',()=>{
@@ -71,7 +71,7 @@ test('legacy-only and legacy-selected generation-1 sessions restart without modi
 });
 
 test('seed selection resumes epoch progress and never mistakes an existing slot for fresh',()=>{
- const store=new Store(),old=progress(createConnectedState(17));storeSession(store,old,true);let current=restartSession(store,old);current=progress(current);storeSession(store,current,true);assert.deepEqual(selectSeed(store,17),current);assert.deepEqual(selectRegionalSeed(store,17),createRegionalState(17));assert.deepEqual(selectSeed(store,18),createConnectedState(18));
+ const store=new Store(),old=progress(createConnectedState(17));storeSession(store,old,true);let current=restartSession(store,old);current=progress(current);storeSession(store,current,true);assert.deepEqual(selectSeed(store,17),current);assert.deepEqual(selectRegionalSeed(store,17),createOrganicRegionalState(17));assert.deepEqual(selectSeed(store,18),createConnectedState(18));
  const other=createRegionalState(18);storeSession(store,other,true);assert.equal(loadSession(store).seed,18);storeSession(store,selectSeed(store,17),true);assert.deepEqual(loadSession(store),current);assert.equal(preResetSave(store,current),serializeSave(old));
 });
 
@@ -102,7 +102,8 @@ test('old confirmations reject autosaves, pointer changes, mutations and a newer
 });
 
 test('pre-upgrade and pre-contact checkpoints retain exact original bytes across fresh epochs',()=>{
- const store=new Store(),old=progress(createRegionalState(17)),raw=JSON.stringify(old,null,2)+'\n';store.setItem(saveKey(old),raw);store.setItem(ACTIVE_WORLD_KEY,saveKey(old));store.setItem(preContactKey(old),raw);
+ const store=new Store(),old=progress(createRegionalState(17));delete old.traversal; // Historical pre-contact checkpoint: fresh worlds now include v2 props.
+ const raw=JSON.stringify(old,null,2)+'\n';store.setItem(saveKey(old),raw);store.setItem(ACTIVE_WORLD_KEY,saveKey(old));store.setItem(preContactKey(old),raw);
  const current=packs(old);storeSession(store,current,true);assert.equal(preUpgradeSave(store,current),raw);restartSession(store,current);storeSession(store,packs(loadSession(store)),true);assert.equal(preUpgradeSave(store,current),raw);assert.equal(preContactSave(store,current),raw);assert.equal(store.getItem(preUpgradeKey(old)),raw);
 });
 

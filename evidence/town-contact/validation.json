@@ -1,0 +1,85 @@
+{
+  "kind": "axiom-town-contact-local-milestone",
+  "recordedAt": "2026-10-06T19:32:35.736234+00:00",
+  "baseCommit": "cdb067b47acdf2f86aa119f6a3e1a767708cf6ba",
+  "runtime": "Node v22.23.0",
+  "fullOriginalRequestComplete": false,
+  "publication": "none; local only",
+  "checks": {
+    "bothTypeScriptProjects": "pass",
+    "clientAndServerProductionBuild": "pass",
+    "independentFocused": {
+      "pass": 7,
+      "fail": 0
+    },
+    "emittedContactWorkerAndAvatar": {
+      "kind": "axiom-town-contact-emitted",
+      "scope": "Actual emitted Rapier worker and Three rig; source main course harness and save model. No browser/GPU/device or shared traversal claim.",
+      "worker": {
+        "file": "physics.worker-Bn8W0z6h.js",
+        "sha256": "2bb64ea8d62e1f73a4be7e6ad5515048f282de7a6a6660d30f7bc58095f2d5c1"
+      },
+      "avatar": {
+        "file": "guard-view-THzUB-dN.js",
+        "export": "A",
+        "sha256": "dc7f70bd80e7dec12e7052d47acbc2bc646511639d5606ced8c340b898303acb"
+      },
+      "tests": 7,
+      "pass": 7,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0
+    },
+    "emittedMainWorkerRenderBoundary": "pass: steady 5 FPS and jittered/pause/delivery profiles",
+    "emittedTownFrames": "pass: four steady and four world scenarios",
+    "emittedServerSave": "pass: actual source/emitted HTTP authority, exact retries, guest rejection and validated imports",
+    "permittedAggregate": {
+      "tests": 1913,
+      "pass": 1911,
+      "fail": 2,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "duration_ms": 2454020.469943
+    },
+    "postAggregateFixtureRerun": {
+      "tests": 29,
+      "pass": 29,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "duration_ms": 3038.035502
+    },
+    "cleanAggregateRerun": false,
+    "exactFinalInventory": {
+      "files": 276,
+      "cases": 1913,
+      "baselineCasesRetained": 1906,
+      "heldFilesExcluded": 13
+    },
+    "frozenFileCount": 648,
+    "productionFilesUnchangedAfterAggregate": true
+  },
+  "delivered": [
+    "Fresh regional-world v2 rear-yard prop saves; legacy geometry preserved",
+    "Three seeded bounded rear work yards with physical crates, short steps and tall ledges",
+    "Existing real push/pull/jump plus reverse supported tall-ledge lowering",
+    "Actor clearance gates, disposable real-controller course, controls, bounded diagnostic evidence"
+  ],
+  "remaining": [
+    "Full versioned organic residential/business layout; concrete plan in NEXT-STEPS.md",
+    "Low-crate hand-climb and controlled low-crate climb-down",
+    "Server-authoritative shared props and traversal, ownership and reconnect/retry protocol",
+    "Clean aggregate rerun after two fixture-only corrections",
+    "Browser, rendered visual, touch/device and performance acceptance"
+  ],
+  "restrictions": {
+    "heldTestFilesUnchanged": true,
+    "heldTestFilesNotRun": true,
+    "regionalFoodCouplingUnchanged": true,
+    "browserAndRegistryRestrictionsRespected": true,
+    "noForceExit": true,
+    "noCommitPushPrMergeDeployOrSiteChanges": true
+  }
+}

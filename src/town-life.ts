@@ -1,7 +1,8 @@
 /** Implemented contract for src/town-life.ts. IDs and pose coordinates remain authoritative. */
 import {townResidents,townResidentRoutinePhase,type TownResident,type TownResidentPose} from './town-residents.ts';
 import {seedSample} from './procedural.ts';
-import {startingTown,TOWN_CENTER,type TownPlan} from './starting-town.ts';
+import {startingTown,validTownLayout,TOWN_CENTER,type TownPlan,type TownLayout} from './starting-town.ts';
+import {townRoadRoute} from './town-road-route.ts';
 import {townPathClear} from './town-crowd.ts';
 import {advanceTownNavigation,townLifeTaskPoint,townLifeTaskStages,townLifeDeparturePoint,townNavigationClear,townNavigationWorkClear,townNavigationDetour,townLifeWorkArea,TOWN_NAV_STEP,type TownLifeNavigation,type TownNavigationActor} from './town-navigation.ts';
 export type TownLifeNeed = 'nourishment'|'energy'|'hygiene'|'comfort'|'connection'|'fulfillment';
@@ -14,7 +15,7 @@ export interface TownLifeResidentState {habitatCare?:true;id:string;index:number
 export interface TownLifeFacilityState {id:string;condition:number;closedFor:number;queue:number[];reservations:number[];occupants:number[];served:number;canceled:number}
 export type TownLifeResource='pantry'|'water'|'materials'|'harvest';
 export interface TownLifeSources {field:number;aquifer:number;salvage:number}
-export interface TownLifeState {seed:number;version:1;workshopSpent?:number;supplyDeliveries?:number;habitatCare?:{received:number;stock:number;used:number};navigation?:TownLifeNavigation;revision:number;tick:number;cycleTick:number;accumulator:number;residents:TownLifeResidentState[];facilities:TownLifeFacilityState[];resources:Record<TownLifeResource,number>;sources:TownLifeSources;sourceLedger:{epochs:number;initial:TownLifeSources;recharged:TownLifeSources;extracted:TownLifeSources;overflow:TownLifeSources};ledger:{epochs:number;donationBaseline:Record<TownLifeResource,number>;initial:Record<TownLifeResource,number>;produced:Record<TownLifeResource,number>;consumed:Record<TownLifeResource,number>;donated:Record<TownLifeResource,number>;overflow:Record<TownLifeResource,number>};cooldowns:{donate:number;repair:number;gather:number};gathering:number;contributions:Record<TownLifeCommand['kind'],number>;playerSpent:{scrap:number;core:number;water:number};events:{tick:number;residentId:string|null;kind:'completed'|'interrupted'|'shortage'|'aid'|'desire';text:string}[]}
+export interface TownLifeState {townLayout?:TownLayout;seed:number;version:1;workshopSpent?:number;supplyDeliveries?:number;habitatCare?:{received:number;stock:number;used:number};navigation?:TownLifeNavigation;revision:number;tick:number;cycleTick:number;accumulator:number;residents:TownLifeResidentState[];facilities:TownLifeFacilityState[];resources:Record<TownLifeResource,number>;sources:TownLifeSources;sourceLedger:{epochs:number;initial:TownLifeSources;recharged:TownLifeSources;extracted:TownLifeSources;overflow:TownLifeSources};ledger:{epochs:number;donationBaseline:Record<TownLifeResource,number>;initial:Record<TownLifeResource,number>;produced:Record<TownLifeResource,number>;consumed:Record<TownLifeResource,number>;donated:Record<TownLifeResource,number>;overflow:Record<TownLifeResource,number>};cooldowns:{donate:number;repair:number;gather:number};gathering:number;contributions:Record<TownLifeCommand['kind'],number>;playerSpent:{scrap:number;core:number;water:number};events:{tick:number;residentId:string|null;kind:'completed'|'interrupted'|'shortage'|'aid'|'desire';text:string}[]}
 export type TownLifeCommand = {kind:'donate-water'|'donate-supplies'|'repair-service'|'host-gathering'|'encourage-resident';targetId:string;expectedRevision:number};
 export interface TownLifeSummary {name:string;activity:string;reason:string;mood:string;needs:{key:TownLifeNeed;value:number;label:string}[];desire:string;relationships:string[];diagnostics:string[];facility:string;progress:number}
 
@@ -75,10 +76,10 @@ function traitsFor(r:TownResident):Record<TownLifeNeed,number>{return Object.fro
 const homeId=(n:number)=>`home-${n}`;
 /** Open-air household and public stations use the existing streets/forecourts,
  * not invisible interiors. Public capacity is backed by distinct service slots. */
-export function townLifeFacilities(seed:number):readonly TownLifeFacility[]{
- const plan=startingTown(seed),cached=facilityCache.get(plan);if(cached)return cached;const roster=townResidents(seed),out:TownLifeFacility[]=plan.homes.map((h,i)=>({id:homeId(i),label:h.name,kind:'home',x:h.entry.x,z:h.entry.z+Math.sign(h.entry.z-plan.center.z)*1.3,roadZ:h.entry.z,capacity:roster.filter(r=>r.homeIndex===i).length,homeIndex:i,actions:['eat','rest','wash','leisure','socialize','cook']}));
+export function townLifeFacilities(seed:number,townLayout?:TownLayout):readonly TownLifeFacility[]{
+ const plan=startingTown(seed,townLayout),cached=facilityCache.get(plan);if(cached)return cached;const roster=townResidents(seed),out:TownLifeFacility[]=plan.homes.map((h,i)=>({id:homeId(i),label:h.name,kind:'home',x:h.entry.x,z:h.entry.z+Math.sign(h.entry.z-plan.center.z)*1.3,roadZ:h.entry.z,capacity:roster.filter(r=>r.homeIndex===i).length,homeIndex:i,actions:['eat','rest','wash','leisure','socialize','cook']}));
  const add=(id:string,label:string,kind:TownLifeFacilityKind,x:number,z:number,capacity:number,actions:TownLifeActionKind[],roadZ=plan.center.z)=>out.push({id,label,kind,x,z,roadZ,capacity,homeIndex:null,actions});
- const shop=(index:number,id:string,kind:TownLifeFacilityKind,capacity:number,actions:TownLifeActionKind[])=>{const b=plan.shops[index]!;add(id,b.name,kind,b.entry.x,b.entry.z+2.2,capacity,actions);};
+ const shop=(index:number,id:string,kind:TownLifeFacilityKind,capacity:number,actions:TownLifeActionKind[])=>{const b=plan.shops[index]!,legacy=plan.layoutVersion===3?startingTown(seed).shops[index]!:b;add(id,b.name,kind,legacy.entry.x,legacy.entry.z+2.2,capacity,actions);};
  shop(3,'cookshop','cookshop',12,['eat','cook']);shop(4,'inn','inn',14,['rest','leisure','socialize']);shop(5,'apothecary','apothecary',8,['recover','wash']);shop(2,'workshop','workshop',14,['craft','maintain']);
  add('garden-west','West shared garden','garden',plan.center.x-30,plan.center.z+13,12,['garden','leisure','socialize']);
  add('garden-east','East shared garden','garden',plan.center.x+30,plan.center.z+13,12,['garden','leisure','socialize']);
@@ -91,11 +92,11 @@ export function townLifeFacilities(seed:number):readonly TownLifeFacility[]{
 function legacySlotPoint(f:TownLifeFacility,slot:number){if(f.kind==='home')return {x:f.x+(slot-(f.capacity-1)/2)*.72,z:f.z};const width=f.kind==='square'?8:5;return {x:f.x+((slot%width)-(Math.min(width,f.capacity)-1)/2)*.74,z:f.z+Math.floor(slot/width)*.74};}
 function event(s:TownLifeState,kind:TownLifeState['events'][number]['kind'],text:string,residentId:string|null=null){s.events.push({tick:s.tick,residentId,kind,text});if(s.events.length>32)s.events.shift();}
 /** Cold model fixture: no decisions or clock advance. Production uses createTownLifeOpening. */
-export function createTownLife(seed:number):TownLifeState{
- const roster=townResidents(seed),fs=townLifeFacilities(seed);
+export function createTownLife(seed:number,townLayout?:TownLayout):TownLifeState{
+ const roster=townResidents(seed),fs=townLifeFacilities(seed,townLayout);
  const residents=roster.map(r=>{const f=fs[r.homeIndex]!,slot=roster.filter(q=>q.homeIndex===r.homeIndex&&q.index<r.index).length,p=legacySlotPoint(f,slot);
  return {id:r.id,index:r.index,homeIndex:r.homeIndex,householdId:r.householdId,needs:Object.fromEntries(TOWN_LIFE_NEEDS.map((k,i)=>[k,60+(r.index*7+i*13)%31])) as Record<TownLifeNeed,number>,traits:traitsFor(r),stress:12+(r.index%12),mood:'content' as const,desire:{kind:DESIRES[r.index%DESIRES.length]!,progress:0,completed:0},relationships:r.housemateIds.map(id=>({residentId:id,affinity:55,shared:0})),action:null,status:'idle' as const,facilityId:null,slot:-1,remaining:0,batch:1,committed:0,waited:0,lease:0,path:[],pathIndex:0,...p,facing:0,distance:0,speed:0,lastAction:null,completed:0,interruptions:0,unmetSeconds:0,encouragementCooldown:0,reason:'Choosing how to begin the day.'} satisfies TownLifeResidentState;});
- for(const r of residents)updateMood(r);return sealState({seed,version:1,revision:0,tick:0,cycleTick:0,accumulator:0,residents,facilities:fs.map(f=>({id:f.id,condition:100,closedFor:0,queue:[],reservations:[],occupants:[],served:0,canceled:0})),resources:{...INITIAL},sources:{field:600,aquifer:1000,salvage:400},sourceLedger:{epochs:0,initial:{field:600,aquifer:1000,salvage:400},recharged:zeroSources(),extracted:zeroSources(),overflow:zeroSources()},ledger:{epochs:0,donationBaseline:zero(),initial:{...INITIAL},produced:zero(),consumed:zero(),donated:zero(),overflow:zero()},cooldowns:{donate:0,repair:0,gather:0},gathering:0,contributions:{'donate-water':0,'donate-supplies':0,'repair-service':0,'host-gathering':0,'encourage-resident':0},playerSpent:{scrap:0,core:0,water:0},events:[]});
+ for(const r of residents)updateMood(r);return sealState({seed,...(townLayout?{townLayout}:{}),version:1,revision:0,tick:0,cycleTick:0,accumulator:0,residents,facilities:fs.map(f=>({id:f.id,condition:100,closedFor:0,queue:[],reservations:[],occupants:[],served:0,canceled:0})),resources:{...INITIAL},sources:{field:600,aquifer:1000,salvage:400},sourceLedger:{epochs:0,initial:{field:600,aquifer:1000,salvage:400},recharged:zeroSources(),extracted:zeroSources(),overflow:zeroSources()},ledger:{epochs:0,donationBaseline:zero(),initial:{...INITIAL},produced:zero(),consumed:zero(),donated:zero(),overflow:zero()},cooldowns:{donate:0,repair:0,gather:0},gathering:0,contributions:{'donate-water':0,'donate-supplies':0,'repair-service':0,'host-gathering':0,'encourage-resident':0},playerSpent:{scrap:0,core:0,water:0},events:[]});
 }
 /** Each resident keeps their real six-phase timetable, with an independent active-day
  * starting phase. Shared households no longer force 100 simultaneous breakfasts.
@@ -109,8 +110,8 @@ const openingSample=(seed:number,purpose:string,index:number)=>seedSample(seed,T
  * tick zero, then generate a spread of initial route/action phases. No warmup
  * ticks, completed work, produced resources, needs recovery or offline catchup.
  * Already-present saves NEVER pass through this constructor. */
-export function createTownLifeOpening(seed:number):TownLifeState{
- const s=structuredClone(createTownLife(seed)),fs=townLifeFacilities(seed),plan=startingTown(seed);initializeNavigation(s,fs,plan,TOWN_LIFE_DEFAULTS);
+export function createTownLifeOpening(seed:number,townLayout?:TownLayout):TownLifeState{
+ const s=structuredClone(createTownLife(seed,townLayout)),fs=townLifeFacilities(seed,townLayout),plan=startingTown(seed,townLayout);initializeNavigation(s,fs,plan,TOWN_LIFE_DEFAULTS);
  for(const r of s.residents){
   for(const k of TOWN_LIFE_NEEDS)r.needs[k]=58+openingSample(seed,'need-'+k,r.index)*34;
   updateMood(r);
@@ -139,7 +140,7 @@ export function createTownLifeOpening(seed:number):TownLifeState{
  // Seed a new opening only on collision-clear points of each real route. The
  // already-paid occupied workers keep their distinct work places; travelers
  // choose another deterministic phase if their first phase crosses a neighbor.
- const placed=s.residents.filter(r=>r.status==='acting'),cold=createTownLife(seed);
+ const placed=s.residents.filter(r=>r.status==='acting'),cold=createTownLife(seed,townLayout);
  for(const r of s.residents.filter(r=>r.status==='traveling')){
   const clear=(p:{x:number;z:number})=>placed.every(q=>Math.hypot(q.x-p.x,q.z-p.z)>=.72);
   if(!clear(r)){
@@ -173,7 +174,7 @@ function debit(s:TownLifeState,k:TownLifeResource,n:number){ledgerRoom(s);s.reso
 function credit(s:TownLifeState,k:TownLifeResource,n:number,kind:'produced'|'donated'='produced'){ledgerRoom(s);const add=Math.min(n,CAPS[k]-s.resources[k]);s.resources[k]=quant(s.resources[k]+add);s.ledger[kind][k]=quant(count(s.ledger[kind][k],n));s.ledger.overflow[k]=quant(count(s.ledger.overflow[k],n-add));}
 function resetAction(r:TownLifeResidentState){delete r.habitatCare;r.action=null;r.status='idle';r.facilityId=null;r.slot=-1;r.remaining=0;r.batch=1;r.committed=0;r.waited=0;r.lease=0;r.path=[];r.pathIndex=0;r.speed=0;}
 function departurePoint(s:TownLifeState,r:TownLifeResidentState,f:TownLifeFacility){
- const plan=startingTown(s.seed),direction=Math.atan2(0,f.roadZ-r.z||-1),areas=townLifeFacilities(s.seed).map(townLifeWorkArea),reserved=s.residents.filter(q=>q.index!==r.index&&q.action&&q.slot>=0).map(q=>{const d=townLifeFacilities(s.seed).find(f=>f.id===q.facilityId)!;return townLifeTaskPoint(d,q.slot,q.action!,Math.max(0,s.navigation?.residents[q.index]?.stage??0));});
+ const plan=startingTown(s.seed,s.townLayout),direction=Math.atan2(0,f.roadZ-r.z||-1),areas=townLifeFacilities(s.seed,s.townLayout).map(townLifeWorkArea),reserved=s.residents.filter(q=>q.index!==r.index&&q.action&&q.slot>=0).map(q=>{const d=townLifeFacilities(s.seed,s.townLayout).find(f=>f.id===q.facilityId)!;return townLifeTaskPoint(d,q.slot,q.action!,Math.max(0,s.navigation?.residents[q.index]?.stage??0));});
  for(const radius of [1.8,2.6,3.4,4.2,5.2,6.5,8])for(let turn=0;turn<16;turn++){
   const angle=direction+(turn%2?-1:1)*Math.ceil(turn/2)*Math.PI/8,p={x:quant(r.x+Math.sin(angle)*radius),z:quant(r.z+Math.cos(angle)*radius)};
   if(areas.some(a=>p.x>a.minX-.75&&p.x<a.maxX+.75&&p.z>a.minZ-.75&&p.z<a.maxZ+.75)||!townNavigationClear(plan,r,p)||s.residents.some(q=>q.index!==r.index&&Math.hypot(q.x-p.x,q.z-p.z)<1.5)||reserved.some(q=>Math.hypot(q.x-p.x,q.z-p.z)<1.4)||s.navigation?.residents.some((n,i)=>i!==r.index&&n.departure&&Math.hypot(n.departure.x-p.x,n.departure.z-p.z)<1.5))continue;
@@ -181,11 +182,12 @@ function departurePoint(s:TownLifeState,r:TownLifeResidentState,f:TownLifeFacili
  }
  return townLifeDeparturePoint(f,r);
 }
-function cancel(s:TownLifeState,r:TownLifeResidentState,why:string){const descriptor=townLifeFacilities(s.seed).find(f=>f.id===r.facilityId);if(s.navigation){const n=s.navigation.residents[r.index]!;n.stage=0;n.detour=null;if(descriptor)n.departure=departurePoint(s,r,descriptor);}const f=s.facilities.find(f=>f.id===r.facilityId);if(f){f.queue=f.queue.filter(i=>i!==r.index);f.reservations=f.reservations.filter(i=>i!==r.index);f.occupants=f.occupants.filter(i=>i!==r.index);f.canceled=count(f.canceled);}r.interruptions=count(r.interruptions);event(s,'interrupted',`${townResidents(s.seed)[r.index]!.name}: ${why}`,r.id);resetAction(r);r.reason=why;}
+function cancel(s:TownLifeState,r:TownLifeResidentState,why:string){const descriptor=townLifeFacilities(s.seed,s.townLayout).find(f=>f.id===r.facilityId);if(s.navigation){const n=s.navigation.residents[r.index]!;n.stage=0;n.detour=null;if(descriptor)n.departure=departurePoint(s,r,descriptor);}const f=s.facilities.find(f=>f.id===r.facilityId);if(f){f.queue=f.queue.filter(i=>i!==r.index);f.reservations=f.reservations.filter(i=>i!==r.index);f.occupants=f.occupants.filter(i=>i!==r.index);f.canceled=count(f.canceled);}r.interruptions=count(r.interruptions);event(s,'interrupted',`${townResidents(s.seed)[r.index]!.name}: ${why}`,r.id);resetAction(r);r.reason=why;}
 /** Shortest of a fixed set of safe Manhattan road routes. The northern market
  * building forbids the central trunk. Mid-route replanning starts at actual x/z.
  * All candidates are bounded (5 roads × 3 trunks × at most 5 waypoints). */
 function route(plan:TownPlan,from:{x:number;z:number},to:{x:number;z:number},roadZ:number):{x:number;z:number}[]|null{
+ if(plan.layoutVersion===3)return townRoadRoute(plan,from,to);
  // An activity at the current slot needs no journey. Nearby slots in the same
  // clear forecourt do not require a spurious trip out to the road and back.
  const direct=Math.hypot(to.x-from.x,to.z-from.z);
@@ -271,7 +273,7 @@ function acquire(s:TownLifeState,fs:readonly TownLifeFacility[],plan:TownPlan,t:
  }
 }
 function begin(s:TownLifeState,r:TownLifeResidentState,t:TownLifeTuning){
- const f=s.facilities.find(f=>f.id===r.facilityId)!,descriptor=townLifeFacilities(s.seed).find(q=>q.id===f.id)!,target=s.navigation?townLifeTaskPoint(descriptor,r.slot,r.action!):legacySlotPoint(descriptor,r.slot);
+ const f=s.facilities.find(f=>f.id===r.facilityId)!,descriptor=townLifeFacilities(s.seed,s.townLayout).find(q=>q.id===f.id)!,target=s.navigation?townLifeTaskPoint(descriptor,r.slot,r.action!):legacySlotPoint(descriptor,r.slot);
  // Path exhaustion is a bookkeeping event. Only the achieved body can arrive.
  if(Math.hypot(r.x-target.x,r.z-target.z)>1e-6)return;
  if(!inputsReady(s,r.action!,t)){cancel(s,r,'The required supply was used before arrival; seeking another option.');return;}
@@ -288,7 +290,7 @@ function finish(s:TownLifeState,r:TownLifeResidentState,t:TownLifeTuning){
  if(a==='maintain'){const target=s.facilities.slice(40).sort((a,b)=>a.condition-b.condition||a.id.localeCompare(b.id))[0]!;target.condition=clamp(target.condition+32);target.closedFor=Math.max(0,target.closedFor-30);}
  if(a==='socialize'){const others=f.occupants.filter(i=>i!==r.index);const other=others.sort((a,b)=>(r.relationships.find(v=>v.residentId===s.residents[b]!.id)?.affinity??20)-(r.relationships.find(v=>v.residentId===s.residents[a]!.id)?.affinity??20)||a-b)[0];if(other!==undefined){bond(s,r,s.residents[other]!);s.residents[other]!.needs.connection=clamp(s.residents[other]!.needs.connection+8);}else{r.needs.connection=clamp(r.needs.connection-28);r.reason='The square was quiet; next time a familiar face may be here.';}}
  if(desired(r.desire.kind,a)&&(a!=='socialize'||f.occupants.some(i=>i!==r.index))){r.desire.progress=clamp(r.desire.progress+(a==='socialize'?34:25));if(r.desire.progress>=100){r.desire.completed=count(r.desire.completed);r.desire.kind=DESIRES[(DESIRES.indexOf(r.desire.kind)+1+r.index%2)%DESIRES.length]!;r.desire.progress=0;r.needs.fulfillment=clamp(r.needs.fulfillment+18);r.stress=clamp(r.stress-14);event(s,'desire',`${townResidents(s.seed)[r.index]!.name} completed a personal ambition and chose a new one.`,r.id);}}
- if(s.navigation){const n=s.navigation.residents[r.index]!;n.departure=departurePoint(s,r,townLifeFacilities(s.seed).find(q=>q.id===f.id)!);n.stage=0;n.detour=null;}
+ if(s.navigation){const n=s.navigation.residents[r.index]!;n.departure=departurePoint(s,r,townLifeFacilities(s.seed,s.townLayout).find(q=>q.id===f.id)!);n.stage=0;n.detour=null;}
  f.condition=clamp(f.condition-(f.id.startsWith('home-')?0:.08));f.served=count(f.served);f.occupants=f.occupants.filter(i=>i!==r.index);r.completed=count(r.completed);r.lastAction=a;const reason=r.reason;resetAction(r);r.reason=reason;if(r.completed%5===0)event(s,'completed',`${townResidents(s.seed)[r.index]!.name} finished ${LABELS[a].toLowerCase()}.`,r.id);
 }
 function sourceRoom(s:TownLifeState){if(SOURCE_KEYS.some(k=>['recharged','extracted','overflow'].some(c=>s.sourceLedger[c as 'recharged'][k]>TOWN_LIFE_COUNTER_LIMIT-100)))s.sourceLedger={epochs:count(s.sourceLedger.epochs),initial:{...s.sources},recharged:zeroSources(),extracted:zeroSources(),overflow:zeroSources()};}
@@ -383,7 +385,7 @@ function advanceTownLifeInternal(state:TownLifeState,dt:number,tuning:TownLifeTu
  if(!trustedStates.has(state))state=immutableTownLife(state,state.seed);if(dt===0)return state;
  actors=actors.slice().sort((a,b)=>(a.id??'').localeCompare(b.id??'')||a.x-b.x||a.z-b.z);
  const total=state.accumulator+dt,steps=Math.floor((total+1e-8)/TOWN_LIFE_STEP),raw=total-steps*TOWN_LIFE_STEP,accumulator=Math.abs(raw)<1e-8?0:Math.max(0,Math.round(raw*1e12)/1e12);if(!steps){const next=Object.freeze({...state,accumulator});trustedStates.add(next);return next;}const s=structuredClone(state);s.accumulator=accumulator;
- if(steps){const fs=townLifeFacilities(s.seed),plan=startingTown(s.seed);for(let i=0;i<steps;i++){if(work)assignWorkshopWorker(s,work.residentId);step(s,fs,plan,tuning,actors,work);}}return sealState(s);
+ if(steps){const fs=townLifeFacilities(s.seed,s.townLayout),plan=startingTown(s.seed,s.townLayout);for(let i=0;i<steps;i++){if(work)assignWorkshopWorker(s,work.residentId);step(s,fs,plan,tuning,actors,work);}}return sealState(s);
 }
 
 /** A finite, non-food delivery to Greenlight Apothecary. Campaign authority
@@ -406,7 +408,7 @@ function assignWorkshopWorker(s:TownLifeState,residentId:string):boolean{
  if(!r||urgentAction(r)||!available(facility))return false;
  if(r.facilityId==='workshop'&&r.action==='craft')return true;
  if(r.status==='acting'||!inputsReady(s,'craft',TOWN_LIFE_DEFAULTS))return false;
- initializeNavigation(s,townLifeFacilities(s.seed),startingTown(s.seed),TOWN_LIFE_DEFAULTS);
+ initializeNavigation(s,townLifeFacilities(s.seed,s.townLayout),startingTown(s.seed,s.townLayout),TOWN_LIFE_DEFAULTS);
  if(r.status!=='idle')cancel(s,r,'Helping prepare the commissioned workshop frame.');
  r.action='craft';r.facilityId='workshop';r.status='queued';r.waited=0;r.reason='Prefabricating the commissioned workshop frame at the town workbench.';
  s.facilities.find(f=>f.id==='workshop')!.queue.push(r.index);
@@ -438,11 +440,12 @@ function array(v:unknown,max:number):v is unknown[]{if(!Array.isArray(v)||Object
 const point=(v:unknown):v is {x:number;z:number}=>keys(v,['x','z'])&&finite(v.x,TOWN_CENTER.x-55,TOWN_CENTER.x+55)&&finite(v.z,TOWN_CENTER.z-48,TOWN_CENTER.z+48);
 const resourceRecord=(v:unknown,max:number)=>keys(v,RESOURCES)&&RESOURCES.every(k=>finite(v[k],0,max));
 export function validTownLife(v:unknown,seed:number):v is TownLifeState{
- if(!integer(seed,0,0xffffffff)||!keys(v,['seed','version','revision','tick','cycleTick','accumulator','residents','facilities','resources','sources','sourceLedger','ledger','cooldowns','gathering','contributions','playerSpent','events',...(v&&typeof v==='object'&&Object.hasOwn(v,'supplyDeliveries')?['supplyDeliveries']:[]),...(v&&typeof v==='object'&&Object.hasOwn(v,'habitatCare')?['habitatCare']:[]),...(v&&typeof v==='object'&&Object.hasOwn(v,'workshopSpent')?['workshopSpent']:[]),...(v&&typeof v==='object'&&Object.hasOwn(v,'navigation')?['navigation']:[])])||v.seed!==seed||v.version!==1||!integer(v.revision)||!integer(v.tick)||!integer(v.cycleTick,0,959)||v.tick<TOWN_LIFE_COUNTER_LIMIT&&v.cycleTick!==v.tick%960||!finite(v.accumulator,0,TOWN_LIFE_STEP-1e-8))return false;
+ if(!integer(seed,0,0xffffffff)||!keys(v,['seed','version','revision','tick','cycleTick','accumulator','residents','facilities','resources','sources','sourceLedger','ledger','cooldowns','gathering','contributions','playerSpent','events',...(v&&typeof v==='object'&&Object.hasOwn(v,'townLayout')?['townLayout']:[]),...(v&&typeof v==='object'&&Object.hasOwn(v,'supplyDeliveries')?['supplyDeliveries']:[]),...(v&&typeof v==='object'&&Object.hasOwn(v,'habitatCare')?['habitatCare']:[]),...(v&&typeof v==='object'&&Object.hasOwn(v,'workshopSpent')?['workshopSpent']:[]),...(v&&typeof v==='object'&&Object.hasOwn(v,'navigation')?['navigation']:[])])||v.seed!==seed||v.version!==1||!integer(v.revision)||!integer(v.tick)||!integer(v.cycleTick,0,959)||v.tick<TOWN_LIFE_COUNTER_LIMIT&&v.cycleTick!==v.tick%960||!finite(v.accumulator,0,TOWN_LIFE_STEP-1e-8))return false;
+ const townLayout=v.townLayout as TownLayout|undefined;if(Object.hasOwn(v,'townLayout')&&!validTownLayout(townLayout,seed))return false;
  if(Object.hasOwn(v,'habitatCare')&&(!keys(v.habitatCare,['received','stock','used'])||!integer(v.habitatCare.received,0,10000)||v.habitatCare.received%5!==0||!integer(v.habitatCare.stock,0,20)||!integer(v.habitatCare.used,0,10000)||v.habitatCare.received!==v.habitatCare.stock+v.habitatCare.used))return false;
  if(Object.hasOwn(v,'workshopSpent')&&!integer(v.workshopSpent,0,10000))return false;
  if(!array(v.residents,100)||v.residents.length!==100||!array(v.facilities,48)||v.facilities.length!==48)return false;
- const fs=townLifeFacilities(seed),roster=townResidents(seed),plan=startingTown(seed),navigation=v.navigation as TownLifeNavigation|undefined;
+ const fs=townLifeFacilities(seed,townLayout),roster=townResidents(seed),plan=startingTown(seed,townLayout),navigation=v.navigation as TownLifeNavigation|undefined;
  if(Object.hasOwn(v,'navigation')&&(!keys(v.navigation,['version','resolved','residents'])||v.navigation.version!==1||typeof v.navigation.resolved!=='boolean'||!array(v.navigation.residents,100)||v.navigation.residents.length!==100))return false;
  if(navigation)for(const n of navigation.residents){
   if(!keys(n,['stage','blocked','goal','best','departure','detour','trace'])||!integer(n.stage,-1,2)||!finite(n.blocked,0,60)||!finite(n.best,0,200)||n.goal!==null&&!point(n.goal)||n.departure!==null&&!point(n.departure)||n.detour!==null&&!point(n.detour)||!array(n.trace,33)||n.trace.length>0&&n.trace.length<6||n.trace.length%3!==0)return false;
@@ -465,7 +468,7 @@ export function validTownLife(v:unknown,seed:number):v is TownLifeState{
   const relations=new Set<string>();for(const rel of r.relationships){if(!keys(rel,['residentId','affinity','shared'])||typeof rel.residentId!=='string'||rel.residentId===r.id||!roster.some(q=>q.id===rel.residentId)||relations.has(rel.residentId)||!finite(rel.affinity,-100,100)||!integer(rel.shared))return false;relations.add(rel.residentId);}if(identity.housemateIds.some(id=>!relations.has(id)))return false;
   if(r.action!==null&&!ACTIONS.includes(r.action as TownLifeActionKind)||r.lastAction!==null&&!ACTIONS.includes(r.lastAction as TownLifeActionKind)||!['idle','queued','traveling','acting'].includes(r.status as string))return false;
   if(!finite(r.x,TOWN_CENTER.x-55,TOWN_CENTER.x+55)||!finite(r.z,TOWN_CENTER.z-48,TOWN_CENTER.z+48)||!finite(r.facing,-Math.PI,Math.PI)||!finite(r.speed,0,6)||!finite(r.distance,0,TOWN_LIFE_COUNTER_LIMIT)||!integer(r.completed)||!integer(r.interruptions)||!finite(r.unmetSeconds,0,TOWN_LIFE_COUNTER_LIMIT)||!finite(r.encouragementCooldown,0,60)||typeof r.reason!=='string'||r.reason.length>240)return false;
-  if(!finite(r.remaining,0,30)||!finite(r.batch,.5,2)||!finite(r.committed,0,8)||!finite(r.waited,0,90)||!finite(r.lease,0,300)||!integer(r.slot,-1,23)||!array(r.path,5)||!r.path.every(point)||!integer(r.pathIndex,0,r.path.length))return false;
+  if(!finite(r.remaining,0,30)||!finite(r.batch,.5,2)||!finite(r.committed,0,8)||!finite(r.waited,0,90)||!finite(r.lease,0,300)||!integer(r.slot,-1,23)||!array(r.path,townLayout?32:5)||!r.path.every(point)||!integer(r.pathIndex,0,r.path.length))return false;
   if(navigation){const n=navigation.residents[i]!,trace=n.trace;if((trace.length?Math.hypot(trace.at(-3)!-r.x,trace.at(-2)!-r.z)>1e-7:r.speed!==0)||n.stage===-1&&r.status!=='acting'||r.status!=='acting'&&n.stage!==0||r.status==='acting'&&n.stage>=townLifeTaskStages(r.action as TownLifeActionKind))return false;if(n.stage===-1){const f=fs.find(f=>f.id===r.facilityId);if(!f||Math.hypot(r.x-legacySlotPoint(f,r.slot).x,r.z-legacySlotPoint(f,r.slot).z)>1e-7)return false;}}
   if(Object.hasOwn(r,'habitatCare')&&(r.habitatCare!==true||r.status!=='acting'||r.action!=='recover'||r.facilityId!=='apothecary'))return false;
   const p={x:r.x,z:r.z};if(!townPathClear(plan,p,p,.56))return false;
@@ -493,7 +496,7 @@ export function immutableTownLife(value:unknown,seed:number):TownLifeState{if(!v
 export function validTownLifeCommand(v:unknown):v is TownLifeCommand{return keys(v,['kind','targetId','expectedRevision'])&&COMMANDS.includes(v.kind as TownLifeCommand['kind'])&&typeof v.targetId==='string'&&v.targetId.length>=1&&v.targetId.length<=80&&integer(v.expectedRevision);}
 export function townLifePlayerCost(life:TownLifeState|undefined){return life?{...life.playerSpent}:{scrap:0,core:0,water:0};}
 export function townLifeCommandCost(kind:TownLifeCommand['kind']){return {scrap:kind==='donate-supplies'||kind==='repair-service'||kind==='host-gathering'?2:0,core:0,water:kind==='donate-water'||kind==='host-gathering'?1:0};}
-export function townLifeCommandPosition(life:TownLifeState,command:TownLifeCommand):{x:number;z:number}|undefined{if(command.kind==='encourage-resident'){const r=life.residents.find(r=>r.id===command.targetId);return r?{x:r.x,z:r.z}:undefined;}const f=townLifeFacilities(life.seed).find(f=>f.id===command.targetId);return f?{x:f.x,z:f.z}:undefined;}
+export function townLifeCommandPosition(life:TownLifeState,command:TownLifeCommand):{x:number;z:number}|undefined{if(command.kind==='encourage-resident'){const r=life.residents.find(r=>r.id===command.targetId);return r?{x:r.x,z:r.z}:undefined;}const f=townLifeFacilities(life.seed,life.townLayout).find(f=>f.id===command.targetId);return f?{x:f.x,z:f.z}:undefined;}
 export function applyTownLifeCommand(state:TownLifeState,context:{seed:number;zone:string;player:{x:number;z:number;hp:number};inventory:{scrap:number;core:number;water:number}},command:TownLifeCommand,authorityPosition?:{x:number;z:number}):{life:TownLifeState;inventory:{scrap:number;core:number;water:number};message:string}|null{
  if(!validTownLifeCommand(command)||(state.seed!==context.seed||!trustedStates.has(state)&&!validTownLife(state,context.seed))||context.zone!=='valley'||command.expectedRevision!==state.revision||state.revision>=TOWN_LIFE_COUNTER_LIMIT||!finite(context.player.hp,.000001,100)||!finite(context.player.x,-1e6,1e6)||!finite(context.player.z,-1e6,1e6))return null;
  const target=authorityPosition??townLifeCommandPosition(state,command),cost=townLifeCommandCost(command.kind);if(!target||!finite(target.x,TOWN_CENTER.x-60,TOWN_CENTER.x+60)||!finite(target.z,TOWN_CENTER.z-62,TOWN_CENTER.z+62)||Math.hypot(target.x-context.player.x,target.z-context.player.z)>3.5||(['scrap','core','water']as const).some(k=>!integer(context.inventory[k])||context.inventory[k]<cost[k]||state.playerSpent[k]+cost[k]>TOWN_LIFE_COUNTER_LIMIT))return null;
@@ -518,7 +521,7 @@ export function townLifePose(life:TownLifeState,index:number):TownResidentPose{
  return {x:r.x,z:r.z,facing:r.facing,activity,moving:r.speed>.001,speed:r.speed,distance:r.distance,...(life.navigation?{authoritativeMotion:1 as const,contactResolved:life.navigation.resolved,motionPath:life.navigation.residents[index]!.trace.length?Array.from({length:life.navigation.residents[index]!.trace.length/3},(_,j)=>{const p=life.navigation!.residents[index]!.trace;return {x:p[j*3]!,z:p[j*3+1]!,t:p[j*3+2]!*TOWN_NAV_STEP};}):[{x:r.x,z:r.z,t:0},{x:r.x,z:r.z,t:TOWN_LIFE_STEP}]}:{} )};
 }
 export function townLifeSummary(life:TownLifeState,index:number):TownLifeSummary{
- if(!integer(index,0,99))throw RangeError('Resident index must be 0–99.');const r=life.residents[index]!,identity=townResidents(life.seed)[index]!,f=townLifeFacilities(life.seed).find(f=>f.id===r.facilityId),diagnostics:string[]=[];
+ if(!integer(index,0,99))throw RangeError('Resident index must be 0–99.');const r=life.residents[index]!,identity=townResidents(life.seed)[index]!,f=townLifeFacilities(life.seed,life.townLayout).find(f=>f.id===r.facilityId),diagnostics:string[]=[];
  for(const k of TOWN_LIFE_NEEDS)if(r.needs[k]<25)diagnostics.push(`${k} is low (${Math.round(r.needs[k])}/100).`);if(r.status==='queued')diagnostics.push(`Waiting ${Math.round(r.waited)} seconds in a first-come service queue.`);if(r.unmetSeconds>0)diagnostics.push(`${Math.round(r.unmetSeconds)} recent seconds with a critical unmet need.`);if(life.resources.pantry<40)diagnostics.push('Town pantry is low; cooking needs harvested produce and water.');if(life.resources.water<40)diagnostics.push('Town water is low; drawing water or a donation can help.');
  if(r.habitatCare)diagnostics.push('Botanical care: 1.5× energy, hygiene and comfort recovery during achieved treatment; the dose is spent even if interrupted.');if(life.habitatCare&&(r.facilityId==='apothecary'||r.habitatCare))diagnostics.push(`Greenlight botanical care: ${life.habitatCare.stock} doses in stock; ${life.habitatCare.used} spent.`);
  const desireText:Record<TownLifeDesireKind,string>={'share-company':`Build friendships around ${identity.interest}`,'practice-craft':`Practice a personal craft inspired by ${identity.interest}`,'tend-garden':'Make the shared garden productive','help-town':'Help keep shared services supplied','settle-in':`Make life at ${identity.address} comfortable`};

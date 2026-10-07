@@ -1,0 +1,30 @@
+TAP version 13
+# (node:9259) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: actual main preview navigation owns real Worker cancellation, page lifecycle remount and forbidden-destination safety
+ok 1 - actual main preview navigation owns real Worker cancellation, page lifecycle remount and forbidden-destination safety
+  ---
+  duration_ms: 539.709276
+  type: 'test'
+  ...
+# Subtest: actual startup boundary awaits only bounded preparation and retains the ordinary source-of-truth loaders afterward
+ok 2 - actual startup boundary awaits only bounded preparation and retains the ordinary source-of-truth loaders afterward
+  ---
+  duration_ms: 0.571808
+  type: 'test'
+  ...
+# Subtest: regional streaming survives persisted pagehide instead of being permanently disposed on BFCache pause
+ok 3 - regional streaming survives persisted pagehide instead of being permanently disposed on BFCache pause
+  ---
+  duration_ms: 0.189674
+  type: 'test'
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 3
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 789.802492

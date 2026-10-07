@@ -82,7 +82,7 @@ test('freight commands reject airborne crouched raised attacking and guarded pos
 });
 test('source activation cannot entomb present, disconnected or expired retained peers, or the durable survey crate',()=>{
  const s=source(),box=regionalTradeConstructionBoxes(s.seed,plan(s).sources[0]!.id).find(b=>b.solid)!;assert(box);
- for(const kind of ['present','disconnected','expired','crate'] as const){const initial=copy(s),position={x:box.center.x,z:box.center.z};if(kind==='crate'){const body={...traversalBodies(initial)[0]!,...position,y:box.center.y};initial.traversal=traversalFromBodies([body],initial)!;valid(initial);}
+ for(const kind of ['present','disconnected','expired','crate'] as const){const initial=copy(s),position={x:box.center.x,z:box.center.z};if(kind==='crate'){const body={...traversalBodies(initial)[0]!,...position,y:box.center.y};initial.traversal=traversalFromBodies([body,...traversalBodies(initial).slice(1)],initial)!;valid(initial);}
  const room=createRoom('host','Host',initial,1000),host=room.players[0]!;
  if(kind!=='crate'){const peer=makePlayer('guest','Guest',1,at(initial,position.x,position.z),1000);if(kind==='disconnected')peer.active=false;if(kind==='expired')peer.lastSeen=-100000;room.players.push(peer);}
  const before=copy(room.world.frontierTrade),notices=syncRoom(room,'host',{seq:1,sessionId:host.sessionId,actions:[command(room.world)]},1000);assert.deepEqual(room.world.frontierTrade,before,kind);assert(notices.some(n=>n.includes('construction footprint')),`${kind}: ${notices}`);assert.equal(regionalTradeObstacles(room.world.seed,room.world.frontierTrade!).length,0);valid(room.world);
@@ -125,7 +125,7 @@ test('four-player repair and freight-store races commit one bounded job each and
 });
 test('store construction uses the same durable-peer and crate footprint guard as source activation',()=>{
  const s=readyStore(),box=regionalTradeConstructionBoxes(s.seed,plan(s).projects[0]!.id).find(b=>b.solid)!;assert(box);
- for(const kind of ['present','disconnected','crate'] as const){let initial=copy(s);if(kind==='crate'){initial={...initial,traversal:traversalFromBodies([{...traversalBodies(initial)[0]!,x:box.center.x,y:box.center.y,z:box.center.z}],initial)!};valid(initial);}
+ for(const kind of ['present','disconnected','crate'] as const){let initial=copy(s);if(kind==='crate'){initial={...initial,traversal:traversalFromBodies([{...traversalBodies(initial)[0]!,x:box.center.x,y:box.center.y,z:box.center.z},...traversalBodies(initial).slice(1)],initial)!};valid(initial);}
  const room=createRoom('host','Host',initial,1000),host=room.players[0]!;if(kind!=='crate'){const peer=makePlayer('guest','Guest',1,at(initial,box.center.x,box.center.z),1000);if(kind==='disconnected')peer.active=false;room.players.push(peer);}
  const before=copy(room.world.frontierTrade),notices=syncRoom(room,'host',{seq:1,sessionId:host.sessionId,actions:[command(room.world,'build-store')]},1000);assert.deepEqual(room.world.frontierTrade,before,kind);assert(notices.some(n=>n.includes('construction footprint')),`${kind}: ${notices}`);assert.equal(room.world.frontierTrade!.routes[0]!.embodied,0);valid(room.world);
  }
@@ -150,7 +150,7 @@ test('four-player reserve withdrawal races issue one shared credit and sequence 
  }finally{f.stop();}
 });
 test('withdrawal neither creates a construction footprint nor spends the unchanged wilderness ledger',()=>{
- let s=finishRoute(source(),0);const box=regionalTradeConstructionBoxes(s.seed,plan(s).projects[0]!.id).find(b=>b.solid)!;s={...s,traversal:traversalFromBodies([{...traversalBodies(s)[0]!,x:box.center.x,y:box.center.y,z:box.center.z}],s)!};valid(s);
+ let s=finishRoute(source(),0);const box=regionalTradeConstructionBoxes(s.seed,plan(s).projects[0]!.id).find(b=>b.solid)!;s={...s,traversal:traversalFromBodies([{...traversalBodies(s)[0]!,x:box.center.x,y:box.center.y,z:box.center.z},...traversalBodies(s).slice(1)],s)!};valid(s);
  const room=createRoom('host','Host',s,1000),host=room.players[0]!,before=copy(regionalTradeObstacles(s.seed,s.frontierTrade!));const notices=syncRoom(room,'host',{seq:1,sessionId:host.sessionId,actions:[command(room.world,'withdraw-reserve')]},1000);assert.deepEqual(notices,[]);assert.deepEqual(regionalTradeWithdrawn(room.world.frontierTrade),{wood:0,stone:8});assert.deepEqual(regionalTradeObstacles(s.seed,room.world.frontierTrade!),before);assert.deepEqual(room.world.wilderness,s.wilderness);valid(room.world);
 });
 test('withdrawn quarry and timber reserve funds V31 collector delivery once under concurrent clients without double allocation',async()=>{

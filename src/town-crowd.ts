@@ -39,7 +39,7 @@ function neighbors(grid:Map<string,number[]>,p:Point){const out:number[]=[],x=Ma
 export class TownCrowd {
  readonly seed:number;readonly plan:TownPlan;readonly residents;private cache=new Map<number,CrowdPose[]>();private cacheKey='';pairChecks=0;maxNeighbors=0;frames=0;unresolvedActorContacts=0;
  private lifeCache:{input:readonly TownResidentPose[];signature:string;population:number;avoidance:number;poses:CrowdPose[]}|undefined;
- constructor(seed:number){this.seed=seed;this.plan=startingTown(seed);this.residents=townResidents(seed);}
+ constructor(seed:number,townLayout?:import('./starting-town.ts').TownLayout){this.seed=seed;this.plan=startingTown(seed,townLayout);this.residents=townResidents(seed);}
  private separate(poses:CrowdPose[],origins:readonly Point[],strength:number,actors:readonly TownActor[]=[],passes=6){
   for(let pass=0;pass<passes;pass++){
    const grid=buckets(poses);

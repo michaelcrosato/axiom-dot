@@ -1,4 +1,4 @@
-import {startingTown,townChunkBoxes,townReserved,townTerrainHeight,TOWN_CENTER,TOWN_BOUNDS} from './starting-town.ts';
+import {type TownLayout,startingTown,townChunkBoxes,townReserved,townTerrainHeight,TOWN_CENTER,TOWN_BOUNDS} from './starting-town.ts';
 import {generateValley,valleyHeight,type ValleyPlan} from './valley.ts';
 import {seedSample,type Vec3} from './procedural.ts';
 import type {WildernessFeature} from './wilderness.ts';
@@ -33,14 +33,14 @@ export interface RegionalPlan {
  budget:{maxSites:number;maxRoads:number;maxCandidatesPerChunk:number;maxTerrainVerticesPerChunk:number;maxCachedFeatureChunks:number};
 }
 export interface RegionalChunk {
- version:1;seed:number;cx:number;cz:number;key:string;bounds:RegionalBounds;
+ townLayout?:TownLayout;version:1;seed:number;cx:number;cz:number;key:string;bounds:RegionalBounds;
  terrain:{vertices:number[];indices:number[];colors:number[];normals:number[];bound:number;step:number};
  biomes:RegionalBiomeId[];roads:RegionalMesh[];water:RegionalMesh[];structures:RegionalBox[];features:WildernessFeature[];
  sites:RegionalSite[];budget:{candidates:number;vertices:number;triangles:number};
 }
 interface Segment {a:Vec3;b:Vec3;width:number;id:string}
-interface Context {plan:RegionalPlan;valley:ValleyPlan;phases:number[];roads:Segment[];rivers:Segment[];roadIndex:Map<string,Segment[]>;riverIndex:Map<string,Segment[]>;townRoads:RegionalRoad[];townSegments:Segment[]}
-const contexts=new Map<number,Context>();
+interface Context {townLayout?:TownLayout;plan:RegionalPlan;valley:ValleyPlan;phases:number[];roads:Segment[];rivers:Segment[];roadIndex:Map<string,Segment[]>;riverIndex:Map<string,Segment[]>;townRoads:RegionalRoad[];townSegments:Segment[]}
+const contexts=new Map<string,Context>();
 const featureCache=new Map<string,WildernessFeature[]>();
 let featureCompilations=0,contextCompilations=0;
 const clamp=(v:number,a:number,b:number)=>Math.max(a,Math.min(b,v));
@@ -90,8 +90,8 @@ function valleyExit(valley:ValleyPlan,side:number):Vec3[]{
  if(finish<0)throw new Error('Regional valley gateway has no traversable route');
  const path:Vec3[]=[];for(let at=finish;at>=0;at=previous[at]!){path.push({x:(at%n)*2-80,y:heights[at*3+1]!,z:Math.floor(at/n)*2-80});if(at===first)break;}path.reverse();if(Math.hypot(path[0]!.x-start.x,path[0]!.z-start.z)>.001)path.unshift({...start});return path;
 }
-function context(seed:number):Context {
- validSeed(seed);const old=contexts.get(seed);if(old){contexts.delete(seed);contexts.set(seed,old);return old;}
+function context(seed:number,townLayout?:TownLayout):Context {
+ validSeed(seed);if(townLayout!==undefined)startingTown(seed,townLayout);const cacheKey=seed+':'+(townLayout?.manifestHash??'legacy');const old=contexts.get(cacheKey);if(old){contexts.delete(cacheKey);contexts.set(cacheKey,old);return old;}
  contextCompilations++;
  const sample=(path:string,purpose:string)=>seedSample(seed,REGIONAL_VERSION,'regional-world',path,purpose);
  const valley=generateValley(seed),phases=[sample('terrain','phase-a')*Math.PI*2,sample('terrain','phase-b')*Math.PI*2,sample('terrain','phase-c')*Math.PI*2];
@@ -139,15 +139,17 @@ function context(seed:number):Context {
  const plan:RegionalPlan={version:1,seed,area:REGION_AREA,bound:REGION_BOUND,chunkSize:CHUNK_SIZE,terrainStep:REGION_STEP,bounds:{minX:-REGION_BOUND,maxX:REGION_BOUND,minZ:-REGION_BOUND,maxZ:REGION_BOUND},biomes:BIOMES.map(b=>({...b})),roads,water,sites,gateways,routeGraph:{nodes,edges:[...roads.map(r=>({id:r.id,from:r.from,to:r.to})),{id:idFor(seed,'route/core-valley-bridge'),from:valley.settlements[0]!.id,to:valley.settlements[1]!.id}]},budget:{maxSites:12,maxRoads:16,maxCandidatesPerChunk:REGIONAL_MAX_CANDIDATES,maxTerrainVerticesPerChunk:1089,maxCachedFeatureChunks:REGIONAL_FEATURE_CACHE_LIMIT}};
  const tc=TOWN_CENTER,townRoads:RegionalRoad[]=[];
  const street=(key:string,points:Vec3[],width=4)=>townRoads.push({id:`town:1:${seed}/road/${key}`,from:'town',to:'town',width,points});
+ if(townLayout){for(const r of startingTown(seed,townLayout).streets!)street(r.id,r.points,r.width);}else {
  for(const z of [-44,-24,0,24,44])street('row-'+z,[{x:tc.x-48,y:6,z:tc.z+z},{x:tc.x+48,y:6,z:tc.z+z}],z===0?6:4);
  for(const x of [-48,0,48])street('lane-'+x,[{x:tc.x+x,y:6,z:tc.z+(x===0?0:-44)},{x:tc.x+x,y:6,z:tc.z+44}]);
+ }
  // The connector's final leg shares the west trail's centreline. Join it at the
  // trail's own graded profile: a flat gateway-height leg left a ~1 m step where
  // its blend ended (up to 0.5 grade on about one seed in ten).
  const gate=gateways[0]!.position,join=segments([roads[0]!]).map(s=>nearSegment(-100,gate.z,s)).reduce((a,b)=>b.distance<a.distance?b:a);
  street('valley-access',[{x:tc.x+48,y:6,z:tc.z},{x:-100,y:6,z:tc.z},{x:-100,y:Math.fround(join.y),z:gate.z},{...gate}],4);
- const result:Context={townRoads:freeze(townRoads),townSegments:segments(townRoads),plan:freeze(plan),valley,phases,roads:roadSegments,rivers:riverSegments,roadIndex:indexSegments(roadSegments,16),riverIndex:indexSegments(riverSegments,16)};
- if(contexts.size>=REGIONAL_CONTEXT_CACHE_LIMIT)contexts.delete(contexts.keys().next().value!);contexts.set(seed,result);return result;
+ const result:Context={...(townLayout?{townLayout}:{}),townRoads:freeze(townRoads),townSegments:segments(townRoads),plan:freeze(plan),valley,phases,roads:roadSegments,rivers:riverSegments,roadIndex:indexSegments(roadSegments,16),riverIndex:indexSegments(riverSegments,16)};
+ if(contexts.size>=REGIONAL_CONTEXT_CACHE_LIMIT)contexts.delete(contexts.keys().next().value!);contexts.set(cacheKey,result);return result;
 }
 /** Small immutable macro metadata only; querying it never constructs chunks or props. */
 export function regionalPlan(seed:number):RegionalPlan{return context(seed).plan;}
@@ -171,14 +173,14 @@ function vertexHeight(c:Context,x:number,z:number):number {
 function townVertexHeight(c:Context,x:number,z:number){let h=vertexHeight(c,x,z);if(Math.max(Math.abs(x),Math.abs(z))<=CORE_BOUND||x<TOWN_CENTER.x-80||x> -72||z<TOWN_CENTER.z-TOWN_BOUNDS.halfDepth-20||z>c.plan.gateways[0]!.position.z+8)return h;for(const segment of c.townSegments){const p=nearSegment(x,z,segment);if(p.distance<segment.width/2+5){const t=1-smooth((p.distance-segment.width/2-1)/4);h+=(p.y-h)*t;}}return townTerrainHeight(x,z,h);}
 function townCleared(c:Context,x:number,z:number){if(x<TOWN_CENTER.x-83||x> -70||z<TOWN_CENTER.z-TOWN_BOUNDS.halfDepth-23||z>c.plan.gateways[0]!.position.z+10)return false;return townReserved(x,z,23)||c.townSegments.some(s=>nearSegment(x,z,s).distance<s.width/2+8);}
 /** Exact barycentric surface of global 2 m triangles, including clipped boundary cells. */
-function sampleRegionalHeight(seed:number,x:number,z:number,town:boolean):number {
- validCoordinates(x,z);const c=context(seed);x=clamp(x,-REGION_BOUND,REGION_BOUND);z=clamp(z,-REGION_BOUND,REGION_BOUND);
+function sampleRegionalHeight(seed:number,x:number,z:number,town:boolean,townLayout?:TownLayout):number {
+ validCoordinates(x,z);const c=context(seed,townLayout);x=clamp(x,-REGION_BOUND,REGION_BOUND);z=clamp(z,-REGION_BOUND,REGION_BOUND);
  if(Math.max(Math.abs(x),Math.abs(z))<=CORE_BOUND)return valleyHeight(c.valley,x,z);
  const ix=Math.min(Math.floor((REGION_BOUND-1e-9)/REGION_STEP),Math.floor(x/REGION_STEP)),iz=Math.min(Math.floor((REGION_BOUND-1e-9)/REGION_STEP),Math.floor(z/REGION_STEP));
  const x0=Math.max(-REGION_BOUND,ix*REGION_STEP),x1=Math.min(REGION_BOUND,(ix+1)*REGION_STEP),z0=Math.max(-REGION_BOUND,iz*REGION_STEP),z1=Math.min(REGION_BOUND,(iz+1)*REGION_STEP),u=(x-x0)/(x1-x0),v=(z-z0)/(z1-z0),sample=town?townVertexHeight:vertexHeight,a=sample(c,x0,z0),b=sample(c,x1,z0),d=sample(c,x1,z1),e=sample(c,x0,z1);
  return u+v<=1?a+(b-a)*u+(e-a)*v:d+(e-d)*(1-u)+(b-d)*(1-v);
 }
-export function regionalHeight(seed:number,x:number,z:number){return sampleRegionalHeight(seed,x,z,true);}
+export function regionalHeight(seed:number,x:number,z:number,townLayout?:TownLayout){return sampleRegionalHeight(seed,x,z,true,townLayout);}
 export function legacyRegionalHeight(seed:number,x:number,z:number){return sampleRegionalHeight(seed,x,z,false);}
 function terrainAxes(min:number,max:number){const points=[min];for(let p=(Math.floor(min/REGION_STEP)+1)*REGION_STEP;p<max-1e-8;p+=REGION_STEP)points.push(p);points.push(max);return points;}
 function nearestRiver(c:Context,x:number,z:number){let closest={distance:Infinity,y:0,width:0};for(const s of localSegments(c.riverIndex,x,z)){const v=nearSegment(x,z,s);if(v.distance<closest.distance)closest={...v,width:s.width};}return closest;}
@@ -251,9 +253,9 @@ function siteStructures(site:RegionalSite):RegionalBox[]{
  }
  return out;
 }
-function structuresFor(c:Context,cx:number,cz:number){const key=chunkKey(cx,cz);return [...c.plan.sites.filter(s=>s.ownerChunk===key).flatMap(siteStructures),...townChunkBoxes(c.plan.seed,cx,cz)];}
-export function regionalObstaclesNear(seed:number,x:number,z:number):WildernessObstacle[]{
- validCoordinates(x,z);const c=context(seed),at=regionalChunkAt(x,z),out:WildernessObstacle[]=[];
+function structuresFor(c:Context,cx:number,cz:number){const key=chunkKey(cx,cz);return [...c.plan.sites.filter(s=>s.ownerChunk===key).flatMap(siteStructures),...townChunkBoxes(c.plan.seed,cx,cz,c.townLayout)];}
+export function regionalObstaclesNear(seed:number,x:number,z:number,townLayout?:TownLayout):WildernessObstacle[]{
+ validCoordinates(x,z);const c=context(seed,townLayout),at=regionalChunkAt(x,z),out:WildernessObstacle[]=[];
  for(let cz=Math.max(REGION_MIN_CHUNK,at.cz-1);cz<=Math.min(REGION_MAX_CHUNK,at.cz+1);cz++)for(let cx=Math.max(REGION_MIN_CHUNK,at.cx-1);cx<=Math.min(REGION_MAX_CHUNK,at.cx+1);cx++){
   for(const f of featuresFor(c,cx,cz))if(!townCleared(c,f.x,f.z))out.push(...f.solids);
   for(const b of structuresFor(c,cx,cz))if(b.solid)out.push({featureId:b.id,x:b.center.x,y:b.center.y,z:b.center.z,hx:b.half.x,hy:b.half.y,hz:b.half.z});
@@ -274,14 +276,14 @@ function ribbon(c:Context,item:RegionalRoad|RegionalWater,bounds:RegionalBounds,
   for(let k=0;k<steps;k++){
    const t0=k/steps,t1=(k+1)/steps,ax=a.x+dx*t0,az=a.z+dz*t0,bx=a.x+dx*t1,bz=a.z+dz*t1,ay=a.y+(b.y-a.y)*t0,by=a.y+(b.y-a.y)*t1;
    const polygon=clipPolygon([{x:ax-nx,y:ay,z:az-nz},{x:ax+nx,y:ay,z:az+nz},{x:bx+nx,y:by,z:bz+nz},{x:bx-nx,y:by,z:bz-nz}],bounds);if(polygon.length<3)continue;
-   const base=vertices.length/3;for(const p of polygon)vertices.push(p.x,isWater?p.y+.015:regionalHeight(c.plan.seed,p.x,p.z)+.045,p.z);
+   const base=vertices.length/3;for(const p of polygon)vertices.push(p.x,isWater?p.y+.015:regionalHeight(c.plan.seed,p.x,p.z,c.townLayout)+.045,p.z);
    for(let j=1;j<polygon.length-1;j++)indices.push(base,base+j,base+j+1);
   }
  }
  return vertices.length?{id:item.id,vertices,indices,color:isWater?'#5c9995':'#b4a486'}:undefined;
 }
-export function generateRegionalChunk(seed:number,cx:number,cz:number):RegionalChunk {
- validChunk(cx,cz);const c=context(seed),bounds=regionalChunkBounds(cx,cz),xs=terrainAxes(bounds.minX,bounds.maxX),zs=terrainAxes(bounds.minZ,bounds.maxZ),vertices:number[]=[],indices:number[]=[],colors:number[]=[],normals:number[]=[];
+export function generateRegionalChunk(seed:number,cx:number,cz:number,townLayout?:TownLayout):RegionalChunk {
+ validChunk(cx,cz);const c=context(seed,townLayout),bounds=regionalChunkBounds(cx,cz),xs=terrainAxes(bounds.minX,bounds.maxX),zs=terrainAxes(bounds.minZ,bounds.maxZ),vertices:number[]=[],indices:number[]=[],colors:number[]=[],normals:number[]=[];
  const heightMemo=new Map<string,number>(),height=(x:number,z:number)=>{const key=`${x}:${z}`;let h=heightMemo.get(key);if(h===undefined){h=townVertexHeight(c,x,z);heightMemo.set(key,h);}return h;};
  const linear=(v:number)=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4;
  for(const z of zs)for(const x of xs){
@@ -293,7 +295,7 @@ export function generateRegionalChunk(seed:number,cx:number,cz:number):RegionalC
  for(let iz=0;iz<zs.length-1;iz++)for(let ix=0;ix<xs.length-1;ix++){const a=iz*xs.length+ix,b=a+1,e=a+xs.length,d=e+1;indices.push(a,e,b,b,e,d);}
  const roads=[...c.plan.roads,...c.townRoads].map(r=>ribbon(c,r,bounds,false)).filter((m):m is RegionalMesh=>!!m),water=c.plan.water.map(r=>ribbon(c,r,bounds,true)).filter((m):m is RegionalMesh=>!!m),key=chunkKey(cx,cz);
  const biomes=[...new Set([{x:bounds.minX,z:bounds.minZ},{x:bounds.maxX,z:bounds.maxZ},{x:(bounds.minX+bounds.maxX)/2,z:(bounds.minZ+bounds.maxZ)/2}].map(p=>regionalBiomeAt(seed,p.x,p.z).id))];
- return {version:1,seed,cx,cz,key,bounds,terrain:{vertices,indices,colors,normals,bound:REGION_BOUND,step:REGION_STEP},biomes,roads,water,structures:structuresFor(c,cx,cz),features:featuresFor(c,cx,cz).filter(f=>!townCleared(c,f.x,f.z)),sites:c.plan.sites.filter(s=>s.ownerChunk===key),budget:{candidates:REGIONAL_MAX_CANDIDATES,vertices:vertices.length/3,triangles:indices.length/3}};
+ return {version:1,seed,...(townLayout?{townLayout}:{}),cx,cz,key,bounds,terrain:{vertices,indices,colors,normals,bound:REGION_BOUND,step:REGION_STEP},biomes,roads,water,structures:structuresFor(c,cx,cz),features:featuresFor(c,cx,cz).filter(f=>!townCleared(c,f.x,f.z)),sites:c.plan.sites.filter(s=>s.ownerChunk===key),budget:{candidates:REGIONAL_MAX_CANDIDATES,vertices:vertices.length/3,triangles:indices.length/3}};
 }
 /** Read-only diagnostics expose bounds, never mutable cache entries. */
 export function regionalCacheStats(){return {contexts:contexts.size,featureChunks:featureCache.size,featureCompilations,contextCompilations,maxContexts:REGIONAL_CONTEXT_CACHE_LIMIT,maxFeatureChunks:REGIONAL_FEATURE_CACHE_LIMIT};}
@@ -301,4 +303,4 @@ export function regionalCacheStats(){return {contexts:contexts.size,featureChunk
 /** Legacy identity lookup is retained for saved receipts; new gathering excludes developed streets. */
 export function regionalTownCleared(seed:number,x:number,z:number){return townCleared(context(seed),x,z);}
 
-export function regionalTownRoads(seed:number):readonly RegionalRoad[]{return context(seed).townRoads;}
+export function regionalTownRoads(seed:number,townLayout?:TownLayout):readonly RegionalRoad[]{return context(seed,townLayout).townRoads;}

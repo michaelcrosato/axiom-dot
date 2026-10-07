@@ -1,0 +1,186 @@
+TAP version 13
+# Subtest: restart createState keeps exact foundation and seed, clearing all progress
+ok 1 - restart createState keeps exact foundation and seed, clearing all progress
+  ---
+  duration_ms: 72.693697
+  type: 'test'
+  ...
+# Subtest: restart createConnectedState keeps exact foundation and seed, clearing all progress
+ok 2 - restart createConnectedState keeps exact foundation and seed, clearing all progress
+  ---
+  duration_ms: 141.293657
+  type: 'test'
+  ...
+# Subtest: restart createRegionalState keeps exact foundation and seed, clearing all progress
+ok 3 - restart createRegionalState keeps exact foundation and seed, clearing all progress
+  ---
+  duration_ms: 19.027399
+  type: 'test'
+  ...
+# Subtest: every other seed, flavor, legacy save, checkpoint and setting retains exact bytes
+ok 4 - every other seed, flavor, legacy save, checkpoint and setting retains exact bytes
+  ---
+  duration_ms: 706.86386
+  type: 'test'
+  ...
+# Subtest: protected pre-reset bytes survive autosaves, another restart, recovery and later autosaves
+ok 5 - protected pre-reset bytes survive autosaves, another restart, recovery and later autosaves
+  ---
+  duration_ms: 1025.847303
+  type: 'test'
+  ...
+# Subtest: checkpoint and atomic-commit quota failures preserve current save, pointer and existing recoveries
+ok 6 - checkpoint and atomic-commit quota failures preserve current save, pointer and existing recoveries
+  ---
+  duration_ms: 114.739126
+  type: 'test'
+  ...
+# Subtest: restore failures preserve the fresh run and its original recovery checkpoint
+ok 7 - restore failures preserve the fresh run and its original recovery checkpoint
+  ---
+  duration_ms: 27.764289
+  type: 'test'
+  ...
+# Subtest: unsaved live progress is checkpointed without an initial mutating save
+ok 8 - unsaved live progress is checkpointed without an initial mutating save
+  ---
+  duration_ms: 20.408023
+  type: 'test'
+  ...
+# Subtest: legacy-only and legacy-selected generation-1 sessions restart without modifying the v1 alias
+ok 9 - legacy-only and legacy-selected generation-1 sessions restart without modifying the v1 alias
+  ---
+  duration_ms: 20.649653
+  type: 'test'
+  ...
+# Subtest: seed selection resumes epoch progress and never mistakes an existing slot for fresh
+ok 10 - seed selection resumes epoch progress and never mistakes an existing slot for fresh
+  ---
+  duration_ms: 30.788673
+  type: 'test'
+  ...
+# Subtest: corrupt or wrong-world recovery data cannot restore or overwrite current progress
+ok 11 - corrupt or wrong-world recovery data cannot restore or overwrite current progress
+  ---
+  duration_ms: 47.383928
+  type: 'test'
+  ...
+# Subtest: invalid record blocks further writes while current and original raw sources remain intact
+ok 12 - invalid record blocks further writes while current and original raw sources remain intact
+  ---
+  duration_ms: 9.469559
+  type: 'test'
+  ...
+# Subtest: corrupt current epoch payload falls back to its rolling backup without touching reset recovery
+ok 13 - corrupt current epoch payload falls back to its rolling backup without touching reset recovery
+  ---
+  duration_ms: 25.939807
+  type: 'test'
+  ...
+# Subtest: old confirmations reject autosaves, pointer changes, mutations and a newer reset without writes
+ok 14 - old confirmations reject autosaves, pointer changes, mutations and a newer reset without writes
+  ---
+  duration_ms: 18.459796
+  type: 'test'
+  ...
+# Subtest: pre-upgrade and pre-contact checkpoints retain exact original bytes across fresh epochs
+ok 15 - pre-upgrade and pre-contact checkpoints retain exact original bytes across fresh epochs
+  ---
+  duration_ms: 29.523793
+  type: 'test'
+  ...
+# Subtest: new epoch pack-checkpoint creation uses fresh save bytes rather than archived original progress
+ok 16 - new epoch pack-checkpoint creation uses fresh save bytes rather than archived original progress
+  ---
+  duration_ms: 22.912318
+  type: 'test'
+  ...
+# Subtest: operation returns defensive snapshots and repeated clicks cannot mutate committed data
+ok 17 - operation returns defensive snapshots and repeated clicks cannot mutate committed data
+  ---
+  duration_ms: 5.88666
+  type: 'test'
+  ...
+# Subtest: recovery archive exports ignore invalid, wrong-world and unrelated records and remain read-only
+ok 18 - recovery archive exports ignore invalid, wrong-world and unrelated records and remain read-only
+  ---
+  duration_ms: 8.176661
+  type: 'test'
+  ...
+# Subtest: an explicitly selected archive is directly recoverable without replacing the original protected checkpoint
+ok 19 - an explicitly selected archive is directly recoverable without replacing the original protected checkpoint
+  ---
+  duration_ms: 42.920547
+  type: 'test'
+  ...
+# Subtest: checkpoint selection rejects arbitrary keys, other worlds and changed or corrupt content without mutation
+ok 20 - checkpoint selection rejects arbitrary keys, other worlds and changed or corrupt content without mutation
+  ---
+  duration_ms: 15.122442
+  type: 'test'
+  ...
+# Subtest: a tab holding pre-reset revision cannot overwrite the new session or any checkpoints
+ok 21 - a tab holding pre-reset revision cannot overwrite the new session or any checkpoints
+  ---
+  duration_ms: 5.522067
+  type: 'test'
+  ...
+# Subtest: a tab holding pre-restore revision cannot overwrite the recovered session
+ok 22 - a tab holding pre-restore revision cannot overwrite the recovered session
+  ---
+  duration_ms: 12.804814
+  type: 'test'
+  ...
+# Subtest: ordinary same-epoch saves remain valid and never increment the reset revision
+ok 23 - ordinary same-epoch saves remain valid and never increment the reset revision
+  ---
+  duration_ms: 133.301949
+  type: 'test'
+  ...
+# Subtest: revision lookup rejects corrupt envelopes without mutation
+ok 24 - revision lookup rejects corrupt envelopes without mutation
+  ---
+  duration_ms: 0.574113
+  type: 'test'
+  ...
+# Subtest: a reset committed during rollback-checkpoint staging is rechecked before the old save can commit
+ok 25 - a reset committed during rollback-checkpoint staging is rechecked before the old save can commit
+  ---
+  duration_ms: 20.629775
+  type: 'test'
+  ...
+# Subtest: real Rapier startup remains at simulation step zero through preload and paused teleport
+ok 26 - real Rapier startup remains at simulation step zero through preload and paused teleport
+  ---
+  duration_ms: 534.879735
+  type: 'test'
+  ...
+# (node:5623) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: initial dynamic colliders participate in overlap recovery before the zero-tick pose is returned
+ok 27 - initial dynamic colliders participate in overlap recovery before the zero-tick pose is returned
+  ---
+  duration_ms: 1761.146686
+  type: 'test'
+  ...
+# Subtest: actual main snapshot handler does not tick, move, save or consume controls during renderer warmup
+ok 28 - actual main snapshot handler does not tick, move, save or consume controls during renderer warmup
+  ---
+  duration_ms: 14.814509
+  type: 'test'
+  ...
+# Subtest: read-only initial support query preserves genuinely airborne spawn and zero step count
+ok 29 - read-only initial support query preserves genuinely airborne spawn and zero step count
+  ---
+  duration_ms: 315.304831
+  type: 'test'
+  ...
+1..29
+# tests 29
+# suites 0
+# pass 29
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3038.035502

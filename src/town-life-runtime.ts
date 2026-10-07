@@ -8,12 +8,12 @@ export function townLifePoses(life:TownLifeState|undefined):readonly TownResiden
  if(!poses){poses=Object.freeze(life.residents.map((_,index)=>{const p=TOWN_LIFE_ENGINE.pose(life,index);return Object.freeze({...p,authoritativeMotion:1 as const,contactResolved:p.contactResolved??false,motionPath:p.motionPath??Object.freeze([{x:p.x,z:p.z,t:0},{x:p.x,z:p.z,t:TOWN_LIFE_STEP}].map(q=>Object.freeze(q)))});}));projections.set(life.residents,poses);}return poses;
 }
 
-const crowds=new Map<number,TownCrowd>();
+const crowds=new Map<string,TownCrowd>();
 /** Resolve only at eligibility/action boundaries. Actors are local or server-authenticated, never command data. */
 export function townLifeInteractionTarget(life:TownLifeState,command:TownLifeCommand,actors:readonly TownActor[]=[]):{x:number;z:number}|undefined {
  if(command.kind!=='encourage-resident')return townLifeCommandPosition(life,command);
  const index=life.residents.findIndex(r=>r.id===command.targetId);if(index<0)return undefined;
- let crowd=crowds.get(life.seed);if(!crowd){crowd=new TownCrowd(life.seed);crowds.set(life.seed,crowd);while(crowds.size>4)crowds.delete(crowds.keys().next().value!);}
+ const key=life.seed+':'+(life.townLayout?.manifestHash??'legacy');let crowd=crowds.get(key);if(!crowd){crowd=new TownCrowd(life.seed,life.townLayout);crowds.set(key,crowd);while(crowds.size>4)crowds.delete(crowds.keys().next().value!);}
  const pose=crowd.sample(0,100,1,actors,townLifePoses(life))[index];return pose?{x:pose.x,z:pose.z}:undefined;
 }
 
